@@ -1,7 +1,7 @@
 #MyEclipse Hibernate Properties
-#Tue Jun 21 16:53:38 CST 2011
+#Thu Jun 23 16:30:07 CST 2011
 sessionFactoryName=
-genBasicCompId=false
+genBasicCompId=true
 profile=
 daoSFId=
 version=3.3
@@ -17,9 +17,8 @@ addLibs2Project=false
 genVersionTag=false
 sessionFactoryId=sessionFactory
 basePersistenceClass=
-genAnnotations=false
+genAnnotations=true
 reSettingsFile=
 configFile=/Web_kx_Replenishment2/src/applicationContext.xml
 createConfigFile=false
 addLibs2Classpath=false
-baseDaoClass=

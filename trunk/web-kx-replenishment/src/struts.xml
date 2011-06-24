@@ -22,10 +22,5 @@
 			<result name="login" type="redirect">/user/preLogin.action</result>
 		</global-results>
 	</package>
-	
-	<package name="sol" extends="struts-default" namespace="/user">
-		<action name="test" class="userAction">
-			<result name="success">/WEB-INF/content/1.jsp</result>
-		</action>
-	</package>
+
 </struts>    

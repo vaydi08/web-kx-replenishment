@@ -14,7 +14,7 @@
 	
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-		<property name="dataSource" ref="datasource" />
+		<property name="dataSource" ref="dataSource" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
@@ -23,7 +23,14 @@
 		</property>
 		<property name="annotatedClasses">
 			<list>
-			</list>
+			<value>com.sol.kx.replenishment.dao.pojo.InfoTessera</value>
+			<value>com.sol.kx.replenishment.dao.pojo.InfoProduct</value>
+			<value>
+				com.sol.kx.replenishment.dao.pojo.InfoCategory
+			</value>
+			<value>
+				com.sol.kx.replenishment.dao.pojo.InfoManufactory
+			</value></list>
 		</property>
 	</bean>
 	
