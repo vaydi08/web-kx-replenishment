@@ -1,18 +1,20 @@
 package com.sol.kx.replenishment.dao.pojo;
 
 import java.sql.Timestamp;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * InfoProduct entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "info_product", schema = "dbo", catalog = "RSMNG")
+@Table(name = "info_product")
 public class InfoProduct implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -31,6 +33,9 @@ public class InfoProduct implements java.io.Serializable {
 	private String stand;
 	private String remark;
 	private Timestamp lastUpdateTime;
+	
+	private List<InfoTessera> infoTesseras;
+	private List<InfoManufactory> infoManufactories;
 
 	// Constructors
 
@@ -139,7 +144,7 @@ public class InfoProduct implements java.io.Serializable {
 		this.pcode = pcode;
 	}
 
-	@Column(name = "quality")
+	@Column(name = "quality",nullable = true)
 	public String getQuality() {
 		return this.quality;
 	}
@@ -148,7 +153,7 @@ public class InfoProduct implements java.io.Serializable {
 		this.quality = quality;
 	}
 
-	@Column(name = "image")
+	@Column(name = "image",nullable = true)
 	public String getImage() {
 		return this.image;
 	}
@@ -166,7 +171,7 @@ public class InfoProduct implements java.io.Serializable {
 		this.weight = weight;
 	}
 
-	@Column(name = "stand")
+	@Column(name = "stand",nullable = true)
 	public String getStand() {
 		return this.stand;
 	}
@@ -175,7 +180,7 @@ public class InfoProduct implements java.io.Serializable {
 		this.stand = stand;
 	}
 
-	@Column(name = "remark")
+	@Column(name = "remark",nullable = true)
 	public String getRemark() {
 		return this.remark;
 	}
@@ -184,7 +189,7 @@ public class InfoProduct implements java.io.Serializable {
 		this.remark = remark;
 	}
 
-	@Column(name = "lastUpdateTime", nullable = false, length = 23)
+	@Column(name = "lastUpdateTime", nullable = false, length = 23,insertable = false)
 	public Timestamp getLastUpdateTime() {
 		return this.lastUpdateTime;
 	}
@@ -193,4 +198,22 @@ public class InfoProduct implements java.io.Serializable {
 		this.lastUpdateTime = lastUpdateTime;
 	}
 
+	@Transient
+	public List<InfoTessera> getInfoTesseras() {
+		return infoTesseras;
+	}
+
+	public void setInfoTesseras(List<InfoTessera> infoTesseras) {
+		this.infoTesseras = infoTesseras;
+	}
+
+	@Transient
+	public List<InfoManufactory> getInfoManufactories() {
+		return infoManufactories;
+	}
+
+	public void setInfoManufactories(List<InfoManufactory> infoManufactories) {
+		this.infoManufactories = infoManufactories;
+	}
+	
 }

@@ -103,7 +103,7 @@
 
 	<!--自定义的日志输出器 -->  
     <logger name="org.springframework">  
-        <level value="info" />  
+        <level value="error" />  
         <!-- 日志输出地 -->  
         <appender-ref ref="STDOUT" />  
     </logger>

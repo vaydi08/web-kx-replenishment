@@ -56,6 +56,13 @@ public interface BaseDao<T> {
 	public int executeSql(final String sql,final Object... objs);
 	
 	/**
+	 * 执行HQL查询
+	 * @param criterions
+	 * @return
+	 */
+	public List<T> find(Criterion... criterions);
+	
+	/**
 	 * 执行原生SQL查询
 	 * @param <X> 
 	 * @param clazz 反射类

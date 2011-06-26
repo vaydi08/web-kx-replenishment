@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 
 /**
  * InfoTessera entity. @author MyEclipse Persistence Tools
@@ -25,8 +28,11 @@ public class InfoTessera implements java.io.Serializable {
 	private String clarity;
 	private String color;
 	private String cut;
+	
+	private InfoProduct infoProduct;
 
 	// Constructors
+
 
 	/** default constructor */
 	public InfoTessera() {
@@ -116,5 +122,16 @@ public class InfoTessera implements java.io.Serializable {
 	public void setCut(String cut) {
 		this.cut = cut;
 	}
+
+	@ManyToOne
+	@JoinColumn(name = "pid",insertable = false, updatable = false)
+	public InfoProduct getInfoProduct() {
+		return infoProduct;
+	}
+
+	public void setInfoProduct(InfoProduct infoProduct) {
+		this.infoProduct = infoProduct;
+	}
+
 
 }

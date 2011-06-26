@@ -89,6 +89,11 @@ public class HibernateDaoImpl<T> extends HibernateTemplate implements BaseDao<T>
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<T> find(Criterion... criterions) {
+		return findByCriteria(createCriterion(criterions));
+	}
+	
+	@SuppressWarnings("unchecked")
 	public <X> List<X> findSql(final Class<X> clazz,final String sql,final Map<String,Type> scalarMap,final Map<String,Object> map) {
 		return executeFind(new HibernateCallback<List>() {
 			public List doInHibernate(Session session) throws HibernateException,
@@ -186,5 +191,9 @@ public class HibernateDaoImpl<T> extends HibernateTemplate implements BaseDao<T>
 	 */
 	public T getPojo(Serializable id) {
 		return super.get(entityClass,id);
+	}
+	
+	protected <X> X listFirst(List<X> list) {
+		return list != null && list.size() > 0 ? list.get(0) : null;
 	}
 }

@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -23,6 +25,8 @@ public class InfoManufactory implements java.io.Serializable {
 	private String mfCode;
 	private String remark;
 
+	private InfoProduct infoProduct;
+	
 	// Constructors
 
 	/** default constructor */
@@ -76,7 +80,7 @@ public class InfoManufactory implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "mf_code")
+	@Column(name = "mf_code",nullable = true)
 	public String getMfCode() {
 		return this.mfCode;
 	}
@@ -85,13 +89,23 @@ public class InfoManufactory implements java.io.Serializable {
 		this.mfCode = mfCode;
 	}
 
-	@Column(name = "remark")
+	@Column(name = "remark",nullable = true)
 	public String getRemark() {
 		return this.remark;
 	}
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "pid",insertable = false,updatable = false)
+	public InfoProduct getInfoProduct() {
+		return infoProduct;
+	}
+
+	public void setInfoProduct(InfoProduct infoProduct) {
+		this.infoProduct = infoProduct;
 	}
 
 }

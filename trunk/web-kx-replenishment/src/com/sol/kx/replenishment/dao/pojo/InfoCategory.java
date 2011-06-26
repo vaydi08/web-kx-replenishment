@@ -89,7 +89,7 @@ public class InfoCategory implements java.io.Serializable {
 		this.clevel = clevel;
 	}
 
-	@Column(name = "parent")
+	@Column(name = "parent",insertable = false)
 	public Integer getParent() {
 		return this.parent;
 	}
@@ -98,7 +98,7 @@ public class InfoCategory implements java.io.Serializable {
 		this.parent = parent;
 	}
 
-	@Column(name = "lastUpdateTime", length = 23)
+	@Column(name = "lastUpdateTime", length = 23,insertable = false)
 	public Timestamp getLastUpdateTime() {
 		return this.lastUpdateTime;
 	}
