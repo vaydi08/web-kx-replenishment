@@ -15,6 +15,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.transform.Transformers;
 import org.hibernate.type.Type;
@@ -93,6 +94,15 @@ public class HibernateDaoImpl<T> extends HibernateTemplate implements BaseDao<T>
 		return findByCriteria(createCriterion(criterions));
 	}
 	
+	protected Integer findCount(final DetachedCriteria dc) {
+		return execute(new HibernateCallback<Integer>() {
+			public Integer doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				return (Integer) dc.getExecutableCriteria(session).setProjection(Projections.rowCount()).uniqueResult();
+			}
+		});
+	}
+	
 	@SuppressWarnings("unchecked")
 	public <X> List<X> findSql(final Class<X> clazz,final String sql,final Map<String,Type> scalarMap,final Map<String,Object> map) {
 		return executeFind(new HibernateCallback<List>() {
@@ -140,6 +150,16 @@ public class HibernateDaoImpl<T> extends HibernateTemplate implements BaseDao<T>
 	 */
 	public DetachedCriteria createCriterion(Criterion... criterions) {
 		return createCriterion(entityClass, criterions);
+	}
+	
+	protected DetachedCriteria createCriterion(Map<String,Object> map) {
+		Criterion[] cs = new Criterion[map.size()];
+		Set<Entry<String,Object>> set = map.entrySet();
+		int i = 0;
+		for(Entry<String,Object> en : set)
+			cs[i++] = Restrictions.like(en.getKey(), en.getValue());
+		
+		return createCriterion(entityClass, cs);
 	}
 	
 	/* (non-Javadoc)

@@ -10,8 +10,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @Controller
 @Scope("session")
-@Results({@Result(name = "success",location = "1.jsp")})
-@ParentPackage("struts-default")
+@Results({@Result(name = "success",location = "main.jsp")})
 public class MainAction extends ActionSupport{
 
 	private static final long serialVersionUID = 1L;

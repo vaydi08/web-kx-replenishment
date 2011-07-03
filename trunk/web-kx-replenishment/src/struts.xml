@@ -4,9 +4,9 @@
 	<constant name="struts.objectFactory" value="spring"/>
 	<constant name="struts.convention.package.locators" value="action" />
 	<constant name="struts.convention.package.locators.basePackage" value="com.sol.kx.replenishment" />
-	<!-- 
+
 	<constant name="struts.convention.default.parent.package" value="web-base" />
-	 -->
+
 	<package name="web-base" extends="convention-default">
 		<interceptors>
 			<interceptor name="authority" class="userAuthInterceptor" />

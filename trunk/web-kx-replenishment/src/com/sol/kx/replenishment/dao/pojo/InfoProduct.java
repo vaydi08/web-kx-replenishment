@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -21,19 +23,20 @@ public class InfoProduct implements java.io.Serializable {
 	// Fields
 
 	private Integer id;
-	private Integer type1;
-	private Integer type2;
-	private Integer type3;
-	private Integer type4;
+	private InfoCategory type1;
+	private InfoCategory type2;
+	private InfoCategory type3;
+	private InfoCategory type4;
 	private String name;
 	private String pcode;
 	private String quality;
 	private String image;
 	private Double weight;
 	private String stand;
+	private String unit;
 	private String remark;
 	private Timestamp lastUpdateTime;
-	
+		
 	private List<InfoTessera> infoTesseras;
 	private List<InfoManufactory> infoManufactories;
 
@@ -44,8 +47,8 @@ public class InfoProduct implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public InfoProduct(Integer id, Integer type1, Integer type2, Integer type3,
-			Integer type4, String name, String pcode, Double weight,
+	public InfoProduct(Integer id, InfoCategory type1, InfoCategory type2, InfoCategory type3,
+			InfoCategory type4, String name, String pcode, Double weight,
 			Timestamp lastUpdateTime) {
 		this.id = id;
 		this.type1 = type1;
@@ -59,8 +62,8 @@ public class InfoProduct implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public InfoProduct(Integer id, Integer type1, Integer type2, Integer type3,
-			Integer type4, String name, String pcode, String quality,
+	public InfoProduct(Integer id, InfoCategory type1, InfoCategory type2, InfoCategory type3,
+			InfoCategory type4, String name, String pcode, String quality,
 			String image, Double weight, String stand, String remark,
 			Timestamp lastUpdateTime) {
 		this.id = id;
@@ -90,39 +93,43 @@ public class InfoProduct implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "type1", nullable = false)
-	public Integer getType1() {
+	@ManyToOne
+	@JoinColumn(name = "type1", insertable = false,updatable = false)
+	public InfoCategory getType1() {
 		return this.type1;
 	}
 
-	public void setType1(Integer type1) {
+	public void setType1(InfoCategory type1) {
 		this.type1 = type1;
 	}
 
-	@Column(name = "type2", nullable = false)
-	public Integer getType2() {
+	@ManyToOne
+	@JoinColumn(name = "type2", insertable = false,updatable = false)
+	public InfoCategory getType2() {
 		return this.type2;
 	}
 
-	public void setType2(Integer type2) {
+	public void setType2(InfoCategory type2) {
 		this.type2 = type2;
 	}
 
-	@Column(name = "type3", nullable = false)
-	public Integer getType3() {
+	@ManyToOne
+	@JoinColumn(name = "type3", insertable = false,updatable = false)
+	public InfoCategory getType3() {
 		return this.type3;
 	}
 
-	public void setType3(Integer type3) {
+	public void setType3(InfoCategory type3) {
 		this.type3 = type3;
 	}
 
-	@Column(name = "type4", nullable = false)
-	public Integer getType4() {
+	@ManyToOne
+	@JoinColumn(name = "type4", insertable = false,updatable = false)
+	public InfoCategory getType4() {
 		return this.type4;
 	}
 
-	public void setType4(Integer type4) {
+	public void setType4(InfoCategory type4) {
 		this.type4 = type4;
 	}
 
@@ -214,6 +221,15 @@ public class InfoProduct implements java.io.Serializable {
 
 	public void setInfoManufactories(List<InfoManufactory> infoManufactories) {
 		this.infoManufactories = infoManufactories;
+	}
+
+	@Column(name = "unit",nullable = true,length=10)
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 	
 }
