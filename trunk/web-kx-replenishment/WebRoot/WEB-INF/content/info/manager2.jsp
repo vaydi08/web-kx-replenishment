@@ -31,7 +31,7 @@
        	];
        	
        	$('#pagetb').jpage({totalRecord:<s:property value="productList.size()"/>,dataStore:initData,groupSize:0,
-			dataBefore:'<table cellpadding="1" cellspacing="1" width="1024"><thead><tr><th><input type="checkbox" id="allsel" /> </th><th class="imgtd">&nbsp;</th><th>大类</th><th>小类</th><th>货型1</th> <th>货型2</th><th>商品品名</th> <th>商品代码</th><th>金属成色</th><th>金重</th><th>规格</th><th>单位</th><th>备注</th></tr></thead>',
+			dataBefore:'<table cellpadding="1" cellspacing="1" width="1024"><thead><tr><th width="30"><input type="checkbox" id="allsel" /> </th><th class="imgtd">&nbsp;</th><th>大类</th><th>小类</th><th>货型1</th> <th>货型2</th><th>商品品名</th> <th>商品代码</th><th>金属成色</th><th>金重</th><th>规格</th><th>单位</th><th>备注</th></tr></thead>',
 			dataAfter:'</table>'
         });
 
