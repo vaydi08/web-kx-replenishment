@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.sol.kx.replenishment.dao.pojo.InfoCategory;
 import com.sol.kx.replenishment.dao.pojo.InfoProduct;
+import com.sol.kx.replenishment.dao.pojo.InfoShop;
 import com.sol.kx.replenishment.service.bean.PageResult;
 
 public interface InfoProductService {
@@ -30,4 +31,10 @@ public interface InfoProductService {
 	 * @return
 	 */
 	public List<InfoProduct> findProduct(Map<String,Object> map);
+	
+	/**
+	 * 查找门店
+	 * @return
+	 */
+	public List<InfoShop> findShop();
 }

@@ -24,13 +24,10 @@
 		<property name="annotatedClasses">
 			<list>
 			<value>com.sol.kx.replenishment.dao.pojo.InfoTessera</value>
+			<value>com.sol.kx.replenishment.dao.pojo.InfoShop</value>
 			<value>com.sol.kx.replenishment.dao.pojo.InfoProduct</value>
-			<value>
-				com.sol.kx.replenishment.dao.pojo.InfoCategory
-			</value>
-			<value>
-				com.sol.kx.replenishment.dao.pojo.InfoManufactory
-			</value></list>
+			<value>com.sol.kx.replenishment.dao.pojo.InfoCategory</value>
+			<value>com.sol.kx.replenishment.dao.pojo.InfoManufactory</value></list>
 		</property>
 	</bean>
 	

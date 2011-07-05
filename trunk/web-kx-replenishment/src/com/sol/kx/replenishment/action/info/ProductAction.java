@@ -16,7 +16,8 @@ import com.sol.kx.replenishment.service.InfoProductService;
 
 @Controller
 @Scope("prototype")
-@Results({@Result(name = "manager",location = "manager2.jsp")})
+@Results({@Result(name = BaseAction.MANAGER,location = "manager2.jsp"),
+		  @Result(name = BaseAction.PRENEW,location = "product.jsp")})
 public class ProductAction extends BaseAction<InfoProduct>{
 
 	private static final long serialVersionUID = 1L;
@@ -30,7 +31,12 @@ public class ProductAction extends BaseAction<InfoProduct>{
 	
 	public String manager() {
 		productList = infoCategoryService.findProduct(new HashMap<String,Object>(0));
-		return "manager";
+		return MANAGER;
+	}
+	
+	public String preNew() {
+		input = new InfoProduct();
+		return PRENEW;
 	}
 	
 	public List<InfoCategory> getCategoryLevel1() {
@@ -54,11 +60,11 @@ public class ProductAction extends BaseAction<InfoProduct>{
 		this.showImage = showImage;
 	}
 
-	public List getProductList() {
+	public List<InfoProduct> getProductList() {
 		return productList;
 	}
 
-	public void setProductList(List productList) {
+	public void setProductList(List<InfoProduct> productList) {
 		this.productList = productList;
 	}
 

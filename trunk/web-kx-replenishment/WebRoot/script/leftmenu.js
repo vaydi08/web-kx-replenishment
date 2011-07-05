@@ -3,7 +3,7 @@
 		var options = $.extend({},options);
 		
 		this.find(".menu").click(function() {
-			var submenu = $(this).find(".submenu").toggle();
+			var submenu = $(this).next(".submenu").toggle();
 		});
 	};
 		

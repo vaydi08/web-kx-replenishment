@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sol.kx.replenishment.dao.InfoCategoryDao;
 import com.sol.kx.replenishment.dao.InfoProductDao;
+import com.sol.kx.replenishment.dao.InfoShopDao;
 import com.sol.kx.replenishment.dao.pojo.InfoCategory;
 import com.sol.kx.replenishment.dao.pojo.InfoProduct;
+import com.sol.kx.replenishment.dao.pojo.InfoShop;
 import com.sol.kx.replenishment.service.InfoProductService;
 import com.sol.kx.replenishment.service.bean.EnvironmentFactory;
 import com.sol.kx.replenishment.service.bean.PageResult;
@@ -23,6 +25,9 @@ public class InfoProductServiceImpl implements InfoProductService{
 	
 	@Autowired
 	private InfoProductDao infoProductDao;
+	
+	@Autowired
+	private InfoShopDao infoShopDao;
 	
 	@Autowired
 	private EnvironmentFactory environmentFactory;
@@ -39,7 +44,13 @@ public class InfoProductServiceImpl implements InfoProductService{
 		return result;
 	}
 	
+	@Transactional(readOnly = true)
 	public List<InfoProduct> findProduct(Map<String, Object> map) {
 		return infoProductDao.findProduct(map);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<InfoShop> findShop() {
+		return infoShopDao.findShop();
 	}
 }

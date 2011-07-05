@@ -4,7 +4,6 @@ body {
 	font-family: "微软雅黑";
 	font-size:12px;
 	width:1024px;
-	margin:0px auto;
 	background:#e5e5e5
 }
 table {font-size:12px}
@@ -28,7 +27,7 @@ li { list-style-type:none}
 
 
 #mainFrame{width:1024px;}
-#left { float:left; width:160px !important;width:200px; padding:10px; background:#555; text-align:center;height:697px;overflow-y:scroll }
+#left { float:left; width:160px !important;width:200px; padding:10px; background:#555; text-align:center;height:697px;}
 
 .golden_1 { background:url(golden_1.png) no-repeat; width:174px; text-align:center; line-height:60px; font-size:16px; font-weight:bold; color:#333; text-indent:20px } 
 .golden_2 { background:url(golden_2.png) no-repeat; width:174px; text-align:center; line-height:60px; font-size:16px; font-weight:bold; color:#333; text-indent:20px } 
@@ -40,9 +39,12 @@ li { list-style-type:none}
 
 .golden li { background:url(blue_samll.png) no-repeat center; line-height:40px;}
 
-#right { float:right;width:824px;height:697px; padding:10px;background-image:url('right_background.jpg');}
-input[type='text'],select,textarea { background:#FFF; line-height:30px; border:1px solid #999; text-indent:15px}
+#right {width:824px;height:697px; padding:10px;background-image:url('right_background.jpg');}
+input[type="text"],select,textarea { background:#FFF; line-height:30px; border:1px solid #999; width:200px;}
+
 select {width:100px;}
+.input select{width:200px;}
+
 .requst {}
 .requst li { padding:8px 0px; clear:both}
 .requst li i { font-style:normal; float:left; width:80px}

@@ -20,6 +20,7 @@ public class InfoProductDaoImpl extends HibernateDaoImpl<InfoProduct> implements
 		result.setResult(super.findByCriteria(dc, (result.getPage() - 1) * result.getPageSize(), result.getPageSize()));
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<InfoProduct> findProduct(Map<String, Object> map) {
 		return findByCriteria(createCriterion(map));
 	}
