@@ -30,8 +30,8 @@
 			''
        	];
        	
-       	$('#pagetb').jpage({totalRecord:<s:property value="productList.size()"/>,dataStore:initData,groupSize:0,
-			dataBefore:'<table cellpadding="1" cellspacing="1" width="100%"><thead><tr><th><input type="checkbox" id="allsel" /> </th><th>门店</th><th>编号</th><th>地址</th> <th>电话</th><th>备注</th></tr></thead>',
+       	$('#pagetb').jpage({totalRecord:<s:property value="list.size()"/>,dataStore:initData,groupSize:0,
+			dataBefore:'<table cellpadding="1" cellspacing="1" width="100%"><thead><tr><th width="30"><input type="checkbox" id="allsel" /> </th><th>门店</th><th>编号</th><th>地址</th> <th>电话</th><th>备注</th></tr></thead>',
 			dataAfter:'</table>'
         });
 
