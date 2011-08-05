@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Content SYSTEM "SocketContent.dtd" >
+<Content>
+	<Item name="threadClass" size="0" type="String" lengthField="threadClassLength"/>
+	<Item name="threadName" size="0" type="String" lengthField="threadNameLength"/>
+	<Item name="threadGroup" size="0" type="String" lengthField="threadGroupLength"/>
+</Content>

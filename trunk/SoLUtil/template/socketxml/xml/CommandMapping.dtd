@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT CommandMapping (Map*)>
+
+<!ATTLIST CommandMapping commandField CDATA #REQUIRED>
+<!ATTLIST CommandMapping packetLengthField CDATA #REQUIRED>
+<!ATTLIST CommandMapping sequenceField CDATA #REQUIRED>
+
+<!ATTLIST Map command CDATA #REQUIRED>
+<!ATTLIST Map file CDATA #REQUIRED>

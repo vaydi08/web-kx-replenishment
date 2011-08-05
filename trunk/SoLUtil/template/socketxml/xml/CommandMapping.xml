@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE CommandMapping SYSTEM "CommandMapping.dtd">
+<CommandMapping commandField="command" packetLengthField="packetLength" sequenceField="sequence">
+	<Map file="ActiveTest.xml" command="1"/>
+	<Map file="ActiveTestResp.xml" command="70000001"/>
+	<Map file="MonitorThreadReport.xml" command="3"/>
+	<Map file="ResultResp.xml" command="70000002"/>
+</CommandMapping>

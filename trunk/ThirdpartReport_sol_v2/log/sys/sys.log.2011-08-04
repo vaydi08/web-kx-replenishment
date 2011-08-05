@@ -1,0 +1,307 @@
+[INFO ]2011-08-04 12:03:35: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 12:03:35: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 12:03:35: 系统启动,开始初始化...
+[INFO ]2011-08-04 12:03:36: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[INFO ]2011-08-04 12:12:00: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 12:12:00: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 12:12:00: 系统启动,开始初始化...
+[INFO ]2011-08-04 12:12:01: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-04 12:12:01: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[DEBUG]2011-08-04 12:12:01: 恢复未成功发送的记录
+[INFO ]2011-08-04 13:15:59: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 13:15:59: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 13:15:59: 系统启动,开始初始化...
+[INFO ]2011-08-04 13:16:00: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-04 13:16:00: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[DEBUG]2011-08-04 13:16:00: 恢复未成功发送的记录
+[INFO ]2011-08-04 13:17:05: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 13:17:05: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 13:17:05: 系统启动,开始初始化...
+[INFO ]2011-08-04 13:17:06: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-04 13:17:06: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[DEBUG]2011-08-04 13:17:06: 恢复未成功发送的记录
+[INFO ]2011-08-04 13:17:35: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 13:17:35: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 13:17:35: 系统启动,开始初始化...
+[INFO ]2011-08-04 13:17:36: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-04 13:17:36: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[DEBUG]2011-08-04 13:17:36: 恢复未成功发送的记录
+[INFO ]2011-08-04 13:45:34: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 13:45:34: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 13:45:34: 系统启动,开始初始化...
+[INFO ]2011-08-04 13:45:34: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-04 13:45:34: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[DEBUG]2011-08-04 13:45:34: 恢复未成功发送的记录
+[INFO ]2011-08-04 13:47:31: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 13:47:31: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 13:47:31: 系统启动,开始初始化...
+[INFO ]2011-08-04 13:47:32: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-04 13:47:32: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[DEBUG]2011-08-04 13:47:32: 恢复未成功发送的记录
+[INFO ]2011-08-04 13:48:20: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 13:48:20: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 13:48:20: 系统启动,开始初始化...
+[INFO ]2011-08-04 13:48:21: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-04 13:48:21: 恢复未成功发送的记录
+[DEBUG]2011-08-04 13:48:21: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-04 13:55:55: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 13:55:55: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 13:55:55: 系统启动,开始初始化...
+[INFO ]2011-08-04 13:55:55: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-04 13:55:55: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-04 13:58:03: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 13:58:03: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 13:58:03: 系统启动,开始初始化...
+[INFO ]2011-08-04 13:58:04: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-04 13:58:04: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-04 14:20:17: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 14:20:17: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 14:20:17: 系统启动,开始初始化...
+[INFO ]2011-08-04 14:20:17: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-04 14:20:17: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-04 14:31:17: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 14:31:17: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 14:31:17: 系统启动,开始初始化...
+[INFO ]2011-08-04 14:31:18: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-04 14:31:18: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-04 14:33:01: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 14:33:01: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 14:33:01: 系统启动,开始初始化...
+[INFO ]2011-08-04 14:33:01: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-04 14:33:01: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-04 14:37:54: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 14:37:54: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 14:37:54: 系统启动,开始初始化...
+[INFO ]2011-08-04 14:37:55: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-04 14:37:55: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[DEBUG]2011-08-04 14:37:55: 恢复未成功发送的记录
+[INFO ]2011-08-04 14:42:02: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 14:42:02: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 14:42:02: 系统启动,开始初始化...
+[INFO ]2011-08-04 14:42:02: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[INFO ]2011-08-04 14:46:44: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 14:46:44: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 14:46:44: 系统启动,开始初始化...
+[INFO ]2011-08-04 14:46:45: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[INFO ]2011-08-04 14:51:49: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 14:51:49: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 14:51:49: 系统启动,开始初始化...
+[INFO ]2011-08-04 14:51:50: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[ERROR]2011-08-04 14:54:15: 写入计数文件时产生IO错误，文件 [F:\tmp\tpAll_646_20110804] - \tmp\tpAll_646_20110804 (请求的操作无法在使用用户映射区域打开的文件上执行。)
+java.io.FileNotFoundException: \tmp\tpAll_646_20110804 (请求的操作无法在使用用户映射区域打开的文件上执行。)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:179)
+	at java.io.FileWriter.<init>(FileWriter.java:90)
+	at org.sol.util.textCounter.Writer.takeCount(Writer.java:70)
+	at org.sol.util.textCounter.Counter.takeMOCount(Counter.java:56)
+	at com.megajoy.thirdpart.report.service.impl.HttpExecutorService$Runned.dayCount(HttpExecutorService.java:123)
+	at com.megajoy.thirdpart.report.service.impl.HttpExecutorService$Runned.run(HttpExecutorService.java:88)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:138)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)
+	at java.lang.Thread.run(Thread.java:619)
+[INFO ]2011-08-04 15:07:03: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 15:07:03: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 15:07:03: 系统启动,开始初始化...
+[INFO ]2011-08-04 15:07:03: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[INFO ]2011-08-04 15:10:35: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 15:10:35: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 15:10:35: 系统启动,开始初始化...
+[INFO ]2011-08-04 15:10:36: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[INFO ]2011-08-04 15:14:01: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 15:14:01: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 15:14:01: 系统启动,开始初始化...
+[INFO ]2011-08-04 15:14:02: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[ERROR]2011-08-04 15:14:02: 读取计数文件时产生IO错误，文件 [F:\tmp\tp_641_20110804] - mark/reset not supported
+java.io.IOException: mark/reset not supported
+	at java.io.InputStream.reset(InputStream.java:334)
+	at org.sol.util.textCounter.Reader.readCount(Reader.java:55)
+	at org.sol.util.textCounter.Counter.checkNeedIgnoreThirdpartReport(Counter.java:66)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.parseData(ThirdpartServiceImpl.java:168)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.parseData(ThirdpartServiceImpl.java:122)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:23)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:30)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+[ERROR]2011-08-04 15:14:02: 读取计数文件时产生IO错误，文件 [F:\tmp\tpAll_641_20110804] - mark/reset not supported
+java.io.IOException: mark/reset not supported
+	at java.io.InputStream.reset(InputStream.java:334)
+	at org.sol.util.textCounter.Reader.readCount(Reader.java:55)
+	at org.sol.util.textCounter.Counter.readCount(Counter.java:77)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.parseData(ThirdpartServiceImpl.java:186)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.parseData(ThirdpartServiceImpl.java:122)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:23)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:30)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+[INFO ]2011-08-04 15:15:18: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 15:15:18: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 15:15:18: 系统启动,开始初始化...
+[INFO ]2011-08-04 15:15:19: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[ERROR]2011-08-04 15:16:42: 写入计数文件时产生IO错误，文件 [F:\tmp\tpAll_641_20110804] - \tmp\tpAll_641_20110804 (请求的操作无法在使用用户映射区域打开的文件上执行。)
+java.io.FileNotFoundException: \tmp\tpAll_641_20110804 (请求的操作无法在使用用户映射区域打开的文件上执行。)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:179)
+	at java.io.FileWriter.<init>(FileWriter.java:90)
+	at org.sol.util.textCounter.Writer.takeCount(Writer.java:70)
+	at org.sol.util.textCounter.Counter.takeMOCount(Counter.java:56)
+	at com.megajoy.thirdpart.report.service.impl.HttpExecutorService$Runned.dayCount(HttpExecutorService.java:123)
+	at com.megajoy.thirdpart.report.service.impl.HttpExecutorService$Runned.run(HttpExecutorService.java:88)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:138)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)
+	at java.lang.Thread.run(Thread.java:619)
+[INFO ]2011-08-04 15:23:16: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 15:23:16: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 15:23:16: 系统启动,开始初始化...
+[INFO ]2011-08-04 15:23:17: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[INFO ]2011-08-04 15:36:33: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 15:36:33: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 15:36:33: 系统启动,开始初始化...
+[INFO ]2011-08-04 15:36:35: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[INFO ]2011-08-04 15:55:37: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 15:55:37: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 15:55:37: 系统启动,开始初始化...
+[INFO ]2011-08-04 15:55:38: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[INFO ]2011-08-04 16:02:41: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 16:02:41: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 16:02:41: 系统启动,开始初始化...
+[INFO ]2011-08-04 16:02:42: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[INFO ]2011-08-04 16:08:40: 从序列化文件中读取队列信息
+[INFO ]2011-08-04 16:08:40: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-04 16:08:40: 系统启动,开始初始化...
+[INFO ]2011-08-04 16:08:41: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+

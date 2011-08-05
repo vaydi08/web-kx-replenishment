@@ -1,0 +1,1784 @@
+[INFO ]2011-08-03 11:48:55: 从序列化文件中读取队列信息
+[INFO ]2011-08-03 11:48:55: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-03 11:48:55: 系统启动,开始初始化...
+[INFO ]2011-08-03 11:48:56: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-03 11:48:56: 执行 [ConfigServiceImpl.initConfig] 耗时:904
+[DEBUG]2011-08-03 11:48:56: 执行 [ViewSyncServiceImpl.init] 耗时:0
+[DEBUG]2011-08-03 11:48:56: 恢复未成功发送的记录
+[DEBUG]2011-08-03 11:48:56: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[DEBUG]2011-08-03 11:48:56: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:94
+[DEBUG]2011-08-03 11:48:56: 执行 [ThirdpartServiceImpl.queryResend] 耗时:94
+[DEBUG]2011-08-03 11:48:56: 执行 [ThirdpartServiceImpl.resumeUnsendData] 耗时:172
+[DEBUG]2011-08-03 11:49:00: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:64
+[DEBUG]2011-08-03 11:49:00: 执行 [ThirdpartServiceImpl.queryResend] 耗时:64
+[DEBUG]2011-08-03 11:49:05: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 11:49:05: 执行 [ThirdpartServiceImpl.queryResend] 耗时:375
+[INFO ]2011-08-03 11:49:24: 从序列化文件中读取队列信息
+[INFO ]2011-08-03 11:49:24: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-03 11:49:24: 系统启动,开始初始化...
+[INFO ]2011-08-03 11:49:25: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-03 11:49:25: 执行 [ConfigServiceImpl.initConfig] 耗时:656
+[DEBUG]2011-08-03 11:49:25: 执行 [ViewSyncServiceImpl.init] 耗时:0
+[DEBUG]2011-08-03 11:49:25: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[DEBUG]2011-08-03 11:49:25: 恢复未成功发送的记录
+[DEBUG]2011-08-03 11:49:25: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:91
+[DEBUG]2011-08-03 11:49:25: 执行 [ThirdpartServiceImpl.queryResend] 耗时:94
+[DEBUG]2011-08-03 11:49:25: 执行 [ThirdpartServiceImpl.resumeUnsendData] 耗时:188
+[DEBUG]2011-08-03 11:49:26: 执行 [ViewSyncServiceImpl.viewSync] 耗时:731
+[DEBUG]2011-08-03 11:49:30: 执行 [ViewSyncServiceImpl.viewSync] 耗时:562
+[DEBUG]2011-08-03 11:49:31: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:359
+[DEBUG]2011-08-03 11:49:31: 执行 [ThirdpartServiceImpl.queryResend] 耗时:312
+[DEBUG]2011-08-03 11:49:36: 执行 [ThirdpartServiceImpl.queryResend] 耗时:764
+[DEBUG]2011-08-03 11:49:37: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:811
+[DEBUG]2011-08-03 11:49:37: 执行 [ViewSyncServiceImpl.viewSync] 耗时:1063
+[ERROR]2011-08-03 11:49:39: [646]发送HTTP数据错误 - 
+org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:8080 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:158)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:149)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:561)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:415)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:130)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:123)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:148)
+	... 35 more
+[DEBUG]2011-08-03 11:49:39: 执行 [ThirdpartServiceImpl.sendData] 耗时:2716
+[ERROR]2011-08-03 11:49:39: [641]发送HTTP数据错误 - 
+org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:8080 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:158)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:149)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:561)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:415)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:130)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:123)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:148)
+	... 35 more
+[ERROR]2011-08-03 11:49:39: [646]发送HTTP数据错误 - 
+org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:8080 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:158)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:149)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:561)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:415)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:139)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:123)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:148)
+	... 35 more
+[DEBUG]2011-08-03 11:49:39: 执行 [ThirdpartServiceImpl.sendData] 耗时:2810
+[ERROR]2011-08-03 11:49:39: [641]发送HTTP数据错误 - 
+org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:8080 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:158)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:149)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:561)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:415)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:139)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:123)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:148)
+	... 35 more
+[DEBUG]2011-08-03 11:49:41: 执行 [ViewSyncServiceImpl.viewSync] 耗时:547
+[ERROR]2011-08-03 11:49:41: [641]发送HTTP数据错误 - 
+org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:8080 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:158)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:149)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:561)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:415)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:139)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:123)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:148)
+	... 35 more
+[ERROR]2011-08-03 11:49:41: [641]发送HTTP数据错误 - 
+org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:8080 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:158)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:149)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:561)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:415)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:130)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:123)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:148)
+	... 35 more
+[DEBUG]2011-08-03 11:49:42: 执行 [ThirdpartServiceImpl.queryResend] 耗时:437
+[INFO ]2011-08-03 11:52:10: 从序列化文件中读取队列信息
+[INFO ]2011-08-03 11:52:10: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-03 11:52:10: 系统启动,开始初始化...
+[INFO ]2011-08-03 11:52:11: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-03 11:52:11: 执行 [ConfigServiceImpl.initConfig] 耗时:686
+[DEBUG]2011-08-03 11:52:11: 执行 [ViewSyncServiceImpl.init] 耗时:0
+[DEBUG]2011-08-03 11:52:11: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[DEBUG]2011-08-03 11:52:11: 恢复未成功发送的记录
+[DEBUG]2011-08-03 11:52:11: 执行 [ThirdpartServiceImpl.queryResend] 耗时:94
+[DEBUG]2011-08-03 11:52:11: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:94
+[DEBUG]2011-08-03 11:52:11: 执行 [ThirdpartServiceImpl.resumeUnsendData] 耗时:188
+[DEBUG]2011-08-03 11:52:12: 执行 [ViewSyncServiceImpl.viewSync] 耗时:843
+[DEBUG]2011-08-03 11:52:17: 执行 [ViewSyncServiceImpl.viewSync] 耗时:703
+[DEBUG]2011-08-03 11:52:17: 执行 [ThirdpartServiceImpl.queryResend] 耗时:843
+[DEBUG]2011-08-03 11:52:17: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:875
+[DEBUG]2011-08-03 11:52:18: 执行 [ThirdpartServiceImpl.sendData] 耗时:1198
+[DEBUG]2011-08-03 11:52:18: 执行 [ThirdpartServiceImpl.sendData] 耗时:1228
+[DEBUG]2011-08-03 11:52:20: 执行 [ThirdpartServiceImpl.sendData] 耗时:2744
+[DEBUG]2011-08-03 11:52:20: 执行 [ThirdpartServiceImpl.sendData] 耗时:2744
+[INFO ]2011-08-03 11:57:36: 从序列化文件中读取队列信息
+[INFO ]2011-08-03 11:57:36: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-03 11:57:36: 系统启动,开始初始化...
+[INFO ]2011-08-03 11:57:36: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-03 11:57:36: 执行 [ConfigServiceImpl.initConfig] 耗时:655
+[DEBUG]2011-08-03 11:57:36: 执行 [ViewSyncServiceImpl.init] 耗时:0
+[DEBUG]2011-08-03 11:57:36: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[DEBUG]2011-08-03 11:57:36: 恢复未成功发送的记录
+[DEBUG]2011-08-03 11:57:37: 执行 [ThirdpartServiceImpl.resumeUnsendData] 耗时:282
+[DEBUG]2011-08-03 11:57:37: 执行 [ViewSyncServiceImpl.viewSync] 耗时:703
+[DEBUG]2011-08-03 11:57:38: 执行 [ThirdpartServiceImpl.queryResend] 耗时:1140
+[DEBUG]2011-08-03 11:57:38: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:1375
+[DEBUG]2011-08-03 11:57:38: 执行 [ThirdpartServiceImpl.sendData] 耗时:282
+[DEBUG]2011-08-03 11:57:38: 执行 [ThirdpartServiceImpl.sendData] 耗时:517
+[DEBUG]2011-08-03 11:57:42: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:609
+[DEBUG]2011-08-03 11:57:42: 执行 [ThirdpartServiceImpl.queryResend] 耗时:140
+[DEBUG]2011-08-03 11:57:42: 执行 [ViewSyncServiceImpl.viewSync] 耗时:577
+[DEBUG]2011-08-03 11:57:47: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:672
+[DEBUG]2011-08-03 11:57:47: 执行 [ThirdpartServiceImpl.queryResend] 耗时:421
+[DEBUG]2011-08-03 11:57:48: 执行 [ViewSyncServiceImpl.viewSync] 耗时:624
+[ERROR]2011-08-03 11:57:49: [641]发送HTTP数据错误 - 
+java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.fillBuffer(AbstractSessionInputBuffer.java:149)
+	at org.apache.http.impl.io.SocketInputBuffer.fillBuffer(SocketInputBuffer.java:110)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.readLine(AbstractSessionInputBuffer.java:260)
+	at org.apache.http.impl.conn.DefaultResponseParser.parseHead(DefaultResponseParser.java:98)
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:252)
+	at org.apache.http.impl.AbstractHttpClientConnection.receiveResponseHeader(AbstractHttpClientConnection.java:281)
+	at org.apache.http.impl.conn.DefaultClientConnection.receiveResponseHeader(DefaultClientConnection.java:247)
+	at org.apache.http.impl.conn.AbstractClientConnAdapter.receiveResponseHeader(AbstractClientConnAdapter.java:219)
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:298)
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryExecute(DefaultRequestDirector.java:633)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:454)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:139)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+[ERROR]2011-08-03 11:57:49: [641]发送HTTP数据错误 - 
+java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.fillBuffer(AbstractSessionInputBuffer.java:149)
+	at org.apache.http.impl.io.SocketInputBuffer.fillBuffer(SocketInputBuffer.java:110)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.readLine(AbstractSessionInputBuffer.java:260)
+	at org.apache.http.impl.conn.DefaultResponseParser.parseHead(DefaultResponseParser.java:98)
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:252)
+	at org.apache.http.impl.AbstractHttpClientConnection.receiveResponseHeader(AbstractHttpClientConnection.java:281)
+	at org.apache.http.impl.conn.DefaultClientConnection.receiveResponseHeader(DefaultClientConnection.java:247)
+	at org.apache.http.impl.conn.AbstractClientConnAdapter.receiveResponseHeader(AbstractClientConnAdapter.java:219)
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:298)
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryExecute(DefaultRequestDirector.java:633)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:454)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:130)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+[ERROR]2011-08-03 11:57:52: [646]发送HTTP数据错误 - 
+java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.fillBuffer(AbstractSessionInputBuffer.java:149)
+	at org.apache.http.impl.io.SocketInputBuffer.fillBuffer(SocketInputBuffer.java:110)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.readLine(AbstractSessionInputBuffer.java:260)
+	at org.apache.http.impl.conn.DefaultResponseParser.parseHead(DefaultResponseParser.java:98)
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:252)
+	at org.apache.http.impl.AbstractHttpClientConnection.receiveResponseHeader(AbstractHttpClientConnection.java:281)
+	at org.apache.http.impl.conn.DefaultClientConnection.receiveResponseHeader(DefaultClientConnection.java:247)
+	at org.apache.http.impl.conn.AbstractClientConnAdapter.receiveResponseHeader(AbstractClientConnAdapter.java:219)
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:298)
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryExecute(DefaultRequestDirector.java:633)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:454)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:130)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+[ERROR]2011-08-03 11:57:52: [641]发送HTTP数据错误 - 
+java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.fillBuffer(AbstractSessionInputBuffer.java:149)
+	at org.apache.http.impl.io.SocketInputBuffer.fillBuffer(SocketInputBuffer.java:110)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.readLine(AbstractSessionInputBuffer.java:260)
+	at org.apache.http.impl.conn.DefaultResponseParser.parseHead(DefaultResponseParser.java:98)
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:252)
+	at org.apache.http.impl.AbstractHttpClientConnection.receiveResponseHeader(AbstractHttpClientConnection.java:281)
+	at org.apache.http.impl.conn.DefaultClientConnection.receiveResponseHeader(DefaultClientConnection.java:247)
+	at org.apache.http.impl.conn.AbstractClientConnAdapter.receiveResponseHeader(AbstractClientConnAdapter.java:219)
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:298)
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryExecute(DefaultRequestDirector.java:633)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:454)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:130)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+[DEBUG]2011-08-03 11:57:52: 执行 [ThirdpartServiceImpl.sendData] 耗时:10532
+[DEBUG]2011-08-03 11:57:53: 执行 [ThirdpartServiceImpl.queryResend] 耗时:359
+[DEBUG]2011-08-03 11:57:53: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:406
+[DEBUG]2011-08-03 11:57:53: 执行 [ViewSyncServiceImpl.viewSync] 耗时:890
+[ERROR]2011-08-03 11:57:58: [646]发送HTTP数据错误 - 
+java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.fillBuffer(AbstractSessionInputBuffer.java:149)
+	at org.apache.http.impl.io.SocketInputBuffer.fillBuffer(SocketInputBuffer.java:110)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.readLine(AbstractSessionInputBuffer.java:260)
+	at org.apache.http.impl.conn.DefaultResponseParser.parseHead(DefaultResponseParser.java:98)
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:252)
+	at org.apache.http.impl.AbstractHttpClientConnection.receiveResponseHeader(AbstractHttpClientConnection.java:281)
+	at org.apache.http.impl.conn.DefaultClientConnection.receiveResponseHeader(DefaultClientConnection.java:247)
+	at org.apache.http.impl.conn.AbstractClientConnAdapter.receiveResponseHeader(AbstractClientConnAdapter.java:219)
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:298)
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryExecute(DefaultRequestDirector.java:633)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:454)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:130)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+[DEBUG]2011-08-03 11:57:58: 执行 [ThirdpartServiceImpl.sendData] 耗时:10518
+[ERROR]2011-08-03 11:57:59: [641]发送HTTP数据错误 - 
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.fillBuffer(AbstractSessionInputBuffer.java:149)
+	at org.apache.http.impl.io.SocketInputBuffer.fillBuffer(SocketInputBuffer.java:110)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.readLine(AbstractSessionInputBuffer.java:260)
+	at org.apache.http.impl.conn.DefaultResponseParser.parseHead(DefaultResponseParser.java:98)
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:252)
+	at org.apache.http.impl.AbstractHttpClientConnection.receiveResponseHeader(AbstractHttpClientConnection.java:281)
+	at org.apache.http.impl.conn.DefaultClientConnection.receiveResponseHeader(DefaultClientConnection.java:247)
+	at org.apache.http.impl.conn.AbstractClientConnAdapter.receiveResponseHeader(AbstractClientConnAdapter.java:219)
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:298)
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryExecute(DefaultRequestDirector.java:633)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:454)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:130)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+[DEBUG]2011-08-03 11:57:59: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:859
+[ERROR]2011-08-03 11:57:59: [641]发送HTTP数据错误 - 
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.fillBuffer(AbstractSessionInputBuffer.java:149)
+	at org.apache.http.impl.io.SocketInputBuffer.fillBuffer(SocketInputBuffer.java:110)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.readLine(AbstractSessionInputBuffer.java:260)
+	at org.apache.http.impl.conn.DefaultResponseParser.parseHead(DefaultResponseParser.java:98)
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:252)
+	at org.apache.http.impl.AbstractHttpClientConnection.receiveResponseHeader(AbstractHttpClientConnection.java:281)
+	at org.apache.http.impl.conn.DefaultClientConnection.receiveResponseHeader(DefaultClientConnection.java:247)
+	at org.apache.http.impl.conn.AbstractClientConnAdapter.receiveResponseHeader(AbstractClientConnAdapter.java:219)
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:298)
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryExecute(DefaultRequestDirector.java:633)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:454)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:139)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+[ERROR]2011-08-03 11:57:59: [641]发送HTTP数据错误 - 
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.fillBuffer(AbstractSessionInputBuffer.java:149)
+	at org.apache.http.impl.io.SocketInputBuffer.fillBuffer(SocketInputBuffer.java:110)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.readLine(AbstractSessionInputBuffer.java:260)
+	at org.apache.http.impl.conn.DefaultResponseParser.parseHead(DefaultResponseParser.java:98)
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:252)
+	at org.apache.http.impl.AbstractHttpClientConnection.receiveResponseHeader(AbstractHttpClientConnection.java:281)
+	at org.apache.http.impl.conn.DefaultClientConnection.receiveResponseHeader(DefaultClientConnection.java:247)
+	at org.apache.http.impl.conn.AbstractClientConnAdapter.receiveResponseHeader(AbstractClientConnAdapter.java:219)
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:298)
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryExecute(DefaultRequestDirector.java:633)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:454)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:130)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+[ERROR]2011-08-03 11:57:59: [641]发送HTTP数据错误 - 
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.fillBuffer(AbstractSessionInputBuffer.java:149)
+	at org.apache.http.impl.io.SocketInputBuffer.fillBuffer(SocketInputBuffer.java:110)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.readLine(AbstractSessionInputBuffer.java:260)
+	at org.apache.http.impl.conn.DefaultResponseParser.parseHead(DefaultResponseParser.java:98)
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:252)
+	at org.apache.http.impl.AbstractHttpClientConnection.receiveResponseHeader(AbstractHttpClientConnection.java:281)
+	at org.apache.http.impl.conn.DefaultClientConnection.receiveResponseHeader(DefaultClientConnection.java:247)
+	at org.apache.http.impl.conn.AbstractClientConnAdapter.receiveResponseHeader(AbstractClientConnAdapter.java:219)
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:298)
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryExecute(DefaultRequestDirector.java:633)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:454)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:130)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+[DEBUG]2011-08-03 11:57:59: 执行 [ThirdpartServiceImpl.queryResend] 耗时:1046
+[DEBUG]2011-08-03 11:57:59: 执行 [ViewSyncServiceImpl.viewSync] 耗时:547
+[ERROR]2011-08-03 11:58:01: [641]发送HTTP数据错误 - 
+org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:8080 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:158)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:149)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:561)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:415)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:130)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:123)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:148)
+	... 34 more
+[ERROR]2011-08-03 11:58:01: [646]发送HTTP数据错误 - 
+org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:8080 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:158)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:149)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:561)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:415)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:130)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:123)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:148)
+	... 34 more
+[DEBUG]2011-08-03 11:58:01: 执行 [ThirdpartServiceImpl.sendData] 耗时:2218
+[ERROR]2011-08-03 11:58:01: [641]发送HTTP数据错误 - 
+org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:8080 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:158)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:149)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:561)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:415)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:130)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:123)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:148)
+	... 35 more
+[ERROR]2011-08-03 11:58:01: [641]发送HTTP数据错误 - 
+org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:8080 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:158)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:149)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:561)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:415)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:130)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:123)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:148)
+	... 35 more
+[ERROR]2011-08-03 11:58:01: [641]发送HTTP数据错误 - 
+org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:8080 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:158)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:149)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:561)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:415)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.megajoy.thirdpart.report.service.bean.HttpConnectionManager.post(HttpConnectionManager.java:89)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:272)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendData(ThirdpartServiceImpl.java:139)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.megajoy.thirdpart.report.interceptor.ServiceLogInterceptor.doAround(ServiceLogInterceptor.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at $Proxy18.sendData(Unknown Source)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:21)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:123)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:148)
+	... 35 more
+[INFO ]2011-08-03 11:59:47: 从序列化文件中读取队列信息
+[INFO ]2011-08-03 11:59:47: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-03 11:59:47: 系统启动,开始初始化...
+[INFO ]2011-08-03 11:59:48: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-03 11:59:48: 执行 [ConfigServiceImpl.initConfig] 耗时:656
+[DEBUG]2011-08-03 11:59:48: 执行 [ViewSyncServiceImpl.init] 耗时:0
+[DEBUG]2011-08-03 11:59:48: 恢复未成功发送的记录
+[DEBUG]2011-08-03 11:59:48: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[DEBUG]2011-08-03 11:59:48: 执行 [ThirdpartServiceImpl.resumeUnsendData] 耗时:219
+[DEBUG]2011-08-03 11:59:49: 执行 [ViewSyncServiceImpl.viewSync] 耗时:1202
+[DEBUG]2011-08-03 11:59:49: 执行 [ThirdpartServiceImpl.queryResend] 耗时:1608
+[DEBUG]2011-08-03 11:59:49: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:1608
+[INFO ]2011-08-03 12:00:22: 从序列化文件中读取队列信息
+[INFO ]2011-08-03 12:00:22: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-03 12:00:22: 系统启动,开始初始化...
+[INFO ]2011-08-03 12:00:23: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-03 12:00:23: 执行 [ConfigServiceImpl.initConfig] 耗时:688
+[DEBUG]2011-08-03 12:00:23: 执行 [ViewSyncServiceImpl.init] 耗时:0
+[DEBUG]2011-08-03 12:00:23: 恢复未成功发送的记录
+[DEBUG]2011-08-03 12:00:23: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[DEBUG]2011-08-03 12:00:23: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:79
+[DEBUG]2011-08-03 12:00:23: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:00:23: 执行 [ThirdpartServiceImpl.resumeUnsendData] 耗时:454
+[DEBUG]2011-08-03 12:00:23: 执行 [ViewSyncServiceImpl.viewSync] 耗时:562
+[INFO ]2011-08-03 12:00:34: 从序列化文件中读取队列信息
+[INFO ]2011-08-03 12:00:34: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-03 12:00:34: 系统启动,开始初始化...
+[INFO ]2011-08-03 12:00:34: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-03 12:00:34: 执行 [ConfigServiceImpl.initConfig] 耗时:655
+[DEBUG]2011-08-03 12:00:34: 执行 [ViewSyncServiceImpl.init] 耗时:0
+[DEBUG]2011-08-03 12:00:34: 恢复未成功发送的记录
+[DEBUG]2011-08-03 12:00:34: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[DEBUG]2011-08-03 12:00:35: 执行 [ThirdpartServiceImpl.resumeUnsendData] 耗时:203
+[DEBUG]2011-08-03 12:00:35: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:1000
+[DEBUG]2011-08-03 12:00:35: 执行 [ThirdpartServiceImpl.queryResend] 耗时:1047
+[DEBUG]2011-08-03 12:00:36: 执行 [ViewSyncServiceImpl.viewSync] 耗时:1797
+[DEBUG]2011-08-03 12:00:39: 执行 [ThirdpartServiceImpl.sendData] 耗时:3670
+[DEBUG]2011-08-03 12:00:39: 执行 [ThirdpartServiceImpl.sendData] 耗时:3748
+[DEBUG]2011-08-03 12:00:39: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:00:40: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:484
+[DEBUG]2011-08-03 12:00:40: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:00:40: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:00:40: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:00:41: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:499
+[DEBUG]2011-08-03 12:00:41: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:00:41: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:189
+[DEBUG]2011-08-03 12:00:41: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:00:41: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:00:42: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:00:42: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:00:42: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:483
+[DEBUG]2011-08-03 12:00:43: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:173
+[DEBUG]2011-08-03 12:00:43: 执行 [ThirdpartServiceImpl.sendData] 耗时:7761
+[DEBUG]2011-08-03 12:00:43: 执行 [ThirdpartServiceImpl.sendData] 耗时:7871
+[DEBUG]2011-08-03 12:00:43: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:00:43: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:00:44: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:00:44: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:00:44: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:00:44: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:00:44: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:00:45: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:483
+[DEBUG]2011-08-03 12:00:45: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:173
+[DEBUG]2011-08-03 12:00:45: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:00:45: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:00:46: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:00:46: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:00:46: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:484
+[DEBUG]2011-08-03 12:00:46: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:00:47: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:00:47: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:00:47: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:00:47: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:483
+[DEBUG]2011-08-03 12:00:48: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:189
+[DEBUG]2011-08-03 12:00:48: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:483
+[DEBUG]2011-08-03 12:00:48: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:00:49: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:00:49: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:00:49: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:00:49: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:00:49: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:00:50: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:718
+[INFO ]2011-08-03 12:04:11: 从序列化文件中读取队列信息
+[INFO ]2011-08-03 12:04:11: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-03 12:04:11: 系统启动,开始初始化...
+[INFO ]2011-08-03 12:04:11: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[DEBUG]2011-08-03 12:04:11: 执行 [ConfigServiceImpl.initConfig] 耗时:670
+[DEBUG]2011-08-03 12:04:11: 执行 [ViewSyncServiceImpl.init] 耗时:0
+[DEBUG]2011-08-03 12:04:11: 恢复未成功发送的记录
+[DEBUG]2011-08-03 12:04:11: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[DEBUG]2011-08-03 12:04:12: 执行 [ThirdpartServiceImpl.queryResend] 耗时:94
+[DEBUG]2011-08-03 12:04:12: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:94
+[DEBUG]2011-08-03 12:04:12: 执行 [ThirdpartServiceImpl.resumeUnsendData] 耗时:157
+[DEBUG]2011-08-03 12:04:12: 执行 [ViewSyncServiceImpl.viewSync] 耗时:547
+[DEBUG]2011-08-03 12:04:17: 执行 [ViewSyncServiceImpl.viewSync] 耗时:516
+[DEBUG]2011-08-03 12:04:17: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:141
+[DEBUG]2011-08-03 12:04:17: 执行 [ThirdpartServiceImpl.queryResend] 耗时:156
+[DEBUG]2011-08-03 12:04:22: 执行 [ViewSyncServiceImpl.viewSync] 耗时:562
+[DEBUG]2011-08-03 12:04:22: 执行 [ThirdpartServiceImpl.queryResend] 耗时:343
+[DEBUG]2011-08-03 12:04:22: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:358
+[DEBUG]2011-08-03 12:04:28: 执行 [ThirdpartServiceImpl.queryResend] 耗时:547
+[DEBUG]2011-08-03 12:04:28: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:563
+[DEBUG]2011-08-03 12:04:28: 执行 [ViewSyncServiceImpl.viewSync] 耗时:579
+[DEBUG]2011-08-03 12:04:33: 执行 [ThirdpartServiceImpl.queryResend] 耗时:64
+[DEBUG]2011-08-03 12:04:34: 执行 [ViewSyncServiceImpl.viewSync] 耗时:781
+[DEBUG]2011-08-03 12:04:34: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:906
+[DEBUG]2011-08-03 12:04:34: 执行 [ThirdpartServiceImpl.sendData] 耗时:671
+[DEBUG]2011-08-03 12:04:35: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:265
+[DEBUG]2011-08-03 12:04:35: 执行 [ThirdpartServiceImpl.sendData] 耗时:1576
+[DEBUG]2011-08-03 12:04:36: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:04:36: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:220
+[DEBUG]2011-08-03 12:04:36: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:483
+[DEBUG]2011-08-03 12:04:36: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:37: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:04:37: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:190
+[DEBUG]2011-08-03 12:04:37: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:312
+[DEBUG]2011-08-03 12:04:37: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:04:38: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:38: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:04:38: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:204
+[DEBUG]2011-08-03 12:04:38: 执行 [ThirdpartServiceImpl.queryResend] 耗时:78
+[DEBUG]2011-08-03 12:04:38: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:38: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:04:39: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:718
+[DEBUG]2011-08-03 12:04:39: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:219
+[DEBUG]2011-08-03 12:04:39: 执行 [ViewSyncServiceImpl.viewSync] 耗时:687
+[DEBUG]2011-08-03 12:04:39: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:234
+[DEBUG]2011-08-03 12:04:40: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:202
+[DEBUG]2011-08-03 12:04:40: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:1045
+[DEBUG]2011-08-03 12:04:40: 执行 [ThirdpartServiceImpl.sendData] 耗时:48
+[DEBUG]2011-08-03 12:04:40: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:547
+[DEBUG]2011-08-03 12:04:40: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:41: 执行 [ThirdpartServiceImpl.sendData] 耗时:687
+[DEBUG]2011-08-03 12:04:41: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:41: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:04:41: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:04:41: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:04:42: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:484
+[DEBUG]2011-08-03 12:04:42: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:202
+[DEBUG]2011-08-03 12:04:42: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:04:42: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:04:42: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:43: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:43: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:04:43: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:43: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:43: 执行 [ThirdpartServiceImpl.queryResend] 耗时:63
+[DEBUG]2011-08-03 12:04:43: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:04:44: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:04:44: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:44: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:04:44: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:04:44: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:45: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:765
+[DEBUG]2011-08-03 12:04:45: 执行 [ThirdpartServiceImpl.sendData] 耗时:16
+[DEBUG]2011-08-03 12:04:45: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:781
+[DEBUG]2011-08-03 12:04:45: 执行 [ViewSyncServiceImpl.viewSync] 耗时:609
+[DEBUG]2011-08-03 12:04:45: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:04:45: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:204
+[DEBUG]2011-08-03 12:04:46: 执行 [ThirdpartServiceImpl.sendData] 耗时:844
+[DEBUG]2011-08-03 12:04:46: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:46: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:671
+[DEBUG]2011-08-03 12:04:47: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:04:47: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:483
+[DEBUG]2011-08-03 12:04:47: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:04:47: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:48: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:04:48: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:484
+[DEBUG]2011-08-03 12:04:48: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:49: 执行 [ThirdpartServiceImpl.queryResend] 耗时:172
+[DEBUG]2011-08-03 12:04:49: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:49: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:189
+[DEBUG]2011-08-03 12:04:49: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:04:49: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:04:49: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:49: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:04:50: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:50: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:04:50: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:04:50: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:04:51: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:577
+[DEBUG]2011-08-03 12:04:51: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:1108
+[DEBUG]2011-08-03 12:04:51: 执行 [ThirdpartServiceImpl.sendData] 耗时:94
+[DEBUG]2011-08-03 12:04:51: 执行 [ViewSyncServiceImpl.viewSync] 耗时:1078
+[DEBUG]2011-08-03 12:04:51: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:500
+[DEBUG]2011-08-03 12:04:51: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:04:52: 执行 [ThirdpartServiceImpl.sendData] 耗时:921
+[DEBUG]2011-08-03 12:04:52: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:204
+[DEBUG]2011-08-03 12:04:52: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:52: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:04:53: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:500
+[DEBUG]2011-08-03 12:04:53: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:04:53: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:04:53: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:54: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:04:54: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:54: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:468
+[DEBUG]2011-08-03 12:04:55: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:485
+[DEBUG]2011-08-03 12:04:55: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:55: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:55: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:219
+[DEBUG]2011-08-03 12:04:55: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:204
+[DEBUG]2011-08-03 12:04:56: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:202
+[DEBUG]2011-08-03 12:04:56: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:234
+[DEBUG]2011-08-03 12:04:56: 执行 [ViewSyncServiceImpl.viewSync] 耗时:670
+[DEBUG]2011-08-03 12:04:56: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:1047
+[DEBUG]2011-08-03 12:04:56: 执行 [ThirdpartServiceImpl.sendData] 耗时:31
+[DEBUG]2011-08-03 12:04:56: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:234
+[DEBUG]2011-08-03 12:04:56: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:266
+[DEBUG]2011-08-03 12:04:57: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:57: 执行 [ThirdpartServiceImpl.sendData] 耗时:827
+[DEBUG]2011-08-03 12:04:57: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:484
+[DEBUG]2011-08-03 12:04:57: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:57: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:58: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:173
+[DEBUG]2011-08-03 12:04:58: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:58: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:58: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:04:58: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:59: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:04:59: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:173
+[DEBUG]2011-08-03 12:04:59: 执行 [ThirdpartServiceImpl.queryResend] 耗时:109
+[DEBUG]2011-08-03 12:04:59: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:202
+[DEBUG]2011-08-03 12:04:59: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:04:59: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:04:59: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:00: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:05:00: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:05:00: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:05:00: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:05:00: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:05:01: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:202
+[DEBUG]2011-08-03 12:05:01: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:1045
+[DEBUG]2011-08-03 12:05:01: 执行 [ThirdpartServiceImpl.sendData] 耗时:32
+[DEBUG]2011-08-03 12:05:02: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:1047
+[DEBUG]2011-08-03 12:05:02: 执行 [ThirdpartServiceImpl.sendData] 耗时:594
+[DEBUG]2011-08-03 12:05:02: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:02: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:05:02: 执行 [ViewSyncServiceImpl.viewSync] 耗时:984
+[DEBUG]2011-08-03 12:05:02: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:02: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:196
+[DEBUG]2011-08-03 12:05:03: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:03: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:05:03: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:03: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:05:03: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:04: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:173
+[DEBUG]2011-08-03 12:05:04: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:04: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:04: 执行 [ThirdpartServiceImpl.queryResend] 耗时:124
+[DEBUG]2011-08-03 12:05:04: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:05:04: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:05:04: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:05: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:173
+[DEBUG]2011-08-03 12:05:05: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:671
+[DEBUG]2011-08-03 12:05:05: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:05:06: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:204
+[DEBUG]2011-08-03 12:05:06: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:05:06: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:218
+[DEBUG]2011-08-03 12:05:06: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:1062
+[DEBUG]2011-08-03 12:05:06: 执行 [ThirdpartServiceImpl.sendData] 耗时:31
+[DEBUG]2011-08-03 12:05:07: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:518
+[DEBUG]2011-08-03 12:05:07: 执行 [ViewSyncServiceImpl.viewSync] 耗时:549
+[DEBUG]2011-08-03 12:05:07: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:05:07: 执行 [ThirdpartServiceImpl.sendData] 耗时:580
+[DEBUG]2011-08-03 12:05:07: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:05:07: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:07: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:05:08: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:08: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:05:08: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:484
+[DEBUG]2011-08-03 12:05:08: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:05:09: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:09: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:189
+[DEBUG]2011-08-03 12:05:09: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:09: 执行 [ThirdpartServiceImpl.queryResend] 耗时:78
+[DEBUG]2011-08-03 12:05:09: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:09: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:10: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:05:10: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:05:10: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:189
+[DEBUG]2011-08-03 12:05:10: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:05:10: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:05:10: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:05:11: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:11: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:05:11: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:1077
+[DEBUG]2011-08-03 12:05:11: 执行 [ThirdpartServiceImpl.sendData] 耗时:47
+[DEBUG]2011-08-03 12:05:12: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:12: 执行 [ThirdpartServiceImpl.sendData] 耗时:1078
+[DEBUG]2011-08-03 12:05:13: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:218
+[DEBUG]2011-08-03 12:05:13: 执行 [ViewSyncServiceImpl.viewSync] 耗时:937
+[DEBUG]2011-08-03 12:05:13: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:05:13: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:05:13: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:05:13: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:05:14: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:14: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:05:14: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:05:17: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:2981
+[DEBUG]2011-08-03 12:05:17: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:204
+[DEBUG]2011-08-03 12:05:17: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:05:18: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:234
+[DEBUG]2011-08-03 12:05:18: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:05:18: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:312
+[DEBUG]2011-08-03 12:05:18: 执行 [ThirdpartServiceImpl.queryResend] 耗时:3935
+[DEBUG]2011-08-03 12:05:18: 执行 [ThirdpartServiceImpl.sendData] 耗时:78
+[DEBUG]2011-08-03 12:05:18: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:2873
+[DEBUG]2011-08-03 12:05:18: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:297
+[DEBUG]2011-08-03 12:05:18: 执行 [ViewSyncServiceImpl.viewSync] 耗时:594
+[DEBUG]2011-08-03 12:05:19: 执行 [ThirdpartServiceImpl.sendData] 耗时:250
+[DEBUG]2011-08-03 12:05:19: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:19: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:19: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:516
+[DEBUG]2011-08-03 12:05:22: 执行 [ThirdpartServiceImpl.sendData] 耗时:3777
+[DEBUG]2011-08-03 12:05:22: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:05:22: 执行 [ThirdpartServiceImpl.sendData] 耗时:3856
+[DEBUG]2011-08-03 12:05:22: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:05:23: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:577
+[DEBUG]2011-08-03 12:05:23: 执行 [ThirdpartServiceImpl.queryResend] 耗时:2995
+[DEBUG]2011-08-03 12:05:24: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:865
+[DEBUG]2011-08-03 12:05:26: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:4528
+[DEBUG]2011-08-03 12:05:26: 执行 [ThirdpartServiceImpl.queryResend] 耗时:781
+[DEBUG]2011-08-03 12:05:26: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:266
+[DEBUG]2011-08-03 12:05:27: 执行 [ViewSyncServiceImpl.viewSync] 耗时:2980
+[DEBUG]2011-08-03 12:05:27: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:483
+[DEBUG]2011-08-03 12:05:30: 执行 [ThirdpartServiceImpl.sendData] 耗时:6418
+[DEBUG]2011-08-03 12:05:30: 执行 [ThirdpartServiceImpl.sendData] 耗时:6434
+[DEBUG]2011-08-03 12:05:30: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:218
+[DEBUG]2011-08-03 12:05:30: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:218
+[DEBUG]2011-08-03 12:05:33: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:6352
+[DEBUG]2011-08-03 12:05:30: 执行 [ViewSyncServiceImpl.viewSync] 耗时:546
+[DEBUG]2011-08-03 12:05:33: 执行 [ThirdpartServiceImpl.queryResend] 耗时:2218
+[DEBUG]2011-08-03 12:05:33: 执行 [ThirdpartServiceImpl.sendData] 耗时:172
+[DEBUG]2011-08-03 12:05:33: 执行 [ThirdpartServiceImpl.sendData] 耗时:7539
+[DEBUG]2011-08-03 12:05:33: 执行 [ThirdpartServiceImpl.sendData] 耗时:7554
+[DEBUG]2011-08-03 12:05:33: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:05:34: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:34: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:05:37: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:3723
+[DEBUG]2011-08-03 12:05:37: 执行 [ThirdpartServiceImpl.sendData] 耗时:62
+[DEBUG]2011-08-03 12:05:37: 执行 [ThirdpartServiceImpl.queryResend] 耗时:837
+[DEBUG]2011-08-03 12:05:37: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:281
+[DEBUG]2011-08-03 12:05:37: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:38: 执行 [ViewSyncServiceImpl.viewSync] 耗时:2537
+[DEBUG]2011-08-03 12:05:41: 执行 [ThirdpartServiceImpl.sendData] 耗时:7390
+[DEBUG]2011-08-03 12:05:41: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:235
+[DEBUG]2011-08-03 12:05:41: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:05:44: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:5383
+[DEBUG]2011-08-03 12:05:42: 执行 [ViewSyncServiceImpl.viewSync] 耗时:1138
+[DEBUG]2011-08-03 12:05:45: 执行 [ThirdpartServiceImpl.queryResend] 耗时:2185
+[DEBUG]2011-08-03 12:05:45: 执行 [ThirdpartServiceImpl.sendData] 耗时:7521
+[DEBUG]2011-08-03 12:05:45: 执行 [ThirdpartServiceImpl.sendData] 耗时:280
+[DEBUG]2011-08-03 12:05:45: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:313
+[DEBUG]2011-08-03 12:05:45: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:218
+[DEBUG]2011-08-03 12:05:45: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:250
+[DEBUG]2011-08-03 12:05:49: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:4196
+[DEBUG]2011-08-03 12:05:49: 执行 [ThirdpartServiceImpl.queryResend] 耗时:1171
+[DEBUG]2011-08-03 12:05:49: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:05:49: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:05:49: 执行 [ViewSyncServiceImpl.viewSync] 耗时:2668
+[DEBUG]2011-08-03 12:05:49: 执行 [ThirdpartServiceImpl.sendData] 耗时:547
+[DEBUG]2011-08-03 12:05:49: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:05:49: 执行 [ThirdpartServiceImpl.sendData] 耗时:5041
+[DEBUG]2011-08-03 12:05:50: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:499
+[DEBUG]2011-08-03 12:05:53: 执行 [ThirdpartServiceImpl.queryResend] 耗时:391
+[DEBUG]2011-08-03 12:05:53: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:3574
+[DEBUG]2011-08-03 12:05:53: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:562
+[DEBUG]2011-08-03 12:05:54: 执行 [ViewSyncServiceImpl.viewSync] 耗时:1281
+[DEBUG]2011-08-03 12:05:54: 执行 [ThirdpartServiceImpl.sendData] 耗时:4885
+[DEBUG]2011-08-03 12:05:54: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:54: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:05:54: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:54: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:05:54: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:05:55: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:55: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:55: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:05:55: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:05:55: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:173
+[DEBUG]2011-08-03 12:05:58: 执行 [ViewSyncServiceImpl.viewSync] 耗时:516
+[DEBUG]2011-08-03 12:05:59: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:4166
+[DEBUG]2011-08-03 12:06:00: 执行 [ThirdpartServiceImpl.queryResend] 耗时:1171
+[DEBUG]2011-08-03 12:06:00: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:4526
+[DEBUG]2011-08-03 12:06:00: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:516
+[DEBUG]2011-08-03 12:06:00: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:00: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:01: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:01: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:01: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:01: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:02: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:686
+[DEBUG]2011-08-03 12:06:02: 执行 [ThirdpartServiceImpl.sendData] 耗时:48
+[DEBUG]2011-08-03 12:06:02: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:500
+[DEBUG]2011-08-03 12:06:02: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:02: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:02: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:02: 执行 [ThirdpartServiceImpl.sendData] 耗时:750
+[DEBUG]2011-08-03 12:06:02: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:03: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:03: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:03: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:03: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:03: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:03: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:04: 执行 [ThirdpartServiceImpl.queryResend] 耗时:63
+[DEBUG]2011-08-03 12:06:04: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:204
+[DEBUG]2011-08-03 12:06:04: 执行 [ViewSyncServiceImpl.viewSync] 耗时:531
+[DEBUG]2011-08-03 12:06:04: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:04: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:04: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:468
+[DEBUG]2011-08-03 12:06:05: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:06:05: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:05: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:05: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:05: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:06:06: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:06: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:499
+[DEBUG]2011-08-03 12:06:06: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:10: 执行 [ThirdpartServiceImpl.queryResend] 耗时:843
+[DEBUG]2011-08-03 12:06:10: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:2949
+[DEBUG]2011-08-03 12:06:10: 执行 [ViewSyncServiceImpl.viewSync] 耗时:796
+[DEBUG]2011-08-03 12:06:10: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:3293
+[DEBUG]2011-08-03 12:06:10: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:10: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:10: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:06:11: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:483
+[DEBUG]2011-08-03 12:06:11: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:11: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:204
+[DEBUG]2011-08-03 12:06:11: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:250
+[DEBUG]2011-08-03 12:06:11: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:06:12: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:141
+[DEBUG]2011-08-03 12:06:12: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:06:12: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:484
+[DEBUG]2011-08-03 12:06:12: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:204
+[DEBUG]2011-08-03 12:06:13: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:578
+[DEBUG]2011-08-03 12:06:13: 执行 [ThirdpartServiceImpl.sendData] 耗时:31
+[DEBUG]2011-08-03 12:06:14: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:1218
+[DEBUG]2011-08-03 12:06:14: 执行 [ThirdpartServiceImpl.sendData] 耗时:609
+[DEBUG]2011-08-03 12:06:14: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:14: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:14: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:14: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:15: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:15: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:06:15: 执行 [ThirdpartServiceImpl.queryResend] 耗时:141
+[DEBUG]2011-08-03 12:06:15: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:06:15: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:06:15: 执行 [ViewSyncServiceImpl.viewSync] 耗时:530
+[DEBUG]2011-08-03 12:06:15: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:16: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:16: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:16: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:06:16: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:16: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:06:16: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:17: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:17: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:204
+[DEBUG]2011-08-03 12:06:17: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:17: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:17: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:18: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:468
+[DEBUG]2011-08-03 12:06:18: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:189
+[DEBUG]2011-08-03 12:06:18: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:202
+[DEBUG]2011-08-03 12:06:18: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:19: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:265
+[DEBUG]2011-08-03 12:06:19: 执行 [ThirdpartServiceImpl.sendData] 耗时:15
+[DEBUG]2011-08-03 12:06:19: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:19: 执行 [ThirdpartServiceImpl.sendData] 耗时:156
+[DEBUG]2011-08-03 12:06:19: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:19: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:19: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:19: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:20: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:06:20: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:20: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:20: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:06:20: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:500
+[DEBUG]2011-08-03 12:06:21: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:06:21: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:06:21: 执行 [ViewSyncServiceImpl.viewSync] 耗时:516
+[DEBUG]2011-08-03 12:06:21: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:21: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:483
+[DEBUG]2011-08-03 12:06:22: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:173
+[DEBUG]2011-08-03 12:06:22: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:22: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:22: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:22: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:23: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:23: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:23: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:23: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:23: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:06:23: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:06:24: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:24: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 12:06:24: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:189
+[DEBUG]2011-08-03 12:06:24: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:24: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:06:24: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:06:25: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:25: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:25: 执行 [ThirdpartServiceImpl.queryResend] 耗时:63
+[DEBUG]2011-08-03 12:06:25: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:484
+[DEBUG]2011-08-03 12:06:25: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:26: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:26: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:26: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:26: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:26: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:26: 执行 [ViewSyncServiceImpl.viewSync] 耗时:499
+[DEBUG]2011-08-03 12:06:27: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:27: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:27: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:27: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:204
+[DEBUG]2011-08-03 12:06:27: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:06:27: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:06:28: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:28: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:06:28: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:28: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:28: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:29: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:29: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:29: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 12:06:29: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:468
+[DEBUG]2011-08-03 12:06:29: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:204
+[DEBUG]2011-08-03 12:06:30: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:30: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:30: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:30: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:30: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:06:30: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:31: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:177
+[DEBUG]2011-08-03 12:06:31: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:31: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:31: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:31: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:31: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:32: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:32: 执行 [ViewSyncServiceImpl.viewSync] 耗时:484
+[DEBUG]2011-08-03 12:06:32: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:656
+[DEBUG]2011-08-03 12:06:32: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:33: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:33: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:34: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:795
+[DEBUG]2011-08-03 12:06:34: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:204
+[DEBUG]2011-08-03 12:06:34: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:94
+[DEBUG]2011-08-03 12:06:34: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:34: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:34: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:35: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:35: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:35: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:35: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:35: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:35: 执行 [ThirdpartServiceImpl.queryResend] 耗时:110
+[DEBUG]2011-08-03 12:06:36: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:06:36: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:36: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:06:36: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:189
+[DEBUG]2011-08-03 12:06:36: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:36: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:37: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:37: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:37: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:37: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:173
+[DEBUG]2011-08-03 12:06:37: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:37: 执行 [ViewSyncServiceImpl.viewSync] 耗时:469
+[DEBUG]2011-08-03 12:06:38: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:38: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:06:38: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:38: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:38: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:38: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:39: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:39: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:06:39: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:62
+[DEBUG]2011-08-03 12:06:39: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:500
+[DEBUG]2011-08-03 12:06:40: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:203
+[DEBUG]2011-08-03 12:06:40: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:40: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:40: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:40: 执行 [ThirdpartServiceImpl.queryResend] 耗时:63
+[DEBUG]2011-08-03 12:06:41: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:484
+[DEBUG]2011-08-03 12:06:41: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:42: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:1372
+[DEBUG]2011-08-03 12:06:42: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:189
+[DEBUG]2011-08-03 12:06:42: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:43: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:234
+[DEBUG]2011-08-03 12:06:43: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:43: 执行 [ViewSyncServiceImpl.viewSync] 耗时:483
+[DEBUG]2011-08-03 12:06:43: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:43: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:44: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:501
+[DEBUG]2011-08-03 12:06:44: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:171
+[DEBUG]2011-08-03 12:06:45: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:640
+[DEBUG]2011-08-03 12:06:45: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:188
+[DEBUG]2011-08-03 12:06:45: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:688
+[DEBUG]2011-08-03 12:06:45: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:187
+[DEBUG]2011-08-03 12:06:45: 执行 [ThirdpartServiceImpl.updateSendstate] 耗时:172
+[DEBUG]2011-08-03 12:06:46: 执行 [ThirdpartServiceImpl.queryResend] 耗时:63
+[DEBUG]2011-08-03 12:06:50: 执行 [ViewSyncServiceImpl.viewSync] 耗时:1437
+[DEBUG]2011-08-03 12:06:50: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:62
+[DEBUG]2011-08-03 12:06:51: 执行 [ThirdpartServiceImpl.queryResend] 耗时:64
+[DEBUG]2011-08-03 12:06:54: 执行 [ViewSyncServiceImpl.viewSync] 耗时:781
+[DEBUG]2011-08-03 12:06:55: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 12:06:56: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:07:00: 执行 [ViewSyncServiceImpl.viewSync] 耗时:469
+[DEBUG]2011-08-03 12:07:00: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 12:07:01: 执行 [ThirdpartServiceImpl.queryResend] 耗时:63
+[DEBUG]2011-08-03 12:07:05: 执行 [ViewSyncServiceImpl.viewSync] 耗时:469
+[DEBUG]2011-08-03 12:07:06: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:374
+[DEBUG]2011-08-03 12:07:06: 执行 [ThirdpartServiceImpl.queryResend] 耗时:64
+[DEBUG]2011-08-03 12:07:11: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 12:07:11: 执行 [ViewSyncServiceImpl.viewSync] 耗时:469
+[DEBUG]2011-08-03 12:07:11: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:07:16: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:64
+[DEBUG]2011-08-03 12:07:16: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:07:17: 执行 [ViewSyncServiceImpl.viewSync] 耗时:796
+[DEBUG]2011-08-03 12:07:21: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:64
+[DEBUG]2011-08-03 12:07:22: 执行 [ThirdpartServiceImpl.queryResend] 耗时:359
+[DEBUG]2011-08-03 12:07:22: 执行 [ViewSyncServiceImpl.viewSync] 耗时:469
+[DEBUG]2011-08-03 12:07:26: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 12:07:27: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:07:28: 执行 [ViewSyncServiceImpl.viewSync] 耗时:484
+[DEBUG]2011-08-03 12:07:31: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 12:07:32: 执行 [ThirdpartServiceImpl.queryResend] 耗时:63
+[DEBUG]2011-08-03 12:07:33: 执行 [ViewSyncServiceImpl.viewSync] 耗时:469
+[DEBUG]2011-08-03 12:07:37: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 12:07:37: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:07:39: 执行 [ViewSyncServiceImpl.viewSync] 耗时:781
+[DEBUG]2011-08-03 12:07:42: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:64
+[DEBUG]2011-08-03 12:07:42: 执行 [ThirdpartServiceImpl.queryResend] 耗时:78
+[DEBUG]2011-08-03 12:07:45: 执行 [ViewSyncServiceImpl.viewSync] 耗时:491
+[DEBUG]2011-08-03 12:07:47: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 12:07:48: 执行 [ThirdpartServiceImpl.queryResend] 耗时:63
+[DEBUG]2011-08-03 12:07:51: 执行 [ViewSyncServiceImpl.viewSync] 耗时:781
+[DEBUG]2011-08-03 12:07:52: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:64
+[DEBUG]2011-08-03 12:07:53: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:07:56: 执行 [ViewSyncServiceImpl.viewSync] 耗时:485
+[DEBUG]2011-08-03 12:07:57: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 12:07:58: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:08:02: 执行 [ViewSyncServiceImpl.viewSync] 耗时:484
+[DEBUG]2011-08-03 12:08:02: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 12:08:03: 执行 [ThirdpartServiceImpl.queryResend] 耗时:64
+[DEBUG]2011-08-03 12:08:07: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:62
+[DEBUG]2011-08-03 12:08:08: 执行 [ViewSyncServiceImpl.viewSync] 耗时:812
+[DEBUG]2011-08-03 12:08:08: 执行 [ThirdpartServiceImpl.queryResend] 耗时:63
+[DEBUG]2011-08-03 12:08:12: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 12:08:13: 执行 [ThirdpartServiceImpl.queryResend] 耗时:63
+[DEBUG]2011-08-03 12:08:13: 执行 [ViewSyncServiceImpl.viewSync] 耗时:468
+[DEBUG]2011-08-03 12:08:18: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:64
+[DEBUG]2011-08-03 12:08:18: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:08:19: 执行 [ViewSyncServiceImpl.viewSync] 耗时:469
+[DEBUG]2011-08-03 12:08:23: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 12:08:23: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:08:24: 执行 [ViewSyncServiceImpl.viewSync] 耗时:501
+[DEBUG]2011-08-03 12:08:28: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:64
+[DEBUG]2011-08-03 12:08:29: 执行 [ThirdpartServiceImpl.queryResend] 耗时:63
+[DEBUG]2011-08-03 12:08:30: 执行 [ViewSyncServiceImpl.viewSync] 耗时:469
+[DEBUG]2011-08-03 12:08:33: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:79
+[DEBUG]2011-08-03 12:08:34: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:08:35: 执行 [ViewSyncServiceImpl.viewSync] 耗时:485
+[DEBUG]2011-08-03 12:08:38: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:79
+[DEBUG]2011-08-03 12:08:39: 执行 [ThirdpartServiceImpl.queryResend] 耗时:63
+[DEBUG]2011-08-03 12:08:41: 执行 [ViewSyncServiceImpl.viewSync] 耗时:484
+[DEBUG]2011-08-03 12:08:43: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:64
+[DEBUG]2011-08-03 12:08:44: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:08:47: 执行 [ViewSyncServiceImpl.viewSync] 耗时:485
+[DEBUG]2011-08-03 12:08:48: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 12:08:49: 执行 [ThirdpartServiceImpl.queryResend] 耗时:359
+[DEBUG]2011-08-03 12:08:52: 执行 [ViewSyncServiceImpl.viewSync] 耗时:500
+[DEBUG]2011-08-03 12:08:54: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 12:08:55: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:08:58: 执行 [ViewSyncServiceImpl.viewSync] 耗时:500
+[DEBUG]2011-08-03 12:08:59: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:64
+[DEBUG]2011-08-03 12:09:00: 执行 [ThirdpartServiceImpl.queryResend] 耗时:63
+[DEBUG]2011-08-03 12:09:03: 执行 [ViewSyncServiceImpl.viewSync] 耗时:469
+[DEBUG]2011-08-03 12:09:04: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:62
+[DEBUG]2011-08-03 12:09:05: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:09:09: 执行 [ViewSyncServiceImpl.viewSync] 耗时:485
+[DEBUG]2011-08-03 12:09:09: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 12:09:10: 执行 [ThirdpartServiceImpl.queryResend] 耗时:63
+[DEBUG]2011-08-03 12:09:14: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:62
+[DEBUG]2011-08-03 12:09:15: 执行 [ViewSyncServiceImpl.viewSync] 耗时:781
+[DEBUG]2011-08-03 12:09:15: 执行 [ThirdpartServiceImpl.queryResend] 耗时:64
+[DEBUG]2011-08-03 12:09:19: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:64
+[DEBUG]2011-08-03 12:09:20: 执行 [ThirdpartServiceImpl.queryResend] 耗时:63
+[DEBUG]2011-08-03 12:09:20: 执行 [ViewSyncServiceImpl.viewSync] 耗时:766
+[DEBUG]2011-08-03 12:09:24: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:65
+[DEBUG]2011-08-03 12:09:25: 执行 [ThirdpartServiceImpl.queryResend] 耗时:62
+[DEBUG]2011-08-03 12:09:26: 执行 [ViewSyncServiceImpl.viewSync] 耗时:515
+[DEBUG]2011-08-03 12:09:30: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:63
+[DEBUG]2011-08-03 12:09:30: 执行 [ThirdpartServiceImpl.queryResend] 耗时:63
+[DEBUG]2011-08-03 12:09:32: 执行 [ViewSyncServiceImpl.viewSync] 耗时:468
+[DEBUG]2011-08-03 12:09:35: 执行 [ThirdpartServiceImpl.queryUnsend] 耗时:64
+[DEBUG]2011-08-03 12:09:36: 执行 [ThirdpartServiceImpl.queryResend] 耗时:78
+[INFO ]2011-08-03 12:10:13: 从序列化文件中读取队列信息
+[INFO ]2011-08-03 12:10:13: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-03 12:10:13: 系统启动,开始初始化...
+[INFO ]2011-08-03 12:10:13: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+
+[INFO ]2011-08-03 12:16:07: 从序列化文件中读取队列信息
+[INFO ]2011-08-03 12:16:07: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-03 12:16:07: 系统启动,开始初始化...
+[INFO ]2011-08-03 12:16:07: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+

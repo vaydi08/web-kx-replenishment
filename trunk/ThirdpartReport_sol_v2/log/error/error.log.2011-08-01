@@ -1,0 +1,21 @@
+[ERROR]2011-08-01 17:33:23[org.sol.util.thread.BaseThread.run(BaseThread.java:100)]: BaseThread Exception BIGERROR:java.lang.NullPointerException
+
+java.lang.NullPointerException
+	at com.megajoy.thirdpart.report.service.impl.ViewSyncServiceImpl.viewSync(ViewSyncServiceImpl.java:44)
+	at com.megajoy.thirdpart.report.thread.ViewSyncThread.dowhileAction(ViewSyncThread.java:22)
+	at org.sol.util.thread.BaseThread.run(BaseThread.java:97)
+	at java.lang.Thread.run(Thread.java:619)
+[ERROR]2011-08-01 17:35:12[org.sol.util.thread.BaseThread.run(BaseThread.java:100)]: BaseThread Exception BIGERROR:java.lang.NullPointerException
+
+java.lang.NullPointerException
+	at com.megajoy.thirdpart.report.service.impl.ViewSyncServiceImpl.viewSync(ViewSyncServiceImpl.java:44)
+	at com.megajoy.thirdpart.report.thread.ViewSyncThread.dowhileAction(ViewSyncThread.java:22)
+	at org.sol.util.thread.BaseThread.run(BaseThread.java:97)
+	at java.lang.Thread.run(Thread.java:619)
+[ERROR]2011-08-01 17:36:42[org.sol.util.thread.BaseThread.run(BaseThread.java:100)]: BaseThread Exception BIGERROR:java.lang.NullPointerException
+
+java.lang.NullPointerException
+	at com.megajoy.thirdpart.report.service.impl.ViewSyncServiceImpl.viewSync(ViewSyncServiceImpl.java:44)
+	at com.megajoy.thirdpart.report.thread.ViewSyncThread.dowhileAction(ViewSyncThread.java:22)
+	at org.sol.util.thread.BaseThread.run(BaseThread.java:97)
+	at java.lang.Thread.run(Thread.java:619)
