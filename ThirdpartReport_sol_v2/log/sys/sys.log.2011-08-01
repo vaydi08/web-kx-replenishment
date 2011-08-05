@@ -1,0 +1,708 @@
+[INFO ]2011-08-01 16:31:43: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 16:31:43: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 16:31:43: 系统启动,开始初始化...
+[ERROR]2011-08-01 16:31:44: 初始化系统时产生的错误
+com.microsoft.sqlserver.jdbc.SQLServerException: 列名 longnumber 无效。
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:171)
+	at com.microsoft.sqlserver.jdbc.SQLServerResultSet.findColumn(SQLServerResultSet.java:625)
+	at com.microsoft.sqlserver.jdbc.SQLServerResultSet.getObject(SQLServerResultSet.java:2264)
+	at com.mchange.v2.c3p0.impl.NewProxyResultSet.getObject(NewProxyResultSet.java:2313)
+	at org.sol.util.c3p0.DataConsole.returnObject(DataConsole.java:288)
+	at org.sol.util.c3p0.DataConsole.find(DataConsole.java:252)
+	at com.megajoy.thirdpart.report.dao.impl.BaseDaoImpl.find(BaseDaoImpl.java:67)
+	at com.megajoy.thirdpart.report.dao.impl.ConfigDaoImpl.findConfig(ConfigDaoImpl.java:24)
+	at com.megajoy.thirdpart.report.service.impl.ConfigServiceImpl.initConfig(ConfigServiceImpl.java:22)
+	at com.megajoy.thirdpart.report.main.MainStart.start(MainStart.java:22)
+	at com.megajoy.thirdpart.report.main.MainStart.main(MainStart.java:13)
+[INFO ]2011-08-01 16:36:12: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 16:36:12: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 16:36:12: 系统启动,开始初始化...
+[ERROR]2011-08-01 16:36:13: 初始化系统时产生的错误
+java.lang.NoSuchMethodException: com.megajoy.thirdpart.report.dao.pojo.Config.setSerialVersionUID(long)
+	at java.lang.Class.getMethod(Class.java:1605)
+	at org.sol.util.c3p0.DataConsole.returnObject(DataConsole.java:286)
+	at org.sol.util.c3p0.DataConsole.find(DataConsole.java:252)
+	at com.megajoy.thirdpart.report.dao.impl.BaseDaoImpl.find(BaseDaoImpl.java:67)
+	at com.megajoy.thirdpart.report.dao.impl.ConfigDaoImpl.findConfig(ConfigDaoImpl.java:24)
+	at com.megajoy.thirdpart.report.service.impl.ConfigServiceImpl.initConfig(ConfigServiceImpl.java:22)
+	at com.megajoy.thirdpart.report.main.MainStart.start(MainStart.java:22)
+	at com.megajoy.thirdpart.report.main.MainStart.main(MainStart.java:13)
+[INFO ]2011-08-01 16:38:46: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 16:38:46: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 16:38:46: 系统启动,开始初始化...
+[ERROR]2011-08-01 16:38:46: 初始化系统时产生的错误
+java.lang.NoSuchMethodException: com.megajoy.thirdpart.report.dao.pojo.Config.setSerialVersionUID(long)
+	at java.lang.Class.getMethod(Class.java:1605)
+	at org.sol.util.c3p0.DataConsole.returnObject(DataConsole.java:286)
+	at org.sol.util.c3p0.DataConsole.find(DataConsole.java:252)
+	at com.megajoy.thirdpart.report.dao.impl.BaseDaoImpl.find(BaseDaoImpl.java:67)
+	at com.megajoy.thirdpart.report.dao.impl.ConfigDaoImpl.findConfig(ConfigDaoImpl.java:24)
+	at com.megajoy.thirdpart.report.service.impl.ConfigServiceImpl.initConfig(ConfigServiceImpl.java:22)
+	at com.megajoy.thirdpart.report.main.MainStart.start(MainStart.java:22)
+	at com.megajoy.thirdpart.report.main.MainStart.main(MainStart.java:13)
+[INFO ]2011-08-01 16:39:09: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 16:39:09: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 16:39:09: 系统启动,开始初始化...
+[INFO ]2011-08-01 16:39:38: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 16:39:38: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 16:39:38: 系统启动,开始初始化...
+[INFO ]2011-08-01 16:40:35: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 16:40:35: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 16:40:35: 系统启动,开始初始化...
+[INFO ]2011-08-01 16:41:16: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 16:41:16: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 16:41:16: 系统启动,开始初始化...
+[INFO ]2011-08-01 16:41:16: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	         3153        8            106201702       B  jscmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	         3152        8            106201702       B  jscmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	         3154        8            106201702       B  jscmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	         3269        8            106201702       C  jscmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	         3149        8            106201702       B  jscmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	         3150        8            106201702       B  jscmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	         3151        8            106201702       B  jscmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	         3144        8            106201702       D  jscmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	         3145        8            106201702       B  jscmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          635        5          10667799336       1 xtqwcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          639        6          10667799921       D xtsdcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          638        6          10667799921       6 xtsdcmcc      100
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          636        0          10667799336       2 xtqwcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          649        0           1066779929       T xtqwcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          648        5           1066779933       w xtqwcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          645        5          10667799923       D xtsdcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          644        5           1066779929       8 xtqwcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          647        5           1066779929       w xtqwcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          646        5          10667799923       X xtsdcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          641        5           1066779929       7 xtqwcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          640        0          10667799336       4 xtqwcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          643        5          10667799336       5 xtqwcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          104        0          10667799165       G xtqwcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          642        0          10667799921       H xtsdcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          591        8           1066779929       1 xtqwcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          593        2           1066779929       4 xtqwcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          594       10           1066779929       5 xtqwcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          537        0           1066779929       6 xtqwcmcc   100000
+
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	          607       15          10667799280       D xtqwcmcc   100000
+
+[DEBUG]2011-08-01 16:41:16: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-01 16:41:16: 中断所有wait线程
+[INFO ]2011-08-01 16:41:16: 序列化所有队列
+[INFO ]2011-08-01 16:41:16: All Thread is terminate
+[INFO ]2011-08-01 16:42:19: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 16:42:19: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 16:42:19: 系统启动,开始初始化...
+[INFO ]2011-08-01 16:42:20: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command Gateway DayAccess
+	         3153        8            106201702       B  jscmcc   100000
+	         3152        8            106201702       B  jscmcc   100000
+	         3154        8            106201702       B  jscmcc   100000
+	         3269        8            106201702       C  jscmcc   100000
+	         3149        8            106201702       B  jscmcc   100000
+	         3150        8            106201702       B  jscmcc   100000
+	         3151        8            106201702       B  jscmcc   100000
+	         3144        8            106201702       D  jscmcc   100000
+	         3145        8            106201702       B  jscmcc   100000
+	          635        5          10667799336       1 xtqwcmcc   100000
+	          639        6          10667799921       D xtsdcmcc   100000
+	          638        6          10667799921       6 xtsdcmcc      100
+	          636        0          10667799336       2 xtqwcmcc   100000
+	          649        0           1066779929       T xtqwcmcc   100000
+	          648        5           1066779933       w xtqwcmcc   100000
+	          645        5          10667799923       D xtsdcmcc   100000
+	          644        5           1066779929       8 xtqwcmcc   100000
+	          647        5           1066779929       w xtqwcmcc   100000
+	          646        5          10667799923       X xtsdcmcc   100000
+	          641        5           1066779929       7 xtqwcmcc   100000
+	          640        0          10667799336       4 xtqwcmcc   100000
+	          643        5          10667799336       5 xtqwcmcc   100000
+	          104        0          10667799165       G xtqwcmcc   100000
+	          642        0          10667799921       H xtsdcmcc   100000
+	          591        8           1066779929       1 xtqwcmcc   100000
+	          593        2           1066779929       4 xtqwcmcc   100000
+	          594       10           1066779929       5 xtqwcmcc   100000
+	          537        0           1066779929       6 xtqwcmcc   100000
+	          607       15          10667799280       D xtqwcmcc   100000
+
+[DEBUG]2011-08-01 16:42:20: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-01 16:42:20: 中断所有wait线程
+[INFO ]2011-08-01 16:42:20: 序列化所有队列
+[INFO ]2011-08-01 16:42:20: All Thread is terminate
+[INFO ]2011-08-01 16:42:55: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 16:42:55: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 16:42:55: 系统启动,开始初始化...
+[INFO ]2011-08-01 16:42:56: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	         3153        8            106201702       B   jscmcc   100000
+	         3152        8            106201702       B   jscmcc   100000
+	         3154        8            106201702       B   jscmcc   100000
+	         3269        8            106201702       C   jscmcc   100000
+	         3149        8            106201702       B   jscmcc   100000
+	         3150        8            106201702       B   jscmcc   100000
+	         3151        8            106201702       B   jscmcc   100000
+	         3144        8            106201702       D   jscmcc   100000
+	         3145        8            106201702       B   jscmcc   100000
+	          635        5          10667799336       1 xtqwcmcc   100000
+	          639        6          10667799921       D xtsdcmcc   100000
+	          638        6          10667799921       6 xtsdcmcc      100
+	          636        0          10667799336       2 xtqwcmcc   100000
+	          649        0           1066779929       T xtqwcmcc   100000
+	          648        5           1066779933       w xtqwcmcc   100000
+	          645        5          10667799923       D xtsdcmcc   100000
+	          644        5           1066779929       8 xtqwcmcc   100000
+	          647        5           1066779929       w xtqwcmcc   100000
+	          646        5          10667799923       X xtsdcmcc   100000
+	          641        5           1066779929       7 xtqwcmcc   100000
+	          640        0          10667799336       4 xtqwcmcc   100000
+	          643        5          10667799336       5 xtqwcmcc   100000
+	          104        0          10667799165       G xtqwcmcc   100000
+	          642        0          10667799921       H xtsdcmcc   100000
+	          591        8           1066779929       1 xtqwcmcc   100000
+	          593        2           1066779929       4 xtqwcmcc   100000
+	          594       10           1066779929       5 xtqwcmcc   100000
+	          537        0           1066779929       6 xtqwcmcc   100000
+	          607       15          10667799280       D xtqwcmcc   100000
+
+[DEBUG]2011-08-01 16:42:56: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-01 16:42:56: 中断所有wait线程
+[INFO ]2011-08-01 16:42:56: 序列化所有队列
+[INFO ]2011-08-01 16:42:56: All Thread is terminate
+[INFO ]2011-08-01 16:43:09: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 16:43:09: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 16:43:09: 系统启动,开始初始化...
+[INFO ]2011-08-01 16:43:09: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	         3153        8            106201702       B   jscmcc    100000
+	         3152        8            106201702       B   jscmcc    100000
+	         3154        8            106201702       B   jscmcc    100000
+	         3269        8            106201702       C   jscmcc    100000
+	         3149        8            106201702       B   jscmcc    100000
+	         3150        8            106201702       B   jscmcc    100000
+	         3151        8            106201702       B   jscmcc    100000
+	         3144        8            106201702       D   jscmcc    100000
+	         3145        8            106201702       B   jscmcc    100000
+	          635        5          10667799336       1 xtqwcmcc    100000
+	          639        6          10667799921       D xtsdcmcc    100000
+	          638        6          10667799921       6 xtsdcmcc       100
+	          636        0          10667799336       2 xtqwcmcc    100000
+	          649        0           1066779929       T xtqwcmcc    100000
+	          648        5           1066779933       w xtqwcmcc    100000
+	          645        5          10667799923       D xtsdcmcc    100000
+	          644        5           1066779929       8 xtqwcmcc    100000
+	          647        5           1066779929       w xtqwcmcc    100000
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+	          640        0          10667799336       4 xtqwcmcc    100000
+	          643        5          10667799336       5 xtqwcmcc    100000
+	          104        0          10667799165       G xtqwcmcc    100000
+	          642        0          10667799921       H xtsdcmcc    100000
+	          591        8           1066779929       1 xtqwcmcc    100000
+	          593        2           1066779929       4 xtqwcmcc    100000
+	          594       10           1066779929       5 xtqwcmcc    100000
+	          537        0           1066779929       6 xtqwcmcc    100000
+	          607       15          10667799280       D xtqwcmcc    100000
+
+[DEBUG]2011-08-01 16:43:09: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-01 16:43:09: 中断所有wait线程
+[INFO ]2011-08-01 16:43:09: 序列化所有队列
+[INFO ]2011-08-01 16:43:09: All Thread is terminate
+[INFO ]2011-08-01 16:43:59: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 16:43:59: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 16:43:59: 系统启动,开始初始化...
+[INFO ]2011-08-01 16:44:00: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          219       15         106677992841       T xtqwcmcc    100000
+
+[DEBUG]2011-08-01 16:44:00: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-01 16:44:00: 中断所有wait线程
+[INFO ]2011-08-01 16:44:00: 序列化所有队列
+[INFO ]2011-08-01 16:44:00: All Thread is terminate
+[INFO ]2011-08-01 16:44:12: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 16:44:12: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 16:44:12: 系统启动,开始初始化...
+[INFO ]2011-08-01 16:44:13: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	          590        6           1066779929       2 xtqwcmcc    100000
+
+[DEBUG]2011-08-01 16:44:13: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-01 16:44:13: 中断所有wait线程
+[INFO ]2011-08-01 16:44:13: 序列化所有队列
+[INFO ]2011-08-01 16:44:13: All Thread is terminate
+[INFO ]2011-08-01 16:44:25: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 16:44:25: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 16:44:25: 系统启动,开始初始化...
+[INFO ]2011-08-01 16:44:25: 系统没有读取到有效配置的业务,系统退出...
+[INFO ]2011-08-01 17:30:59: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 17:30:59: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 17:31:14: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 17:31:14: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 17:31:14: 系统启动,开始初始化...
+[INFO ]2011-08-01 17:31:14: 系统没有读取到有效配置的业务,系统退出...
+[INFO ]2011-08-01 17:31:26: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 17:31:26: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 17:31:26: 系统启动,开始初始化...
+[INFO ]2011-08-01 17:32:34: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 17:32:34: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 17:32:34: 系统启动,开始初始化...
+[INFO ]2011-08-01 17:33:22: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 17:33:22: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 17:33:22: 系统启动,开始初始化...
+[INFO ]2011-08-01 17:33:23: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	         3153        8            106201702       B   jscmcc    100000
+	         3152        8            106201702       B   jscmcc    100000
+	         3154        8            106201702       B   jscmcc    100000
+	         3269        8            106201702       C   jscmcc    100000
+	         3149        8            106201702       B   jscmcc    100000
+	         3150        8            106201702       B   jscmcc    100000
+	         3151        8            106201702       B   jscmcc    100000
+	         3144        8            106201702       D   jscmcc    100000
+	         3145        8            106201702       B   jscmcc    100000
+	          635        5          10667799336       1 xtqwcmcc    100000
+	          639        6          10667799921       D xtsdcmcc    100000
+	          638        6          10667799921       6 xtsdcmcc       100
+	          636        0          10667799336       2 xtqwcmcc    100000
+	          649        0           1066779929       T xtqwcmcc    100000
+	          648        5           1066779933       w xtqwcmcc    100000
+	          645        5          10667799923       D xtsdcmcc    100000
+	          644        5           1066779929       8 xtqwcmcc    100000
+	          647        5           1066779929       w xtqwcmcc    100000
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+	          640        0          10667799336       4 xtqwcmcc    100000
+	          643        5          10667799336       5 xtqwcmcc    100000
+	          104        0          10667799165       G xtqwcmcc    100000
+	          642        0          10667799921       H xtsdcmcc    100000
+	          591        8           1066779929       1 xtqwcmcc    100000
+	          593        2           1066779929       4 xtqwcmcc    100000
+	          594       10           1066779929       5 xtqwcmcc    100000
+	          537        0           1066779929       6 xtqwcmcc    100000
+	          607       15          10667799280       D xtqwcmcc    100000
+
+[DEBUG]2011-08-01 17:33:23: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-01 17:35:11: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 17:35:11: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 17:35:11: 系统启动,开始初始化...
+[INFO ]2011-08-01 17:35:12: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	         3153        8            106201702       B   jscmcc    100000
+	         3152        8            106201702       B   jscmcc    100000
+	         3154        8            106201702       B   jscmcc    100000
+	         3269        8            106201702       C   jscmcc    100000
+	         3149        8            106201702       B   jscmcc    100000
+	         3150        8            106201702       B   jscmcc    100000
+	         3151        8            106201702       B   jscmcc    100000
+	         3144        8            106201702       D   jscmcc    100000
+	         3145        8            106201702       B   jscmcc    100000
+	          635        5          10667799336       1 xtqwcmcc    100000
+	          639        6          10667799921       D xtsdcmcc    100000
+	          638        6          10667799921       6 xtsdcmcc       100
+	          636        0          10667799336       2 xtqwcmcc    100000
+	          649        0           1066779929       T xtqwcmcc    100000
+	          648        5           1066779933       w xtqwcmcc    100000
+	          645        5          10667799923       D xtsdcmcc    100000
+	          644        5           1066779929       8 xtqwcmcc    100000
+	          647        5           1066779929       w xtqwcmcc    100000
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+	          640        0          10667799336       4 xtqwcmcc    100000
+	          643        5          10667799336       5 xtqwcmcc    100000
+	          104        0          10667799165       G xtqwcmcc    100000
+	          642        0          10667799921       H xtsdcmcc    100000
+	          591        8           1066779929       1 xtqwcmcc    100000
+	          593        2           1066779929       4 xtqwcmcc    100000
+	          594       10           1066779929       5 xtqwcmcc    100000
+	          537        0           1066779929       6 xtqwcmcc    100000
+	          607       15          10667799280       D xtqwcmcc    100000
+
+[DEBUG]2011-08-01 17:35:12: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-01 17:35:26: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 17:35:26: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 17:35:26: 系统启动,开始初始化...
+[INFO ]2011-08-01 17:35:27: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	         3153        8            106201702       B   jscmcc    100000
+	         3152        8            106201702       B   jscmcc    100000
+	         3154        8            106201702       B   jscmcc    100000
+	         3269        8            106201702       C   jscmcc    100000
+	         3149        8            106201702       B   jscmcc    100000
+	         3150        8            106201702       B   jscmcc    100000
+	         3151        8            106201702       B   jscmcc    100000
+	         3144        8            106201702       D   jscmcc    100000
+	         3145        8            106201702       B   jscmcc    100000
+	          635        5          10667799336       1 xtqwcmcc    100000
+	          639        6          10667799921       D xtsdcmcc    100000
+	          638        6          10667799921       6 xtsdcmcc       100
+	          636        0          10667799336       2 xtqwcmcc    100000
+	          649        0           1066779929       T xtqwcmcc    100000
+	          648        5           1066779933       w xtqwcmcc    100000
+	          645        5          10667799923       D xtsdcmcc    100000
+	          644        5           1066779929       8 xtqwcmcc    100000
+	          647        5           1066779929       w xtqwcmcc    100000
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+	          640        0          10667799336       4 xtqwcmcc    100000
+	          643        5          10667799336       5 xtqwcmcc    100000
+	          104        0          10667799165       G xtqwcmcc    100000
+	          642        0          10667799921       H xtsdcmcc    100000
+	          591        8           1066779929       1 xtqwcmcc    100000
+	          593        2           1066779929       4 xtqwcmcc    100000
+	          594       10           1066779929       5 xtqwcmcc    100000
+	          537        0           1066779929       6 xtqwcmcc    100000
+	          607       15          10667799280       D xtqwcmcc    100000
+
+[DEBUG]2011-08-01 17:35:27: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-01 17:37:03: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 17:37:03: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 17:37:03: 系统启动,开始初始化...
+[INFO ]2011-08-01 17:37:04: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	         3153        8            106201702       B   jscmcc    100000
+	         3152        8            106201702       B   jscmcc    100000
+	         3154        8            106201702       B   jscmcc    100000
+	         3269        8            106201702       C   jscmcc    100000
+	         3149        8            106201702       B   jscmcc    100000
+	         3150        8            106201702       B   jscmcc    100000
+	         3151        8            106201702       B   jscmcc    100000
+	         3144        8            106201702       D   jscmcc    100000
+	         3145        8            106201702       B   jscmcc    100000
+	          635        5          10667799336       1 xtqwcmcc    100000
+	          639        6          10667799921       D xtsdcmcc    100000
+	          638        6          10667799921       6 xtsdcmcc       100
+	          636        0          10667799336       2 xtqwcmcc    100000
+	          649        0           1066779929       T xtqwcmcc    100000
+	          648        5           1066779933       w xtqwcmcc    100000
+	          645        5          10667799923       D xtsdcmcc    100000
+	          644        5           1066779929       8 xtqwcmcc    100000
+	          647        5           1066779929       w xtqwcmcc    100000
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+	          640        0          10667799336       4 xtqwcmcc    100000
+	          643        5          10667799336       5 xtqwcmcc    100000
+	          104        0          10667799165       G xtqwcmcc    100000
+	          642        0          10667799921       H xtsdcmcc    100000
+	          591        8           1066779929       1 xtqwcmcc    100000
+	          593        2           1066779929       4 xtqwcmcc    100000
+	          594       10           1066779929       5 xtqwcmcc    100000
+	          537        0           1066779929       6 xtqwcmcc    100000
+	          607       15          10667799280       D xtqwcmcc    100000
+
+[DEBUG]2011-08-01 17:37:04: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-01 17:37:30: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 17:37:30: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 17:37:30: 系统启动,开始初始化...
+[INFO ]2011-08-01 17:37:31: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	         3153        8            106201702       B   jscmcc    100000
+	         3152        8            106201702       B   jscmcc    100000
+	         3154        8            106201702       B   jscmcc    100000
+	         3269        8            106201702       C   jscmcc    100000
+	         3149        8            106201702       B   jscmcc    100000
+	         3150        8            106201702       B   jscmcc    100000
+	         3151        8            106201702       B   jscmcc    100000
+	         3144        8            106201702       D   jscmcc    100000
+	         3145        8            106201702       B   jscmcc    100000
+	          635        5          10667799336       1 xtqwcmcc    100000
+	          639        6          10667799921       D xtsdcmcc    100000
+	          638        6          10667799921       6 xtsdcmcc       100
+	          636        0          10667799336       2 xtqwcmcc    100000
+	          649        0           1066779929       T xtqwcmcc    100000
+	          648        5           1066779933       w xtqwcmcc    100000
+	          645        5          10667799923       D xtsdcmcc    100000
+	          644        5           1066779929       8 xtqwcmcc    100000
+	          647        5           1066779929       w xtqwcmcc    100000
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+	          640        0          10667799336       4 xtqwcmcc    100000
+	          643        5          10667799336       5 xtqwcmcc    100000
+	          104        0          10667799165       G xtqwcmcc    100000
+	          642        0          10667799921       H xtsdcmcc    100000
+	          591        8           1066779929       1 xtqwcmcc    100000
+	          593        2           1066779929       4 xtqwcmcc    100000
+	          594       10           1066779929       5 xtqwcmcc    100000
+	          537        0           1066779929       6 xtqwcmcc    100000
+	          607       15          10667799280       D xtqwcmcc    100000
+
+[DEBUG]2011-08-01 17:37:31: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-01 17:37:49: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 17:37:49: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 17:42:06: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 17:42:06: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 17:42:06: 系统启动,开始初始化...
+[INFO ]2011-08-01 17:42:07: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	         3153        8            106201702       B   jscmcc    100000
+	         3152        8            106201702       B   jscmcc    100000
+	         3154        8            106201702       B   jscmcc    100000
+	         3269        8            106201702       C   jscmcc    100000
+	         3149        8            106201702       B   jscmcc    100000
+	         3150        8            106201702       B   jscmcc    100000
+	         3151        8            106201702       B   jscmcc    100000
+	         3144        8            106201702       D   jscmcc    100000
+	         3145        8            106201702       B   jscmcc    100000
+	          635        5          10667799336       1 xtqwcmcc    100000
+	          639        6          10667799921       D xtsdcmcc    100000
+	          638        6          10667799921       6 xtsdcmcc       100
+	          636        0          10667799336       2 xtqwcmcc    100000
+	          649        0           1066779929       T xtqwcmcc    100000
+	          648        5           1066779933       w xtqwcmcc    100000
+	          645        5          10667799923       D xtsdcmcc    100000
+	          644        5           1066779929       8 xtqwcmcc    100000
+	          647        5           1066779929       w xtqwcmcc    100000
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+	          640        0          10667799336       4 xtqwcmcc    100000
+	          643        5          10667799336       5 xtqwcmcc    100000
+	          104        0          10667799165       G xtqwcmcc    100000
+	          642        0          10667799921       H xtsdcmcc    100000
+	          591        8           1066779929       1 xtqwcmcc    100000
+	          593        2           1066779929       4 xtqwcmcc    100000
+	          594       10           1066779929       5 xtqwcmcc    100000
+	          537        0           1066779929       6 xtqwcmcc    100000
+	          607       15          10667799280       D xtqwcmcc    100000
+
+[DEBUG]2011-08-01 17:42:07: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-01 17:42:38: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 17:42:38: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 17:44:22: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 17:44:22: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 17:44:22: 系统启动,开始初始化...
+[INFO ]2011-08-01 17:44:23: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	         3153        8            106201702       B   jscmcc    100000
+	         3152        8            106201702       B   jscmcc    100000
+	         3154        8            106201702       B   jscmcc    100000
+	         3269        8            106201702       C   jscmcc    100000
+	         3149        8            106201702       B   jscmcc    100000
+	         3150        8            106201702       B   jscmcc    100000
+	         3151        8            106201702       B   jscmcc    100000
+	         3144        8            106201702       D   jscmcc    100000
+	         3145        8            106201702       B   jscmcc    100000
+	          635        5          10667799336       1 xtqwcmcc    100000
+	          639        6          10667799921       D xtsdcmcc    100000
+	          638        6          10667799921       6 xtsdcmcc       100
+	          636        0          10667799336       2 xtqwcmcc    100000
+	          649        0           1066779929       T xtqwcmcc    100000
+	          648        5           1066779933       w xtqwcmcc    100000
+	          645        5          10667799923       D xtsdcmcc    100000
+	          644        5           1066779929       8 xtqwcmcc    100000
+	          647        5           1066779929       w xtqwcmcc    100000
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+	          640        0          10667799336       4 xtqwcmcc    100000
+	          643        5          10667799336       5 xtqwcmcc    100000
+	          104        0          10667799165       G xtqwcmcc    100000
+	          642        0          10667799921       H xtsdcmcc    100000
+	          591        8           1066779929       1 xtqwcmcc    100000
+	          593        2           1066779929       4 xtqwcmcc    100000
+	          594       10           1066779929       5 xtqwcmcc    100000
+	          537        0           1066779929       6 xtqwcmcc    100000
+	          607       15          10667799280       D xtqwcmcc    100000
+
+[DEBUG]2011-08-01 17:45:02: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-01 17:45:15: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 17:45:15: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 17:45:17: 系统启动,开始初始化...
+[INFO ]2011-08-01 17:45:18: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	         3153        8            106201702       B   jscmcc    100000
+	         3152        8            106201702       B   jscmcc    100000
+	         3154        8            106201702       B   jscmcc    100000
+	         3269        8            106201702       C   jscmcc    100000
+	         3149        8            106201702       B   jscmcc    100000
+	         3150        8            106201702       B   jscmcc    100000
+	         3151        8            106201702       B   jscmcc    100000
+	         3144        8            106201702       D   jscmcc    100000
+	         3145        8            106201702       B   jscmcc    100000
+	          635        5          10667799336       1 xtqwcmcc    100000
+	          639        6          10667799921       D xtsdcmcc    100000
+	          638        6          10667799921       6 xtsdcmcc       100
+	          636        0          10667799336       2 xtqwcmcc    100000
+	          649        0           1066779929       T xtqwcmcc    100000
+	          648        5           1066779933       w xtqwcmcc    100000
+	          645        5          10667799923       D xtsdcmcc    100000
+	          644        5           1066779929       8 xtqwcmcc    100000
+	          647        5           1066779929       w xtqwcmcc    100000
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+	          640        0          10667799336       4 xtqwcmcc    100000
+	          643        5          10667799336       5 xtqwcmcc    100000
+	          104        0          10667799165       G xtqwcmcc    100000
+	          642        0          10667799921       H xtsdcmcc    100000
+	          591        8           1066779929       1 xtqwcmcc    100000
+	          593        2           1066779929       4 xtqwcmcc    100000
+	          594       10           1066779929       5 xtqwcmcc    100000
+	          537        0           1066779929       6 xtqwcmcc    100000
+	          607       15          10667799280       D xtqwcmcc    100000
+
+[INFO ]2011-08-01 17:47:18: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 17:47:18: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 17:47:18: 系统启动,开始初始化...
+[INFO ]2011-08-01 17:47:19: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	         3153        8            106201702       B   jscmcc    100000
+	         3152        8            106201702       B   jscmcc    100000
+	         3154        8            106201702       B   jscmcc    100000
+	         3269        8            106201702       C   jscmcc    100000
+	         3149        8            106201702       B   jscmcc    100000
+	         3150        8            106201702       B   jscmcc    100000
+	         3151        8            106201702       B   jscmcc    100000
+	         3144        8            106201702       D   jscmcc    100000
+	         3145        8            106201702       B   jscmcc    100000
+	          635        5          10667799336       1 xtqwcmcc    100000
+	          639        6          10667799921       D xtsdcmcc    100000
+	          638        6          10667799921       6 xtsdcmcc       100
+	          636        0          10667799336       2 xtqwcmcc    100000
+	          649        0           1066779929       T xtqwcmcc    100000
+	          648        5           1066779933       w xtqwcmcc    100000
+	          645        5          10667799923       D xtsdcmcc    100000
+	          644        5           1066779929       8 xtqwcmcc    100000
+	          647        5           1066779929       w xtqwcmcc    100000
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+	          640        0          10667799336       4 xtqwcmcc    100000
+	          643        5          10667799336       5 xtqwcmcc    100000
+	          104        0          10667799165       G xtqwcmcc    100000
+	          642        0          10667799921       H xtsdcmcc    100000
+	          591        8           1066779929       1 xtqwcmcc    100000
+	          593        2           1066779929       4 xtqwcmcc    100000
+	          594       10           1066779929       5 xtqwcmcc    100000
+	          537        0           1066779929       6 xtqwcmcc    100000
+	          607       15          10667799280       D xtqwcmcc    100000
+
+[DEBUG]2011-08-01 17:47:19: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook
+[INFO ]2011-08-01 17:49:59: 从序列化文件中读取队列信息
+[INFO ]2011-08-01 17:49:59: 不存在序列化队列文件,跳过...
+[INFO ]2011-08-01 17:49:59: 系统启动,开始初始化...
+[INFO ]2011-08-01 17:49:59: 
+读取的作业配置情况:
+	which_service Discount           Longnumber Command  Gateway DayAccess
+	         3153        8            106201702       B   jscmcc    100000
+	         3152        8            106201702       B   jscmcc    100000
+	         3154        8            106201702       B   jscmcc    100000
+	         3269        8            106201702       C   jscmcc    100000
+	         3149        8            106201702       B   jscmcc    100000
+	         3150        8            106201702       B   jscmcc    100000
+	         3151        8            106201702       B   jscmcc    100000
+	         3144        8            106201702       D   jscmcc    100000
+	         3145        8            106201702       B   jscmcc    100000
+	          635        5          10667799336       1 xtqwcmcc    100000
+	          639        6          10667799921       D xtsdcmcc    100000
+	          638        6          10667799921       6 xtsdcmcc       100
+	          636        0          10667799336       2 xtqwcmcc    100000
+	          649        0           1066779929       T xtqwcmcc    100000
+	          648        5           1066779933       w xtqwcmcc    100000
+	          645        5          10667799923       D xtsdcmcc    100000
+	          644        5           1066779929       8 xtqwcmcc    100000
+	          647        5           1066779929       w xtqwcmcc    100000
+	          646        5          10667799923       X xtsdcmcc    100000
+	          641        5           1066779929       7 xtqwcmcc    100000
+	          640        0          10667799336       4 xtqwcmcc    100000
+	          643        5          10667799336       5 xtqwcmcc    100000
+	          104        0          10667799165       G xtqwcmcc    100000
+	          642        0          10667799921       H xtsdcmcc    100000
+	          591        8           1066779929       1 xtqwcmcc    100000
+	          593        2           1066779929       4 xtqwcmcc    100000
+	          594       10           1066779929       5 xtqwcmcc    100000
+	          537        0           1066779929       6 xtqwcmcc    100000
+	          607       15          10667799280       D xtqwcmcc    100000
+
+[DEBUG]2011-08-01 17:49:59: -init- 注册关闭事件钩子. 使用的实现类:class com.megajoy.thirdpart.report.main.MainStart$ShutDownHook

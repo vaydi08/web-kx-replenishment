@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Header SYSTEM "SocketHeader.dtd">
+<Header>
+	<Item name="packetLength" size="4" type="int"/>
+	<Item name="command" size="4" type="int"/>
+	<Item name="sequence" size="4" type="int"/>
+</Header>

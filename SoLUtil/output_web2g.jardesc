@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="F:/megajoy/开发项目/SoLUtil/SoLUtil_Web2g.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/SoLUtil/output_web2g.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <javaElement handleIdentifier="=SoLUtil/src&lt;org.sol.util.log"/>
+        <javaElement handleIdentifier="=SoLUtil/src&lt;org.sol.util.socket.message"/>
+        <javaElement handleIdentifier="=SoLUtil/src&lt;org.sol.util.common"/>
+        <javaElement handleIdentifier="=SoLUtil/src&lt;org.sol.util.threadPool"/>
+        <javaElement handleIdentifier="=SoLUtil/src&lt;org.sol.util.socket"/>
+        <javaElement handleIdentifier="=SoLUtil/src&lt;org.sol.util.thread"/>
+        <javaElement handleIdentifier="=SoLUtil/src&lt;org.sol.util.config"/>
+    </selectedElements>
+</jardesc>

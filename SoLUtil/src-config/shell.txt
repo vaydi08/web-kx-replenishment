@@ -1,0 +1,1 @@
+start "@TITLE@" java -classpath "./;@LIBSPROJECT@;@RELEASEJARNAME@" @MAINCLASS@ @RUNTIMEPARAM@

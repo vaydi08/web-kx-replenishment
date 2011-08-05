@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Content SYSTEM "SocketContent.dtd" >
+<Content>
+	<Item name="resultCode" size="4" type="int"/>
+	<Item name="resultMsg" type="String" size="0" lengthField="resultMsgLength"/>
+</Content>

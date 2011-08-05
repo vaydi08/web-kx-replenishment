@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT Header (Item*)>
+
+<!ELEMENT Item EMPTY>
+<!ATTLIST Item name CDATA #REQUIRED>
+<!ATTLIST Item type (int|String) #REQUIRED>
+<!ATTLIST Item size CDATA #REQUIRED>

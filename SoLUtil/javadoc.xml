@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" additionalparam="-encoding UTF-8  " author="true" classpath="lib/org.springframework.context-3.0.1.RELEASE-A.jar;lib/jdom.jar;E:\software\Developer\lib\swt\lib\jface-3.0.1.jar;lib/com.springsource.org.apache.log4j-1.2.15.jar;lib/org.springframework.beans-3.0.1.RELEASE-A.jar;lib/org.springframework.core-3.0.1.RELEASE-A.jar;lib/org.springframework.expression-3.0.1.RELEASE-A.jar;E:\software\Developer\lib\swt\lib\swt-win32-3.5.5.7.jar;lib/com.springsource.org.apache.commons.logging-1.1.1.jar;E:\software\Developer\lib\swt\lib\osgi-3.0.1.jar;lib/org.springframework.asm-3.0.1.RELEASE-A.jar;E:\software\Developer\lib\swt\lib\runtime-3.0.1.jar" destdir="apidoc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="org.sol.util.threadMonitor,org.sol.util.common,org.sol.util.socket,org.sol.util.threadPool,org.sol.util.threadMonitor.ui,org.sol.util.ui,org.sol.util.config,org.sol.util.socket.message,org.sol.util.thread" source="1.6" sourcepath="src" splitindex="true" use="true" version="true"/>
+    </target>
+</project>

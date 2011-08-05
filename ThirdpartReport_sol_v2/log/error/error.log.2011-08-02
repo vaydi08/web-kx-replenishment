@@ -1,0 +1,27 @@
+[ERROR]2011-08-02 11:06:34[org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:90)]: BaseThread Exception BIGERROR:java.lang.NullPointerException
+
+java.lang.NullPointerException
+	at com.megajoy.thirdpart.report.service.bean.ConfigBeanFactory.getHttpManager(ConfigBeanFactory.java:30)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:67)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:20)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+[ERROR]2011-08-02 11:09:25[org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:90)]: BaseThread Exception BIGERROR:java.lang.NullPointerException
+
+java.lang.NullPointerException
+	at com.megajoy.thirdpart.report.service.bean.ConfigBeanFactory.getHttpManager(ConfigBeanFactory.java:31)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:67)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:20)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
+[ERROR]2011-08-02 11:11:26[org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:90)]: BaseThread Exception BIGERROR:java.lang.NullPointerException
+
+java.lang.NullPointerException
+	at com.megajoy.thirdpart.report.service.bean.ConfigBeanFactory.getHttpManager(ConfigBeanFactory.java:32)
+	at com.megajoy.thirdpart.report.service.impl.ThirdpartServiceImpl.sendHttp(ThirdpartServiceImpl.java:67)
+	at com.megajoy.thirdpart.report.thread.WorkProcessThread.runAction(WorkProcessThread.java:20)
+	at com.megajoy.thirdpart.report.thread.NoDelayThread.dowhileAction(NoDelayThread.java:25)
+	at org.sol.util.thread.BaseThreadWithNodelay.run(BaseThreadWithNodelay.java:87)
+	at java.lang.Thread.run(Thread.java:619)
