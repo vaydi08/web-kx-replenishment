@@ -22,58 +22,48 @@
 	  <ul>
 	    <li><a href="#" class="menu"><img src="images/leftbutton/left1.png"/></a>
 	      <ul class="submenu" id="memu1">
-	        <li><a target="mainFrame" href='<s:url action="product" namespace="info" method="manager"/>'><img src="images/leftbutton/ls1.png"/></a></li>
-	        <li><a target="mainFrame" href='<s:url action="product" namespace="info" method="manager"/>'><img src="images/leftbutton/ls2.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls3.png"/></a></li>
-	        <li><a target="mainFrame" href='<s:url action="shop" namespace="info" method="manager"/>'><img src="images/leftbutton/ls4.png"/></a></li>
+	        <li><a target="mainFrame" href='<s:url action="product" namespace="info" method="manager"/>'><img src="images/leftbutton/ls1_1.png"/></a></li>
+	        <li><a target="mainFrame" href='<s:url action="product" namespace="info" method="manager"/>'><img src="images/leftbutton/ls1_2.png"/></a></li>
+	        <li><a href=""><img src="images/leftbutton/ls1_3.png"/></a></li>
+	        <li><a target="mainFrame" href='<s:url action="shop" namespace="info" method="manager"/>'><img src="images/leftbutton/ls1_4.png"/></a></li>
+	        <li><a target="mainFrame" href='<s:url action="shop" namespace="info" method="manager"/>'><img src="images/leftbutton/ls1_5.png"/></a></li>
+	        <li><a target="mainFrame" href='<s:url action="category" namespace="info" method="manager"/>'><img src="images/leftbutton/ls1_6.png"/></a></li>
 	      </ul>
 	    </li>
-	    <li><a href="#" class="menu"><img src="images/leftbutton/heding.png"/></a>
-	      <ul class="submenu" id="memu1">
-	        <li><a href=""><img src="images/leftbutton/ls1.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls1.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls3.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls4.png"/></a></li>
-	      </ul>
+	    <li><a target="mainFrame" href='<s:url action="check" namespace="stock" method="preManager"/>'><img src="images/leftbutton/heding.png"/></a>
 	    </li>
-	    <li><a href="#" class="menu"><img src="images/leftbutton/daoru.png"/></a>
-	      <ul class="submenu" id="memu1">
-	        <li><a href=""><img src="images/leftbutton/ls1.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls1.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls3.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls4.png"/></a></li>
-	      </ul>
+	    <li><a target="mainFrame" href='<s:url action="check" namespace="stock" method="preManager"/>'><img src="images/leftbutton/daoru.png"/></a>
 	    </li>
 	    <li><a href="#" class="menu"><img src="images/leftbutton/fenxi.png"/></a>
 	      <ul class="submenu" id="memu1">
-	        <li><a href=""><img src="images/leftbutton/ls1.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls1.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls3.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls4.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls4_1.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls1.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls3.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls4.png"/></a></li>
 	      </ul>
 	    </li>
 	    <li><a href="#" class="menu"><img src="images/leftbutton/fenhuo.png"/></a>
 	      <ul class="submenu" id="memu1">
-	        <li><a href=""><img src="images/leftbutton/ls1.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls1.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls3.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls4.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls1.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls1.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls3.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls4.png"/></a></li>
 	      </ul>
 	    </li>
 	    <li><a href="#" class="menu"><img src="images/leftbutton/dinggou.png"/></a>
 	      <ul class="submenu" id="memu1">
-	        <li><a href=""><img src="images/leftbutton/ls1.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls1.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls3.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls4.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls1.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls1.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls3.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls4.png"/></a></li>
 	      </ul>
 	    </li>
 	    <li><a href="#" class="menu"><img src="images/leftbutton/system.png"/></a>
 	      <ul class="submenu" id="memu1">
-	        <li><a href=""><img src="images/leftbutton/ls1.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls1.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls3.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls4.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls1.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls1.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls3.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls4.png"/></a></li>
 	      </ul>
 	    </li>
 

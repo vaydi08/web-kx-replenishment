@@ -70,14 +70,14 @@
 		<form action="product!manager.action" method="post">
 			<table cellpadding="0" cellspacing="0" border="0">
 				<tr>
-				<td width="50" height="30">大类</td>
-				<td><s:select list="categoryLevel1" listKey="id" listValue="name" name="category1" theme="simple"/></td>
-				<td width="50" align="center">小类</td>
-				<td><s:select list="categoryLevel2" listKey="id" listValue="name" name="category2" theme="simple"/></td>
-				<td width="50" align="center">货型1</td>
-				<td><s:select list="categoryLevel3" listKey="id" listValue="name" name="category3" theme="simple"/></td>
-				<td width="50" align="center">货型2</td>
-				<td><s:select list="categoryLevel4" listKey="id" listValue="name" name="category4" theme="simple"/></td>
+				<td width="35" height="30">大类</td>
+				<td width="110"><s:select list="categoryLevel1" listKey="id" listValue="name" name="category1" theme="simple"/></td>
+				<td width="35">小类</td>
+				<td width="110"><s:select list="categoryLevel2" listKey="id" listValue="name" name="category2" theme="simple"/></td>
+				<td width="40">货型1</td>
+				<td width="110"><s:select list="categoryLevel3" listKey="id" listValue="name" name="category3" theme="simple"/></td>
+				<td width="40">货型2</td>
+				<td width="110"><s:select list="categoryLevel4" listKey="id" listValue="name" name="category4" theme="simple"/></td>
 				</tr>
 			</table>
 			<table cellpadding="0" cellspacing="0" border="0" width="600">
