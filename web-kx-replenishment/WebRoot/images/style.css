@@ -63,3 +63,5 @@ select {width:100px;}
 .button {}
 .button ul { float:right}
 .button ul li { float:left; background: }
+
+.hiddenDiv {display:none;width:300px;padding:10px;position:absolute;left:200px;top:200px;border:1px solid #444;background-color:#fff;}

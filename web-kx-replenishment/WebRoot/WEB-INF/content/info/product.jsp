@@ -31,6 +31,8 @@
 		<td width="230"><s:select list="categoryLevel1" listKey="id" listValue="name" name="category1" theme="simple"/></td>
 		<td width="70">小类</td>
 		<td width="230"><s:select list="categoryLevel2" listKey="id" listValue="name" name="category2" theme="simple"/></td>
+
+		<td><a href="category!preNew.action" id="newCategory">增加新分类</a></td>
 		</tr>
 		
 		<tr>
@@ -38,6 +40,8 @@
 		<td><s:select list="categoryLevel3" listKey="id" listValue="name" name="category3" theme="simple"/></td>
 		<td>货型2</td>
 		<td><s:select list="categoryLevel4" listKey="id" listValue="name" name="category4" theme="simple"/></td>
+		
+		<td></td>
 		</tr>
 		</table>
 		
