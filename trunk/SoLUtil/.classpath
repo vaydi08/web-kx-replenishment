@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="org/sol/util/ui/ConsoleText.java|org/sol/util/threadMonitor/ui/MainFrame.java|org/sol/util/threadMonitor/ui/ThreadInfoTabComp.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/org.springframework.core-3.0.1.RELEASE-A.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.context-3.0.1.RELEASE-A.jar"/>
@@ -12,6 +12,10 @@
 	<classpathentry kind="lib" path="lib/jdom.jar"/>
 	<classpathentry kind="lib" path="lib/sqlserver/c3p0-0.9.1.jar"/>
 	<classpathentry kind="lib" path="lib/sqlserver/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="lib/swt/jface-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/swt/osgi-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/swt/runtime-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/swt/swt-win32-3.5.5.7.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/swt"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

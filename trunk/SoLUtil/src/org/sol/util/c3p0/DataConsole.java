@@ -16,6 +16,7 @@ import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.sol.util.common.StringUtil;
 import org.sol.util.log.Logger;
 
 
@@ -328,18 +329,38 @@ public class DataConsole {
 		
 		Set<Entry<String,Class<?>>> set = smap.entrySet();
 		for(Entry<String,Class<?>> en : set) {
-			String methodName = "set" + en.getKey().replaceFirst(en.getKey().substring(0, 1),en.getKey().substring(0, 1).toUpperCase());
-			Method method = clazz.getMethod(methodName, en.getValue());
 			try {
-				method.invoke(obj, en.getValue().equals(String.class) ? rs.getObject(en.getKey()).toString() : rs.getObject(en.getKey()));
-			} catch (IllegalArgumentException e) {
-				Logger.DB.lerror("不正确的对象映射.", methodName,en.getValue().getName(),rs.getObject(en.getKey()).getClass().getName(),clazz.getName());
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
+				setField(obj,en.getKey(),en.getValue(),rs.getObject(en.getKey()));
+			} catch (IllegalArgumentException e1) {
+				Logger.DB.lerror("不正确的对象映射.", en.getKey(),en.getValue().getName(),rs.getObject(en.getKey()).getClass().getName(),clazz.getName());
+			} catch (InvocationTargetException e1) {
+				e1.printStackTrace();
 			}
+			
+			
+//			String methodName = "set" + en.getKey().replaceFirst(en.getKey().substring(0, 1),en.getKey().substring(0, 1).toUpperCase());
+//			Method method = clazz.getMethod(methodName, en.getValue());
+//			try {
+//				method.invoke(obj, en.getValue().equals(String.class) ? (rs.getObject(en.getKey()) == null ? "" : rs.getObject(en.getKey()).toString()) : rs.getObject(en.getKey()));
+//			} catch (IllegalArgumentException e) {
+//				Logger.DB.lerror("不正确的对象映射.", methodName,en.getValue().getName(),rs.getObject(en.getKey()).getClass().getName(),clazz.getName());
+//			} catch (InvocationTargetException e) {
+//				e.printStackTrace();
+//			}
 		}
 		
 		return obj;
+	}
+	
+	private void setField(Object obj,String fieldname,Class<?> type,Object value) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException  {
+		if(fieldname.indexOf('_') > 0) {
+			String thisfieldname = fieldname.substring(0,fieldname.indexOf('_'));
+			Method thismethod = obj.getClass().getMethod(StringUtil.getMethod(thisfieldname));
+			setField(thismethod.invoke(obj),fieldname.substring(fieldname.indexOf('_') + 1),type,value);
+		} else {
+			Method thismethod = obj.getClass().getMethod(StringUtil.setMethod(fieldname),type);
+			thismethod.invoke(obj, value);
+		}
 	}
 		
 	/**
