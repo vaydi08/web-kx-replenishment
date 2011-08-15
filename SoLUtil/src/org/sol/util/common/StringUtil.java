@@ -23,6 +23,14 @@ public class StringUtil {
             .toString();
 	}
 	
+	public static String getMethod(String name) {
+		return "get" + name.replaceFirst(name.substring(0,1), name.substring(0,1).toUpperCase());
+	}
+	
+	public static String setMethod(String name) {
+		return "set" + name.replaceFirst(name.substring(0,1), name.substring(0,1).toUpperCase());
+	}
+	
 	/**
 	 * 首字母小写
 	 * @param field
