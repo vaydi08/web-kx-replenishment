@@ -38,6 +38,9 @@ public class C3p0Source {
 	private String CONSOLE_PROPERTIES;
 	
 	private static final Log log = LogFactory.getLog(C3p0Source.class);
+	
+	private boolean bResetFlag = false;
+	
 	/**
 	 * 构造器
 	 * 
@@ -292,10 +295,10 @@ public class C3p0Source {
 	    }
 	  }
 	
-	 /**
-	  * 方法
-	  * 加入了线程锁保证了连接数据库的安全
-	  * 从连接池中获取连接
+	/**
+	 * 方法
+	 * 加入了线程锁保证了连接数据库的安全
+	 * 从连接池中获取连接
 	*/
 	public Connection getConnection(String sourceName) {
 		ComboPooledDataSource ds=null;
@@ -303,9 +306,20 @@ public class C3p0Source {
 			synchronized(dataMap){
 				ds=(ComboPooledDataSource)dataMap.get(sourceName);
 			}
-			return ds.getConnection();
+			Connection conn = ds.getConnection();
+			if(bResetFlag = true)
+				bResetFlag = false;
+			return conn;
 	    }catch(SQLException e) {
 	    	log.error("获取连接出错"+e.getMessage());
+	    	if(!bResetFlag) {
+	    		log.info("尝试重新建立连接");
+	    		ds.hardReset();
+	    		bResetFlag = true;
+	    	} else {
+	    		log.error("数据连接已断开,尝试重新连接无效,系统将退出");
+	    		// TODO return error connection
+	    	}
 	    }
 	    return null;
 	}
