@@ -24,32 +24,35 @@ public class DataConsole {
 	/**
 	 * 连接
 	 */
-	private Connection connection;
+	protected Connection connection;
 	/**
 	 * 预处理对象
 	 */
-	private PreparedStatement ps;
+	protected PreparedStatement ps;
 	/**
 	 * 存储过程处理对象
 	 */
-	private CallableStatement cs;
+	protected CallableStatement cs;
 //	private Statement st;
 	/**
 	 * 结果集对象
 	 */
-	private ResultSet rs;
+	protected ResultSet rs;
 	/**
 	 * 数据源
 	 */
-	private String sourceName;
+	protected String sourceName;
 	/**
 	 * C3P0池
 	 */
 	private C3p0Source ce = null; 
 
-	private int queryTime;
+	protected int queryTime;
 	
-	private Log log = LogFactory.getLog(DataConsole.class);
+	protected Log log = LogFactory.getLog(DataConsole.class);
+	
+	public DataConsole() {
+	}
 	
 	public DataConsole(String sourceName,C3p0Source ce,int queryTime) {
 		this.sourceName = sourceName;
