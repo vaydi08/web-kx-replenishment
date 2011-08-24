@@ -19,7 +19,7 @@ public class DataConsoleUtil {
 			
 			if(excludeName.length > 0) {
 				for(String exclude : excludeName) {
-					if(fieldname.contains(exclude))
+					if(fieldname.equals(exclude))
 						continue FieldLoop;
 				}
 			}
@@ -28,4 +28,5 @@ public class DataConsoleUtil {
 		
 		return map;
 	}
+
 }
