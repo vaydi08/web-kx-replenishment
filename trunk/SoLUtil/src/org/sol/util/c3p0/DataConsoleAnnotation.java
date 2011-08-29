@@ -82,6 +82,7 @@ public class DataConsoleAnnotation {
 	 * @throws SQLException
 	 */
 	public Object findReturn(String sql,int returnType,List<Object> objs) throws SQLException {
+		log.debug("Query return value:[" + sql + "]");
 		try {
 			getConnection();
 			
@@ -117,6 +118,7 @@ public class DataConsoleAnnotation {
 	 * @throws Exception
 	 */
 	public <X> List<X> call(Class<X> clazz,String sql,Map<String,Class<?>> smap,Object... params) throws Exception {
+		log.debug("Call Query produce:[" + sql + "]");
 		try {
 			rs = call(sql, (params != null && params.length > 0) ? Arrays.asList(params) : null);
 			
@@ -180,6 +182,7 @@ public class DataConsoleAnnotation {
 	 * @throws Exception
 	 */
 	public <X> X get(Class<X> clazz,String sql,Map<String,Class<?>> smap,List<Object> params) throws Exception {
+		log.debug("Get Entity:[" + sql + "]");
 		try {
 			rs = query(sql, params);
 			
@@ -208,6 +211,7 @@ public class DataConsoleAnnotation {
 	 * @throws SQLException
 	 */
 	public Object callWithReturn(String call,int returnType,Object... params) throws SQLException {
+		log.debug("Call return value:[" + call + "]");
 		try {
 			getConnection();
 
@@ -259,6 +263,8 @@ public class DataConsoleAnnotation {
 	public int insertPrepareSQLAndReturnKey(String sql,Object... objs) throws SQLException {
 		int countRow = 0;
 		int key = 0;
+		
+		log.debug("Insert and return Id:[" + sql + "]");
 		try {
 			getConnection();
 			
@@ -321,6 +327,8 @@ public class DataConsoleAnnotation {
 	 * @throws SQLException
 	 */
 	public int updatePrepareSQL(String sql,List<Object> objs) throws SQLException {
+		log.debug("Update:[" + sql + "]");
+		
 		int countRow = 0;
 		try {
 			getConnection();
@@ -464,10 +472,11 @@ public class DataConsoleAnnotation {
 		return (Integer) findReturn(countDataEntity.getSql(), Types.INTEGER, countDataEntity.getParams());
 	}
 	public int findCount(String sql,Condition condition) throws Exception {
-		String where = sql.substring(6);
-		where += condition.getWhere();
+		String where = sql;
+		if(condition != null)
+			where += condition.getWhere();
 		
-		return (Integer) findReturn(where, Types.INTEGER, condition.getParams());
+		return (Integer) findReturn(where, Types.INTEGER, (condition == null ? null : condition.getParams()));
 	}
 
 	

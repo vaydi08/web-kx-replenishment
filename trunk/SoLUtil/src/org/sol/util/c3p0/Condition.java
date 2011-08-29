@@ -76,7 +76,8 @@ public class Condition {
 	}
 	
 	public void addDefault(String type,String value) {
-		addWhere(type + " like ?", "%" + value + "%");
+		if(!value.isEmpty())
+			addWhere(type + " like ?", "%" + value + "%");
 	}
 	public void addDefault(String type,Integer value) {
 		addWhere(type + " = ?", value);
