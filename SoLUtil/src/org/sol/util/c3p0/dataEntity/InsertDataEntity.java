@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -37,9 +36,6 @@ public class InsertDataEntity extends DataEntity{
 				// 存入映射名 - 字段类型
 				sql.append(col.name()).append(",");
 				list.add(getFieldValue(obj, field.getName(),!col.columnDefinition().isEmpty()));
-			} else if(field.isAnnotationPresent(Id.class)) {
-				sql.append(field.getName()).append(",");
-				list.add(getFieldValue(obj, field.getName(), false));
 			}
 		}
 		
