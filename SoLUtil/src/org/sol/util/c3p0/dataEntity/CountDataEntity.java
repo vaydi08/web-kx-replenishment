@@ -40,8 +40,13 @@ public class CountDataEntity extends DataEntity{
 				Object value = getFieldValue(obj, field.getName(),!col.columnDefinition().isEmpty());
 				if(value != null) {
 					// 存入映射名 - 字段类型
-					where.append(col.name()).append("=?,");
-					list.add(value);
+					if(value instanceof String) {
+						where.append(col.name()).append(" like ? and ");
+						list.add("%" + (String)value + "%");
+					} else {
+						where.append(col.name()).append(" = ? and ");
+						list.add(value);
+					}
 				}
 			} else if(field.isAnnotationPresent(Id.class)) {
 				idname = field.getName();
@@ -52,7 +57,7 @@ public class CountDataEntity extends DataEntity{
 		// 添加where条件
 		if(list.size() > 0) {
 			// 去掉最后一个逗号
-			where.deleteCharAt(where.length() - 1);
+			where.delete(where.length() - 4, where.length());
 			sql.append(" where ").append(where.toString());
 		}
 		

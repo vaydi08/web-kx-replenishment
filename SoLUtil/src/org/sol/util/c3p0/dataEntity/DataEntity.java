@@ -11,6 +11,9 @@ public class DataEntity {
 	protected List<Object> params;
 	
 	protected Object getFieldValue(Object obj,String fieldname,boolean inherit) throws Exception {
+		if(obj == null)
+			return null;
+		
 		Method method = obj.getClass().getMethod(StringUtil.getMethod(fieldname));
 		Object entityObj = method.invoke(obj);
 		if(inherit) {

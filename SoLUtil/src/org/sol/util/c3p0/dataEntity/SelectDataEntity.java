@@ -94,8 +94,13 @@ public class SelectDataEntity extends DataEntity{
 				// where
 				Object fieldvalue = getFieldValue(obj, field.getName(), !col.columnDefinition().isEmpty());
 				if(fieldvalue != null) {
-					where.append(col.name()).append("=? and ");
-					list.add(fieldvalue);
+					if(fieldvalue instanceof String) {
+						where.append(col.name()).append(" like ? and ");
+						list.add("%" + (String)fieldvalue + "%");
+					} else {
+						where.append(col.name()).append(" = ? and ");
+						list.add(fieldvalue);
+					}
 				}
 			} else if(field.isAnnotationPresent(Id.class)) {
 				sql.append(field.getName()).append(',');
