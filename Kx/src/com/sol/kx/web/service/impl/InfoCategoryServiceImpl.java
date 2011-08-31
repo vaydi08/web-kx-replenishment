@@ -2,17 +2,25 @@ package com.sol.kx.web.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sol.kx.web.dao.BaseDao;
+import com.sol.kx.web.dao.InfoCategoryDao;
 import com.sol.kx.web.dao.pojo.InfoCategory;
 import com.sol.kx.web.service.InfoCategoryService;
 import com.sol.kx.web.service.bean.ComboBoxBean;
 
 @Service
-public class InfoCategoryServiceImpl extends BaseServiceImpl implements InfoCategoryService{
-	/* (non-Javadoc)
-	 * @see com.sol.kx.web.service.impl.InfoCategoryService#findCategoryType(int)
-	 */
+public class InfoCategoryServiceImpl extends BaseServiceImpl<InfoCategory> implements InfoCategoryService{
+	@Autowired
+	private InfoCategoryDao infoCategoryDao;
+	
+	@Override
+	protected BaseDao getDao() {
+		return infoCategoryDao;
+	}
+	
 	public ComboBoxBean findCategoryType(int clevel,String defaultText) {
 		List<InfoCategory> list = null;
 		try {
@@ -29,4 +37,5 @@ public class InfoCategoryServiceImpl extends BaseServiceImpl implements InfoCate
 		
 		return bean;
 	}
+
 }

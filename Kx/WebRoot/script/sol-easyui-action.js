@@ -1,6 +1,37 @@
 // 表单的url
 var form_url;
 
+// 预定义函数
+// 添加框函数
+function onAddBtn(addUrl) {
+	form_url = addUrl;
+	$("#dlg").dialog('open');
+	$("#form").form('clear');
+}
+function onEditBtn(editUrl) {
+	var row = $("#listTable").datagrid('getSelected');
+	if (row){
+		form_url = editUrl,
+		$("#dlg").dialog('open');
+		$("#form").form('load',row);
+	}
+}
+function onRemoveBtn(removeUrl) {
+	var row = $("#listTable").datagrid('getSelected');
+	if(row) {
+		$.messager.confirm('确认删除','将要删除此记录,删除操作不可恢复,请确认?',function(b){
+			if(b) {
+				$.post(removeUrl,{"input.id":row.id},function(data){
+					var result = eval('(' + data + ')');
+					if(result.success)
+						$("#listTable").datagrid('reload');
+					else
+						$.messager.show({title:"Error",msg:result.msg});
+				});
+			}
+		})
+	}
+}
 (function($) {
 // 扩展
 // 查询面板
@@ -23,7 +54,7 @@ jQuery.fn.queryPanel = function(config) {
 		searcher:onQuery,
 		getparam:function(value){
 					var queryType = $("#queryType").val();
-					return {"queryType":queryType,"queryValue":value};
+					return {"queryType":queryType,"queryValue":(value == null?"":value)};
 				},
 		prompt:"请输入查询项,留空表示查询全部",
 		menu:"#EU_queryValue",
@@ -35,6 +66,8 @@ jQuery.fn.queryPanel = function(config) {
 	
 	// 生成面板
 	me.panel({
+		width:800,
+		height:80,
 		title:p.title,
 		iconCls:p.iconCls,
 		collapsible:p.collapsible
@@ -50,12 +83,12 @@ jQuery.fn.queryPanel = function(config) {
 jQuery.fn.grid = function(config) {
 	// 调用者自身
 	var me = $(this);
-	
+
 	// 解释工具栏
 	var getToolbar = function() {
 		var tools = config.tools;
 		var out = new Array();
-		for(i = 0; i < tools.length; i ++) {
+		for(i = 0; i < tools.length; i=i+1) {
 			if(tools[i].type == "add") {
 				out.push({
 					id:'btnadd',
@@ -63,8 +96,8 @@ jQuery.fn.grid = function(config) {
 					iconCls:'icon-add',
 					handler:function(){
 						form_url = config.addUrl;
-						$(config.dlg).dialog('open');
-						$(config.form).form('clear');
+						$("#dlg").dialog('open');
+						$("#form").form('clear');
 					}});
 			}
 			if(tools[i].type == "edit") {
@@ -73,11 +106,11 @@ jQuery.fn.grid = function(config) {
 					text:tools[i].text,
 					iconCls:'icon-edit',
 					handler:function(){
-						var row = $(p.datagrid).datagrid('getSelected');
+						var row = $("#listTable").datagrid('getSelected');
 						if (row){
 							form_url = config.editUrl,
-							$(config.dlg).dialog('open');
-							$(config.form).form('load',row);
+							$("#dlg").dialog('open');
+							$("#form").form('load',row);
 						}
 					}});
 			}
@@ -86,9 +119,7 @@ jQuery.fn.grid = function(config) {
 					id:'btnremove',
 					text:tools[i].text,
 					iconCls:'icon-remove',
-					handler:function(){
-			    		alert("tool remove");
-					}});
+					handler:function(){}});
 			}
 			if(tools[i].type == "-")
 				out.push('-');
@@ -102,6 +133,7 @@ jQuery.fn.grid = function(config) {
 		}
 		return out;
 	}
+	
 	// 默认参数
 	var p = $.extend({
 		datagrid:"#listTable",
@@ -110,17 +142,17 @@ jQuery.fn.grid = function(config) {
 		title:"",
 		url:"",
 		frozenColumns:(config.multi ? [[{field:'ck',checkbox:true}]] : null),
-		columns:null,
-		toolbar:getToolbar(),
+		toolbar:(config.tools != null ?getToolbar() : config.toolbar),
 		
-		width:805,
+		width:800,
 		height:500,
 		iconCls:"icon-save",
 		nowrap:true,
 		singleSelect:(config.multi ? false : true),
 		striped:true,
 		pagination:true,
-		rownumbers:true
+		rownumbers:true,
+		fitColumns:true
 	},config);
 	
 	// 生成datagrid
@@ -159,7 +191,7 @@ jQuery.fn.grid = function(config) {
 			$(p.form).form('submit',{
 				url: form_url,
 				onSubmit: function(){
-					return p.onSubmit;
+					return p.onSubmit();
 				},
 				success: function(result){
 					return p.onSuccess(result);
@@ -217,6 +249,7 @@ jQuery.fn.grid = function(config) {
 			$(p.saveBtn).bind("click",save);
 			// 取消按钮
 			$(p.cancelBtn).bind("click",cancel);
+
 		}
 		
 		me.dialog(p);

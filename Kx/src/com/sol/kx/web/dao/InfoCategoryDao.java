@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.sol.kx.web.dao.pojo.InfoCategory;
 
-public interface InfoCategoryDao {
+public interface InfoCategoryDao extends BaseDao{
 
 	/**
 	 * 查询各个分类的列表

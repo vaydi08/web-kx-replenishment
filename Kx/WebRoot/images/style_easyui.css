@@ -10,11 +10,8 @@ input[type='text'] {border:1px solid #A4BED4;width:150px;}
 select {width:150px;}
 
 .clear {height:15px;}
-#top { width:1024px;height:71px; clear:both; background:url(title_bar.jpg) no-repeat}
 .topStr {position:relative;top:40px;left:700px;font-weight:bold}
 
-#mainFrame{width:1024px;}
-#left { float:left; width:160px !important;width:200px; padding:10px; background:#555; text-align:center;height:697px;}
 
 .golden_1 { background:url(golden_1.png) no-repeat; width:174px; text-align:center; line-height:60px; font-size:16px; font-weight:bold; color:#333; text-indent:20px } 
 .golden_2 { background:url(golden_2.png) no-repeat; width:174px; text-align:center; line-height:60px; font-size:16px; font-weight:bold; color:#333; text-indent:20px } 
@@ -26,7 +23,7 @@ select {width:150px;}
 
 .golden li { background:url(blue_samll.png) no-repeat center; line-height:40px;}
 
-#right {width:824px;height:697px; padding:10px;background-image:url('right_background.jpg');}
+#right {width:825px!important; width:820px;margin:0px;padding:10px;height:700px!important;height:700px;background-image:url('right_background.jpg');}
 
 .hiddenDiv {display:none;width:300px;padding:10px;position:absolute;left:200px;top:200px;border:1px solid #444;background-color:#fff;}
 
@@ -70,4 +67,5 @@ color:#333;
 }
 
 /* easyui extention */
-#queryPanel{width:800px;height:80px;padding:10px;background:#fafafa;margin-bottom:10px}
+#queryPanel{padding:10px;background:#fafafa;margin-bottom:10px}
+
