@@ -52,3 +52,9 @@
 .icon-tip{
 	background:url('icons/tip.png') no-repeat;
 }
+.icon-import{
+	background:url('icons/import.png') no-repeat;
+}
+.icon-export{
+	background:url('icons/export.png') no-repeat;
+}

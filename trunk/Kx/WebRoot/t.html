@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>t.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<script type="text/javascript" src="script/easyui/jquery-1.6.min.js"></script>
+
+<script>
+$(document).ready(function(){
+	alert($("input[name=a.b]").attr("id"));
+});
+</script>
+  </head>
+  
+  <body>
+    <input name="a.b" id="a"/>
+  </body>
+</html>

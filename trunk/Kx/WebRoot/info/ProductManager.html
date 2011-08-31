@@ -26,26 +26,81 @@
 	<!-- DEFAULT -->
 	<script type="text/javascript" src="../script/sol-easyui-action.js"></script>
 		<script>
+		var onImport = function() {
+			//$("#upload").dialog('open');
+			$.messager.show({title:"err",msg:"123"});
+		}
 		$(function(){
 			// 查询面板
 			$("#queryPanel").queryPanel({
-				getparam:function(){
+				getparam:function(value){
 					var queryType = $("#queryType").val();
 					var type1 = $("#type1").combobox('getValue');
 					var type2 = $("#type2").combobox('getValue');
 					var type3 = $("#type3").combobox('getValue');
 					var type4 = $("#type4").combobox('getValue');
+
 					return {"queryType":queryType,"queryValue":value,"type1":type1,"type2":type2,"type3":type3,"type4":type4};
 				}
 			});
 
-			$("#dlg").crud();
-			
+			$("#dlg").crud({
+				onSubmit:function() {
+					var type1 = $("#add_type1").combobox('getValue');
+					var type2 = $("#add_type2").combobox('getValue');
+					var type3 = $("#add_type3").combobox('getValue');
+					var type4 = $("#add_type4").combobox('getValue');
+
+					if(!(type1 > 0 && type2 > 0 && type3 > 0 && type4 > 0 && $("form").form('validate'))){
+						$.messager.show({title:'Field',msg:"数据请填写不完整"});
+						return false;
+					} else
+						return true;
+				}
+			});
+
+			var onAdd = function() {
+				form_url = "info-product!add.action";
+				$("#dlg").dialog('open');
+				$("#form").form('clear');
+				$("#add_type1").combobox('setValue',0);
+				$("#add_type2").combobox('setValue',0);
+				$("#add_type3").combobox('setValue',0);
+				$("#add_type4").combobox('setValue',0);
+			}
+			var onEdit = function() {
+				var row = $("#listTable").datagrid('getSelected');
+				if (row){
+					form_url = "info-product!edit.action";
+					$("#dlg").dialog('open');
+					$("#form").form('load',row);
+				}
+				$("#add_type1").combobox('setValue',row.type1_id);
+				$("#add_type2").combobox('setValue',row.type2_id);
+				$("#add_type3").combobox('setValue',row.type3_id);
+				$("#add_type4").combobox('setValue',row.type4_id);
+			}
+			var onRemove = function() {
+				var row = $("#listTable").datagrid('getSelected');
+				if(row) {
+					$.messager.confirm('确认删除','将要删除此产品,删除操作不可恢复,请确认?',function(b){
+						if(b) {
+							$.post("info-product!delete.action",{"input.id":row.id},function(data){
+								var result = eval('(' + data + ')');
+								if(result.success)
+									$("#listTable").datagrid('reload');
+								else
+									$.messager.show({title:"Error",msg:result.msg});
+							});
+						}
+					})
+				}
+			}
 			// 数据表格
 			$("#listTable").grid({
 				title:"产品列表",
 				url:"info-product!manager.action",
-				multi:true,
+				multi:false,
 				columns:[[
 			        {field:'type',title:'类别',width:120,
 				        formatter:function(value,rec) {
@@ -57,14 +112,14 @@
 			        {field:'pweight',title:'金重',width:40},
 			        {field:'stand',title:'规格',width:80},
 			        {field:'unit',title:'单位',width:40},
-			        {field:'premark',title:'备注',width:80},
-			        {field:'opt',title:'操作',width:100,align:'center',
-						formatter:function(value,rec){
-							return '<span style="color:red">编辑 删除</span>';
-						}
-					}
+			        {field:'premark',title:'备注',width:80}
 			    ]],
-			    tools:[{"type":"add","text":"添加产品"},{"type":"edit","text":"修改产品"},{"type":"-"},{"type":"remove","text":"删除产品"},{"type":"-"},{"type":"other","text":"添加分类"}],
+			    //tools:[{"type":"add","text":"添加产品"},{"type":"edit","text":"修改产品"},{"type":"-"},{"type":"remove","text":"删除产品"},{"type":"-"},{"type":"other","text":"添加分类"}],
+			    toolbar:[{id:"btnadd",text:"添加产品",iconCls:"icon-add",handler:onAdd},
+			    		{id:"btnedit",text:"修改产品",iconCls:"icon-edit",handler:onEdit},
+			    		{id:"btnremove",text:"删除产品",iconCls:"icon-remove",handler:onRemove},
+			    		{id:"btnimport",text:"从Excel导入",iconCls:"icon-import",handler:onImport}
+			    		],
 			    dlg:"#dlg",
 			    form:"#form",
 			    addUrl:"info-product!add.action",
@@ -77,7 +132,7 @@
 			        $('#ddv-'+index).panel({   
 			            border:false,   
 			            cache:false,   
-			            href:'ext_img.html',
+			            href:'ext_img.jsp?img=' + row.image,
 			            onLoad:function(){
 			                $('#listTable').datagrid('fixDetailRowHeight',index);   
 			            }   
@@ -122,7 +177,7 @@
   
   <body>
 	
-	<div id="right">
+	<div id="right" >
 		<div id="queryPanel">
 			<table cellpadding="0" cellspacing="0" border="0">
 				<tr>
@@ -199,32 +254,33 @@
 		
 		<div class="clear5"></div>
 		
+		<input type="hidden" name="input.id" id="id" />
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 		<td width="70" height="30">商品品名</td>
-		<td width="230"><input type="text" name="input.name" value="" id="pname" required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
+		<td width="230"><input type="text" name="input.pname" value="" id="pname" required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
 		<td width="70" >商品代码</td>
 		<td width="230"><input type="text" name="input.pcode" value="" id="pcode"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
 		</tr>
 		<tr>
 		<td width="70" height="30">金属成色</td>
-		<td><input type="text" name="input.quality" value="" id="input_quality"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
+		<td><input type="text" name="input.quality" value="" id="quality"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
 		<td>金　　重</td>
-		<td><input type="text" name="input.pweight" value="" id="input_weight"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
+		<td><input type="text" name="input.pweight" value="" id="pweight"  required="true" precision="4" class="easyui-numberbox"/></td>
 		</tr>
 		<tr>
 		<td width="70" height="30">规　　格</td>
-		<td><input type="text" name="input.stand" value="" id="input_stand"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
+		<td><input type="text" name="input.stand" value="" id="stand"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
 		<td width="70" height="30">单　　位</td>
-		<td><input type="text" name="input.unit" value="" id="input_unit"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
+		<td><input type="text" name="input.unit" value="件" id="unit"  required="true" validType="length[1,20]" class="easyui-validatebox" /></td>
 		</tr>
 		<tr>
 		<td width="70" height="30">备　　注</td>
-		<td colspan="3"><input type="text" name="input.premark" value="" id="input_remark"  required="false" validType="length[1,20]" class="easyui-validatebox"/></td>
+		<td colspan="3"><input type="text" name="input.premark" value="" id="remark"  required="false" validType="length[1,20]" class="easyui-validatebox"/></td>
 		</tr>
 		<tr>
 		<td width="70" height="30">图　　片</td>
-		<td colspan="3"><input type="file" name="input.image" /></td>
+		<td colspan="3"><input type="file" name="input.image" id="image"/></td>
 		</tr>
 		
 		</table>
@@ -236,5 +292,7 @@
 		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" id="dlg-cancel">取消</a>
 	</div>
 	
+	<div class="easyui-dialog" title="导入文件" style="width:400px;height:200px" modal="true" href="upload.html" id="upload" closed="true">
+	</div> 
   </body>
 </html>

@@ -1,48 +1,43 @@
 package com.sol.kx.web.action;
 
 import org.sol.util.c3p0.Condition;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.sol.kx.web.common.Logger;
-import com.sol.kx.web.service.InfoCategoryService;
-import com.sol.kx.web.service.InfoProductService;
+import com.sol.kx.web.common.Util;
+import com.sol.kx.web.service.BaseService;
 import com.sol.kx.web.service.bean.PagerBean;
+import com.sol.kx.web.service.bean.ResultBean;
 
 public abstract class BaseAction<T> extends ActionSupport{
 
 	private static final long serialVersionUID = 1L;
 	// 全局常量
-	protected static final String DATA = "data";
-	protected static final String RESULT = "result";
-	protected static final String COMBOBOX = "combobox";
+	public static final String DATA = "data";
+	public static final String RESULT = "result";
+	public static final String COMBOBOX = "combobox";
 	
 	
-	
-	@Autowired
-	protected InfoProductService infoProductService;
-	
-	@Autowired
-	protected InfoCategoryService infoCategoryService;
+	protected abstract BaseService<T> getService();
 	
 	
 	// 分页对象
 	protected PagerBean<T> pagerBean;
+	
+	// 提交请求结果
+	protected ResultBean result;
 	
 	// 通用查询条件类型
 	protected String queryType;
 	// 通用查询条件值
 	protected String queryValue;
 	
-	// 提交请求执行结果
-	protected boolean resultSuccess;
-	// 提交请求错误信息
-	protected String resultErrMsg;
-	
-	
+	// pojo
+	protected T input;
 	
 	public BaseAction() {
 		pagerBean = new PagerBean<T>();
+		input = newPojo();
 	}
 	
 	/**
@@ -61,7 +56,7 @@ public abstract class BaseAction<T> extends ActionSupport{
 				else if(queryType.endsWith("_i"))
 					condition.addDefault(queryType.substring(0,queryType.length() - 2), Integer.valueOf(queryValue));
 				else	
-					condition.addDefault(queryType.substring(0,queryType.length()), queryValue);
+					condition.addDefault(queryType, queryValue);
 				
 				return condition;
 			} catch (Exception e) {
@@ -71,24 +66,54 @@ public abstract class BaseAction<T> extends ActionSupport{
 		}
 	}
 	
-	/**
-	 * 提交请求 成功
-	 * @return
-	 */
-	protected String RESULT_SUCCESS() {
-		this.resultSuccess = true;
+	protected T defaultQuery() {
+		T obj = newPojo();
+		
+		if(queryType == null || queryValue == null || queryValue.equals(""))
+			return obj;
+		else {
+			try {
+				// 以 _f 结尾查询浮点 ,以_i结尾查询数值 , 其他查询字符
+				if(queryType.endsWith("_f")) 
+					Util.setValue(obj, queryType.substring(0,queryType.length() - 2), Double.parseDouble(queryValue));
+				else if(queryType.endsWith("_i"))
+					Util.setValue(obj, queryType.substring(0,queryType.length() - 2), Integer.parseInt(queryValue));
+				else	
+					Util.setValue(obj, queryType, queryValue);
+				
+				return obj;
+			} catch (Exception e) {
+				Logger.SYS.info("查询条件输入格式错误");
+				return obj;
+			}
+		}
+	}
+	
+	
+	
+	protected abstract T newPojo();
+	
+	public String manager() {
+		T obj = defaultQuery();
+		pagerBean = getService().find(pagerBean, obj);
+		return DATA;
+	}
+	
+	public String add() {
+		result = getService().add(input);
 		return RESULT;
 	}
-	/**
-	 * 提交请求 失败
-	 * @param msg
-	 * @return
-	 */
-	protected String RESULT_ERR(String msg) {
-		this.resultSuccess = false;
-		this.resultErrMsg = msg;
+	
+	public String edit() {
+		result = getService().update(input);
 		return RESULT;
 	}
+	
+	public String delete() {
+		result = getService().delete(input);
+		return RESULT;
+	}
+	
 	public PagerBean<T> getPagerBean() {
 		return pagerBean;
 	}
@@ -128,11 +153,17 @@ public abstract class BaseAction<T> extends ActionSupport{
 		this.queryValue = queryValue;
 	}
 
-	public boolean isResultSuccess() {
-		return resultSuccess;
+	public ResultBean getResult() {
+		return result;
 	}
 
-	public String getResultErrMsg() {
-		return resultErrMsg;
+	public void setInput(T input) {
+		this.input = input;
 	}
+
+	public T getInput() {
+		return input;
+	}
+
+
 }

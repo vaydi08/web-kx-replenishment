@@ -6,7 +6,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class Pojo implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -28,6 +27,7 @@ public class Pojo implements Serializable{
 	}
 	
 	protected void setField(Map<String,Object> map,Object obj,String name) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+
 		// 获取方法列表
 		Field[] fields = obj.getClass().getDeclaredFields();
 
@@ -51,5 +51,9 @@ public class Pojo implements Serializable{
 			else
 				map.put(mapname, value);
 		}
+		
+//		map.put("id", id);
 	}
+	
+	public Integer getId(){return 0;}
 }

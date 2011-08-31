@@ -1,25 +1,40 @@
 package com.sol.kx.web.dao.pojo;
 
-import java.sql.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Table(name = "info_product")
 public class InfoProduct extends Pojo{
 
 	private static final long serialVersionUID = 1L;
 	
+	@Id
 	private Integer id;
+	@Column(columnDefinition = "id,cname", name = "type1")
 	private InfoCategory type1;
+	@Column(columnDefinition = "id,cname", name = "type2")
 	private InfoCategory type2;
+	@Column(columnDefinition = "id,cname", name = "type3")
 	private InfoCategory type3;
+	@Column(columnDefinition = "id,cname", name = "type4")
 	private InfoCategory type4;
+	@Column(name = "pname")
 	private String pname;
+	@Column(name = "pcode")
 	private String pcode;
+	@Column(name = "quality")
 	private String quality;
+	@Column(name = "image")
 	private String image;
+	@Column(name = "pweight")
 	private Double pweight;
+	@Column(name = "stand")
 	private String stand;
+	@Column(name = "unit")
 	private String unit;
+	@Column(name = "premark")
 	private String premark;
-	private Timestamp lastUpdateTime;
 	
 	public InfoProduct() {
 		type1 = new InfoCategory();
@@ -28,12 +43,26 @@ public class InfoProduct extends Pojo{
 		type4 = new InfoCategory();
 	}
 	
-	public Integer getId() {
-		return id;
+	public InfoProduct(Integer type1, Integer type2,
+			Integer type3, Integer type4, String pname, String pcode,
+			String quality, String image, Double pweight, String stand,
+			String unit, String premark) {
+		this();
+		this.type1.setId(type1);
+		this.type2.setId(type2);
+		this.type3.setId(type3);
+		this.type4.setId(type4);
+		this.pname = pname;
+		this.pcode = pcode;
+		this.quality = quality;
+		this.image = image;
+		this.pweight = pweight;
+		this.stand = stand;
+		this.unit = unit;
+		this.premark = premark;
 	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+
+
 
 	public String getPcode() {
 		return pcode;
@@ -65,13 +94,6 @@ public class InfoProduct extends Pojo{
 	}
 	public void setUnit(String unit) {
 		this.unit = unit;
-	}
-
-	public Timestamp getLastUpdateTime() {
-		return lastUpdateTime;
-	}
-	public void setLastUpdateTime(Timestamp lastUpdateTime) {
-		this.lastUpdateTime = lastUpdateTime;
 	}
 
 	public String getPname() {
@@ -128,6 +150,23 @@ public class InfoProduct extends Pojo{
 
 	public void setType4(InfoCategory type4) {
 		this.type4 = type4;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "InfoProduct [id=" + id + ", image=" + image + ", pcode="
+				+ pcode + ", pname=" + pname + ", premark=" + premark
+				+ ", pweight=" + pweight + ", quality=" + quality + ", stand="
+				+ stand + ", type1=" + type1.getId() + ", type2=" + type2.getId() + ", type3="
+				+ type3.getId() + ", type4=" + type4.getId() + ", unit=" + unit + "]";
 	}
 
 	

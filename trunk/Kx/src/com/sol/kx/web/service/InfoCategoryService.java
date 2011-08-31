@@ -1,8 +1,9 @@
 package com.sol.kx.web.service;
 
+import com.sol.kx.web.dao.pojo.InfoCategory;
 import com.sol.kx.web.service.bean.ComboBoxBean;
 
-public interface InfoCategoryService {
+public interface InfoCategoryService extends BaseService<InfoCategory>{
 
 	/**
 	 * 查询分类

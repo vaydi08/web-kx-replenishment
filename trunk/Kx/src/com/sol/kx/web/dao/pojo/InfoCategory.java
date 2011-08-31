@@ -1,25 +1,32 @@
 package com.sol.kx.web.dao.pojo;
 
-import java.sql.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-
+@Table(name = "info_category")
 public class InfoCategory extends Pojo{
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
 	private Integer id;
+	@Column(name = "ccode")
 	private String ccode;
+	@Column(name = "cname")
 	private String cname;
+	@Column(name = "clevel")
 	private Integer clevel;
-	private Integer parent;
-	private Timestamp lastUpdateTime;
 	
-	public Integer getId() {
-		return id;
+	public InfoCategory() {
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	
+	public InfoCategory(String ccode, String cname, Integer clevel) {
+		this.ccode = ccode;
+		this.cname = cname;
+		this.clevel = clevel;
 	}
+	
 	public String getCcode() {
 		return ccode;
 	}
@@ -33,23 +40,25 @@ public class InfoCategory extends Pojo{
 	public void setClevel(Integer clevel) {
 		this.clevel = clevel;
 	}
-	public Integer getParent() {
-		return parent;
-	}
-	public void setParent(Integer parent) {
-		this.parent = parent;
-	}
-	public Timestamp getLastUpdateTime() {
-		return lastUpdateTime;
-	}
-	public void setLastUpdateTime(Timestamp lastUpdateTime) {
-		this.lastUpdateTime = lastUpdateTime;
-	}
 	public String getCname() {
 		return cname;
 	}
 	public void setCname(String cname) {
 		this.cname = cname;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "InfoCategory [ccode=" + ccode + ", clevel=" + clevel
+				+ ", cname=" + cname + ", id=" + id + "]";
 	}
 
 }

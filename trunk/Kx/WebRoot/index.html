@@ -1,31 +1,84 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-	<head>
-		<title>index.html</title>
+  <head>
+    <title>金今生货品分析系统</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" type="text/css" href="images/style_easyui.css">
+	
+	<script src="script/jquery/jquery.js"></script>
+	
+	<script src="script/leftmenu.js"></script>
+	<script src="script/default.js"></script>
+	
+	<style>
+	*{ margin:0px; padding:0px}
+	body {
+		font-family: "微软雅黑";
+		font-size:12px;
+		width:1024px;
+		background:#e5e5e5
+	}
 
-		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-		<meta http-equiv="description" content="this is my page">
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	#top { width:1024px;height:71px; clear:both; background:url(images/title_bar.jpg) no-repeat}
+	#left { float:left; width:160px !important;width:200px; padding:10px; background:#555; text-align:center;height:700px;overflow-y:auto;overflow-x:hidden;}
+	#left li { list-style-type:none}
+	
+	#mainFrame {width:843px !important; width:820px;margin:0px;padding:0px;height:725px !important;height:704px;}
+	</style>
+  </head>
+  
+  <body>
+    <div id='top'><div class='topStr'>当前用户：beiouwolf 2011 / 07 / 09 <a href=''>重新登录</a> <a href="main.html" target="mainFrame">首页</a></div></div>
+    <div id="main" style="clear:both;width:1024px;height:700px">
+    <div id="left">
+	  <ul>
+	    <li><a href="#" class="menu"><img src="images/leftbutton/left1.png"/></a>
+	      <ul class="submenu" id="memu1">
+	        <li><a target="mainFrame" href='info/ProductManager.html'><img src="images/leftbutton/ls1_1.png"/></a></li>
+	        <li><a target="mainFrame" href='info/product!manager.action'><img src="images/leftbutton/ls1_2.png"/></a></li>
+	        <li><a href=""><img src="images/leftbutton/ls1_3.png"/></a></li>
+	        <li><a target="mainFrame" href='info/ShopManager.html'><img src="images/leftbutton/ls1_4.png"/></a></li>
+	        <li><a target="mainFrame" href='info/shop!manager.action'><img src="images/leftbutton/ls1_5.png"/></a></li>
+	        <li><a target="mainFrame" href='info/CategoryManager.html'><img src="images/leftbutton/ls1_6.png"/></a></li>
+	      </ul>
+	    </li>
+	    <li><a target="mainFrame" href='stock/checkManager.html'><img src="images/leftbutton/heding.png"/></a>
+	    </li>
+	    <li><a target="mainFrame" href='compare/compare.html'><img src="images/leftbutton/daoru.png"/></a>
+	    </li>
+	    <li><a href="#" class="menu"><img src="images/leftbutton/fenxi.png"/></a>
+	      <ul class="submenu" id="memu1">
+	        <li><a target="mainFrame"  href="history/import.html"><img src="images/leftbutton/ls4_1.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls4_2.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls4_3.png"/></a></li>
+	      </ul>
+	    </li>
+	    <li><a href="#" class="menu"><img src="images/leftbutton/fenhuo.png"/></a>
+	      <ul class="submenu" id="memu1">
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls1.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls1.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls3.png"/></a></li>
+	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls4.png"/></a></li>
+	      </ul>
+	    </li>
+	    <li><a href="order/orderManager.html" target="mainFrame"><img src="images/leftbutton/dinggou.png"/></a>
+	    </li>
+	    <li><a href="#" class="menu"><img src="images/leftbutton/system.png"/></a>
+	      <ul class="submenu" id="memu1">
+	        <li><a target="mainFrame"  href="system/userManager.html"><img src="images/leftbutton/ls7_1.png"/></a></li>
+	        <li><a target="mainFrame"  href="system/authManager.html"><img src="images/leftbutton/ls7_2.png"/></a></li>
+	        <li><a target="mainFrame"  href="system/system.html"><img src="images/leftbutton/ls7_3.png"/></a></li>
+	      </ul>
+	    </li>
 
-		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
-
-	</head>
-
-	<frameset rows="71,*" cols="*" frameborder="no" border="0" framespacing="0">
-		<frame src="top.html"
-			name="topFrame" scrolling="No" noresize="noresize" id="topFrame"
-			title="topFrame" />
-		<frameset cols="200,*" frameborder="no" border="0" framespacing="0">
-			<frame src="menu.html"
-				name="leftFrame" scrolling="auto" noresize="noresize" id="leftFrame"
-				title="leftFrame" />
-			<frame src="main.html"
-				name="mainFrame" id="mainFrame" title="mainFrame" />
-		</frameset>
-	</frameset>
-
-	<noframes>
-		<body>
-		</body>
-	</noframes>
+	  </ul>
+	</div>
+	
+	<iframe src="main.html" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" name="mainFrame" id="mainFrame"></iframe>
+    </div>
+  </body>
 </html>

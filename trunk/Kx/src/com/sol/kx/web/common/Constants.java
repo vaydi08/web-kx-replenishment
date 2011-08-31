@@ -4,7 +4,7 @@ public class Constants {
 	// 查询超时
 	public static final int TRANS_TIMEOUT = 40;
 	
-	public static final String DB = "RSMNG";
+	public static final String DB = "jdbc/kx";
 	
 	// 分页大小
 	public static int pageSize = 10;

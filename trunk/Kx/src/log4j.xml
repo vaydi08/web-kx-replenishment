@@ -83,7 +83,10 @@
 	</logger>
 
 
-
+	<logger name="org.sol">
+		<appender-ref ref="STDOUT"/>
+	</logger>
+	<!-- 
 	<category name="org.springframework">
 		<level value="ERROR" />
 		<appender-ref ref="STDOUT" />
@@ -94,10 +97,9 @@
 	</category>	
 
 
-	<!--自定义的日志输出器 -->  
+	自定义的日志输出器
     <logger name="org.springframework.jdbc.core">  
         <level value="info" />  
-        <!-- 日志输出地 -->  
         <appender-ref ref="STDOUT" />  
     </logger>
     <logger name="com.opensymphony.xwork2">  
@@ -108,8 +110,9 @@
         <level value="info" />
         <appender-ref ref="STDOUT" />  
     </logger>
-    
+     -->
+     
     <root>
-		<level value="info" />
+		<level value="debug" />
 	</root>
 </log4j:configuration>
