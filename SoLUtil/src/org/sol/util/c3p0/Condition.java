@@ -87,8 +87,8 @@ public class Condition {
 		return where.toString();
 	}
 
-	public Object[] getParams() {
-		return params == null ? null : params.toArray();
+	public List<Object> getParams() {
+		return params;
 	}
 
 }
