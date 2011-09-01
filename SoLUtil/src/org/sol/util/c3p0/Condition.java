@@ -22,7 +22,6 @@ public class Condition {
 	 * @throws IllegalAccessException
 	 * @throws InvocationTargetException
 	 */
-	@Deprecated
 	public Condition(Serializable po,String... excludeNames) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 		Field[] fields = po.getClass().getDeclaredFields();
 		
@@ -58,7 +57,6 @@ public class Condition {
 			this.params = params;
 		}
 	}
-
 	
 	public Condition() {
 		this.where = new StringBuilder(" where");
@@ -76,8 +74,7 @@ public class Condition {
 	}
 	
 	public void addDefault(String type,String value) {
-		if(!value.isEmpty())
-			addWhere(type + " like ?", "%" + value + "%");
+		addWhere(type + " like ?", "%" + value + "%");
 	}
 	public void addDefault(String type,Integer value) {
 		addWhere(type + " = ?", value);
@@ -90,8 +87,8 @@ public class Condition {
 		return where.toString();
 	}
 
-	public List<Object> getParams() {
-		return params;
+	public Object[] getParams() {
+		return params == null ? null : params.toArray();
 	}
 
 }

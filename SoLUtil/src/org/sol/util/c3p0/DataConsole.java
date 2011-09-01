@@ -140,48 +140,6 @@ public class DataConsole {
 	}
 	
 	/**
-	 * 执行预编译SQL,并返回生成的主键
-	 * @param sql SQL语句
-	 * @param objs 参数列表
-	 * @return 执行影响条数
-	 * @throws SQLException
-	 */
-	public int insertPrepareSQLAndReturnKey(String sql,Object... objs) throws SQLException {
-		int countRow = 0;
-		int key = 0;
-		try {
-			if (connection == null || connection.isClosed()) 
-				getConnection();
-			
-			connection.setAutoCommit(false);
-
-			ps = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
-			ps.setQueryTimeout(queryTime);
-			for(int i = 0; i < objs.length; i ++)
-				ps.setObject(i+1,objs[i]);
-			
-			countRow = ps.executeUpdate();
-			if(countRow > 0) {
-				ResultSet rs = ps.getGeneratedKeys();
-				if(rs.next())
-					key = rs.getInt(1);
-			}
-			connection.commit();
-		} catch (SQLException e) {
-			countRow = 0;
-			connection.rollback();
-			closeConnection();
-			throw e;
-		} finally {
-			if (connection != null) {
-				connection.setAutoCommit(true);
-			}
-			close();
-		}
-		return key;
-	}
-	
-	/**
 	 * 执行批处理更新
 	 * @param sql
 	 * @param paramList
@@ -398,10 +356,10 @@ public class DataConsole {
 	}
 	
 	private void setField(Object obj,String fieldname,Class<?> type,Object value) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException  {
-		if(fieldname.indexOf('_') > 0) {
-			String thisfieldname = fieldname.substring(0,fieldname.indexOf('_'));
+		if(fieldname.indexOf(',') > 0) {
+			String thisfieldname = fieldname.substring(0,fieldname.indexOf(','));
 			Method thismethod = obj.getClass().getMethod(StringUtil.getMethod(thisfieldname));
-			setField(thismethod.invoke(obj),fieldname.substring(fieldname.indexOf('_') + 1),type,value);
+			setField(thismethod.invoke(obj),fieldname.substring(fieldname.indexOf(',') + 1),type,value);
 		} else {
 			Method thismethod = obj.getClass().getMethod(StringUtil.setMethod(fieldname),type);
 			thismethod.invoke(obj, value);

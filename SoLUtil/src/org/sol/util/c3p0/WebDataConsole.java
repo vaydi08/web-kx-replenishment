@@ -23,14 +23,16 @@ public class WebDataConsole extends DataConsole{
 		while (connection == null || connection.isClosed()) {
 			try {
 				closeConnection();
-				connection = getDataSource().getConnection();
+				DataSource ds = getDataSource();
+				ds.setLoginTimeout(10);
+				connection = ds.getConnection();
 			} catch (Exception sqle) {
 				log.error("error getConnection():" + sqle.getMessage(),sqle);
 			} catch (Throwable ae) {
 				log.error("error getConnection():" + ae.getMessage(),ae);
 			}finally{
 				if(Times>5){
-					throw new SQLException("获取连接次数已经超过6次。不再尝试重新获取");
+					throw new DisconnectException("获取连接次数已经超过6次。不再尝试重新获取");
 //					break;
 				}
 				Times++;
@@ -42,7 +44,7 @@ public class WebDataConsole extends DataConsole{
 	private DataSource getDataSource() throws NamingException {
 		Context initCtx = new InitialContext();
 	    Context envCtx =(Context)initCtx.lookup("java:comp/env");
-
+	    
 	    return (DataSource)envCtx.lookup(sourceName);
 	}
 }
