@@ -5,11 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.persistence.Column;
 import javax.persistence.Id;
-import javax.persistence.Table;
-
 import org.sol.util.c3p0.Condition;
 
 /**
@@ -52,8 +49,10 @@ public class SelectDataEntity extends DataEntity{
 						map.put(entityName + "_" + subName, subClazz);
 					}
 				}
-			} else if(field.isAnnotationPresent(Id.class))
+			} else if(field.isAnnotationPresent(Id.class)) {
 				map.put(field.getName(),field.getType());
+				idname = field.getName();
+			}
 		}
 		
 		if(condition != null) {
@@ -64,61 +63,82 @@ public class SelectDataEntity extends DataEntity{
 		this.smap = map;
 	}
 	
+	public SelectDataEntity(Class<?> clazz) {
+		super(clazz);
+		orderList = new ArrayList<String>();
+	}
+	
 	public SelectDataEntity(Object obj) throws Exception {
-		Class<?> clazz = obj.getClass();
-		// 字段
-		Field[] fields = clazz.getDeclaredFields();
-		// sql
-		StringBuilder sql = new StringBuilder();
-		StringBuilder where = new StringBuilder();
+		this(obj.getClass());
+		
+		buildConditionMap(obj);
+	}
+	
+	private void buildSmap(Field[] fields,StringBuilder sql) {
 		// 输出字段映射表
 		Map<String,Class<?>> map = new HashMap<String, Class<?>>(fields.length);
-		// 查询参数列表
-		List<Object> list = new ArrayList<Object>(fields.length);
 		
-		// 获取表名
-		String tablename = clazz.getAnnotation(Table.class).name();
-		
-		// 开始拼接SQL
-		sql.append("select ");
-		where.append(" where ");
-		
-		// 遍历字段
 		for(Field field : fields) {
-			// 如果是列字段
-			if(field.isAnnotationPresent(Column.class)) {
-				Column col = field.getAnnotation(Column.class);
-				// 存入映射名 - 字段类型
-				sql.append(col.name()).append(',');
-				map.put(col.name(), field.getType());
-				// where
-				Object fieldvalue = getFieldValue(obj, field.getName(), !col.columnDefinition().isEmpty());
-				if(fieldvalue != null) {
-					if(fieldvalue instanceof String) {
-						where.append(col.name()).append(" like ? and ");
-						list.add("%" + (String)fieldvalue + "%");
-					} else {
-						where.append(col.name()).append(" = ? and ");
-						list.add(fieldvalue);
-					}
-				}
-			} else if(field.isAnnotationPresent(Id.class)) {
+			if(field.isAnnotationPresent(Id.class)) {
 				sql.append(field.getName()).append(',');
-				map.put(field.getName(),field.getType());
+				map.put(field.getName(), field.getType());
+			} else if(field.isAnnotationPresent(Column.class)) {
+				sql.append(field.getName()).append(',');
+				map.put(field.getAnnotation(Column.class).name(), field.getType());
 			}
 		}
+		this.smap = map;
+	}
+	@Override
+	protected void buildSql() {
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append("select ");
+		
+		Field[] fields = clazz.getDeclaredFields();
+		buildSmap(fields, sql);
 		
 		// 去掉最后一个逗号
 		sql.deleteCharAt(sql.length() - 1);
 		// 加上表名
 		sql.append(" from ").append(tablename);
-		if(where.length() > 7) {
-			where.delete(where.length()-5, where.length());
-			sql.append(where.toString());
-			this.params = list;
+		
+		// 拼合where条件
+		buildWhere(sql);
+		
+		// 拼合Order
+		if(orderList.size() > 0) {
+			sql.append(" order by ");
+			sql.append(getOrderString());
 		}
-		this.sql = sql.toString();
-		this.smap = map;
+		
+		super.sql = sql.toString();
+	}
+
+	/**
+	 * 排序列表
+	 * @return
+	 */
+	protected List<String> orderList;
+	
+	public void order(String fieldname) {
+		orderList.add(fieldname);
+	}
+	
+	public void orderDesc(String fieldname) {
+		orderList.add(fieldname + " desc");
+	}
+	
+	public String getOrderString() {
+		StringBuilder orderStr = new StringBuilder();
+		if(orderList.size() > 0) {
+			for(String order : orderList)
+				orderStr.append(order).append(",");
+
+			orderStr.deleteCharAt(orderStr.length() - 1);
+		}
+		
+		return orderStr.toString();
 	}
 
 }

@@ -1,5 +1,11 @@
 package org.sol.util.common;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 /**
  * 字符串工具
@@ -63,5 +69,35 @@ public class StringUtil {
 	
 	public static String newLine() {
 		return System.getProperty("line.separator");
+	}
+	
+	/**
+	 * 日期转换
+	 */
+	private static final DateFormat df_short = new SimpleDateFormat("yyyy-MM-dd");
+	private static final DateFormat df_full = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	
+	public static Timestamp parseTimestampShort(String input) {
+		Date date = new Date();
+		try {
+			date = df_short.parse(input);
+		} catch (ParseException e) {
+			date = new Date();
+		}
+		Timestamp t = new Timestamp(date.getTime());
+		
+		return t;
+	}
+	
+	public static String formatDateShort(Date date) {
+		return df_short.format(date);
+	}
+	
+	public static String formatDate(Date date) {
+		return df_full.format(date);
+	}
+	
+	public static String formatTimestamp(Timestamp t) {
+		return df_full.format(t.getTime());
 	}
 }
