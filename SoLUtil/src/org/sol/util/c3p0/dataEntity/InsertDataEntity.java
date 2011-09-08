@@ -3,8 +3,10 @@ package org.sol.util.c3p0.dataEntity;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
+
 import javax.persistence.Column;
-import javax.persistence.Table;
+import javax.persistence.Id;
 
 /**
  * 2011-08-28 通过pojo生成SQL和参数列表
@@ -13,43 +15,64 @@ import javax.persistence.Table;
  */
 public class InsertDataEntity extends DataEntity{
 	
+	public InsertDataEntity(Class<?> clazz) {
+		super(clazz);
+	}
+	
 	public InsertDataEntity(Object obj) throws Exception {
-		Class<?> clazz = obj.getClass();
-		// 字段
-		Field[] fields = clazz.getDeclaredFields();
-		// sql
+		super(obj.getClass());
+		
+		buildConditionMap(obj);
+	}
+	
+	@Override
+	protected void buildSql() {
 		StringBuilder sql = new StringBuilder();
-		// 输出字段映射表
-		List<Object> list = new ArrayList<Object>(fields.length);
 		
-		// 获取表名
-		String tablename = clazz.getAnnotation(Table.class).name();
-		
-		// 开始拼接SQL
+		// 加上表名
 		sql.append("insert into ").append(tablename).append("(");
 		
-		// 遍历字段
-		for(Field field : fields) {
-			// 如果是列字段
-			if(field.isAnnotationPresent(Column.class)) {
-				Column col = field.getAnnotation(Column.class);
-				// 存入映射名 - 字段类型
-				sql.append(col.name()).append(",");
-				list.add(getFieldValue(obj, field.getName(),!col.columnDefinition().isEmpty()));
-			}
-		}
-		
-		// 去掉最后一个逗号
-		sql.deleteCharAt(sql.length() - 1);
+		// 拼合insert字段
+		buildInsert(sql);
 		
 		sql.append(") values(");
-		for(int i = 0; i < list.size(); i ++)
+		
+		for(int i = 0; i < params.size(); i ++)
 			sql.append("?,");
 		sql.deleteCharAt(sql.length() - 1);
 		sql.append(")");
 		
-		this.sql = sql.toString();
-		this.params = list;
+		super.sql = sql.toString();
 	}
 
+	protected void buildConditionMap(Object obj) throws Exception {
+		Field[] fields = clazz.getDeclaredFields();
+		for(Field field : fields) {
+			if(field.isAnnotationPresent(Id.class)) {
+				Object value = getFieldValue(obj, field.getName(), false);
+				if(value != null)
+					conditionMap.put(field.getName(), new Object[]{value});
+			} else if(field.isAnnotationPresent(Column.class)) {
+				Object value = getFieldValue(obj, field.getName(), !field.getAnnotation(Column.class).columnDefinition().isEmpty());
+				if(value != null)
+					conditionMap.put(field.getName(), new Object[]{value});
+			}
+		}
+	}
+	
+	private void buildInsert(StringBuilder sql) {
+		if(conditionMap.size() > 0) {
+			// 查询参数列表
+			List<Object> list = new ArrayList<Object>(conditionMap.size());
+			for(Entry<String,Object[]> en : conditionMap.entrySet()) {
+				sql.append(en.getKey()).append(",");
+				
+				for(Object obj : en.getValue())
+					list.add(obj);
+			}
+
+			sql.deleteCharAt(sql.length() - 1);
+			this.params = list;
+		}
+	}
 }

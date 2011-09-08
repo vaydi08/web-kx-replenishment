@@ -1,11 +1,8 @@
 package org.sol.util.c3p0.dataEntity;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.Map.Entry;
 
 
 /**
@@ -15,49 +12,57 @@ import javax.persistence.Table;
  */
 public class UpdateDataEntity extends DataEntity{
 	
+	public UpdateDataEntity(Class<?> clazz) {
+		super(clazz);
+	}
+	
 	public UpdateDataEntity(Object obj) throws Exception {
-		Class<?> clazz = obj.getClass();
-		// 字段
-		Field[] fields = clazz.getDeclaredFields();
-		// sql
-		StringBuilder sql = new StringBuilder();
-		// 输出字段映射表
-		List<Object> list = new ArrayList<Object>(fields.length);
+		super(obj.getClass());
 		
-		// 获取表名
-		String tablename = clazz.getAnnotation(Table.class).name();
-		
-		// 开始拼接SQL
-		sql.append("update ").append(tablename).append(" set ");
-		
-		String idname = null;
-		Object idvalue = null;
-		// 遍历字段
-		for(Field field : fields) {
-			// 如果是列字段
-			if(field.isAnnotationPresent(Column.class)) {
-				Column col = field.getAnnotation(Column.class);
-				Object value = getFieldValue(obj, field.getName(),!col.columnDefinition().isEmpty());
-				if(value != null) {
-					// 存入映射名 - 字段类型
-					sql.append(col.name()).append("=?,");
-					list.add(value);
-				}
-			} else if(field.isAnnotationPresent(Id.class)) {
-				idname = field.getName();
-				idvalue = getFieldValue(obj, field.getName(), false);
-			}
-		}
-		
-		// 去掉最后一个逗号
-		sql.deleteCharAt(sql.length() - 1);
-		
-		// 添加where条件
-		sql.append(" where ").append(idname).append("=?");
-		list.add(idvalue);
-		
-		this.sql = sql.toString();
-		this.params = list;
+		buildConditionMap(obj);
 	}
 
+	@Override
+	protected void buildSql() {
+		StringBuilder sql = new StringBuilder();
+		
+		String idname = getIdname();
+		if(idname == null)
+			throw new RuntimeException("主键未设置");
+		Object[] idvalue = conditionMap.get(idname + "=?");
+		if(idvalue == null || idvalue[0] == null)
+			throw new RuntimeException("主键未设置");
+		
+		// 加上表名
+		sql.append("update ").append(tablename).append(" set ");
+		
+		// 拼合set
+		buildSet(sql,idname);
+		
+		// 设置where id
+		sql.append(" where ").append(idname).append("=?");
+		
+		this.params.add(idvalue[0]);
+		
+		super.sql = sql.toString();
+	}
+	
+	protected void buildSet(StringBuilder sql,String idname) {
+		// 拼合where条件
+		if(conditionMap.size() > 0) {
+			// 查询参数列表
+			List<Object> list = new ArrayList<Object>(conditionMap.size());
+			for(Entry<String,Object[]> en : conditionMap.entrySet()) {
+				if(en.getValue() != null && !en.getKey().equals(idname + "=?")) {
+					sql.append(en.getKey()).append(",");
+					
+					for(Object obj : en.getValue())
+						list.add(obj);
+				}
+			}
+
+			sql.deleteCharAt(sql.length() - 1);
+			this.params = list;
+		}
+	}
 }

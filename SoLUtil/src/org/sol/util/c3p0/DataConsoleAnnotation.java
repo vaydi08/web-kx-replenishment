@@ -377,14 +377,20 @@ public class DataConsoleAnnotation {
 		
 		return find(dataEntity.getSql(), clazz, dataEntity.getSmap(), dataEntity.getParams());
 	}
-	public <X> List<X> findByPage(Class<X> clazz,Object obj,int page,int pageSize) throws Exception {
+	public <X> List<X> findByPage(Class<X> clazz,Object obj,int page,int pageSize,String order) throws Exception {
 		SelectDataEntity dataEntity = new SelectDataEntity(obj);
+		
+		if(order != null)
+			dataEntity.orderDesc(order);
+		else
+			order = "id";
+			
 		
 		String sqlpage = dataEntity.getSql().substring(6);
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("select * from(select top ").append(pageSize).append(" * From (");
-		sb.append("select top ").append(page * pageSize).append(sqlpage).append(" order by id desc) find1 order by id asc) find2 order by id desc");
+		sb.append("select top ").append(page * pageSize).append(sqlpage).append(") find1 order by " + order + " asc) find2 order by " + order + " desc");
 
 		return find(sb.toString(), clazz, dataEntity.getSmap(), dataEntity.getParams());
 	}
@@ -439,7 +445,7 @@ public class DataConsoleAnnotation {
 		Set<Entry<String,Class<?>>> set = smap.entrySet();
 		for(Entry<String,Class<?>> en : set) {
 			try {
-				setField(obj,en.getKey(),en.getValue(),rs.getObject(en.getKey()));
+				setField(obj,en.getKey(),en.getValue(),(en.getValue().equals(String.class) ? rs.getObject(en.getKey()).toString() : rs.getObject(en.getKey())));
 			} catch (IllegalArgumentException e1) {
 				Logger.DB.lerror("不正确的对象映射.", en.getKey(),en.getValue().getName(),rs.getObject(en.getKey()).getClass().getName(),clazz.getName());
 			} catch (InvocationTargetException e1) {
@@ -450,13 +456,16 @@ public class DataConsoleAnnotation {
 		return obj;
 	}
 	private void setField(Object obj,String fieldname,Class<?> type,Object value) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException  {
-		if(fieldname.indexOf('_') > 0) {
-			String thisfieldname = fieldname.substring(0,fieldname.indexOf('_'));
-			Method thismethod = obj.getClass().getMethod(StringUtil.getMethod(thisfieldname));
-			setField(thismethod.invoke(obj),fieldname.substring(fieldname.indexOf('_') + 1),type,value);
-		} else {
+		try {
 			Method thismethod = obj.getClass().getMethod(StringUtil.setMethod(fieldname),type);
 			thismethod.invoke(obj, value);
+		} catch (NoSuchMethodException e) {
+			if(fieldname.indexOf('_') > 0) {
+				String thisfieldname = fieldname.substring(0,fieldname.indexOf('_'));
+				Method thismethod = obj.getClass().getMethod(StringUtil.getMethod(thisfieldname));
+				setField(thismethod.invoke(obj),fieldname.substring(fieldname.indexOf('_') + 1),type,value);
+			} else 
+				throw e;
 		}
 	}
 	
