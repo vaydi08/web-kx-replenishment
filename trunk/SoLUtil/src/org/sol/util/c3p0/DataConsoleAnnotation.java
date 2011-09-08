@@ -394,6 +394,15 @@ public class DataConsoleAnnotation {
 
 		return find(sb.toString(), clazz, dataEntity.getSmap(), dataEntity.getParams());
 	}
+	public <X> List<X> findByPage(SelectDataEntity dataEntity,int page,int pageSize,String order) throws Exception {
+		String sqlpage = dataEntity.getSql().substring(6);
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("select * from(select top ").append(pageSize).append(" * From (");
+		sb.append("select top ").append(page * pageSize).append(sqlpage).append(") find1 order by " + order + " asc) find2 order by " + order + " desc");
+
+		return find(sb.toString(), clazz, dataEntity.getSmap(), dataEntity.getParams());
+	}
 	public <X> List<X> findByPage(Class<X> clazz,String sql,Condition condition,int page,int pageSize) throws Exception {
 		SelectDataEntity dataEntity = new SelectDataEntity(sql,condition,clazz);
 		
