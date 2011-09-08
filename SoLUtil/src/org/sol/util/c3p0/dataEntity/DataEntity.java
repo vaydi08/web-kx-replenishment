@@ -127,4 +127,8 @@ public abstract class DataEntity {
 		
 		return null;
 	}
+
+	public Class<?> getClazz() {
+		return clazz;
+	}
 }
