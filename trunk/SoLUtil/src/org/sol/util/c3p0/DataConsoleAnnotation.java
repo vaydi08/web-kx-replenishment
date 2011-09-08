@@ -394,7 +394,7 @@ public class DataConsoleAnnotation {
 
 		return find(sb.toString(), clazz, dataEntity.getSmap(), dataEntity.getParams());
 	}
-	public <X> List<X> findByPage(SelectDataEntity dataEntity,int page,int pageSize,String order) throws Exception {
+	public <X> List<X> findByPage(Class<X> clazz,SelectDataEntity dataEntity,int page,int pageSize,String order) throws Exception {
 		String sqlpage = dataEntity.getSql().substring(6);
 		
 		StringBuilder sb = new StringBuilder();
