@@ -489,6 +489,9 @@ public class DataConsoleAnnotation {
 		
 		return (Integer) findReturn(countDataEntity.getSql(), Types.INTEGER, countDataEntity.getParams());
 	}
+	public int findCount(CountDataEntity countDataEntity) throws Exception {
+		return (Integer) findReturn(countDataEntity.getSql(), Types.INTEGER, countDataEntity.getParams());
+	}
 	public int findCount(String sql,Condition condition) throws Exception {
 		String where = sql;
 		if(condition != null)
