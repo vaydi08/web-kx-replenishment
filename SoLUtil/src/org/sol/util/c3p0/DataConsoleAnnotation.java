@@ -82,7 +82,7 @@ public class DataConsoleAnnotation {
 	 * @throws SQLException
 	 */
 	public Object findReturn(String sql,int returnType,List<Object> objs) throws SQLException {
-		log.debug("Query return value:[" + sql + "]");
+		log.debug("Query return value:[" + sql + "] " + objs.toString());
 		try {
 			getConnection();
 			
@@ -592,4 +592,5 @@ public class DataConsoleAnnotation {
 			}
 		}
 	}
+	
 }
