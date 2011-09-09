@@ -49,7 +49,7 @@ public abstract class DataEntity {
 		try {
 			tablename = clazz.getAnnotation(Table.class).name();
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException("未设置Table注解",e);
 		}
 		
 		this.clazz = clazz;
