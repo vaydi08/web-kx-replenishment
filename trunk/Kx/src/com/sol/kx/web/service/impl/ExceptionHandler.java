@@ -10,4 +10,8 @@ public class ExceptionHandler {
 	public void onDatabaseException(String msg,Throwable e) {
 		Logger.DB.error(msg,e);
 	}
+	
+	public void onExcelException(String msg,Throwable e) {
+		Logger.SERVICE.error(msg,e);
+	}
 }

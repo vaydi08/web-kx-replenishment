@@ -6,7 +6,7 @@ table {font-size:12px}
 
 a img {border:0px;}
 
-input[type='text'] {border:1px solid #A4BED4;width:150px;}
+/* input[type='text'] {border:1px solid #A4BED4;width:150px;} */
 select {width:150px;}
 
 .clear {height:15px;}

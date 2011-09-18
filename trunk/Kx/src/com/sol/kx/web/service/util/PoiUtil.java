@@ -22,6 +22,9 @@ public class PoiUtil {
 	private Iterator<Cell> cellIt;
 	private Cell thiscell;
 	
+	private int rowNo;
+	private int cellNo;
+	
 	private FormulaEvaluator formula;
 	
 	public PoiUtil(File file) throws IOException {
@@ -38,12 +41,17 @@ public class PoiUtil {
 		rowIt = sheet.rowIterator();
 		
 		this.formula = workbook.getCreationHelper().createFormulaEvaluator();
+		
+		this.rowNo = -1;
 	}
 	
 	public boolean hasRow() {
 		if(rowIt.hasNext()) {
 			thisrow = rowIt.next();
 			cellIt = thisrow.cellIterator();
+			
+			++ this.rowNo;
+			this.cellNo = -1;
 			return true;
 		} else
 			return false;
@@ -52,6 +60,8 @@ public class PoiUtil {
 	public boolean hasCell() {
 		if(cellIt.hasNext()) {
 			thiscell = cellIt.next();
+			
+			++ this.cellNo;
 			return true;
 		} else
 			return false;
@@ -111,5 +121,13 @@ public class PoiUtil {
 		} finally {
 			p.close();
 		}
+	}
+
+	public int getRowNo() {
+		return rowNo;
+	}
+
+	public int getCellNo() {
+		return cellNo;
 	}
 }

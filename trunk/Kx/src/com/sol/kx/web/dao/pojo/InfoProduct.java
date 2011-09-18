@@ -41,6 +41,7 @@ public class InfoProduct extends Pojo{
 		type2 = new InfoCategory();
 		type3 = new InfoCategory();
 		type4 = new InfoCategory();
+		unit = "件";
 	}
 	
 	public InfoProduct(Integer type1, Integer type2,

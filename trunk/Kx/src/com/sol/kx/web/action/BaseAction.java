@@ -99,6 +99,12 @@ public abstract class BaseAction<T> extends ActionSupport{
 		return DATA;
 	}
 	
+	public String manager2() {
+		T obj = defaultQuery();
+		pagerBean = getService().find2(obj);
+		return DATA;
+	}
+	
 	public String add() {
 		result = getService().add(input);
 		return RESULT;
@@ -111,6 +117,21 @@ public abstract class BaseAction<T> extends ActionSupport{
 	
 	public String delete() {
 		result = getService().delete(input);
+		return RESULT;
+	}
+	
+	public String add2() {
+		result = getService().add2(input);
+		return RESULT;
+	}
+	
+	public String edit2() {
+		result = getService().update2(input);
+		return RESULT;
+	}
+	
+	public String delete2() {
+		result = getService().delete2(input);
 		return RESULT;
 	}
 	

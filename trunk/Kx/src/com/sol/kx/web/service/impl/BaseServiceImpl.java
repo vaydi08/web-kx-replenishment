@@ -4,6 +4,10 @@ import java.util.List;
 
 import javax.persistence.Table;
 
+import org.sol.util.c3p0.dataEntity2.DeleteEntity;
+import org.sol.util.c3p0.dataEntity2.InsertEntity;
+import org.sol.util.c3p0.dataEntity2.SelectEntity;
+import org.sol.util.c3p0.dataEntity2.UpdateEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sol.kx.web.common.Logger;
@@ -45,7 +49,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 				obj.toString());
 		try {
 			return setBeanValue(bean, 
-					dao.find(clazz,obj,bean.getPage(), bean.getPageSize()), 
+					dao.find(clazz,obj,bean.getPage(), bean.getPageSize(),"id"), 
 					dao.findCount(obj));
 		} catch (Exception e) {
 			bean.setException(e);
@@ -61,6 +65,16 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("插入记录错误", e);
 			return ResultBean.RESULT_ERR(e.getMessage());
+		}
+	}
+	
+	public int addAndReturnKey(T po) {
+		Logger.SERVICE.ldebug("导入[" + po.getClass().getAnnotation(Table.class).name() + "]数据", po.toString());
+		try {
+			return getDao().addAndReturnKey(po);
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("导入记录错误", e);
+			return -1;
 		}
 	}
 
@@ -79,6 +93,60 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 		Logger.SERVICE.ldebug("更新[" + po.getClass().getAnnotation(Table.class).name() + "]数据", po.toString());
 		try {
 			getDao().update(po);
+			return ResultBean.RESULT_SUCCESS();
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("更新记录错误", e);
+			return ResultBean.RESULT_ERR(e.getMessage());
+		}
+	}
+	
+	public PagerBean<T> find2(T obj) {
+		Logger.SERVICE.ldebug("查询[" + obj.getClass().getAnnotation(Table.class).name() + "]数据",obj.toString());
+		PagerBean<T> bean = new PagerBean<T>();
+		try {
+			SelectEntity selectEntity = new SelectEntity();
+			selectEntity.init(obj);
+			bean.setDataList((List<T>) getDao().find2(selectEntity));
+			return bean;
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("查询" + obj.getClass().getAnnotation(Table.class).name() + "错误", e);
+			bean.setException(e);
+			return bean;
+		}
+	}
+	
+	public ResultBean add2(T obj) {
+		Logger.SERVICE.ldebug("插入[" + obj.getClass().getAnnotation(Table.class).name() + "]数据", obj.toString());
+		try {
+			InsertEntity entity = new InsertEntity();
+			entity.init(obj);
+			getDao().add2(entity);
+			return ResultBean.RESULT_SUCCESS();
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("插入记录错误", e);
+			return ResultBean.RESULT_ERR(e.getMessage());
+		}
+	}
+	
+	public ResultBean delete2(T obj) {
+		Logger.SERVICE.ldebug("删除[" + obj.getClass().getAnnotation(Table.class).name() + "]数据", obj.toString());
+		try {
+			DeleteEntity entity = new DeleteEntity();
+			entity.init(obj);
+			getDao().delete2(entity);
+			return ResultBean.RESULT_SUCCESS();
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("删除记录错误", e);
+			return ResultBean.RESULT_ERR(e.getMessage());
+		}
+	}
+
+	public ResultBean update2(T obj) {
+		Logger.SERVICE.ldebug("更新[" + obj.getClass().getAnnotation(Table.class).name() + "]数据", obj.toString());
+		try {
+			UpdateEntity entity = new UpdateEntity();
+			entity.init(obj);
+			getDao().update2(entity);
 			return ResultBean.RESULT_SUCCESS();
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("更新记录错误", e);

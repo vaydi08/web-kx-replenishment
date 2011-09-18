@@ -15,11 +15,30 @@
 	<script type="text/javascript" src="../script/swfupload/fileprogress.js"></script>
 	<script type="text/javascript" src="../script/swfupload/handlers.js"></script>
 
+	<script type="text/javascript" src="../script/jquery/jquery.js"></script>
+	
 	<script type="text/javascript">
 		var swfu;
 
 		var success = function(file,serverData) {
-			alert(serverData);
+			//alert(serverData);
+			
+			var data = jQuery.parseJSON(serverData);
+			
+			var div = $("#msg");
+			div.show();
+			
+			div.find("#filename").text(file.name);
+			div.find("#count").text(data.files[0].count);
+			div.find("#success").text(data.files[0].success);
+
+			var str = "";
+			var datamsg = data.files[0].msg;
+			for(var msg in datamsg) {
+				str += datamsg[msg] + "<br/>";
+			}
+			div.find("#errorMsg").html(str);
+			
 		}
 		window.onload = function() {
 			var settings = {
@@ -42,7 +61,7 @@
 				button_width: "65",
 				button_height: "29",
 				button_placeholder_id: "spanButtonPlaceHolder",
-				button_text: '<span class="theFont">Upload</span>',
+				button_text: '<span class="theFont">上传</span>',
 				button_text_style: ".theFont { font-size: 16; }",
 				button_text_left_padding: 12,
 				button_text_top_padding: 3,
@@ -74,17 +93,25 @@
 			<span class="legend">Upload Queue</span>
 		</div>
 		<div id="divStatus">0 Files Uploaded</div>
+		<div id="msg" style="display:none">
+		<table cellpadding="0" cellspacing="0" border="0" width="400">
+		<tr><td>导入文件名:</td><td colspan="3"><span id="filename"></span></td></tr>
+		<tr><td>导入数据行数:</td><td><span id="count"></span></td><td>导入成功行数:</td><td><span id="success"></span></td></tr>
+		<tr><td colspan="4"><span id="errorMsg"></span></td></tr>
+		</table>
+		</div>
 		<div>
 			<span id="spanButtonPlaceHolder"></span>
-			<input id="btnCancel" type="button" value="Cancel All Uploads" onclick="swfu.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;" />
+			<input id="btnCancel" type="button" value="取消正在上传的文件" onclick="swfu.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;" />
 		</div>
 	
 	</form>
 </div>
-
+<!-- 
 <form id="form2" action="upload.action" method="post" enctype="multipart/form-data">
 <input type="file" name="Filedata"/>
 <input type="submit" />"
 </form>
+ -->
   </body>
 </html>

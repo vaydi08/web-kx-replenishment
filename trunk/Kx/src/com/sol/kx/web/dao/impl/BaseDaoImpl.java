@@ -2,14 +2,22 @@ package com.sol.kx.web.dao.impl;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.PostConstruct;
 
 import org.sol.util.c3p0.Condition;
 import org.sol.util.c3p0.DataConsoleAnnotation;
+import org.sol.util.c3p0.dataEntity.CountDataEntity;
+import org.sol.util.c3p0.dataEntity.SelectDataEntity;
+import org.sol.util.c3p0.dataEntity2.CountEntity;
+import org.sol.util.c3p0.dataEntity2.DeleteEntity;
+import org.sol.util.c3p0.dataEntity2.InsertEntity;
+import org.sol.util.c3p0.dataEntity2.SelectEntity;
+import org.sol.util.c3p0.dataEntity2.UpdateEntity;
 import org.sol.util.log.Logger;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -53,6 +61,17 @@ public abstract class BaseDaoImpl implements BaseDao{
 		return dataConsole.get(clazz, sql, smap, Arrays.asList(params));
 	}
 	
+	protected <X> X get(Class<X> clazz,String sql,Integer id) throws Exception {
+	
+		Map<String,Class<?>> smap = new HashMap<String, Class<?>>(1);
+		smap.put("id", Integer.class);
+		
+		List<Object> list = new ArrayList<Object>();
+		list.add(id);
+		
+		return dataConsole.get(clazz, sql, smap, list);
+	}
+	
 	protected Integer findReturnInt(String sql,Object... objs) throws SQLException {
 		return (Integer)dataConsole.findReturn(sql,Types.INTEGER, Arrays.asList(objs));
 	}
@@ -84,8 +103,12 @@ public abstract class BaseDaoImpl implements BaseDao{
 		return dataConsole.find(sql,clazz,smap,Arrays.asList(params));
 	}
 	
-	protected <X> List<X> findByPage(Class<X> clazz,Object obj,int page,int pageSize) throws Exception {
-		return dataConsole.findByPage(clazz, obj, page, pageSize);
+	protected <X> List<X> find(String sql,Class<X> clazz,Map<String,Class<?>> smap,List<Object> params) throws Exception {
+		return dataConsole.find(sql, clazz, smap, params);
+	}
+	
+	protected <X> List<X> findByPage(Class<X> clazz,Object obj,int page,int pageSize,String order) throws Exception {
+		return dataConsole.findByPage(clazz, obj, page, pageSize,order);
 	}
 	
 	/**
@@ -172,19 +195,45 @@ public abstract class BaseDaoImpl implements BaseDao{
 	 * DAO公用函数
 	 */
 	
-	public <X> List<X> find(Class<X> clazz,Object obj,int page,int pageSize) throws Exception {
-		return findByPage(clazz, obj,page,pageSize);
+	public <X> List<X> find(Class<X> clazz,Object obj,int page,int pageSize,String order) throws Exception {
+		return findByPage(clazz, obj,page,pageSize,order);
+	}
+	public <X> List<X> find(Class<X> clazz,String sql,SelectDataEntity dataEntity,int page,int pageSize,String order) throws Exception {
+		return dataConsole.findByPage(clazz, sql,dataEntity,page,pageSize,order);
+	}
+	public List find2(SelectEntity entity) throws Exception {		
+		return dataConsole.find(entity.getFullSql(), entity.getClazz(), entity.getSmap(), entity.getCriteria().getParamList());
 	}
 	public int findCount(Object obj) throws Exception {
 		return dataConsole.findCount(obj);
 	}
+	public int findCount(String sql,CountDataEntity dataEntity) throws Exception {
+		return dataConsole.findCount(sql,dataEntity);
+	}
+	public int findCount2(CountEntity entity) throws Exception {
+		return (Integer)dataConsole.findReturn(entity.getFullSql(), Types.INTEGER, entity.getCriteria().getParamList());
+	}
 	public void add(Object obj) throws Exception {
 		dataConsole.insert(obj);
+	}
+	public void add2(InsertEntity entity) throws SQLException {
+		dataConsole.updatePrepareSQL(entity.getFullSql(), entity.getCriteria().getParamListWithoutId());
+	}
+	public int addAndReturnKey(Object obj) throws SQLException {
+		return dataConsole.insertAndReturnKey(obj);
 	}
 	public void update(Object obj) throws Exception {
 		dataConsole.update(obj);
 	}
+	public void update2(UpdateEntity entity) throws SQLException {
+		dataConsole.updatePrepareSQL(entity.getFullSql(), entity.getCriteria().getParamList());
+	}
 	public void delete(Object obj) throws Exception {
 		dataConsole.delete(obj);
+	}
+	public void delete2(DeleteEntity entity) throws SQLException {
+		List<Object> list = new ArrayList<Object>(1);
+		list.add(entity.getCriteria().getId());
+		dataConsole.updatePrepareSQL(entity.getFullSql(), list);
 	}
 }
