@@ -9,8 +9,14 @@
     
     <link rel="stylesheet" type="text/css" href="images/style_easyui.css">
 	
-	<script src="script/jquery/jquery.js"></script>
-	
+	<!-- EASYUI -->
+	<link rel="stylesheet" type="text/css" href="script/easyui/themes/default/easyui.css" />
+	<link rel="stylesheet" type="text/css" href="script/easyui/themes/icon.css" />
+
+	<script type="text/javascript" src="script/easyui/jquery-1.6.min.js"></script>
+	<script type="text/javascript" src="script/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="script/easyui/locale/easyui-lang-zh_CN.js"></script>
+
 	<script src="script/leftmenu.js"></script>
 	<script src="script/default.js"></script>
 	
@@ -22,6 +28,7 @@
 		width:1024px;
 		background:#e5e5e5
 	}
+	#left a {color:#F6AB00;font-weight:bold;letter-spacing:5px;width:100%;}
 
 	#top { width:1024px;height:71px; clear:both; background:url(images/title_bar.jpg) no-repeat}
 	#left { float:left; width:160px !important;width:200px; padding:10px; background:#555; text-align:center;height:700px;overflow-y:auto;overflow-x:hidden;}
@@ -35,18 +42,16 @@
     <div id='top'><div class='topStr'>当前用户：beiouwolf 2011 / 07 / 09 <a href=''>重新登录</a> <a href="main.html" target="mainFrame">首页</a></div></div>
     <div id="main" style="clear:both;width:1024px;height:700px">
     <div id="left">
+    <!-- 
 	  <ul>
 	    <li><a href="#" class="menu"><img src="images/leftbutton/left1.png"/></a>
 	      <ul class="submenu" id="memu1">
 	        <li><a target="mainFrame" href='info/ProductManager.html'><img src="images/leftbutton/ls1_1.png"/></a></li>
-	        <li><a target="mainFrame" href='info/product!manager.action'><img src="images/leftbutton/ls1_2.png"/></a></li>
-	        <li><a href=""><img src="images/leftbutton/ls1_3.png"/></a></li>
 	        <li><a target="mainFrame" href='info/ShopManager.html'><img src="images/leftbutton/ls1_4.png"/></a></li>
-	        <li><a target="mainFrame" href='info/shop!manager.action'><img src="images/leftbutton/ls1_5.png"/></a></li>
 	        <li><a target="mainFrame" href='info/CategoryManager.html'><img src="images/leftbutton/ls1_6.png"/></a></li>
 	      </ul>
 	    </li>
-	    <li><a target="mainFrame" href='stock/checkManager.html'><img src="images/leftbutton/heding.png"/></a>
+	    <li><a target="mainFrame" href='stock/CheckChoose.html'><img src="images/leftbutton/heding.png"/></a>
 	    </li>
 	    <li><a target="mainFrame" href='compare/compare.html'><img src="images/leftbutton/daoru.png"/></a>
 	    </li>
@@ -76,6 +81,29 @@
 	    </li>
 
 	  </ul>
+	   -->
+	   <style>
+	   .icon-d1{
+			background:url('images/button/d1.png') no-repeat;
+		}
+		.icon-d2{
+			background:url('images/button/d2.png') no-repeat;
+		}
+	   </style>
+	   <div id="menu" class="easyui-accordion" animate="false">
+		<div title="基础数据" iconCls="icon-d1" selected="true" style="overflow:auto;padding:10px;">  
+	        <a href="info/ProductManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">产品数据</a>
+	        <a href="info/ShopManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">门店数据</a>  
+	        <a href="info/CategoryManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">分类列表</a>  
+	    </div>  
+	    <div title="核定数据" iconCls="icon-d2" style="padding:10px;">  
+	        <a href="stock/CheckChoose.html" target="mainFrame" class="easyui-linkbutton" plain="true">核定数据</a>
+	        <a href="info/ShopManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">已作核定</a>  
+	    </div>  
+	    <div title="Title3">  
+	        content3   
+	    </div> 
+	   </div>
 	</div>
 	
 	<iframe src="main.html" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" name="mainFrame" id="mainFrame"></iframe>

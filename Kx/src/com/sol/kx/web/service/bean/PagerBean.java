@@ -15,6 +15,8 @@ public class PagerBean<T> {
 	
 	private Throwable exception;
 	
+	private Object[] reserve;
+	
 	public PagerBean() {
 		page = 1;
 		pageSize = Constants.pageSize;
@@ -65,5 +67,13 @@ public class PagerBean<T> {
 	
 	public boolean hasException() {
 		return exception != null;
+	}
+
+	public Object[] getReserve() {
+		return reserve;
+	}
+
+	public void setReserve(Object[] reserve) {
+		this.reserve = reserve;
 	}
 }

@@ -1,0 +1,174 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title></title>
+    
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<!-- NORMAL STYLE -->
+	<link rel="stylesheet" type="text/css" href="../images/style_easyui.css" />
+	
+	<!-- EASYUI -->
+	<link rel="stylesheet" type="text/css" href="../script/easyui/themes/default/easyui.css" />
+	<link rel="stylesheet" type="text/css" href="../script/easyui/themes/icon.css" />
+
+	<script type="text/javascript" src="../script/easyui/jquery-1.6.min.js"></script>
+	<script type="text/javascript" src="../script/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../script/easyui/locale/easyui-lang-zh_CN.js"></script>
+	
+	<!-- EXTENSION -->
+	<script type=text/javascript src="../script/easyui/datagrid-detailview.js"></script>
+
+	<!-- DEFAULT -->
+	<script type="text/javascript" src="../script/sol-easyui-action.js"></script>
+	
+	<style>
+	.panelSelect td {padding:3px}
+	.panelSelect a:hover {border:1px solid blue}
+	.panelSelect a{border:0px solid blue;color:#aaa;padding:5px}
+	</style>
+	<script type="text/javascript" src="../script/sol/panelSelect.js"></script>
+	<script>
+	$(document).ready(function() {
+		var divClick = function(value,text) {
+			var div = $('body').data('div');
+			var result = $('body').data('result');
+			$(result).text(text);
+			$(result).attr('value',value);
+			$(result).attr('div',div);
+
+			$(div).dialog('close');
+		}
+		
+		$("#shopDiv").find(".panelSelect").panelSelect({
+			'url':'../info/info-shop!findChoose.action',
+			onClick:divClick
+		});
+
+		$("#type1Div").find(".panelSelect").panelSelect({
+			'url':'../info/info-category!findChoose.action?input.clevel=1',
+			onClick:divClick
+		});
+
+		$("#type2Div").find(".panelSelect").panelSelect({
+			'url':'../info/info-category!findChoose.action?input.clevel=2',
+			onClick:divClick
+		});
+
+		$("#type3Div").find(".panelSelect").panelSelect({
+			'url':'../info/info-category!findChoose.action?input.clevel=3',
+			onClick:divClick
+		});
+
+		$("#type4Div").find(".panelSelect").panelSelect({
+			'url':'../info/info-category!findChoose.action?input.clevel=4',
+			onClick:divClick
+		});
+
+		$(".chooseHref").click(function() {
+			closeDialog();
+			
+			var div = $(this).attr("div");
+			$(div).panel('open');
+			var offset = $(this).offset();
+			$(div).panel('move',{left:offset.left + $(this).width() + 50,top:offset.top});
+
+			$('body').data('div',div);
+			$('body').data('result',$(this).attr('result'));
+		});
+
+		var closeDialog = function() {
+			$('.easyui-dialog').each(function(){
+				$(this).dialog('close');
+			});
+		}
+
+		$("#next").click(function() {
+			var shop = $("#shop").attr("value");
+			var type1 = $("#type1").attr("value");
+			var type2 = $("#type2").attr("value");
+			var type3 = $("#type3").attr("value");
+			var type4 = $("#type4").attr("value");
+
+			if(shop == null || shop == 0) {
+				$.messager.show({title:'Error',msg:'选项值未设置，请选择一个分店'});
+				return;
+			}
+
+			var str = "";
+			if(type1 != null && type1 > 0) str += "&type1=" + type1;
+			if(type2 != null && type2 > 0) str += "&type2=" + type2;
+			if(type3 != null && type3 > 0) str += "&type3=" + type3;
+			if(type4 != null && type4 > 0) str += "&type4=" + type4;
+			if(str.length == 0) {
+				$.messager.show({title:'Error',msg:'选项值未设置，请指定至少一种分类'});
+				return;
+			}
+			
+			location.href = 'CheckProductManager.html?shopid=' + shop + str;
+		});
+		
+	});
+
+	</script>
+	
+	</head>
+	<body>
+		<div id="right">
+			<div id="query">
+				<table cellpadding="0" cellspacing="0" border="0">
+				<thead>
+					<tr><th height="50">选择核定门店 及 分类</th></tr>
+				</thead>
+				<tbody>
+					<tr>
+					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#shopDiv" result="#shop">选择门店</a></td>
+					<td><span id="shop"></span></td>
+					</tr>
+					<tr>
+					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#type1Div" result="#type1">选择大类</a></td>
+					<td><span id="type1"></span></td>
+					</tr>
+					<tr>
+					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#type2Div" result="#type2">选择小类</a></td>
+					<td><span id="type2"></span></td>
+					</tr>
+					<tr>
+					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#type3Div" result="#type3">选择货型</a></td>
+					<td><span id="type3"></span></td>
+					</tr>
+					<tr>
+					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#type4Div" result="#type4">选择款式</a></td>
+					<td><span id="type4"></span></td>
+					</tr>
+					<tr>
+					<td colspan="2" height="50">
+					<a href="javascript:void(0)" class="easyui-linkbutton" id="next">下一步</a>
+					</td>
+					</tr>
+				</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<div id="shopDiv" class="easyui-dialog" closeable="true" title="Choose" modal="false" style="width:600px;height:500px" cache="false" closed="true">
+			<div class="panelSelect"></div>
+		</div>
+		<div id="type1Div" class="easyui-dialog" closeable="true" title="Choose" modal="false" style="width:600px;height:500px" cache="false" closed="true">
+			<div class="panelSelect"></div>
+		</div>
+		<div id="type2Div" class="easyui-dialog" closeable="true" title="Choose" modal="false" style="width:600px;height:500px" cache="false" closed="true">
+			<div class="panelSelect"></div>
+		</div>
+		<div id="type3Div" class="easyui-dialog" closeable="true" title="Choose" modal="false" style="width:600px;height:500px" cache="false" closed="true">
+			<div class="panelSelect"></div>
+		</div>
+		<div id="type4Div" class="easyui-dialog" closeable="true" title="Choose" modal="false" style="width:600px;height:500px" cache="false" closed="true">
+			<div class="panelSelect"></div>
+		</div>
+	</body>
+</html>

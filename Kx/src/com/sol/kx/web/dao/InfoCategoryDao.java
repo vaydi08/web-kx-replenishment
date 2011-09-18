@@ -14,4 +14,15 @@ public interface InfoCategoryDao extends BaseDao{
 	 */
 	public List<InfoCategory> findCategoryType(int clevel) throws Exception;
 
+	/**
+	 * 查询分类名称-id映射表
+	 * @return
+	 * @throws Exception
+	 */
+	public List<InfoCategory> findCategoryMapping() throws Exception;
+	
+	public List<InfoCategory> findCustom(Class<InfoCategory> clazz, InfoCategory obj, int page, int pageSize,
+			String order) throws Exception;
+	
+	public int findCountCustom(InfoCategory obj) throws Exception;
 }
