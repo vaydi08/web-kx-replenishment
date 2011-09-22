@@ -30,7 +30,7 @@ public class CountDataEntity extends DataEntity{
 		sql.append("select count(").append(idname).append(") from ").append(tablename);
 		
 		// 拼合where条件
-		buildWhere(sql);
+		sql.append(getWhereSql());
 		
 		super.sql = sql.toString();
 	}

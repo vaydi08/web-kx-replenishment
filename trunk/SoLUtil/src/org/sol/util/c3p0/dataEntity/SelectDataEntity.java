@@ -24,6 +24,10 @@ public class SelectDataEntity extends DataEntity{
 		return smap;
 	}
 	
+	public void setSmap(Map<String, Class<?>> smap) {
+		this.smap = smap;
+	}
+	
 	public SelectDataEntity(String sql,Condition condition,Class<?> clazz) throws SecurityException, NoSuchFieldException {
 		// 字段
 		Field[] fields = clazz.getDeclaredFields();
@@ -67,6 +71,10 @@ public class SelectDataEntity extends DataEntity{
 		super(clazz);
 		orderList = new ArrayList<String>();
 	}
+	public SelectDataEntity(String sql) {
+		this.sql = sql;
+		orderList = new ArrayList<String>();
+	}
 	
 	public SelectDataEntity(Object obj) throws Exception {
 		this(obj.getClass());
@@ -104,13 +112,10 @@ public class SelectDataEntity extends DataEntity{
 		sql.append(" from ").append(tablename);
 		
 		// 拼合where条件
-		buildWhere(sql);
+		sql.append(getWhereSql());
 		
 		// 拼合Order
-		if(orderList.size() > 0) {
-			sql.append(" order by ");
-			sql.append(getOrderString());
-		}
+		sql.append(getOrderString());
 		
 		super.sql = sql.toString();
 	}
@@ -130,15 +135,19 @@ public class SelectDataEntity extends DataEntity{
 	}
 	
 	public String getOrderString() {
-		StringBuilder orderStr = new StringBuilder();
 		if(orderList.size() > 0) {
+			StringBuilder orderStr = new StringBuilder();
+			orderStr.append(" order by ");
+			
 			for(String order : orderList)
 				orderStr.append(order).append(",");
 
 			orderStr.deleteCharAt(orderStr.length() - 1);
-		}
 		
-		return orderStr.toString();
+		
+			return orderStr.toString();
+		} else
+			return "";
 	}
 
 }
