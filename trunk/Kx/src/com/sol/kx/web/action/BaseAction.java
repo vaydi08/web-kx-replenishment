@@ -88,6 +88,28 @@ public abstract class BaseAction<T> extends ActionSupport{
 			}
 		}
 	}
+	protected T defaultQuery2() {
+		T obj = input;
+		
+		if(queryType == null || queryValue == null || queryValue.equals(""))
+			return obj;
+		else {
+			try {
+				// 以 _f 结尾查询浮点 ,以_i结尾查询数值 , 其他查询字符
+				if(queryType.endsWith("_f")) 
+					Util.setValue(obj, queryType.substring(0,queryType.length() - 2), Double.parseDouble(queryValue));
+				else if(queryType.endsWith("_i"))
+					Util.setValue(obj, queryType.substring(0,queryType.length() - 2), Integer.parseInt(queryValue));
+				else	
+					Util.setValue(obj, queryType, queryValue);
+				
+				return obj;
+			} catch (Exception e) {
+				Logger.SYS.info("查询条件输入格式错误");
+				return obj;
+			}
+		}
+	}
 	
 	
 	
@@ -100,8 +122,8 @@ public abstract class BaseAction<T> extends ActionSupport{
 	}
 	
 	public String manager2() {
-		T obj = defaultQuery();
-		pagerBean = getService().find2(obj);
+		T obj = defaultQuery2();
+		pagerBean = getService().findByPage2(pagerBean, obj);
 		return DATA;
 	}
 	

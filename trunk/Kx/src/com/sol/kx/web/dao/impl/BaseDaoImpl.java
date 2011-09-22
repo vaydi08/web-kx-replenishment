@@ -204,6 +204,14 @@ public abstract class BaseDaoImpl implements BaseDao{
 	public List find2(SelectEntity entity) throws Exception {		
 		return dataConsole.find(entity.getFullSql(), entity.getClazz(), entity.getSmap(), entity.getCriteria().getParamList());
 	}
+	public List findByPage2(SelectEntity entity,int page,int pageSize,String order) throws Exception {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("select * from(select top ").append(pageSize).append(" * From (");
+		sb.append("select top ").append(page * pageSize).append(entity.getFullSql().substring(6)).append(") find1 order by " + order + " asc) find2 order by " + order + " desc");
+
+		return dataConsole.find(sb.toString(), entity.getClazz(), entity.getSmap(), entity.getCriteria().getParamList());
+	}
 	public int findCount(Object obj) throws Exception {
 		return dataConsole.findCount(obj);
 	}

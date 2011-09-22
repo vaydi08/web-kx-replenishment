@@ -55,7 +55,7 @@
 				var row = $("#listTable").datagrid('getSelected');
 				if(row != null) {
 					var id = row.id;
-					var url = 'CheckManager.html?queryType=pid_i&queryValue=' + id + '&shopid=' + shopid;
+					var url = 'CheckManager.html?queryType=pid_i&queryValue=' + id + '&shopid=' + shopid + '&stocktype=' + queryString.stocktype;
 					window.showModalDialog(url,'CheckWindow','dialogHeight=500px;dialogWidth=600px;dialogTop=50;dialogLeft=100;toolbar=no;menubar=no;scrollbars=auto');
 				}
 			}
@@ -75,6 +75,7 @@
 			    onLoadSuccess:function(data) {
 					$("#shopname").val(data.shopname);
 					$("#typename").val(data.typename);
+					$("#stocktype").val(queryString.stocktype == 1 ? "一般" : "节假日");
 				}
 			    
 			});
@@ -98,6 +99,8 @@
 		<td width="80">门　店:</td><td><input type="text" readonly="readonly" id="shopname" /></td>
 		<td width="20">&nbsp;</td>
 		<td width="80">分　类:</td><td><input type="text" readonly="readonly" id="typename" /></td>
+		<td width="20">&nbsp;</td>
+		<td width="80">类　别:</td><td><input type="text" readonly="readonly" id="stocktype" /></td>
 		</tr>
 		</table>
 		</div>

@@ -36,6 +36,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.sol.kx.web.dao.InfoProductDao;
 import com.sol.kx.web.dao.StockCheckDao;
+import com.sol.kx.web.dao.StockCheckedDao;
 import com.sol.kx.web.dao.pojo.InfoProduct;
 import com.sol.kx.web.dao.pojo.InfoShop;
 import com.sol.kx.web.dao.pojo.StockCheck;
@@ -44,7 +45,7 @@ import com.sol.kx.web.dao.pojo.StockCheck;
 @ContextConfiguration("classpath:applicationContext.xml")
 public class DatabaseTest {
 	@Autowired
-	private StockCheckDao dao;
+	private StockCheckedDao dao;
 
 	//@Test
 	public void test2() {
@@ -69,46 +70,6 @@ public class DatabaseTest {
 	
 	@Test
 	public void test() {
-		StockCheck obj = new StockCheck();
-		//obj.setId(3);
-		obj.setPid(1);
-		obj.setShopid(2);
-		
-
-		SelectEntity select = new SelectEntity();
-		CountEntity count = new CountEntity();
-		InsertEntity insert = new InsertEntity();
-		UpdateEntity update = new UpdateEntity();
-		DeleteEntity delete = new DeleteEntity();
-		
-		try {
-			select.init(obj);
-			select.getCriteria().order("id");
-			System.out.println(select.getFullSql());
-			System.out.println(select.getCriteria().getParamList());
-			System.out.println(select.getSmap());
-			
-			count.init(obj);
-			System.out.println(count.getFullSql());
-			System.out.println(count.getCriteria().getParamList());
-			
-			insert.init(obj);
-			System.out.println(insert.getFullSql());
-			System.out.println(insert.getCriteria().getParamListWithoutId());
-			
-			update.init(obj);
-			System.out.println(update.getFullSql());
-			System.out.println(update.getCriteria().getParamList());
-			
-			
-			delete.init(obj);
-			System.out.println(delete.getFullSql());
-			System.out.println(delete.getCriteria().getId());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+		dao.test();
 	}
 }

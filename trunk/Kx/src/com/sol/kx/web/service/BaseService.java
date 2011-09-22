@@ -14,6 +14,7 @@ public interface BaseService<T> {
 	public ResultBean delete(T po);
 	
 	public PagerBean<T> find2(T obj);
+	public PagerBean<T> findByPage2(PagerBean<T> bean,T obj);
 	public ResultBean add2(T obj);
 	public ResultBean delete2(T obj);
 	public ResultBean update2(T obj);
