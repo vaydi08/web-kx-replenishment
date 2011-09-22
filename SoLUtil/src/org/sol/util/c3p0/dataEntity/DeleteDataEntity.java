@@ -26,7 +26,7 @@ public class DeleteDataEntity extends DataEntity{
 		sql.append("delete from ").append(tablename);
 		
 		// 拼合where条件
-		buildWhere(sql);
+		sql.append(getWhereSql());
 		
 		super.sql = sql.toString();
 	}
