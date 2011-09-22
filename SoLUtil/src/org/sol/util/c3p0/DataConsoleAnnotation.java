@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +27,7 @@ import org.sol.util.c3p0.dataEntity.DeleteDataEntity;
 import org.sol.util.c3p0.dataEntity.InsertDataEntity;
 import org.sol.util.c3p0.dataEntity.SelectDataEntity;
 import org.sol.util.c3p0.dataEntity.UpdateDataEntity;
+import org.sol.util.c3p0.dataEntity2.CountEntity;
 import org.sol.util.common.StringUtil;
 import org.sol.util.log.Logger;
 
@@ -82,7 +84,8 @@ public class DataConsoleAnnotation {
 	 * @throws SQLException
 	 */
 	public Object findReturn(String sql,int returnType,List<Object> objs) throws SQLException {
-		log.debug("Query return value:[" + sql + "] " + objs.toString());
+		log.debug("Query return value:[" + sql + "]" + (objs != null ? objs.toString() : ""));
+
 		try {
 			getConnection();
 			
@@ -138,6 +141,7 @@ public class DataConsoleAnnotation {
 			close();
 		}
 	}
+	
 	private ResultSet call(String sql,Object... params) throws SQLException {
 		getConnection();
 		
@@ -151,7 +155,7 @@ public class DataConsoleAnnotation {
 		
 		return cs.executeQuery();
 	}
-	
+
 	/**
 	 * 查询单个对象 并映射到对象上,以POJO映射
 	 * @param <X> 
@@ -270,7 +274,7 @@ public class DataConsoleAnnotation {
 			
 			connection.setAutoCommit(false);
 
-			ps = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+			ps = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			ps.setQueryTimeout(queryTime);
 			for(int i = 0; i < objs.length; i ++)
 				ps.setObject(i+1,objs[i]);
@@ -327,7 +331,7 @@ public class DataConsoleAnnotation {
 	 * @throws SQLException
 	 */
 	public int updatePrepareSQL(String sql,List<Object> objs) throws SQLException {
-		log.debug("Update:[" + sql + "]");
+		log.debug("Update:[" + sql + "]" + (objs != null ? objs.toString() : ""));
 		
 		int countRow = 0;
 		try {
@@ -377,6 +381,7 @@ public class DataConsoleAnnotation {
 		
 		return find(dataEntity.getSql(), clazz, dataEntity.getSmap(), dataEntity.getParams());
 	}
+
 	public <X> List<X> findByPage(Class<X> clazz,Object obj,int page,int pageSize,String order) throws Exception {
 		SelectDataEntity dataEntity = new SelectDataEntity(obj);
 		
@@ -403,20 +408,31 @@ public class DataConsoleAnnotation {
 
 		return find(sb.toString(), clazz, dataEntity.getSmap(), dataEntity.getParams());
 	}
-	public <X> List<X> findByPage(Class<X> clazz,String sql,Condition condition,int page,int pageSize) throws Exception {
-		SelectDataEntity dataEntity = new SelectDataEntity(sql,condition,clazz);
+	public <X> List<X> findByPage(Class<X> clazz,String sql,SelectDataEntity dataEntity,int page,int pageSize,String order) throws Exception {
+		String sqlpage = sql.substring(6);
+		sqlpage += dataEntity.getWhereSql() + dataEntity.getOrderString();
 		
-		String sqlpage = dataEntity.getSql().substring(6);
+		StringBuilder sb = new StringBuilder();
+		sb.append("select * from(select top ").append(pageSize).append(" * From (");
+		sb.append("select top ").append(page * pageSize).append(sqlpage).append(") find1 order by " + order + " asc) find2 order by " + order + " desc");
+
+		return find(sb.toString(), clazz, dataEntity.getSmap(), dataEntity.getParams());
+	}
+	public <X> List<X> findByPage(Class<X> clazz,String sql,Condition condition,int page,int pageSize) throws Exception {
+		SelectDataEntity dataEntity = new SelectDataEntity(sql, condition, clazz);
+		
+		String sqlpage = dataEntity.getSimpleSql().substring(6);
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("select * from(select top ").append(pageSize).append(" * From (");
 		sb.append("select top ").append(page * pageSize).append(sqlpage).append(" order by id desc) find1 order by id asc) find2 order by id desc");
 
-		return find(sb.toString(), clazz, dataEntity.getSmap(), dataEntity.getParams());
+		List<Object> list = (condition == null) ? null : condition.getParams();
+		return find(sb.toString(), clazz, dataEntity.getSmap(), list);
 	}
 	public <X> List<X> find(String sql,Class<X> clazz,Map<String,Class<?>> smap,List<Object> params) throws Exception {
 		try {
-			log.debug("Query:" + sql + " Class:" + clazz.getName());
+			log.debug("Query:" + sql + " Class:" + clazz.getName() + (params != null ? params.toString() : ""));
 			
 			rs = query(sql, params);
 			
@@ -435,6 +451,7 @@ public class DataConsoleAnnotation {
 			close();
 		}
 	}
+	
 	private ResultSet query(String sql,List<Object> params) throws Exception {
 		getConnection();
 
@@ -454,7 +471,9 @@ public class DataConsoleAnnotation {
 		Set<Entry<String,Class<?>>> set = smap.entrySet();
 		for(Entry<String,Class<?>> en : set) {
 			try {
-				setField(obj,en.getKey(),en.getValue(),(en.getValue().equals(String.class) ? rs.getObject(en.getKey()).toString() : rs.getObject(en.getKey())));
+				Object value = rs.getObject(en.getKey());
+				
+				setField(obj,en.getKey(),en.getValue(),(en.getValue().equals(String.class) ? (value != null ? value : null) : value));
 			} catch (IllegalArgumentException e1) {
 				Logger.DB.lerror("不正确的对象映射.", en.getKey(),en.getValue().getName(),rs.getObject(en.getKey()).getClass().getName(),clazz.getName());
 			} catch (InvocationTargetException e1) {
@@ -491,6 +510,12 @@ public class DataConsoleAnnotation {
 	}
 	public int findCount(CountDataEntity countDataEntity) throws Exception {
 		return (Integer) findReturn(countDataEntity.getSql(), Types.INTEGER, countDataEntity.getParams());
+	}
+	public int findCount(String sql,CountDataEntity countDataEntity) throws Exception {
+		return (Integer) findReturn(sql + countDataEntity.getWhereSql(), Types.INTEGER, countDataEntity.getParams());
+	}
+	public int findCount2(CountEntity countEntity) throws SQLException {
+		return (Integer)findReturn(countEntity.getFullSql(), Types.INTEGER, countEntity.getCriteria().getParamList());
 	}
 	public int findCount(String sql,Condition condition) throws Exception {
 		String where = sql;
