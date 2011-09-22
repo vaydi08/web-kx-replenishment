@@ -83,7 +83,8 @@ public abstract class DataEntity {
 		}
 	}
 	
-	protected void buildWhere(StringBuilder sql) {
+	public String getWhereSql() {
+		StringBuilder sql = new StringBuilder();
 		// 拼合where条件
 		if(conditionMap.size() > 0) {
 			sql.append(" where ");
@@ -101,6 +102,8 @@ public abstract class DataEntity {
 			sql.delete(sql.length() - 5, sql.length());
 			this.params = list;
 		}
+		
+		return sql.toString();
 	}
 	
 	protected abstract void buildSql();
@@ -110,6 +113,10 @@ public abstract class DataEntity {
 	public String getSql() {
 		buildSql();
 		
+		return sql;
+	}
+	
+	public String getSimpleSql() {
 		return sql;
 	}
 
