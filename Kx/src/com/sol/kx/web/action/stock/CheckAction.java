@@ -47,11 +47,10 @@ public class CheckAction extends BaseAction<StockCheck>{
 	}
 	
 	public String manager() {
-//		StockCheck obj = defaultQuery();
 		pagerBean = stockCheckService.find2(input);
 		return DATA;
 	}
-	
+		
 	public void setType1(int type1) {
 		putProductMap("type1", type1);
 	}
@@ -79,6 +78,10 @@ public class CheckAction extends BaseAction<StockCheck>{
 
 	public PagerBean<InfoProduct> getProductPagerBean() {
 		return productPagerBean;
+	}
+
+	public void setStocktype(Integer stocktype) {
+		this.stocktype = stocktype;
 	}
 
 }

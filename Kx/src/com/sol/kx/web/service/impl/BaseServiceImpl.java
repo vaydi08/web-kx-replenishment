@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Table;
 
+import org.sol.util.c3p0.dataEntity2.CountEntity;
 import org.sol.util.c3p0.dataEntity2.DeleteEntity;
 import org.sol.util.c3p0.dataEntity2.InsertEntity;
 import org.sol.util.c3p0.dataEntity2.SelectEntity;
@@ -57,6 +58,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 			return bean;
 		}
 	}
+	
 	public ResultBean add(T po) {
 		Logger.SERVICE.ldebug("插入[" + po.getClass().getAnnotation(Table.class).name() + "]数据", po.toString());
 		try {
@@ -108,6 +110,23 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 			selectEntity.init(obj);
 			bean.setDataList((List<T>) getDao().find2(selectEntity));
 			return bean;
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("查询" + obj.getClass().getAnnotation(Table.class).name() + "错误", e);
+			bean.setException(e);
+			return bean;
+		}
+	}
+	
+	public PagerBean<T> findByPage2(PagerBean<T> bean,T obj) {
+		Logger.SERVICE.ldebug("查询[" + obj.getClass().getAnnotation(Table.class).name() + "]数据",obj.toString());
+		try {
+			SelectEntity selectEntity = new SelectEntity();
+			selectEntity.init(obj);
+			CountEntity countEntity = new CountEntity();
+			countEntity.init(obj);
+			return setBeanValue(bean, 
+					getDao().findByPage2(selectEntity, bean.getPage(), bean.getPageSize(), "id"), 
+					getDao().findCount2(countEntity));
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("查询" + obj.getClass().getAnnotation(Table.class).name() + "错误", e);
 			bean.setException(e);

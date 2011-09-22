@@ -109,7 +109,7 @@
 				return;
 			}
 			
-			location.href = 'CheckProductManager.html?shopid=' + shop + str;
+			location.href = 'CheckProductManager.html?stocktype=' + $("#stocktype").val() + '&shopid=' + shop + str;
 		});
 		
 	});
@@ -126,23 +126,27 @@
 				</thead>
 				<tbody>
 					<tr>
-					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#shopDiv" result="#shop">选择门店</a></td>
+					<td height="50">核定类型</td>
+					<td><select id="stocktype"><option value="1">一般</option><option value="2">节假日</option></select></td>
+					</tr>
+					<tr>
+					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#shopDiv" result="#shop" plain="true" iconCls="icon-tip">选择门店</a></td>
 					<td><span id="shop"></span></td>
 					</tr>
 					<tr>
-					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#type1Div" result="#type1">选择大类</a></td>
+					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#type1Div" result="#type1" plain="true" iconCls="icon-tip">选择大类</a></td>
 					<td><span id="type1"></span></td>
 					</tr>
 					<tr>
-					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#type2Div" result="#type2">选择小类</a></td>
+					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#type2Div" result="#type2" plain="true" iconCls="icon-tip">选择小类</a></td>
 					<td><span id="type2"></span></td>
 					</tr>
 					<tr>
-					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#type3Div" result="#type3">选择货型</a></td>
+					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#type3Div" result="#type3" plain="true" iconCls="icon-tip">选择货型</a></td>
 					<td><span id="type3"></span></td>
 					</tr>
 					<tr>
-					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#type4Div" result="#type4">选择款式</a></td>
+					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#type4Div" result="#type4" plain="true" iconCls="icon-tip">选择款式</a></td>
 					<td><span id="type4"></span></td>
 					</tr>
 					<tr>

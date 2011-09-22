@@ -25,75 +25,74 @@
 	<script type="text/javascript" src="../script/sol-easyui-action.js"></script>
 	
 	<script>
+	//获取QueryString的数组
+	function getQueryString(){
+	     var result = location.search.match(new RegExp("[\?\&][^\?\&]+=[^\?\&]+","g")); 
+
+	     if(result == null){
+	         return "";
+	     }
+
+	     var out = {};
+	     for(var i = 0; i < result.length; i++){
+	         var value = result[i].split("=");
+	         out[value[0].substring(1)] = value[1];
+	     }
+	     return out;
+	}
+	// url query
+	var queryString = getQueryString();
+	$('body').data('queryString',queryString);
+	$('body').data('paramForEdit',{shopid:queryString.shopid,pid:queryString.queryValue});
+
+	// editor
+	$.extend($.fn.datagrid.defaults.editors, {   
+	    soltext: {   
+	        init: function(container, options){   
+	            var input = $('<input type="text" class="datagrid-editable-input" readonly="readonly">').appendTo(container);   
+	            return input;   
+	        },   
+	        getValue: function(target){   
+	            return $(target).val();   
+	        },   
+	        setValue: function(target, value){
+		        if(!value) {
+		        	var rows = $("#listTable").edatagrid('getRows');
+
+		        	var minweight;
+		        	if(rows.length > 1)
+			        	minweight = rows[rows.length - 2].maxweight;
+		        	else if(rows[0].maxweight)
+		        		minweight = rows[0].maxweight;
+		        	else
+		        		minweight = 0;
+					$('body').data('minweight',minweight);
+		            $(target).val(minweight);
+		        } else {
+		        	$('body').data('minweight',value);
+		        	$(target).val(value);
+		        }
+	        },   
+	        resize: function(target, width){   
+	            var input = $(target);   
+	            if ($.boxModel == true){   
+	                input.width(width - (input.outerWidth() - input.width()));   
+	            } else {   
+	                input.width(width);   
+	            }   
+	        }   
+	    }   
+	});
+	$.extend($.fn.validatebox.defaults.rules, {   
+	    compareWeight: {   
+	        validator: function(value, param){   
+	            return value > $('body').data('minweight');   
+	        },   
+	        message: '输入范围有误'  
+	    }   
+	});   
+	
 	$(document).ready(function() {
-		//获取QueryString的数组
-		function getQueryString(){
-		     var result = location.search.match(new RegExp("[\?\&][^\?\&]+=[^\?\&]+","g")); 
-
-		     if(result == null){
-		         return "";
-		     }
-
-		     var out = {};
-		     for(var i = 0; i < result.length; i++){
-		         var value = result[i].split("=");
-		         out[value[0].substring(1)] = value[1];
-		     }
-		     return out;
-		}
-		// url query
-		var queryString = getQueryString();
-		$('body').data('queryString',queryString);
-		$('body').data('paramForEdit',{shopid:queryString.shopid,pid:queryString.queryValue});
-
-		// editor
-		$.extend($.fn.datagrid.defaults.editors, {   
-		    soltext: {   
-		        init: function(container, options){   
-		            var input = $('<input type="text" class="datagrid-editable-input" readonly="readonly">').appendTo(container);   
-		            return input;   
-		        },   
-		        getValue: function(target){   
-		            return $(target).val();   
-		        },   
-		        setValue: function(target, value){
-			        if(!value) {
-			        	var rows = $("#listTable").edatagrid('getRows');
-
-			        	var minweight;
-			        	if(rows.length > 1)
-				        	minweight = rows[rows.length - 2].maxweight;
-			        	else if(rows[0].maxweight)
-			        		minweight = rows[0].maxweight;
-			        	else
-			        		minweight = 0;
-						$('body').data('minweight',minweight);
-			            $(target).val(minweight);
-			        } else {
-			        	$('body').data('minweight',value);
-			        	$(target).val(value);
-			        }
-		        },   
-		        resize: function(target, width){   
-		            var input = $(target);   
-		            if ($.boxModel == true){   
-		                input.width(width - (input.outerWidth() - input.width()));   
-		            } else {   
-		                input.width(width);   
-		            }   
-		        }   
-		    }   
-		});
-		$.extend($.fn.validatebox.defaults.rules, {   
-		    compareWeight: {   
-		        validator: function(value, param){   
-		            return value > $('body').data('minweight');   
-		        },   
-		        message: '输入范围有误'  
-		    }   
-		});   
-		
-		
 		$("#listTable").edatagrid({
 			width:500,
 			height:400,
@@ -102,12 +101,19 @@
 			saveUrl: 'check!add2.action',
 			updateUrl: 'check!edit2.action',
 			destroyUrl: 'check!delete2.action',
-			queryParams:{'input.shopid':queryString.shopid,'input.pid':queryString.queryValue},
+			queryParams:{'input.shopid':queryString.shopid,'input.pid':queryString.queryValue,'input.stocktype':queryString.stocktype},
 
 			onAfterEdit:function(){$("#listTable").edatagrid('reload');},
 			onDestroy:function(){$("#listTable").edatagrid('reload');}
 		});
 	});
+
+	var stocktypeFormat = function(value,rec) {
+		if(value == 1)
+			return "一般";
+		else if(value == 2)
+			return "节假日";
+	}
 	</script>
 	</head>
 	<body>
@@ -120,16 +126,16 @@
 			<th field="minweight" width="80" editor="{type:'soltext',options:{required:true,precision:2}}">克重范围</th>
 			<th field="maxweight" width="80" editor="{type:'numberbox',options:{required:true,precision:2,validType:'compareWeight'}}"></th>
 			<th field="stock" width="80" editor="{type:'validatebox',options:{required:true}}">核定库存</th>
+			<th field="stocktype" width="80" editor="{type:'combobox',options:{data:{'类型':queryString.stocktype}}}" formatter="stocktypeFormat">类型</th>
 			</tr>
 			</thead>
 			</table>
 		</div>
-		
 		<div id="toolbar">
-		<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#listTable').edatagrid('addRow')">新增</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#listTable').edatagrid('destroyRow')">删除</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#listTable').edatagrid('saveRow')">保存</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#listTable').edatagrid('cancelRow')">取消</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#listTable').edatagrid('addRow')">新增</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#listTable').edatagrid('destroyRow')">删除</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#listTable').edatagrid('saveRow')">保存</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#listTable').edatagrid('cancelRow')">取消</a>
 		</div>
 	</div>
 	</body>

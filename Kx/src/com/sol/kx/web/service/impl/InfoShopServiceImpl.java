@@ -36,6 +36,15 @@ public class InfoShopServiceImpl extends BaseServiceImpl<InfoShop> implements In
 		return map;
 	}
 	
+	public List<InfoShop> findShops() {
+		try {
+			return infoShopDao.findShopChoose();
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("查询[Info_Shop]产生错误", e);
+			return null;
+		}
+	}
+	
 	@Autowired
 	private InfoShopDao infoShopDao;
 	

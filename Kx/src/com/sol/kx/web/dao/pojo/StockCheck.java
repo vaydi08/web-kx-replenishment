@@ -14,6 +14,7 @@ public class StockCheck extends Pojo{
 	
 	@Column(name = "pid")
 	private Integer pid;
+	private String pname;
 	
 	@Column(name = "shopid")
 	private Integer shopid;
@@ -95,6 +96,14 @@ public class StockCheck extends Pojo{
 				+ (shopid != null ? "shopid=" + shopid + ", " : "")
 				+ (stock != null ? "stock=" + stock + ", " : "")
 				+ (stocktype != null ? "stocktype=" + stocktype : "") + "]";
+	}
+
+	public String getPname() {
+		return pname;
+	}
+
+	public void setPname(String pname) {
+		this.pname = pname;
 	}
 	
 }
