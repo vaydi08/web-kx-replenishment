@@ -41,8 +41,11 @@ public class SelectEntity extends Entity {
 			}
 		}
 
-		sql.append(criteria.getIdname());
-		map.put(criteria.getIdname(), criteria.getIdclazz());
+		if(criteria.getIdname() != null) {
+			sql.append(criteria.getIdname());
+			map.put(criteria.getIdname(), criteria.getIdclazz());
+		} else 
+			sql.deleteCharAt(sql.length() - 1);
 
 		this.smap = map;
 	}
