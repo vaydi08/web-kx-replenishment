@@ -55,11 +55,11 @@ public class InfoCategoryServiceImpl extends BaseServiceImpl<InfoCategory> imple
 		}
 		
 		for(InfoCategory po : list) {
-			String name = po.getCname();
+			String code = po.getCcode();
 			Integer level = po.getClevel();
 			Integer id = po.getId();
 			
-			map.put(level + name, id);
+			map.put(level + code, id);
 		}
 		
 		return map;

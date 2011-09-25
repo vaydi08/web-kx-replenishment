@@ -40,7 +40,7 @@ public class InfoCategoryDaoImpl extends BaseDaoImpl implements InfoCategoryDao 
 	public List<InfoCategory> findCategoryMapping() throws Exception {
 		Map<String,Class<?>> smap = new HashMap<String, Class<?>>(2);
 		smap.put("id",Integer.class);
-		smap.put("cname",String.class);
+		smap.put("ccode",String.class);
 		smap.put("clevel", Integer.class);
 		
 		List<Object> list = null;

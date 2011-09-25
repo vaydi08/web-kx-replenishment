@@ -73,6 +73,7 @@
 				$("#add_type2").combobox('setValue',0);
 				$("#add_type3").combobox('setValue',0);
 				$("#add_type4").combobox('setValue',0);
+				$("#unit").validatebox('setValue','件');
 			}
 			var onEdit = function() {
 				var row = $("#listTable").datagrid('getSelected');
@@ -105,6 +106,7 @@
 			// 数据表格
 			$("#listTable").grid({
 				title:"产品列表",
+				height:600,
 				url:"info-product!manager.action",
 				multi:false,
 				columns:[[
@@ -114,11 +116,7 @@
 			        }},
 			        {field:'pname',title:'产品名称',width:80},
 			        {field:'pcode',title:'产品代码',width:80},
-			        {field:'quality',title:'成色',width:80},
-			        {field:'pweight',title:'金重',width:40},
-			        {field:'stand',title:'规格',width:80},
-			        {field:'unit',title:'单位',width:40},
-			        {field:'premark',title:'备注',width:80}
+			        {field:'unit',title:'单位',width:40}
 			    ]],
 			    //tools:[{"type":"add","text":"添加产品"},{"type":"edit","text":"修改产品"},{"type":"-"},{"type":"remove","text":"删除产品"},{"type":"-"},{"type":"other","text":"添加分类"}],
 			    toolbar:[{id:"btnadd",text:"添加产品",iconCls:"icon-add",handler:onAdd},
@@ -134,11 +132,11 @@
 				detailFormatter:function(index,row){   
 			        return '<DIV style="padding-bottom: 5px; padding-left: 0px; padding-right: 0px; padding-top: 5px" id="ddv-' + index + '"></DIV>';   
 			    },   
-			    onExpandRow: function(index,row) {   
+			    onExpandRow: function(index,row) {
 			        $('#ddv-'+index).panel({   
 			            border:false,   
 			            cache:false,   
-			            href:'ext_img.jsp?img=' + row.image,
+			            href:'info-product!details.action?pid=' + row.id,
 			            onLoad:function(){
 			                $('#listTable').datagrid('fixDetailRowHeight',index);   
 			            }   
@@ -214,11 +212,7 @@
 				<div id="EU_queryValue" style="width:100px">  
 				    <div name="pname">品　名</div>  
 				    <div name="pcode">代　码</div>
-				    <div name="quality">成　色</div>  
-				    <div name="pweight_f">金　重</div>
-				    <div name="stand">规　格</div>  
 				    <div name="unit">单　位</div>
-				    <div name="premark">备　注</div>
 				</div>
 				</td>
 				
@@ -269,20 +263,8 @@
 		<td width="230"><input type="text" name="input.pcode" value="" id="pcode"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
 		</tr>
 		<tr>
-		<td width="70" height="30">金属成色</td>
-		<td><input type="text" name="input.quality" value="" id="quality"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
-		<td>金　　重</td>
-		<td><input type="text" name="input.pweight" value="" id="pweight"  required="true" precision="4" class="easyui-numberbox"/></td>
-		</tr>
-		<tr>
-		<td width="70" height="30">规　　格</td>
-		<td><input type="text" name="input.stand" value="" id="stand"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
 		<td width="70" height="30">单　　位</td>
-		<td><input type="text" name="input.unit" value="件" id="unit"  required="true" validType="length[1,20]" class="easyui-validatebox" /></td>
-		</tr>
-		<tr>
-		<td width="70" height="30">备　　注</td>
-		<td colspan="3"><input type="text" name="input.premark" value="" id="remark"  required="false" validType="length[1,20]" class="easyui-validatebox"/></td>
+		<td colspan="3"><input type="text" name="input.unit" id="unit"  required="true" validType="length[1,20]" class="easyui-validatebox" /></td>
 		</tr>
 		<tr>
 		<td width="70" height="30">图　　片</td>

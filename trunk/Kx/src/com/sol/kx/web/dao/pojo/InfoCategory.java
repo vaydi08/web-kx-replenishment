@@ -57,8 +57,11 @@ public class InfoCategory extends Pojo{
 
 	@Override
 	public String toString() {
-		return "InfoCategory [ccode=" + ccode + ", clevel=" + clevel
-				+ ", cname=" + cname + ", id=" + id + "]";
+		return "InfoCategory ["
+				+ (ccode != null ? "ccode=" + ccode + ", " : "")
+				+ (clevel != null ? "clevel=" + clevel + ", " : "")
+				+ (cname != null ? "cname=" + cname + ", " : "")
+				+ (id != null ? "id=" + id : "") + "]";
 	}
 
 }
