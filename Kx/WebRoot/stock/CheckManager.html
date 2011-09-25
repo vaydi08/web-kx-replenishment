@@ -42,8 +42,9 @@
 	}
 	// url query
 	var queryString = getQueryString();
-	$('body').data('queryString',queryString);
-	$('body').data('paramForEdit',{shopid:queryString.shopid,pid:queryString.queryValue});
+
+	$(document).data('queryString',queryString);
+	$(document).data('paramForEdit',{shopid:queryString.shopid,pid:queryString.queryValue,stocktype:queryString.stocktype});
 
 	// editor
 	$.extend($.fn.datagrid.defaults.editors, {   
@@ -103,17 +104,11 @@
 			destroyUrl: 'check!delete2.action',
 			queryParams:{'input.shopid':queryString.shopid,'input.pid':queryString.queryValue,'input.stocktype':queryString.stocktype},
 
-			onAfterEdit:function(){$("#listTable").edatagrid('reload');},
-			onDestroy:function(){$("#listTable").edatagrid('reload');}
+			onAfterEdit:function(){setTimeout("$('#listTable').edatagrid('reload');",1000);},
+			onDestroy:function(){setTimeout("$('#listTable').edatagrid('reload');",1000);}
 		});
 	});
 
-	var stocktypeFormat = function(value,rec) {
-		if(value == 1)
-			return "一般";
-		else if(value == 2)
-			return "节假日";
-	}
 	</script>
 	</head>
 	<body>
@@ -126,7 +121,6 @@
 			<th field="minweight" width="80" editor="{type:'soltext',options:{required:true,precision:2}}">克重范围</th>
 			<th field="maxweight" width="80" editor="{type:'numberbox',options:{required:true,precision:2,validType:'compareWeight'}}"></th>
 			<th field="stock" width="80" editor="{type:'validatebox',options:{required:true}}">核定库存</th>
-			<th field="stocktype" width="80" editor="{type:'combobox',options:{data:{'类型':queryString.stocktype}}}" formatter="stocktypeFormat">类型</th>
 			</tr>
 			</thead>
 			</table>

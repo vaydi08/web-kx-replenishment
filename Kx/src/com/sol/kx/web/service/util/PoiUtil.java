@@ -67,6 +67,39 @@ public class PoiUtil {
 			return false;
 	}
 	
+	public Object getValue(int col,Object defaultvalue) {
+		Cell cell = thisrow.getCell(col);
+		if(cell == null)
+			return defaultvalue;
+		
+		Object ret;
+		
+		switch (cell.getCellType()) {
+		case Cell.CELL_TYPE_BLANK:
+			ret = defaultvalue;
+			break;
+		case Cell.CELL_TYPE_BOOLEAN:
+			ret = cell.getBooleanCellValue();
+			break;
+		case Cell.CELL_TYPE_ERROR:
+			ret = cell.getErrorCellValue();
+			break;
+		case Cell.CELL_TYPE_FORMULA:
+			ret = getFormulaValue(formula.evaluate(cell));
+			break;
+		case Cell.CELL_TYPE_NUMERIC:
+			ret = cell.getNumericCellValue();
+			break;
+		case Cell.CELL_TYPE_STRING:
+			ret = cell.getStringCellValue();
+			break;
+		default:
+			ret = cell.getStringCellValue();
+		}
+		
+		return ret == null ? defaultvalue : ret;
+	}
+	
 	public Object getValue() {
 		switch (thiscell.getCellType()) {
 		case Cell.CELL_TYPE_BLANK:

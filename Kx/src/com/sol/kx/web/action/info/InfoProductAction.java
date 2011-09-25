@@ -1,5 +1,9 @@
 package com.sol.kx.web.action.info;
 
+import java.util.List;
+
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.sol.util.c3p0.Condition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -7,11 +11,13 @@ import org.springframework.stereotype.Controller;
 
 import com.sol.kx.web.action.BaseAction;
 import com.sol.kx.web.dao.pojo.InfoProduct;
+import com.sol.kx.web.dao.pojo.InfoProductDetail;
 import com.sol.kx.web.service.BaseService;
 import com.sol.kx.web.service.InfoProductService;
 
 @Controller
 @Scope("session")
+@Results({@Result(name = "productDetail",location = "/info/ProductDetail.jsp")})
 public class InfoProductAction extends BaseAction<InfoProduct>{
 
 	private static final long serialVersionUID = 1L;
@@ -34,6 +40,7 @@ public class InfoProductAction extends BaseAction<InfoProduct>{
 	private int type3;
 	private int type4;
 
+	
 	/**
 	 * 列表
 	 * @return
@@ -67,6 +74,17 @@ public class InfoProductAction extends BaseAction<InfoProduct>{
 		pagerBean = infoProductService.find(pagerBean, condition);
 		return DATA;
 	}
+	
+	/**
+	 * 子内容列表
+	 */
+	private Integer pid;
+	private List<InfoProductDetail> detailList;
+	
+	public String details() {
+		detailList = infoProductService.findProductDetails(pid);
+		return "productDetail";
+	}
 
 	public void setType1(int type1) {
 		this.type1 = type1;
@@ -82,6 +100,14 @@ public class InfoProductAction extends BaseAction<InfoProduct>{
 
 	public void setType4(int type4) {
 		this.type4 = type4;
+	}
+
+	public void setPid(Integer pid) {
+		this.pid = pid;
+	}
+
+	public List<InfoProductDetail> getDetailList() {
+		return detailList;
 	}
 
 }

@@ -36,6 +36,14 @@
 	
 	#mainFrame {width:843px !important; width:820px;margin:0px;padding:0px;height:725px !important;height:704px;}
 	</style>
+	
+	<script>
+	$(document).ready(function() {
+		$("#menu").accordion({
+			height:$("#left").height()-20
+		});
+	});
+	</script>
   </head>
   
   <body>
@@ -90,7 +98,7 @@
 			background:url('images/button/d2.png') no-repeat;
 		}
 	   </style>
-	   <div id="menu" class="easyui-accordion" animate="false">
+	   <div id="menu">
 		<div title="基础数据" iconCls="icon-d1" selected="true" style="overflow:auto;padding:10px;">  
 	        <a href="info/ProductManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">产品数据</a>
 	        <a href="info/ShopManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">门店数据</a>  
@@ -100,8 +108,8 @@
 	        <a href="stock/CheckChoose.html" target="mainFrame" class="easyui-linkbutton" plain="true">核定数据</a>
 	        <a href="stock/CheckedManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">已作核定</a>  
 	    </div>  
-	    <div title="Title3">  
-	        content3   
+	    <div title="智能比对" iconCls="icon-d2" style="padding:10px;">  
+	        <a href="compare/CompareUpload.html" target="mainFrame" class="easyui-linkbutton" plain="true">比对数据</a>
 	    </div> 
 	   </div>
 	</div>

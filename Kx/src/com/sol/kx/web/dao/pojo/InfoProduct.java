@@ -23,18 +23,8 @@ public class InfoProduct extends Pojo{
 	private String pname;
 	@Column(name = "pcode")
 	private String pcode;
-	@Column(name = "quality")
-	private String quality;
-	@Column(name = "image")
-	private String image;
-	@Column(name = "pweight")
-	private Double pweight;
-	@Column(name = "stand")
-	private String stand;
 	@Column(name = "unit")
 	private String unit;
-	@Column(name = "premark")
-	private String premark;
 	
 	public InfoProduct() {
 		type1 = new InfoCategory();
@@ -44,10 +34,8 @@ public class InfoProduct extends Pojo{
 		unit = "件";
 	}
 	
-	public InfoProduct(Integer type1, Integer type2,
-			Integer type3, Integer type4, String pname, String pcode,
-			String quality, String image, Double pweight, String stand,
-			String unit, String premark) {
+	public InfoProduct(Integer type1, Integer type2,Integer type3, 
+			Integer type4, String pname, String pcode,String unit) {
 		this();
 		this.type1.setId(type1);
 		this.type2.setId(type2);
@@ -55,12 +43,7 @@ public class InfoProduct extends Pojo{
 		this.type4.setId(type4);
 		this.pname = pname;
 		this.pcode = pcode;
-		this.quality = quality;
-		this.image = image;
-		this.pweight = pweight;
-		this.stand = stand;
 		this.unit = unit;
-		this.premark = premark;
 	}
 
 
@@ -71,25 +54,7 @@ public class InfoProduct extends Pojo{
 	public void setPcode(String pcode) {
 		this.pcode = pcode;
 	}
-	public String getQuality() {
-		return quality;
-	}
-	public void setQuality(String quality) {
-		this.quality = quality;
-	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
 
-	public String getStand() {
-		return stand;
-	}
-	public void setStand(String stand) {
-		this.stand = stand;
-	}
 	public String getUnit() {
 		return unit;
 	}
@@ -103,22 +68,6 @@ public class InfoProduct extends Pojo{
 
 	public void setPname(String pname) {
 		this.pname = pname;
-	}
-
-	public Double getPweight() {
-		return pweight;
-	}
-
-	public void setPweight(Double pweight) {
-		this.pweight = pweight;
-	}
-
-	public String getPremark() {
-		return premark;
-	}
-
-	public void setPremark(String premark) {
-		this.premark = premark;
 	}
 
 	public InfoCategory getType1() {
@@ -153,6 +102,7 @@ public class InfoProduct extends Pojo{
 		this.type4 = type4;
 	}
 
+	@Override
 	public Integer getId() {
 		return id;
 	}
@@ -163,12 +113,14 @@ public class InfoProduct extends Pojo{
 
 	@Override
 	public String toString() {
-		return "InfoProduct [id=" + id + ", image=" + image + ", pcode="
-				+ pcode + ", pname=" + pname + ", premark=" + premark
-				+ ", pweight=" + pweight + ", quality=" + quality + ", stand="
-				+ stand + ", type1=" + type1.getId() + ", type2=" + type2.getId() + ", type3="
-				+ type3.getId() + ", type4=" + type4.getId() + ", unit=" + unit + "]";
+		return "InfoProduct [" + (id != null ? "id=" + id + ", " : "")
+				+ (pcode != null ? "pcode=" + pcode + ", " : "")
+				+ (pname != null ? "pname=" + pname + ", " : "")
+				+ (type1 != null ? "type1=" + type1 + ", " : "")
+				+ (type2 != null ? "type2=" + type2 + ", " : "")
+				+ (type3 != null ? "type3=" + type3 + ", " : "")
+				+ (type4 != null ? "type4=" + type4 + ", " : "")
+				+ (unit != null ? "unit=" + unit : "") + "]";
 	}
-
 	
 }

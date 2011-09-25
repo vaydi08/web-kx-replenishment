@@ -37,8 +37,10 @@
 							newrow['input.' + key] = row[key];
 						else
 							newrow[key] = row[key];
-					if($('body').data('paramForEdit')) {
-						var soldata = $('body').data('paramForEdit');
+
+					if($(document).data('paramForEdit')) {
+						var soldata = $(document).data('paramForEdit');
+						
 						for(var key in soldata) 
 							newrow['input.' + key] = soldata[key];
 					}

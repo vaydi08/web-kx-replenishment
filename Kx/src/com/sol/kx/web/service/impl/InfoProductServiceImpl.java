@@ -2,22 +2,23 @@ package com.sol.kx.web.service.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import org.sol.util.c3p0.Condition;
+import org.sol.util.c3p0.dataEntity2.Criteria;
+import org.sol.util.c3p0.dataEntity2.InsertEntity;
+import org.sol.util.c3p0.dataEntity2.SelectEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sol.kx.web.common.Logger;
 import com.sol.kx.web.dao.BaseDao;
 import com.sol.kx.web.dao.InfoProductDao;
-import com.sol.kx.web.dao.pojo.InfoCategory;
 import com.sol.kx.web.dao.pojo.InfoProduct;
+import com.sol.kx.web.dao.pojo.InfoProductDetail;
 import com.sol.kx.web.service.InfoCategoryService;
 import com.sol.kx.web.service.InfoProductService;
 import com.sol.kx.web.service.bean.ImportResultBean;
@@ -43,7 +44,24 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 			return bean;
 		}
 	}
-
+	
+	public List<InfoProductDetail> findProductDetails(Integer pid) {
+		Logger.SERVICE.ldebug("查询[info_product_detail]数据",pid);
+		
+		SelectEntity entity = new SelectEntity();
+		Criteria criteria = new Criteria();
+		criteria.eq("pid", pid);
+		entity.init(InfoProductDetail.class, criteria);
+		
+		try {
+			return infoProductDao.findProductDetails(entity);
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("查询[info_product_detail]时的错误", e);
+			return null;
+		}
+	}
+	
+	
 	@Override
 	protected BaseDao getDao() {
 		return infoProductDao;
@@ -66,105 +84,7 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 	
 	@Autowired
 	private InfoCategoryService infoCategoryService;
-	
-	private class ExcelMapping {
-		String name;
-		Class<?> type;
-		Object defaultvalue;
-		public ExcelMapping(String name,Class<?> type,Object defaultvalue) {
-			this.name = name;
-			this.type = type;
-			this.defaultvalue = defaultvalue;
-		}
-		void doMethod(InfoProduct obj,Object cellValue) {
-			Method method;
-			try {
-				if(cellValue == null)
-					cellValue = defaultvalue;
-				Object value = cellValue;
-				if(!cellValue.getClass().equals(type)) {
-					if(type.equals(String.class))
-						value = cellValue.toString();
-					else if(type.equals(Double.class))
-						value = new Double(0);
-					else if(type.equals(Boolean.class))
-						value = new Boolean(true);
-				}
-				method = obj.getClass().getMethod(name, type);
-				method.invoke(obj, value);
-			} catch (Exception e) {
-				exceptionHandler.onExcelException("导入数据错误 obj:" + obj + 
-						" name:" + name + " value:" + cellValue, e);
-			}			
-		}
-	}
-	private class ExcelTypeMapping extends ExcelMapping {
-		Integer level;
-		Map<String,Integer> map;
-		public ExcelTypeMapping(String name,Class<?> type,Object defaultvalue,Integer level,Map<String,Integer> map) {
-			super(name,type,defaultvalue);
-			this.level = level;
-			this.map = map;
-		}
-		void doMethod(InfoProduct obj,Object cellValue) {
-			Integer value = 0;
-			if(cellValue != null) {
-				value = map.get(level + cellValue.toString() + "");
-				if(value == null) {
-					value = infoCategoryService.addAndReturnKey(new InfoCategory("", cellValue.toString(), level));
-					map.put(level + cellValue.toString(), value);
-				}
-			}
-			InfoCategory subobj = null;
-			try {
-				subobj = (InfoCategory)obj.getClass().getMethod(name).invoke(obj);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			subobj.setId(value);
-		}
-	}
 
-	private List<ExcelMapping> getMethodMapping() {
-		Map<String,Integer> map = infoCategoryService.findCategoryMapping();
-		
-		List<ExcelMapping> methodMapping = new ArrayList<ExcelMapping>(33);
-		methodMapping.add(new ExcelTypeMapping("getType1",Integer.class,0,1,map));
-		methodMapping.add(new ExcelTypeMapping("getType2",Integer.class,0,2, map));
-		methodMapping.add(new ExcelTypeMapping("getType3",Integer.class,0,3,map));
-		methodMapping.add(new ExcelTypeMapping("getType4",Integer.class,0,4, map));
-		methodMapping.add(new ExcelMapping("setPname",String.class,"产品名称"));
-		methodMapping.add(new ExcelMapping("setPcode",String.class,"CODE"));
-		methodMapping.add(new ExcelMapping("setQuality",String.class,"成色"));
-		methodMapping.add(new ExcelMapping("setPweight",Double.class,0.0));
-		methodMapping.add(new ExcelMapping("setStand",String.class,"规格"));
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(null);
-		methodMapping.add(new ExcelMapping("setPremark",String.class,""));
-		methodMapping.add(new ExcelMapping("setImage",String.class,""));
-		
-		return methodMapping;
-	}
 	/**
 	 * 处理一个导入文件
 	 * @param file
@@ -173,30 +93,23 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 		// POI工具
 		PoiUtil poi = null;
 		// mapping
-		List<ExcelMapping> mapping = getMethodMapping();
+		Map<String,Integer> map = infoCategoryService.findCategoryMapping();
 		// result
 		ImportResultBean result = new ImportResultBean();
 		try {
 			poi = new PoiUtil(file);
 			// 遍历
 			while(poi.hasRow()) {
-				InfoProduct infoProduct = new InfoProduct();
 				if(poi.getRowNo() < startrow - 1)
 					continue;
 				
-				while(poi.hasCell()) {
-					if(poi.getCellNo() < mapping.size()) {
-						ExcelMapping map = mapping.get(poi.getCellNo());
-						if(map != null)
-							map.doMethod(infoProduct, poi.getValue());
-					}
+				try {
+					saveProduct(poi, map,result);
+				} catch (Exception e) {
+					result.anError(poi.getRowNo() + " - " + e.getMessage());
 				}
-				
-				importFile(infoProduct, result);
 			}
 		} catch (IOException e) {
-//			result = ResultBean.RESULT_ERR(e.getMessage());
-			
 			Logger.SERVICE.error("上传文件失败",e);
 		} finally {
 			if(poi != null) 
@@ -206,14 +119,68 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 		return result;
 	}
 	
-	private void importFile(InfoProduct infoProduct,ImportResultBean result) {
+	private void saveProduct(PoiUtil poi,Map<String,Integer> map,ImportResultBean result) throws Exception {
+		String pname = poi.getValue(0,"产品名称").toString();
+		String pcode = poi.getValue(1,"").toString();
+		if(pcode.equals("") || pcode.length() != 6)
+			throw new Exception("产品代码为空 或者 产品代码长度错误");
+		
+		Double pweight = (Double) poi.getValue(2,0.0);
+		String quality = poi.getValue(3,"成色").toString();
+		String stand = poi.getValue(4,"规格").toString();
+		String premark = poi.getValue(27,"").toString();
+		String image = poi.getValue(28,"").toString();
+		
+		Integer type1 = map.get("1" + pcode.substring(0,1));
+		Integer type2 = map.get("2" + pcode.substring(1,2));
+		Integer type3 = map.get("3" + pcode.substring(2,4));
+		Integer type4 = map.get("4" + pcode.substring(4));
+		
+		if(type1 == null || type2 == null || type3 == null || type4 == null)
+			throw new Exception("无效的产品代码");
+		
+		InfoProduct infoProduct = new InfoProduct();
+		infoProduct.getType1().setId(type1);
+		infoProduct.getType2().setId(type2);
+		infoProduct.getType3().setId(type3);
+		infoProduct.getType4().setId(type4);
+		infoProduct.setPname(pname);
+		infoProduct.setPcode(pcode);
+		
+		Integer pid = addProduct(infoProduct, result);
+		
+		InfoProductDetail infoProductDetail = new InfoProductDetail();
+		infoProductDetail.setPid(pid);
+		infoProductDetail.setPweight(pweight);
+		infoProductDetail.setQuality(quality);
+		infoProductDetail.setStand(stand);
+		infoProductDetail.setPremark(premark);
+		infoProductDetail.setImage(image);
+		
+		addDetail(infoProductDetail);
+	}
+	
+	private Integer addProduct(InfoProduct infoProduct,ImportResultBean result) {
 		Logger.SERVICE.debug("导入产品 " + infoProduct.toString());
 		try {
-			infoProductDao.addAndReturnKey(infoProduct);
+			Integer pid = infoProductDao.addNotExists(infoProduct);
 			result.anSuccess();
+			return pid;
 		} catch (SQLException e) {
 			result.anError(e.getMessage());
 			exceptionHandler.onDatabaseException("导入InfoProduct错误", e);
+			return null;
+		}
+	}
+	private void addDetail(InfoProductDetail infoProductDetail) {
+		Logger.SERVICE.debug("导入产品-详细 " + infoProductDetail.toString());
+		
+		try {
+			InsertEntity entity = new InsertEntity();
+			entity.init(infoProductDetail);
+			infoProductDao.addProductDetail(entity);
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("导入infoProductDetail错误", e);
 		}
 		
 	}
