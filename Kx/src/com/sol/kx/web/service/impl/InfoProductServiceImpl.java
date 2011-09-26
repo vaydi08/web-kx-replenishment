@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -94,6 +95,8 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 		PoiUtil poi = null;
 		// mapping
 		Map<String,Integer> map = infoCategoryService.findCategoryMapping();
+		
+		Map<String,Integer> codeMap = findCode2Id();
 		// result
 		ImportResultBean result = new ImportResultBean();
 		try {
@@ -104,7 +107,7 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 					continue;
 				
 				try {
-					saveProduct(poi, map,result);
+					saveProduct(poi, map,codeMap,result);
 				} catch (Exception e) {
 					result.anError(poi.getRowNo() + " - " + e.getMessage());
 				}
@@ -119,7 +122,7 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 		return result;
 	}
 	
-	private void saveProduct(PoiUtil poi,Map<String,Integer> map,ImportResultBean result) throws Exception {
+	private void saveProduct(PoiUtil poi,Map<String,Integer> map,Map<String,Integer> codeMap,ImportResultBean result) throws Exception {
 		String pname = poi.getValue(0,"产品名称").toString();
 		String pcode = poi.getValue(1,"").toString();
 		if(pcode.equals("") || pcode.length() != 6)
@@ -147,7 +150,11 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 		infoProduct.setPname(pname);
 		infoProduct.setPcode(pcode);
 		
-		Integer pid = addProduct(infoProduct, result);
+		Integer pid = codeMap.get(pcode);
+		if(pid == null) {
+			pid = addProduct(infoProduct, result);
+			codeMap.put(pcode, pid);
+		}
 		
 		InfoProductDetail infoProductDetail = new InfoProductDetail();
 		infoProductDetail.setPid(pid);
@@ -160,6 +167,19 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 		addDetail(infoProductDetail);
 	}
 	
+	private Map<String,Integer> findCode2Id() {
+		Logger.SERVICE.debug("查询产品编号列表");
+		try {
+			List<InfoProduct> infoProducts = infoProductDao.findCode2Id();
+			Map<String, Integer> map = new HashMap<String, Integer>(infoProducts.size());
+			for(InfoProduct infoProduct : infoProducts)
+				map.put(infoProduct.getPcode(), infoProduct.getId());
+			return map;
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("导入InfoProduct错误", e);
+			return new HashMap<String, Integer>();
+		}
+	}
 	private Integer addProduct(InfoProduct infoProduct,ImportResultBean result) {
 		Logger.SERVICE.debug("导入产品 " + infoProduct.toString());
 		try {
@@ -177,7 +197,7 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 		
 		try {
 			InsertEntity entity = new InsertEntity();
-			entity.init(infoProductDetail);
+			entity.init(infoProductDetail,false);
 			infoProductDao.addProductDetail(entity);
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("导入infoProductDetail错误", e);

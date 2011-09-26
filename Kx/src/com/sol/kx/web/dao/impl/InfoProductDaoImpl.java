@@ -3,7 +3,9 @@ package com.sol.kx.web.dao.impl;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.sol.util.c3p0.Condition;
 import org.sol.util.c3p0.dataEntity2.InsertEntity;
@@ -43,10 +45,23 @@ public class InfoProductDaoImpl extends BaseDaoImpl implements InfoProductDao {
 		list.add(infoProduct.getPname());
 		list.add(infoProduct.getPcode());
 		list.add(infoProduct.getUnit());
-		list.add(infoProduct.getPcode());
 		
-		return (Integer) dataConsole.findReturn(SQL_INSERT_NOTEXISTS, Types.INTEGER,list);
+		return dataConsole.insertPrepareSQLAndReturnKey(SQL_INSERT_NOTEXISTS,
+				infoProduct.getType1().getId(),infoProduct.getType2().getId(),infoProduct.getType3().getId(),
+				infoProduct.getType4().getId(),infoProduct.getPname(),infoProduct.getPcode(),infoProduct.getUnit());
 	}
+	
+	@Value("${sql.info.product.find.code2id}")
+	private String SQL_CODE2ID;
+	
+	public List<InfoProduct> findCode2Id() throws Exception {
+		Map<String,Class<?>> smap = new HashMap<String, Class<?>>(2);
+		smap.put("id", Integer.class);
+		smap.put("pcode", String.class);
+		
+		return dataConsole.find(SQL_CODE2ID, InfoProduct.class, smap, null);
+	}
+	
 	
 	public int addProductDetail(InsertEntity entity) throws Exception {		
 		return dataConsole.updatePrepareSQL(entity.getFullSql(), entity.getCriteria().getParamList());
