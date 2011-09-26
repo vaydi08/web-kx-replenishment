@@ -80,8 +80,4 @@ public class CheckAction extends BaseAction<StockCheck>{
 		return productPagerBean;
 	}
 
-	public void setStocktype(Integer stocktype) {
-		this.stocktype = stocktype;
-	}
-
 }

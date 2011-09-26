@@ -17,6 +17,8 @@ public interface InfoProductDao extends BaseDao{
 	
 	public int addNotExists(InfoProduct infoProduct) throws SQLException;
 	
+	public List<InfoProduct> findCode2Id() throws Exception;
+	
 	public int addProductDetail(InsertEntity entity) throws Exception;
 	
 	public List<InfoProductDetail> findProductDetails(SelectEntity entity) throws Exception;
