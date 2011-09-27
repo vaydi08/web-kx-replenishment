@@ -1,7 +1,9 @@
 package com.sol.kx.web.service.impl;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import com.sol.kx.web.dao.BaseDao;
 import com.sol.kx.web.dao.CompareDao;
 import com.sol.kx.web.dao.pojo.Compare;
 import com.sol.kx.web.service.CompareService;
+import com.sol.kx.web.service.bean.PagerBean;
+import com.sol.kx.web.service.util.PoiUtil;
 
 @Service
 public class CompareServiceImpl extends BaseServiceImpl<Compare> implements CompareService {
@@ -23,8 +27,10 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 		return ctx.getBean(CompareDao.class);
 	}
 	
-	public List<Compare> compareSupply(File uploadFile,int shopid,int stocktype) {
+	public PagerBean<Compare> compareSupply(File uploadFile,int shopid,int stocktype) {
 		CompareDao dao = getCompareDao();
+		
+		PagerBean<Compare> bean = new PagerBean<Compare>();
 		
 		try {
 			dao.startTransaction();
@@ -32,18 +38,16 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 			dao.createSupplyTempTable();
 			
 			// 填充数据
-			dao.insertSupplyTempTable("11sb01", 9.22);
-			dao.insertSupplyTempTable("11sb02", 5.62);
-			dao.insertSupplyTempTable("11mb05", 25.25);
-			dao.insertSupplyTempTable("11ss03", 17.25);
-			dao.insertSupplyTempTable("11sb01", 12.25);
+			List<String> errList = new ArrayList<String>();
+			readSupplyFile(uploadFile, 3, dao, errList);
 			
 			List<Compare> list = dao.compareSupply(shopid,stocktype);
 			
 			dao.removeTempTable();
 			dao.commit();
 			
-			return list;
+			bean.setDataList(list);
+			return bean;
 		} catch (Exception e) {
 			try {
 				dao.rollback();
@@ -51,12 +55,29 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 				e1.printStackTrace();
 			}
 			exceptionHandler.onDatabaseException("处理比对数据时产生错误", e);
-			return null;
+			bean.setException(new Exception("数据库错误:" + e.getMessage(),e));
+			return bean;
 		} finally {
 			dao.close();
 		}
 	}
 
+	private void readSupplyFile(File file,int startrow,CompareDao dao,List<String> errList) throws IOException {
+		PoiUtil poi = new PoiUtil(file);
+		
+		while(poi.hasRow()) {
+			if(poi.getRowNo() < startrow - 1)
+				continue;
+			
+			try {
+				dao.insertSupplyTempTable(poi.getValue(5, "").toString(), (Double)poi.getValue(6, 0));
+			} catch (SQLException e) {
+				errList.add("第" + poi.getRowNo() + "行数据导入失败,原因:" + e.getMessage());
+			}
+		}
+		
+		poi.close();
+	}
 	@Override
 	protected BaseDao getDao() {
 		return null;

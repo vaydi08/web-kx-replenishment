@@ -1,8 +1,6 @@
 package com.sol.kx.web.action.compare;
 
 import java.io.File;
-import java.util.List;
-
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +9,7 @@ import com.sol.kx.web.action.BaseAction;
 import com.sol.kx.web.dao.pojo.Compare;
 import com.sol.kx.web.service.BaseService;
 import com.sol.kx.web.service.CompareService;
+import com.sol.kx.web.service.bean.PagerBean;
 
 @Results({@Result(name = "compare",location = "/compare/compare.jsp")})
 public class CompareAction extends BaseAction<Compare>{
@@ -24,10 +23,10 @@ public class CompareAction extends BaseAction<Compare>{
 	private int shopid;
 	private int stocktype;
 	
-	private List<Compare> supplyList;
+	private PagerBean<Compare> supplyBean;
 	
 	public String uploadSupply() {
-		supplyList = compareService.compareSupply(supplyFile, shopid,stocktype);
+		supplyBean = compareService.compareSupply(supplyFile, shopid,stocktype);
 		return "compare";
 	}
 	
@@ -53,8 +52,9 @@ public class CompareAction extends BaseAction<Compare>{
 		this.stocktype = stocktype;
 	}
 
-	public List<Compare> getSupplyList() {
-		return supplyList;
+	public PagerBean<Compare> getSupplyBean() {
+		return supplyBean;
 	}
+
 
 }

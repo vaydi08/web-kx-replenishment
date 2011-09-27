@@ -36,28 +36,33 @@
 	<div class="easyui-tabs" style="height:600px">
 	<div title="补货建议单" style="padding:10px;">
 	
-	<table class="easyui-datagrid" fitColumns="true" nowrap="true" singleSelect="true">
-	<thead>
-	<tr>
-	<th field="pname" width="80">产品名称</th>
-	<th field="pcode" width="80">产品代码</th>
-	<th field="minweight" width="80">克重范围</th>
-	<th field="stock" width="80">核定库存</th>
-	<th field="kucun" width="80">实际库存</th>
-	<th field="need" width="80">建议补货量</th>
-	</tr>
-	</thead>
-	<s:iterator value="supplyList">
-	<tr>
-	<td><s:property value="pname" /></td>
-	<td><s:property value="pcode" /></td>
-	<td><s:property value="minweight" /> - <s:property value="maxweight" /></td>
-	<td><s:property value="stock" /></td>
-	<td><s:property value="kucun" /></td>
-	<td><s:property value="need" /></td>
-	</tr>
-	</s:iterator>
-	</table>
+	<s:if test="supplyBean.hasException()">
+		<s:property value="supplyBean.exception" />
+	</s:if>
+	<s:else>
+		<table class="easyui-datagrid" fitColumns="true" nowrap="true" singleSelect="true">
+		<thead>
+		<tr>
+		<th field="pname" width="80">产品名称</th>
+		<th field="pcode" width="80">产品代码</th>
+		<th field="minweight" width="80">克重范围</th>
+		<th field="stock" width="80">核定库存</th>
+		<th field="kucun" width="80">实际库存</th>
+		<th field="need" width="80">建议补货量</th>
+		</tr>
+		</thead>
+		<s:iterator value="supplyBean.dataList">
+		<tr>
+		<td><s:property value="pname" /></td>
+		<td><s:property value="pcode" /></td>
+		<td><s:property value="minweight" /> - <s:property value="maxweight" /></td>
+		<td><s:property value="stock" /></td>
+		<td><s:property value="kucun" /></td>
+		<td><s:property value="need" /></td>
+		</tr>
+		</s:iterator>
+		</table>
+	</s:else>
 	</div>
 	
 	<div title="分货建议单" style="padding:10px">
