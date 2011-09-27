@@ -145,7 +145,7 @@ jQuery.fn.grid = function(config) {
 		toolbar:(config.tools != null ?getToolbar() : config.toolbar),
 		
 		width:800,
-		height:500,
+		height:$("#right").height()-200,
 		iconCls:"icon-save",
 		nowrap:true,
 		singleSelect:(config.multi ? false : true),
@@ -154,7 +154,7 @@ jQuery.fn.grid = function(config) {
 		rownumbers:true,
 		fitColumns:true
 	},config);
-	
+
 	// 生成datagrid
 	me.datagrid(p);
 }

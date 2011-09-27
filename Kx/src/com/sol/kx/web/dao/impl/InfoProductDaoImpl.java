@@ -1,7 +1,6 @@
 package com.sol.kx.web.dao.impl;
 
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
