@@ -39,9 +39,15 @@
 	
 	<script>
 	$(document).ready(function() {
+		$("#left").height($(document).height() - $("#top").height() - 50);
+		$("#main").height($(document).height() - $("#top").height() - 50);
+		$("#mainFrame").height($(document).height() - $("#top").height() - 50);
+	
 		$("#menu").accordion({
 			height:$("#left").height()-20
 		});
+
+		
 	});
 	</script>
   </head>
