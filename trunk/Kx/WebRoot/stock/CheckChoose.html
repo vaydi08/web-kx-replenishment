@@ -73,9 +73,9 @@
 			closeDialog();
 			
 			var div = $(this).attr("div");
-			$(div).panel('open');
+			$(div).dialog('open');
 			var offset = $(this).offset();
-			$(div).panel('move',{left:offset.left + $(this).width() + 50,top:offset.top});
+			$(div).dialog('move',{left:offset.left + $(this).width() + 50,top:offset.top});
 
 			$('body').data('div',div);
 			$('body').data('result',$(this).attr('result'));

@@ -14,7 +14,7 @@
   </head>
   
   <body>
-	<table cellpadding="0" cellspacing="0" border="0" class="easyui-datagrid" fitColumns="true" nowrap="true" title="产品列表">
+	<table cellpadding="0" cellspacing="0" border="0">
 	<thead>
 	<tr>
 	<th field="quality" width="80">成色</th>
