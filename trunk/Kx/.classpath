@@ -39,5 +39,9 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-io.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/persistence.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-3.7-20101029.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-ooxml-3.7-20101029.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xbean.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-ooxml-schemas-3.7-20101029.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/dom4j-1.6.1.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

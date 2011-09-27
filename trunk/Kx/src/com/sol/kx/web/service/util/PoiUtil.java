@@ -4,18 +4,18 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellValue;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class PoiUtil {
 	private File file;
 	private FileInputStream is;
-	private HSSFWorkbook workbook;
-	private HSSFSheet sheet;
+	private XSSFWorkbook workbook;
+	private XSSFSheet sheet;
 	
 	private Iterator<Row> rowIt;
 	private Row thisrow;
@@ -29,13 +29,13 @@ public class PoiUtil {
 	
 	public PoiUtil(File file) throws IOException {
 		this.file = file;
-		
+
 		openExcel();
 	}
 	
 	private void openExcel() throws IOException {
 		this.is = new FileInputStream(file);
-		this.workbook = new HSSFWorkbook(is);
+		this.workbook = new XSSFWorkbook(is);
 		this.sheet = workbook.getSheetAt(0);
 		
 		rowIt = sheet.rowIterator();
