@@ -18,9 +18,12 @@ public abstract class Entity {
 	}
 	
 	public void init(Object obj) throws Exception {
+		init(obj,true);
+	}
+	public void init(Object obj,boolean islike) throws Exception {
 		this.clazz = obj.getClass();
 		this.criteria = new Criteria();
-		this.criteria.byPojo(obj, true);
+		this.criteria.byPojo(obj, islike);
 	}
 	public void init(Class<?> clazz,Criteria criteria) {
 		this.clazz = clazz;
