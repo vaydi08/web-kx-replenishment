@@ -76,6 +76,7 @@ public class StringUtil {
 	 */
 	private static final DateFormat df_short = new SimpleDateFormat("yyyy-MM-dd");
 	private static final DateFormat df_full = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static final DateFormat df_compact = new SimpleDateFormat("ddHHmmssS");
 	
 	public static Timestamp parseTimestampShort(String input) {
 		Date date = new Date();
@@ -87,6 +88,10 @@ public class StringUtil {
 		Timestamp t = new Timestamp(date.getTime());
 		
 		return t;
+	}
+	
+	public static String formatDateCompactNow() {
+		return df_compact.format(new Date());
 	}
 	
 	public static String formatDateShort(Date date) {
