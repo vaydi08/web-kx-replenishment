@@ -60,7 +60,7 @@ public class DataConsoleAnnotation {
 
 	private int queryTime;
 	
-	private Log log = LogFactory.getLog(DataConsole.class);
+	private Log log = LogFactory.getLog(DataConsoleAnnotation.class);
 	
 	public DataConsoleAnnotation(String sourceName,C3p0Source ce,int queryTime) {
 		this.sourceName = sourceName;
@@ -465,7 +465,7 @@ public class DataConsoleAnnotation {
 		}
 		return ps.executeQuery();
 	}
-	private <X> X returnObject(Class<X> clazz,Map<String,Class<?>> smap) throws InstantiationException,  SecurityException, NoSuchMethodException, SQLException, IllegalAccessException {
+	public <X> X returnObject(Class<X> clazz,Map<String,Class<?>> smap) throws InstantiationException,  SecurityException, NoSuchMethodException, SQLException, IllegalAccessException {
 		X obj = clazz.newInstance();
 		
 		Set<Entry<String,Class<?>>> set = smap.entrySet();
