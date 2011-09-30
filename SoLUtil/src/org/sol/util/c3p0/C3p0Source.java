@@ -108,7 +108,7 @@ public class C3p0Source {
 		try{
 			//ds.setDriverClass("com.microsoft.jdbc.sqlserver.SQLServerDriver");
 			if("sqlserver".equals(dbdriver)){
-				ds.setDriverClass("com.microsoft.jdbc.sqlserver.SQLServerDriver");
+				ds.setDriverClass("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			}else if("mysql".equals(dbdriver)){
 				ds.setDriverClass("com.mysql.jdbc.Driver");
 			}else if("oracle".equals(dbdriver)){
