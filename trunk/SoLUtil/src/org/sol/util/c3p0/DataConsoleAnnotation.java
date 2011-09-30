@@ -1,9 +1,11 @@
 package org.sol.util.c3p0;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +13,7 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -618,4 +621,37 @@ public class DataConsoleAnnotation {
 		}
 	}
 	
+	private class JdbcProvider implements ConnectionProvider {
+		private String DBDriver;
+		private String DBUrl;
+		
+		public JdbcProvider(String DBDriver,String DBUrl) throws ClassNotFoundException {
+			this.DBDriver = DBDriver;
+			this.DBUrl = DBUrl;
+			
+			Class.forName(DBDriver);
+		}
+		
+		@Override
+		public Connection getConnection(String sourceName) throws SQLException {
+			return DriverManager.getConnection(DBUrl);
+		}
+		
+	}
+	
+	
+	public Map<String,Class<?>> parseSmap(Class<?> clazz,String... paramNames) {
+		Map<String,Class<?>> smap = new HashMap<String, Class<?>>(paramNames.length);
+		
+		for(String name : paramNames) {
+			try {
+				Field field = clazz.getDeclaredField(name);
+				smap.put(name, field.getType());
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			} 
+		}
+		
+		return smap;
+	}
 }

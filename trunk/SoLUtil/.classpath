@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="org/sol/util/ui/ConsoleText.java|org/sol/util/threadMonitor/ui/MainFrame.java|org/sol/util/threadMonitor/ui/ThreadInfoTabComp.java" kind="src" path="src"/>
+	<classpathentry excluding="log4j.xml|org/sol/util/threadMonitor/ui/MainFrame.java|org/sol/util/threadMonitor/ui/ThreadInfoTabComp.java|org/sol/util/ui/ConsoleText.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/org.springframework.core-3.0.1.RELEASE-A.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.context-3.0.1.RELEASE-A.jar"/>
