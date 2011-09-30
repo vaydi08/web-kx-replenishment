@@ -83,11 +83,48 @@
 	</logger>
 
 
+	<category name="org.springframework">
+		<level value="ERROR" />
+		<appender-ref ref="STDOUT" />
+	</category>
+	<category name="com.mchange">
+		<level value="ERROR" />
+		<appender-ref ref="error"/>
+	</category>
+	<category name="org.hibernate">
+		<level value="ERROR" />
+		<appender-ref ref="error"/>
+	</category>
+	<category name="org.apache">
+		<level value="ERROR" />
+		<appender-ref ref="error"/>
+	</category>
+	<category name="httpclient.wire">
+		<level value="ERROR" />
+		<appender-ref ref="error"/>
+	</category>
 	<logger name="org.sol">
+		<level value="ALL" />
 		<appender-ref ref="STDOUT"/>
+		<appender-ref ref="sys"/>
 	</logger>
+	
 
-     
+	<!--自定义的日志输出器 -->  
+    <logger name="org.springframework.jdbc.core">  
+        <level value="info" />  
+        <!-- 日志输出地 -->  
+        <appender-ref ref="STDOUT" />  
+    </logger>
+    <logger name="com.opensymphony.xwork2">  
+        <level value="info" />
+        <appender-ref ref="STDOUT" />  
+    </logger> 
+    <logger name="freemarker">  
+        <level value="info" />
+        <appender-ref ref="STDOUT" />  
+    </logger>
+	
     <root>
 		<level value="debug" />
 	</root>

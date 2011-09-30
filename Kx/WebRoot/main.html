@@ -19,21 +19,25 @@
 	<script type="text/javascript" src="script/easyui/jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="script/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="script/easyui/locale/easyui-lang-zh_CN.js"></script>
-		
+	
+	<!-- DEFAULT -->
+	<script type="text/javascript" src="script/sol-easyui-action.js"></script>
+	
 	<script>
 	$(document).ready(function() {
 		// 表格
-		$('#listTable').datagrid({
-			width:805,
-			height:300,
-			url:'order/order_data.json',
-			singleSelect:true,
+		$('#listTable').grid({
+			title:'有新的订单',
+			height:330,
+			url:'order/order!managerUntake.action',
+			multi:false,
 			columns:[[   
-		        {field:'code',title:'订单号',width:140},
-		        {field:'name',title:'产品名称',width:140},
+		        {field:'id',title:'订单编号',width:140},
+		        {field:'pname',title:'产品名称',width:140},
 		        {field:'pcode',title:'产品代码',width:140},
-		        {field:'shop',title:'订购门店',width:140},
-		        {field:'order',title:'下单人员',width:140}
+		        {field:'shopname',title:'订购门店',width:140},
+		        {field:'fromwho',title:'下单人员',width:140},
+		        {field:'ordertime',title:'下单时间',width:140}
 		    ]],
 			toolbar:[{
 				id:'btngetorder',
@@ -44,7 +48,7 @@
 					if(row) {
 						$.messager.confirm('订单', '接受此订单，将进入处理流程', function(r){
 							if (r){
-								location.href = "order/orderStep1.html?id=" + row.id;
+								location.href = "order/order!orderTake.action?input.id=" + row.id;
 							}
 						});
 					}
@@ -62,12 +66,6 @@
 					alert(pcodes.join(':'));
 				}
 			}]
-		});
-		var p = $('#listTable').datagrid('getPager');
-		$(p).pagination({
-			onBeforeRefresh:function(){
-				alert('before refresh');
-			}
 		});
 		
 	});
