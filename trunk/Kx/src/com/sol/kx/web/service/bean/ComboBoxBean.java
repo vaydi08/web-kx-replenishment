@@ -21,24 +21,41 @@ public class ComboBoxBean {
 	public void addData(String text,String value) {
 		this.dataList.add(new Data(text,value));
 	}
+	public void addData(String text,String value,String reserve) {
+		this.dataList.add(new Data(text,value,false,reserve));
+	}
 	public void addData(String text,String value,boolean selected) {
 		this.dataList.add(new Data(text,value,selected));
+	}
+	public void addData(String text,String value,String reserve,boolean selected) {
+		this.dataList.add(new Data(text,value,selected,reserve));
 	}
 	public void addData(String text,int value) {
 		this.dataList.add(new Data(text,Integer.toString(value)));
 	}
+	public void addData(String text,int value,String reserve) {
+		this.dataList.add(new Data(text,Integer.toString(value),false,reserve));
+	}
 	public void addData(String text,int value,boolean selected) {
 		this.dataList.add(new Data(text,Integer.toString(value),selected));
+	}
+	public void addData(String text,int value,String reserve,boolean selected) {
+		this.dataList.add(new Data(text,Integer.toString(value),selected,reserve));
 	}
 	
 	public class Data {
 		private String value;
 		private String text;
+		private String reserve;
 		private boolean selected;
 		public Data(String text,String value,boolean selected) {
 			this.text = text;
 			this.value = value;
 			this.selected = selected;
+		}
+		public Data(String text,String value,boolean selected,String reserve) {
+			this(text,value,selected);
+			this.reserve = reserve;
 		}
 		public Data(String text,String value) {
 			this(text,value,false);
@@ -61,6 +78,12 @@ public class ComboBoxBean {
 		}
 		public void setSelected(boolean selected) {
 			this.selected = selected;
+		}
+		public String getReserve() {
+			return reserve;
+		}
+		public void setReserve(String reserve) {
+			this.reserve = reserve;
 		}
 	}
 }

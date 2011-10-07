@@ -20,13 +20,11 @@ public class InfoCategoryDaoImpl extends BaseDaoImpl implements InfoCategoryDao 
 	@Value("${sql.info.category.find.type}")
 	private String SQL_CATEGORY_TYPE;
 	
-	/* (non-Javadoc)
-	 * @see com.sol.kx.web.dao.impl.InfoCategoryDao#findCategoryType(int)
-	 */
 	public List<InfoCategory> findCategoryType(int clevel) throws Exception {
 		DataConsoleAnnotation dataConsole = new DataConsoleAnnotation(Constants.DB, Constants.TRANS_TIMEOUT);
-		Map<String,Class<?>> smap = new HashMap<String, Class<?>>(2);
+		Map<String,Class<?>> smap = new HashMap<String, Class<?>>(3);
 		smap.put("id",Integer.class);
+		smap.put("ccode",String.class);
 		smap.put("cname",String.class);
 		
 		List<Object> list = new ArrayList<Object>(1);

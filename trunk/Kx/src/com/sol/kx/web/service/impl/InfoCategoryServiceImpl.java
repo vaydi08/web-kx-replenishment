@@ -37,7 +37,7 @@ public class InfoCategoryServiceImpl extends BaseServiceImpl<InfoCategory> imple
 		ComboBoxBean bean = new ComboBoxBean();
 		bean.addData(defaultText, 0,true);
 		for(InfoCategory po : list)
-			bean.addData(po.getCname(), po.getId());
+			bean.addData(po.getCname(), po.getId(),po.getCcode());
 		
 		return bean;
 	}
