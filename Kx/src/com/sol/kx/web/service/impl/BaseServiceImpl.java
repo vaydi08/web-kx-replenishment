@@ -138,7 +138,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 		Logger.SERVICE.ldebug("插入[" + obj.getClass().getAnnotation(Table.class).name() + "]数据", obj.toString());
 		try {
 			InsertEntity entity = new InsertEntity();
-			entity.init(obj);
+			entity.init(obj,false);
 			getDao().add2(entity);
 			return ResultBean.RESULT_SUCCESS();
 		} catch (Exception e) {
@@ -164,7 +164,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 		Logger.SERVICE.ldebug("更新[" + obj.getClass().getAnnotation(Table.class).name() + "]数据", obj.toString());
 		try {
 			UpdateEntity entity = new UpdateEntity();
-			entity.init(obj);
+			entity.init(obj,false);
 			getDao().update2(entity);
 			return ResultBean.RESULT_SUCCESS();
 		} catch (Exception e) {

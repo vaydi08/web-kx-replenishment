@@ -58,20 +58,14 @@ jQuery.fn.queryPanel = function(config) {
 				},
 		prompt:"请输入查询项,留空表示查询全部",
 		menu:"#EU_queryValue",
-		width:290,
+		width:800,
 		
 		datagrid:"#listTable"
 		
 	},config);
 	
 	// 生成面板
-	me.panel({
-		width:800,
-		height:80,
-		title:p.title,
-		iconCls:p.iconCls,
-		collapsible:p.collapsible
-	});
+	me.panel(p);
 	
 	// 生成searchbox
 	$(p.searchbox).searchbox(p);
