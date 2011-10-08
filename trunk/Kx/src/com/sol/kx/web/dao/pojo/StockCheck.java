@@ -18,6 +18,7 @@ public class StockCheck extends Pojo{
 	
 	@Column(name = "shopid")
 	private Integer shopid;
+	private String shopname;
 	
 	@Column(name = "minweight")
 	private Double minweight;
@@ -104,6 +105,14 @@ public class StockCheck extends Pojo{
 
 	public void setPname(String pname) {
 		this.pname = pname;
+	}
+
+	public String getShopname() {
+		return shopname;
+	}
+
+	public void setShopname(String shopname) {
+		this.shopname = shopname;
 	}
 	
 }

@@ -59,6 +59,7 @@ jQuery.fn.queryPanel = function(config) {
 		prompt:"请输入查询项,留空表示查询全部",
 		menu:"#EU_queryValue",
 		width:800,
+		height:80,
 		
 		datagrid:"#listTable"
 		
@@ -68,6 +69,7 @@ jQuery.fn.queryPanel = function(config) {
 	me.panel(p);
 	
 	// 生成searchbox
+	p.width = 300;
 	$(p.searchbox).searchbox(p);
 }
 })(jQuery);

@@ -3,6 +3,7 @@ package com.sol.kx.web.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +21,7 @@ import com.sol.kx.web.dao.BaseDao;
 import com.sol.kx.web.dao.InfoProductDao;
 import com.sol.kx.web.dao.pojo.InfoProduct;
 import com.sol.kx.web.dao.pojo.InfoProductDetail;
+import com.sol.kx.web.dao.pojo.StockCheck;
 import com.sol.kx.web.service.InfoCategoryService;
 import com.sol.kx.web.service.InfoProductService;
 import com.sol.kx.web.service.bean.ImportResultBean;
@@ -43,6 +45,46 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 			bean.setException(e);
 			exceptionHandler.onDatabaseException("查询[info_product]时的错误", e);
 			return bean;
+		}
+	}
+	
+	public PagerBean<InfoProduct> findFuzzy(PagerBean<InfoProduct> bean,String value) {		
+		Logger.SERVICE.ldebug("查询[info_product]数据",bean.getPage(),bean.getPageSize(),value);
+		try {
+			return setBeanValue(bean, 
+					infoProductDao.findFuzzy(bean.getPage(), bean.getPageSize(), value),
+					infoProductDao.findCountFuzzy(value));
+		} catch (Exception e) {
+			bean.setException(e);
+			exceptionHandler.onDatabaseException("查询[info_product]时的错误", e);
+			return bean;
+		}
+	}
+	
+	public Map<String,List<StockCheck>> findQuickLocator(Integer pid) {
+		Logger.SERVICE.ldebug("查询[stock_type]数据,快速定位",pid);
+		
+		try {
+			List<StockCheck> list = infoProductDao.findQuickLocator(pid);
+			
+			if(list == null || list.size() == 0)
+				return null;
+			
+			Map<String,List<StockCheck>> map = new HashMap<String,List<StockCheck>>();
+
+			for(StockCheck stockCheck : list) {
+				List<StockCheck> typeList = map.get(stockCheck.getShopname());
+				if(typeList == null) {
+					typeList = new ArrayList<StockCheck>();
+					map.put(stockCheck.getShopname(), typeList);
+				}
+				typeList.add(stockCheck);
+			}
+			
+			return map;
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("查询[stock_type]数据,快速定位错误", e);
+			return null;
 		}
 	}
 	
