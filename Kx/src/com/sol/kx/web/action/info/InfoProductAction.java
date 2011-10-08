@@ -1,6 +1,7 @@
 package com.sol.kx.web.action.info;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
@@ -12,12 +13,14 @@ import org.springframework.stereotype.Controller;
 import com.sol.kx.web.action.BaseAction;
 import com.sol.kx.web.dao.pojo.InfoProduct;
 import com.sol.kx.web.dao.pojo.InfoProductDetail;
+import com.sol.kx.web.dao.pojo.StockCheck;
 import com.sol.kx.web.service.BaseService;
 import com.sol.kx.web.service.InfoProductService;
 
 @Controller
 @Scope("session")
-@Results({@Result(name = "productDetail",location = "/info/ProductDetail.jsp")})
+@Results({@Result(name = "productDetail",location = "/info/ProductDetail.jsp"),
+		  @Result(name = "quickLocatorStock",location = "/info/QuickLocatorStock.jsp")})
 public class InfoProductAction extends BaseAction<InfoProduct>{
 
 	private static final long serialVersionUID = 1L;
@@ -76,6 +79,24 @@ public class InfoProductAction extends BaseAction<InfoProduct>{
 	}
 	
 	/**
+	 * 快速定位列表
+	 */
+	private Map<String,List<StockCheck>> quickLocatorStockList;
+	
+	public String quickLocator() {
+		if(queryValue == null || queryValue.equals(""))
+			return null;
+		
+		pagerBean = infoProductService.findFuzzy(pagerBean, queryValue);
+		return DATA;
+	}
+	
+	public String quickLocatorStock() {
+		quickLocatorStockList = infoProductService.findQuickLocator(pid);
+		return "quickLocatorStock";
+	}
+	
+	/**
 	 * 子内容列表
 	 */
 	private Integer pid;
@@ -108,6 +129,10 @@ public class InfoProductAction extends BaseAction<InfoProduct>{
 
 	public List<InfoProductDetail> getDetailList() {
 		return detailList;
+	}
+
+	public Map<String,List<StockCheck>> getQuickLocatorStockList() {
+		return quickLocatorStockList;
 	}
 
 }

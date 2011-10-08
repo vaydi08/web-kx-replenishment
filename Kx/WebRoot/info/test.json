@@ -1,0 +1,16 @@
+[{
+"shopname":"杨中店",
+"minweight":"",
+"maxweight":"",
+"stock":"",
+"stocktype":"",
+	"children":[{
+		
+		"shopname":"杨中店",
+		"minweight":"0.0",
+		"maxweight":"10.0",
+		"stock":"5",
+		"stocktype":"正常"
+		
+	}]
+}]

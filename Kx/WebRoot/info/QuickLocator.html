@@ -20,50 +20,63 @@
 	<script type="text/javascript" src="../script/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="../script/easyui/locale/easyui-lang-zh_CN.js"></script>
 
+	<!-- EXTENSION -->
+	<script type=text/javascript src="../script/easyui/datagrid-detailview.js"></script>
+	
 	<!-- DEFAULT -->
 	<script type="text/javascript" src="../script/sol-easyui-action.js"></script>
+	
+	<!-- CLIPBOARD -->
+	<script type="text/javascript" src="../script/clipboard.js"></script>
 	
 	<script>
 	$(document).ready(function() {
 		var types = ['','','',''];
-		var typeSelect = function(level,code) {
+		var typeSelect = function(level,code,text) {
 			types[level - 1] = code;
 
-			var typeStr = '产品代码是:　　';
+			if(code != '')
+				$("#type" + level + "Tr").html('<td height="20">类别</td><td>' + text + '</td><td>代码</td><td>' + code + '</td>');
+			else
+				$("#type" + level + "Tr").html('');
+
+			var typeStr = '<td height="20">产品代码:</td><td colspan="4"><strong>';
+			var str = '';
 			for(i = 0; i < 4; i ++) {
 				if(types[i] != '')
-					typeStr += types[i];
+					str += types[i];
 				else {
-					$("#typeSpan").text('');
+					$("#typeTr").html('');
 					return;
 				}
 			}
 
-			$("#typeSpan").text(typeStr);
+			typeStr += str + "</strong>&nbsp;<a href='javascript:void(0);' onclick=copyToClipboard('" + str + "')>复制到剪贴板</a></td>";
+			$("#typeTr").html(typeStr);
 		}
 		//查询面板下拉菜单
 		$("#type1").mycombo({
 			url:"info-category!combobox.action?clevel=1",
 			onSelect:function(record) {
-				typeSelect(1,record.reserve);
+				typeSelect(1,record.reserve,record.text);
 			}
 		});
 		$("#type2").mycombo({
 			url:"info-category!combobox.action?clevel=2",
 			onSelect:function(record) {
-				typeSelect(2,record.reserve);
+				typeSelect(2,record.reserve,record.text);
 			}
 		});
 		$("#type3").mycombo({
 			url:"info-category!combobox.action?clevel=3",
 			onSelect:function(record) {
-				typeSelect(3,record.reserve);
+				typeSelect(3,record.reserve,record.text);
 			}
 		});
 		$("#type4").mycombo({
 			url:"info-category!combobox.action?clevel=4",
 			onSelect:function(record) {
-				typeSelect(4,record.reserve);
+				typeSelect(4,record.reserve,record.text);
 			}
 		});
 
@@ -75,21 +88,72 @@
 			title:'快速定位',
 			height:200
 		});
+
+
+		// datagrid
+		$("#listTable").grid({
+			title:"产品列表",
+			url:'info-product!quickLocator.action',
+			queryParams:{queryValue:''},
+			width:'auto',
+			height:300,
+			multi:false,
+			columns:[[
+		        {field:'type',title:'类别',width:120,
+			        formatter:function(value,rec) {
+						return rec.type1_cname + "-" + rec.type2_cname + "-" + rec.type3_cname + "-" + rec.type4_cname;
+		        }},
+		        {field:'pname',title:'产品名称',width:80},
+		        {field:'pcode',title:'产品代码',width:80},
+		        {field:'unit',title:'单位',width:40}
+		    ]],
+		    view: detailview,
+			detailFormatter:function(index,row){   
+		        return '<DIV style="padding-bottom: 5px; padding-left: 0px; padding-right: 0px; padding-top: 5px" id="ddv-' + index + '"></DIV>';   
+		    },   
+		    onExpandRow: function(index,row) {
+		        $('#ddv-'+index).panel({   
+		            border:false,   
+		            cache:false,   
+		            href:'info-product!details.action?pid=' + row.id,
+		            onLoad:function(){
+		                $('#listTable').datagrid('fixDetailRowHeight',index);   
+		            }   
+		        });   
+		        $('#listTable').datagrid('fixDetailRowHeight',index);   
+		    },
+		    onDblClickRow: function(rowIndex, row) {
+		    	var url = 'QuickLocatorStock.html?pid=' + row.id;
+				window.showModalDialog(url,'CheckWindow','dialogHeight=500px;dialogWidth=700px;dialogTop=50;dialogLeft=100;toolbar=no;menubar=no;scrollbars=auto');
+		    }
+		});
 	});
+
+	var quickLocator = function(value,name) {
+		$("#listTable").datagrid('load',{queryValue:value});
+	}
 
 	</script>
 </head>
 <body>
 	<div id="right" >
 		<div id="queryPanel">
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
 		<td>
 		<input id="queryValue" class="easyui-searchbox"  
-       		prompt="请输入检索条件" menu="#queryType" style="width:600px"></input>           
-		<div id="queryType" style="width:120px">  
+       		prompt="请输入检索条件,将在产品代码和产品名称中搜寻" menu="#queryType" style="width:600px"
+       		searcher="quickLocator"></input>           
+		<div id="queryType" style="width:120px">
 		    <div name="all" iconCls="icon-ok">快速检索</div>
 		</div>
+		</td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr>
+		<td>
+		<table id="listTable">
+		</table>
 		</td>
 		</tr>
 		</table>
@@ -110,7 +174,11 @@
 		<td width="120"><select id="type4"></select></td>
 		</tr>
 		<tr><td colspan="5">&nbsp;</td></tr>
-		<tr><td>&nbsp;</td><td colspan="4"><span id="typeSpan"></span></td></tr>
+		<tr id="type1Tr"></tr>
+		<tr id="type2Tr"></tr>
+		<tr id="type3Tr"></tr>
+		<tr id="type4Tr"></tr>
+		<tr id="typeTr"></tr>
 		</table>
 		</div>
 	</div>
