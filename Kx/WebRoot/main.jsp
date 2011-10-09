@@ -1,3 +1,5 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -53,19 +55,25 @@
 						});
 					}
 				}
-			},{
-				id:'btncancelorder',
-				text:'取消订单',
-				iconCls:'icon-remove',
-				handler:function(){
-					var pcodes = [];
-					var rows = $('#listTable').datagrid('getSelections');
-					for(var i=0;i<rows.length;i++){
-						pcodes.push(rows[i].pcode);
+				},{
+					id:'btncancelorder',
+					text:'取消订单',
+					iconCls:'icon-remove',
+					handler:function(){
+						var pcodes = [];
+						var rows = $('#listTable').datagrid('getSelections');
+						for(var i=0;i<rows.length;i++){
+							pcodes.push(rows[i].pcode);
+						}
+						alert(pcodes.join(':'));
 					}
-					alert(pcodes.join(':'));
-				}
-			}]
+				},{
+					id:'myorder',
+					text:'我正在处理的订单',
+					handler:function(){
+						$('#listTable')
+					}
+				}]
 		});
 		
 	});
