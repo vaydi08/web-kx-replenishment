@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.sol.kx.web.action.BaseAction;
+import com.sol.kx.web.common.Constants;
 import com.sol.kx.web.dao.pojo.OrderType;
+import com.sol.kx.web.dao.pojo.SysUser;
 import com.sol.kx.web.service.BaseService;
 import com.sol.kx.web.service.OrderService;
 
@@ -28,10 +31,32 @@ public class OrderAction extends BaseAction<OrderType>{
 		return DATA;
 	}
 	
+	// 首页 自身订单
+	public String managerSelf() {
+		OrderType order = new OrderType();
+		order.setUserid(((SysUser) ActionContext.getContext().getSession().get(Constants.SESSION_USER)).getId());
+		pagerBean = orderService.findSelf(pagerBean,order.getUserid());
+		return DATA;
+	}
+	
+	private OrderType order;
+	
 	public String orderTake() {
 		input.setStatus(OrderType.STATUS_2_Taked);
 		orderService.update2(input);
+		order = orderService.get(input);
 		return "orderTake";
+	}
+	
+	public String orderGoto() {
+		order = orderService.get(input);
+		return "orderTake";
+	}
+	
+	public String orderCancel() {
+		input.setStatus(OrderType.STATUS_x1_Cancel);
+		result = orderService.update2(input);
+		return RESULT;
 	}
 	
 	
@@ -43,6 +68,10 @@ public class OrderAction extends BaseAction<OrderType>{
 	@Override
 	protected OrderType newPojo() {
 		return new OrderType();
+	}
+
+	public OrderType getOrder() {
+		return order;
 	}
 
 	

@@ -20,9 +20,6 @@
 	<script type="text/javascript" src="script/easyui/jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="script/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="script/easyui/locale/easyui-lang-zh_CN.js"></script>
-
-	<script src="script/leftmenu.js"></script>
-	<script src="script/default.js"></script>
 	
 	<style>
 	*{ margin:0px; padding:0px}
@@ -59,7 +56,7 @@
   <body>
     <s:bean name="java.util.Date" var="now" />
     <div id='top'>
-    <div class='topStr'>当前用户：<s:property value="#session[@com.sol.kx.web.common.Constants@SESSION_USER]" /> <s:date name="#now" format="yyyy / MM / dd"/> 
+    <div class='topStr'>当前用户：<s:property value="#session[@com.sol.kx.web.common.Constants@SESSION_USER].username" /> <s:date name="#now" format="yyyy / MM / dd"/> 
     <a href='sys!login.action?input.username=sol&input.password=940430'>重新登录</a> 
     <a href="sys!main.action" target="mainFrame">首页</a></div>
     </div>
@@ -115,7 +112,7 @@
 		}
 	   </style>
 	   <div id="menu">
-		<div title="基础数据" iconCls="icon-d1" selected="true" style="overflow:auto;padding:10px;">  
+		<div title="基础数据" iconCls="icon-d1" selected="true" style="overflow:hidden;padding:10px;">  
 	        <a href="info/ProductManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">产品数据</a>
 	        <a href="info/ShopManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">门店数据</a>  
 	        <a href="info/CategoryManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">分类列表</a>  

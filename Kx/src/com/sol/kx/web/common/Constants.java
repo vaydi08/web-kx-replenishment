@@ -6,6 +6,9 @@ public class Constants {
 	
 	public static final String DB = "jdbc/kx";
 	
+	// 常量
+	public static final String SESSION_USER = "sys_user";
+	
 	// 分页大小
 	public static int pageSize = 10;
 	
