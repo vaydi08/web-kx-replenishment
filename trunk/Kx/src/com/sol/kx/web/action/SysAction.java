@@ -1,15 +1,23 @@
 package com.sol.kx.web.action;
 
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.opensymphony.xwork2.ActionContext;
+import com.sol.kx.web.common.Constants;
 import com.sol.kx.web.dao.pojo.SysUser;
 import com.sol.kx.web.service.BaseService;
 import com.sol.kx.web.service.SysService;
 
 @Controller
 @Scope("session")
+@Results({@Result(name = "loginOk",location = "/LoginResult.jsp"),
+		  @Result(name = "loginFail",location = "/Login.jsp"),
+		  @Result(name = "main",location = "/main.jsp"),
+		  @Result(name = "index",location = "/index.jsp")})
 public class SysAction extends BaseAction<SysUser> {
 
 	private static final long serialVersionUID = 1L;
@@ -21,6 +29,22 @@ public class SysAction extends BaseAction<SysUser> {
 	public String manager() {
 		pagerBean = sysService.findUsers(pagerBean);
 		return DATA;
+	}
+	
+	public String login() {
+		SysUser user = sysService.login(input);
+		if(user != null) {
+			ActionContext.getContext().getSession().put(Constants.SESSION_USER, user);
+			return "loginOk";
+		} else
+			return "loginFail";
+	}
+	
+	public String index() {
+		return "index";
+	}
+	public String main() {
+		return "main";
 	}
 	
 	@Override

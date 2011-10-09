@@ -142,6 +142,7 @@ jQuery.fn.grid = function(config) {
 		
 		width:800,
 		height:$("#right").height()-200,
+		style:{'background-color':'#fafafa'},
 		iconCls:"icon-save",
 		nowrap:true,
 		singleSelect:(config.multi ? false : true),

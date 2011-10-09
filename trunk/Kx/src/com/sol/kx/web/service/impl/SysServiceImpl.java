@@ -29,6 +29,16 @@ public class SysServiceImpl extends BaseServiceImpl<SysUser> implements SysServi
 		}
 	}
 	
+	public SysUser login(SysUser input) {
+		Logger.SERVICE.ldebug("用户登录[sys_user]", input.getUsername(),input.getPassword());
+		try {
+			return sysUserDao.login(input.getUsername(), input.getPassword());
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("用户登录[sys_user]错误", e);
+			return null;
+		}
+	}
+	
 	@Override
 	protected BaseDao getDao() {
 		return sysUserDao;

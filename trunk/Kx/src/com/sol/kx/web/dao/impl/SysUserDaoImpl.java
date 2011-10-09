@@ -2,7 +2,9 @@ package com.sol.kx.web.dao.impl;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
@@ -31,5 +33,19 @@ public class SysUserDaoImpl extends BaseDaoImpl implements SysUserDao{
 	
 	public int findUsersCount() throws SQLException {
 		return (Integer)dataConsole.findReturn(SQL_FINDCOUNT, Types.INTEGER, null);
+	}
+	
+	
+	@Value("${sql.sys.user.login}")
+	private String SQL_LOGIN;
+	
+	public SysUser login(String username,String password) throws Exception {
+		Map<String,Class<?>> smap = dataConsole.parseSmap(SysUser.class, 
+				"id","username","password","shorttel","groupid","groupname","description");
+		
+		List<Object> params = new ArrayList<Object>(2);
+		params.add(username);
+		params.add(password);
+		return dataConsole.get(SysUser.class, SQL_LOGIN, smap, params);
 	}
 }

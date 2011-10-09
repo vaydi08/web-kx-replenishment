@@ -35,12 +35,12 @@
 	</head>
 	<body>
 		<div id="right">
-		
-			<div class="easyui-panel" style="padding:10px;" title="订购信息" iconCls="icon-tip" >
+
+			<div class="easyui-panel" style="padding:10px;background-color:#fafafa;" title="订购信息" iconCls="icon-tip" >
 			<table border="0" cellpadding="0" cellspacing="0" width="700">
 			<tbody>
 			<tr>
-			<td width="100">订单号</td><td width="170">00000001</td>
+			<td width="100">订单号</td><td width="170"><s:property value="order.id"/></td>
 			<td width="100">订购人</td><td width="170">张三</td>
 			<td rowspan="3" align="center"><img height="60" src="../images/product/201081215217.png" /></td>
 			</tr>
@@ -58,7 +58,7 @@
 			
 			<div class="clear"></div>
 
-			<div class="easyui-panel" style="height:170px;padding:10px;" title="等待确认" iconCls="icon-ok">
+			<div class="easyui-panel" style="height:170px;padding:10px;background-color:#fafafa;" title="等待确认" iconCls="icon-ok">
 			<table cellpadding="0" cellspacing="0" width="700">
 			<tbody>
 			<tr>
@@ -85,7 +85,7 @@
 			
 			<div class="clear"></div>
 			
-			<div class="easyui-panel" style="height:70px;padding:10px;" title="业务处理" iconCls="icon-redo">
+			<div class="easyui-panel" style="height:70px;padding:10px;background-color:#fafafa;" title="业务处理" iconCls="icon-redo">
 			<table cellpadding="0" cellspacing="0" width="700">
 			<tbody>
 			<tr>

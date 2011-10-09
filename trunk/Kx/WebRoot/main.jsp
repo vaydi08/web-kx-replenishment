@@ -1,22 +1,22 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title></title>
     
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">
+	<meta http-equiv="pragma" content="no-cache"/>
+	<meta http-equiv="cache-control" content="no-cache"/>
+	<meta http-equiv="expires" content="0"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 	<!-- NORMAL STYLE -->
-	<link rel="stylesheet" type="text/css" href="images/style_easyui.css">
+	<link rel="stylesheet" type="text/css" href="images/style_easyui.css"/>
 	
 	<!-- EASYUI -->
-	<link rel="stylesheet" type="text/css" href="script/easyui/themes/default/easyui.css">
-	<link rel="stylesheet" type="text/css" href="script/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="script/easyui/themes/default/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="script/easyui/themes/icon.css"/>
 
 	<script type="text/javascript" src="script/easyui/jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="script/easyui/jquery.easyui.min.js"></script>
@@ -29,18 +29,9 @@
 	$(document).ready(function() {
 		// 表格
 		$('#listTable').grid({
-			title:'有新的订单',
+			title:"有新的订单",
 			height:330,
 			url:'order/order!managerUntake.action',
-			multi:false,
-			columns:[[   
-		        {field:'id',title:'订单编号',width:140},
-		        {field:'pname',title:'产品名称',width:140},
-		        {field:'pcode',title:'产品代码',width:140},
-		        {field:'shopname',title:'订购门店',width:140},
-		        {field:'fromwho',title:'下单人员',width:140},
-		        {field:'ordertime',title:'下单时间',width:140}
-		    ]],
 			toolbar:[{
 				id:'btngetorder',
 				text:'接单',
@@ -50,7 +41,8 @@
 					if(row) {
 						$.messager.confirm('订单', '接受此订单，将进入处理流程', function(r){
 							if (r){
-								location.href = "order/order!orderTake.action?input.id=" + row.id;
+								location.href = "order/order!orderTake.action?input.id=" + row.id
+								+ "&input.userid=" + <s:property value="#session[@com.sol.kx.web.common.Constants@SESSION_USER].id" />;
 							}
 						});
 					}
@@ -60,18 +52,27 @@
 					text:'取消订单',
 					iconCls:'icon-remove',
 					handler:function(){
-						var pcodes = [];
-						var rows = $('#listTable').datagrid('getSelections');
-						for(var i=0;i<rows.length;i++){
-							pcodes.push(rows[i].pcode);
+						var row = $("#listTable").datagrid('getSelected');
+						if(row) {
+							$.messager.confirm('取消确认', '确定要取消此订单,订单取消后就不能再进行处理', function(r){
+								if(r) {
+									$.post('order/order!orderCancel.action',{'input.id':row.id,'input.userid':<s:property value="#session[@com.sol.kx.web.common.Constants@SESSION_USER].id" />},function(data){
+										var result = eval('(' + data + ')');
+										if(result.success)
+											$("#listTable").datagrid('reload');
+										else
+											$.messager.show({title:"Error",msg:result.msg});
+									});
+								}
+							});
 						}
-						alert(pcodes.join(':'));
 					}
-				},{
+				},'-',{
 					id:'myorder',
-					text:'我正在处理的订单',
+					text:'我的订单',
+					iconCls:'icon-ok',
 					handler:function(){
-						$('#listTable')
+						location.href='order/self.html';
 					}
 				}]
 		});
@@ -85,15 +86,23 @@
   
   <body>
 	
-	<div id="right" style="background-image:url(images/background2.png)">
+	<div id="right">
 		
-		<div class="list" style="background-color:#fafafa">
+		<div class="list" >
 
-			<table id="listTable" title="有新的订单" iconCls="icon-tip" nowrap="true" singleSelect="false"
-				 pagination="true" rownumbers="true" >
-
+			<table id="listTable" iconCls="icon-tip" nowrap="true" singleSelect="true"
+				 pagination="true" rownumbers="true">
+			<thead>
+			<tr>
+			<th field="id" width="100">订单编号</th>
+			<th field="pname" width="100">产品名称</th>
+			<th field="pcode" width="100">产品代码</th>
+			<th field="shopname" width="100">订购门店</th>
+			<th field="fromwho" width="100">下单人员</th>
+			<th field="ordertime" width="100">下单时间</th>
+			</tr>
+			</thead>
 			</table>
-
 		</div>
 		
 		<div>

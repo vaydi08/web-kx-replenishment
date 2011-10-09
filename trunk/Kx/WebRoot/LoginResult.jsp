@@ -15,10 +15,8 @@
 
   </head>
   
-  <body>
-    <script>
-	setTimeout("document.top.href=index.html",0);
-	</script>
+  <body onload="top.location.href='sys!index.action';">
 
+<a href="sys!index.action" target="_top">如果浏览器没有正常跳转,请点击这里</a>
   </body>
 </html>
