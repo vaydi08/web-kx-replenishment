@@ -18,6 +18,9 @@ public class OrderType extends Pojo{
 	private Integer pid;
 	private String pname;
 	private String pcode;
+	private Double pweight;
+	private String image;
+	private String stand;
 	
 	@Column(name = "shopid")
 	private Integer shopid;
@@ -34,6 +37,7 @@ public class OrderType extends Pojo{
 	
 	@Column(name = "userid")
 	private Integer userid;
+	private String username;
 	
 	@Column(name = "gettime")
 	private Timestamp gettime;
@@ -147,24 +151,6 @@ public class OrderType extends Pojo{
 		return serialVersionUID;
 	}
 
-	@Override
-	public String toString() {
-		return "OrderType ["
-				+ (cancelReason != null ? "cancelReason=" + cancelReason + ", "
-						: "")
-				+ (canceltime != null ? "canceltime=" + canceltime + ", " : "")
-				+ (fromwho != null ? "fromwho=" + fromwho + ", " : "")
-				+ (gettime != null ? "gettime=" + gettime + ", " : "")
-				+ (id != null ? "id=" + id + ", " : "")
-				+ (ordertime != null ? "ordertime=" + ordertime + ", " : "")
-				+ (pid != null ? "pid=" + pid + ", " : "")
-				+ (requesttime != null ? "requesttime=" + requesttime + ", "
-						: "")
-				+ (shopid != null ? "shopid=" + shopid + ", " : "")
-				+ (status != null ? "status=" + status + ", " : "")
-				+ (userid != null ? "userid=" + userid : "") + "]";
-	}
-
 	public String getPname() {
 		return pname;
 	}
@@ -187,5 +173,62 @@ public class OrderType extends Pojo{
 
 	public void setShopname(String shopname) {
 		this.shopname = shopname;
+	}
+
+	public Double getPweight() {
+		return pweight;
+	}
+
+	public void setPweight(Double pweight) {
+		this.pweight = pweight;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getStand() {
+		return stand;
+	}
+
+	public void setStand(String stand) {
+		this.stand = stand;
+	}
+
+	@Override
+	public String toString() {
+		return "OrderType ["
+				+ (cancelReason != null ? "cancelReason=" + cancelReason + ", "
+						: "")
+				+ (canceltime != null ? "canceltime=" + canceltime + ", " : "")
+				+ (fromwho != null ? "fromwho=" + fromwho + ", " : "")
+				+ (gettime != null ? "gettime=" + gettime + ", " : "")
+				+ (id != null ? "id=" + id + ", " : "")
+				+ (image != null ? "image=" + image + ", " : "")
+				+ (ordertime != null ? "ordertime=" + ordertime + ", " : "")
+				+ (pcode != null ? "pcode=" + pcode + ", " : "")
+				+ (pid != null ? "pid=" + pid + ", " : "")
+				+ (pname != null ? "pname=" + pname + ", " : "")
+				+ (pweight != null ? "pweight=" + pweight + ", " : "")
+				+ (requesttime != null ? "requesttime=" + requesttime + ", "
+						: "")
+				+ (shopid != null ? "shopid=" + shopid + ", " : "")
+				+ (shopname != null ? "shopname=" + shopname + ", " : "")
+				+ (stand != null ? "stand=" + stand + ", " : "")
+				+ (status != null ? "status=" + status + ", " : "")
+				+ (userid != null ? "userid=" + userid + ", " : "")
+				+ (username != null ? "username=" + username : "") + "]";
 	}
 }

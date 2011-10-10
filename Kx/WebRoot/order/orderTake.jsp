@@ -41,16 +41,16 @@
 			<tbody>
 			<tr>
 			<td width="100">订单号</td><td width="170"><s:property value="order.id"/></td>
-			<td width="100">订购人</td><td width="170">张三</td>
-			<td rowspan="3" align="center"><img height="60" src="../images/product/201081215217.png" /></td>
+			<td width="100">订购人</td><td width="170"><s:property value="order.fromwho"/></td>
+			<td rowspan="3" align="center"><img height="60" src="../images/product/<s:property value="order.image"/>" /></td>
 			</tr>
 			<tr>
-			<td>产品名称</td><td>00000001</td>
-			<td width="100">产品代码</td><td>A0001</td>
+			<td>产品名称</td><td><s:property value="order.pname"/></td>
+			<td width="100">产品代码</td><td><s:property value="order.pcode"/></td>
 			</tr>
 			<tr>
-			<td>订购门店</td><td>上南店</td>
-			<td>下单时间</td><td>2011-07-21 15:34:29</td>
+			<td>订购门店</td><td><s:property value="order.shopname"/></td>
+			<td>下单时间</td><td><s:date name="order.ordertime" format="yyyy-MM-dd HH:mm:ss"/></td>
 			</tr>
 			</tbody>
 			</table>
@@ -62,8 +62,8 @@
 			<table cellpadding="0" cellspacing="0" width="700">
 			<tbody>
 			<tr>
-			<td width="100" height="30">接单人</td><td width="170">李四</td>
-			<td width="100">接单时间</td><td width="170">2011-07-21 18:12:58</td>
+			<td width="100" height="30">接单人</td><td width="170"><s:property value="order.username"/></td>
+			<td width="100">接单时间</td><td width="170"><s:date name="order.gettime" format="yyyy-MM-dd HH:mm:ss"/></td>
 			<td><a href="#" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">取消此订单</a></td>
 			</tr>
 			<tr>

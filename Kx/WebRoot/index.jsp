@@ -126,7 +126,7 @@
 	        <a href="compare/CompareUpload.html" target="mainFrame" class="easyui-linkbutton" plain="true">比对数据</a>
 	    </div>
 	    <div title="订购系统" iconCls="icon-d2" style="padding:10px;">  
-	        <a href="compare/CompareUpload.html" target="mainFrame" class="easyui-linkbutton" plain="true">比对数据</a>
+	        <a href="order/self.html" target="mainFrame" class="easyui-linkbutton" plain="true">我的订单</a>
 	    </div>
 	    <div title="系统管理" iconCls="icon-d2" style="padding:10px;">  
 	        <a href="UserManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">用户管理</a>

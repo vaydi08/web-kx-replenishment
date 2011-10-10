@@ -1,5 +1,8 @@
 package com.sol.kx.web.action.order;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,19 +46,21 @@ public class OrderAction extends BaseAction<OrderType>{
 	
 	public String orderTake() {
 		input.setStatus(OrderType.STATUS_2_Taked);
+		input.setGettime(new Timestamp((new Date()).getTime()));
 		orderService.update2(input);
-		order = orderService.get(input);
+		order = orderService.get(input.getId());
 		return "orderTake";
 	}
 	
 	public String orderGoto() {
-		order = orderService.get(input);
+		order = orderService.get(input.getId());
 		return "orderTake";
 	}
 	
 	public String orderCancel() {
 		input.setStatus(OrderType.STATUS_x1_Cancel);
 		result = orderService.update2(input);
+		
 		return RESULT;
 	}
 	
