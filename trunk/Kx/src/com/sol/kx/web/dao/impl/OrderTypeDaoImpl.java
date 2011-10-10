@@ -3,11 +3,9 @@ package com.sol.kx.web.dao.impl;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.sol.util.c3p0.dataEntity2.SelectEntity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -67,10 +65,14 @@ public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 	@Value("${sql.order.get}")
 	private String SQL_GET;
 	
-	public OrderType get(SelectEntity entity) throws Exception {
+	public OrderType get(Integer id) throws Exception {
 		Map<String,Class<?>> smap = dataConsole.parseSmap(OrderType.class,
-				"pname","pcode")
-		return dataConsole.get(OrderType.class, SQL_GET, entity.getSmap(), entity.getCriteria().getParamList());
+				"id","fromwho","pname","pcode","pweight",
+				"stand","image","shopname","ordertime",
+				"requesttime","username","gettime");
+		List<Object> params = new ArrayList<Object>(1);
+		params.add(id);
+		return dataConsole.get(OrderType.class, SQL_GET, smap, params);
 	}
 	
 	@Override

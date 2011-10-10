@@ -1,6 +1,5 @@
 package com.sol.kx.web.service.impl;
 
-import org.sol.util.c3p0.dataEntity2.SelectEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,12 +44,11 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderType> implements Orde
 		}
 	}
 	
-	public OrderType get(OrderType input) {
-		Logger.SERVICE.ldebug("查询[order_type]指定数据",input.getId());
-		SelectEntity entity = new SelectEntity();
+	public OrderType get(Integer id) {
+		Logger.SERVICE.ldebug("查询[order_type]指定数据",id);
+
 		try {
-			entity.init(input);
-			return orderTypeDao.get(entity);
+			return orderTypeDao.get(id);
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("查询order_type指定数据错误", e);
 			return null;
