@@ -127,6 +127,7 @@
 	    </div>
 	    <div title="订购系统" iconCls="icon-d2" style="padding:10px;">  
 	        <a href="order/self.html" target="mainFrame" class="easyui-linkbutton" plain="true">我的订单</a>
+	        <a href="order/orderSupplier.html" target="mainFrame" class="easyui-linkbutton" plain="true">供应商列表</a>
 	    </div>
 	    <div title="系统管理" iconCls="icon-d2" style="padding:10px;">  
 	        <a href="UserManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">用户管理</a>
