@@ -27,9 +27,28 @@
 
 	<script>
 	$(document).ready(function() {
-		
+		$("#supplier").combobox({
+			width:151,
+			url:"supplier!suppliers.action",
+			onSelect:function(record) {
+				$("#supplier_contact").val(record.reserve);
+			}
+		});
 	});
 
+	var cancelOrder = function() {
+		$.messager.prompt('取消确认', '确定要取消此订单,订单取消后就不能再进行处理<br/>请输入订单取消的原因:', function(r){
+			if(r!= null && r != '') {
+				$.post('order!orderCancel.action',{'input.id':<s:property value="order.id"/>,'input.cancelReason':r},function(data){
+					var result = eval('(' + data + ')');
+					if(result.success)
+						location.href = 'self.html';
+					else
+						$.messager.show({title:"Error",msg:result.msg});
+				});
+			}
+		});
+	}
 	</script>
 	
 	</head>
@@ -64,13 +83,13 @@
 			<tr>
 			<td width="100" height="30">接单人</td><td width="170"><s:property value="order.username"/></td>
 			<td width="100">接单时间</td><td width="170"><s:date name="order.gettime" format="yyyy-MM-dd HH:mm:ss"/></td>
-			<td><a href="#" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">取消此订单</a></td>
+			<td><a href="javascript:cancelOrder()" id="cancelOrder" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">取消此订单</a></td>
 			</tr>
 			<tr>
 			<td height="30">联系供应商</td>
-			<td><select class="easyui-combobox" style="width:151px"><option value="1">老凤祥</option><option value="2">亚一金店</option></select>
+			<td><select id="supplier"></select>
 			</td>
-			<td>联系人</td><td><input type="text" value="JACK" /></td>
+			<td>联系人</td><td><input type="text" id="supplier_contact"/></td>
 			<td></td>
 			</tr>
 			<tr>

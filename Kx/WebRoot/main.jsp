@@ -54,9 +54,9 @@
 					handler:function(){
 						var row = $("#listTable").datagrid('getSelected');
 						if(row) {
-							$.messager.confirm('取消确认', '确定要取消此订单,订单取消后就不能再进行处理', function(r){
-								if(r) {
-									$.post('order/order!orderCancel.action',{'input.id':row.id,'input.userid':<s:property value="#session[@com.sol.kx.web.common.Constants@SESSION_USER].id" />},function(data){
+							$.messager.prompt('取消确认', '确定要取消此订单,订单取消后就不能再进行处理<br/>请输入订单取消的原因:', function(r){
+								if(r!= null && r != '') {
+									$.post('order/order!orderCancel.action',{'input.id':row.id,'input.cancelReason':r},function(data){
 										var result = eval('(' + data + ')');
 										if(result.success)
 											$("#listTable").datagrid('reload');

@@ -59,6 +59,9 @@ public class OrderAction extends BaseAction<OrderType>{
 	
 	public String orderCancel() {
 		input.setStatus(OrderType.STATUS_x1_Cancel);
+		
+		input.setUserid(((SysUser) ActionContext.getContext().getSession().get(Constants.SESSION_USER)).getId());
+		input.setCanceltime(new Timestamp((new Date()).getTime()));
 		result = orderService.update2(input);
 		
 		return RESULT;

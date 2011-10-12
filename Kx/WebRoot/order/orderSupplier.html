@@ -1,0 +1,69 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title></title>
+    
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<!-- NORMAL STYLE -->
+	<link rel="stylesheet" type="text/css" href="../images/style_easyui.css" />
+	
+	<!-- EASYUI -->
+	<link rel="stylesheet" type="text/css" href="../script/easyui/themes/default/easyui.css" />
+	<link rel="stylesheet" type="text/css" href="../script/easyui/themes/icon.css" />
+
+	<script type="text/javascript" src="../script/easyui/jquery-1.6.min.js"></script>
+	<script type="text/javascript" src="../script/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../script/easyui/jquery.edatagrid.js"></script>
+	<script type="text/javascript" src="../script/easyui/locale/easyui-lang-zh_CN.js"></script>
+
+	<!-- DEFAULT -->
+	<script type="text/javascript" src="../script/sol-easyui-action.js"></script>
+	
+	<script>
+
+	$(document).ready(function() {
+		$("#listTable").edatagrid({
+			width:800,
+			height:600,
+			title:"供应商列表",
+			style:{'background-color':'#fafafa'},
+			url:"supplier!manager2.action",
+			saveUrl: 'supplier!add2.action',
+			updateUrl: 'supplier!edit2.action',
+			destroyUrl: 'supplier!delete2.action',
+
+			onAfterEdit:function(){setTimeout("$('#listTable').edatagrid('reload');",500);},
+			onDestroy:function(){setTimeout("$('#listTable').edatagrid('reload');",500);}
+		});
+	});
+
+	</script>
+	</head>
+	<body>
+	<div id="right" >
+		
+		<div class="list">
+			<table id="listTable" toolbar="#toolbar" rownumbers="true" fitColumns="true" singleSelect="true">
+			<thead>
+			<tr>
+			<th field="name" width="80" editor="{type:'validatebox',options:{required:true,validType:'length[1,50]'}}">供应商</th>
+			<th field="contact" width="80" editor="{type:'validatebox',options:{required:true,validType:'length[1,20]'}}">联系人</th>
+			<th field="remark" width="80" editor="text">备注</th>
+			</tr>
+			</thead>
+			</table>
+		</div>
+		<div id="toolbar">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#listTable').edatagrid('addRow')">新增</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#listTable').edatagrid('destroyRow')">删除</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#listTable').edatagrid('saveRow')">保存</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#listTable').edatagrid('cancelRow')">取消</a>
+		</div>
+	</div>
+	</body>
+</html>

@@ -18,6 +18,11 @@ public class ComboBoxBean {
 		this.dataList = new ArrayList<Data>();
 	}
 	
+	public void setFirstSelect() {
+		if(dataList.size() > 0)
+			dataList.get(0).setSelected(true);
+	}
+	
 	public void addData(String text,String value) {
 		this.dataList.add(new Data(text,value));
 	}
