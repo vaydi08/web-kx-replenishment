@@ -42,10 +42,17 @@
 			success:function(data){
 				var result = eval('(' + data + ')');
 				if(result.success)
-					location.href = 'order!order3Repost.action?input.id=<s:property value="order.id"/>';
+					location.href = 'order!order3Repost.action?input.id=' + <s:property value="order.id"/>;
 				else
 					$.messager.show({title:"Error",msg:result.msg});
 			}
+		});
+
+		$("#listTable").datagrid({
+			height:200,
+			title:"供应商情况列表",
+			style:{'background-color':'#fafafa'},
+			url:'feedback!manager.action?input.orderid=<s:property value="order.id"/>'
 		});
 	});
 
@@ -90,7 +97,7 @@
 			</tr>
 			<tr>
 			<td>请求期限</td><td><s:date name="order.requesttime" format="yyyy-MM-dd HH:mm:ss"/></td>
-			<td></td><td></td>
+			<td>&nbsp;</td><td>&nbsp;</td>
 			</tr>
 			</tbody>
 			</table>
@@ -98,32 +105,29 @@
 			
 			<div class="clear"></div>
 
-			<div class="easyui-panel" style="height:170px;padding:10px;background-color:#fafafa;" title="等待确认" iconCls="icon-ok">
-			<form id="form" method="post">
-			<input type="hidden" name="input.orderid" value="<s:property value="order.id"/>" />
-			<table cellpadding="0" cellspacing="0" width="700">
-			<tbody>
+			<table id="listTable" rownumbers="true" fitColumns="true" singleSelect="true">
+			<thead>
 			<tr>
-			<td width="100" height="30">接单人</td><td width="170"><s:property value="order.username"/></td>
-			<td width="100">接单时间</td><td width="170"><s:date name="order.gettime" format="yyyy-MM-dd HH:mm:ss"/></td>
-			<td><a href="javascript:cancelOrder()" id="cancelOrder" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">取消此订单</a></td>
+			<th field="supplier" width="80">供应商</th>
+			<th field="contact" width="80">联系人</th>
+			<th field="ordernum" width="80">订购数量</th>
+			<th field="settime" width="80">联系时间</th>
 			</tr>
-			<tr>
-			<td height="30">联系供应商</td>
-			<td><select id="supplier" name="input.supplier"></select>
-			</td>
-			<td>联系人</td><td><input type="text" id="supplier_contact" name="input.contact"/></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td height="30">订购重量(数量)</td><td colspan="3"><input class="easyui-numberbox" required="true" min="1" precision="0" type="text" name="input.ordernum" /></td>
-			</tr>
-			<tr>
-			<td height="30" colspan="4" align="center"><a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="$('#form').submit()">提交</a></td><td></td>
-			</tr>
-			</tbody>
+			</thead>
 			</table>
-			</form>
+			
+			<div class="clear"></div>
+			
+			<div class="easyui-tabs" style="height:200px;background-color:#fafafa;" title="反馈情况" iconCls="icon-ok">
+				<div title="正常发货" iconCls="icon-ok" style="padding:20px;display:none;">  
+			        
+			    </div>
+			    <div title="供应商无货" iconCls="icon-cancel" style="padding:20px;display:none;">  
+			        
+			    </div>
+			    <div title="部分发货" iconCls="icon-undo" style="padding:20px;display:none;">  
+			        
+			    </div>
 			</div>
 			
 			<div class="clear"></div>
@@ -132,7 +136,7 @@
 			<table cellpadding="0" cellspacing="0" width="700">
 			<tbody>
 			<tr>
-			<td>订单处理: <span style="color:red">等待确认</span> -> 确认成功,供应商反馈 -> 供应商回复 -> 订购完成 -> 货品输送</td>
+			<td>订单处理: 等待确认 -> <span style="color:red">确认成功,供应商反馈</span> -> 供应商回复 -> 订购完成 -> 货品输送</td>
 			</tr>
 			</tbody>
 			</table>

@@ -49,7 +49,7 @@ public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 		params.add(userid);
 		
 		return dataConsole.find(sb.toString(),OrderType.class,
-				dataConsole.parseSmap(OrderType.class, "id","pname","shopname","pcode","fromwho","ordertime"),
+				dataConsole.parseSmap(OrderType.class, "id","pname","shopname","pcode","fromwho","ordertime","status"),
 				params);
 	}
 	
@@ -69,7 +69,7 @@ public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 		Map<String,Class<?>> smap = dataConsole.parseSmap(OrderType.class,
 				"id","fromwho","pname","pcode","pweight",
 				"stand","image","shopname","ordertime",
-				"requesttime","username","gettime");
+				"requesttime","username","gettime","status");
 		List<Object> params = new ArrayList<Object>(1);
 		params.add(id);
 		return dataConsole.get(OrderType.class, SQL_GET, smap, params);

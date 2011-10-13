@@ -26,6 +26,11 @@ public class SupplierAction extends BaseAction<OrderSupplier>{
 
 	private ComboBoxBean comboboxBean;
 	
+	public String manager2() {
+		pagerBean = orderSupplierService.find2(input);
+		return DATA;
+	}
+	
 	public String suppliers() {
 		comboboxBean = orderSupplierService.findSupplierCombobox();
 		return COMBOBOX;
