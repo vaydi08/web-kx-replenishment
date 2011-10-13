@@ -19,7 +19,8 @@ import com.sol.kx.web.service.OrderService;
 
 @Controller
 @Scope("session")
-@Results({@Result(name = "orderTake",location = "/order/orderTake.jsp")})
+@Results({@Result(name = "orderTake",location = "/order/orderTake.jsp"),
+		  @Result(name = "order3Repost",location = "/order/order3Repost.jsp")})
 public class OrderAction extends BaseAction<OrderType>{
 
 	private static final long serialVersionUID = 1L;
@@ -48,13 +49,26 @@ public class OrderAction extends BaseAction<OrderType>{
 		input.setStatus(OrderType.STATUS_2_Taked);
 		input.setGettime(new Timestamp((new Date()).getTime()));
 		orderService.update2(input);
-		order = orderService.get(input.getId());
-		return "orderTake";
+		return orderGoto();
+	}
+	
+	public String order3Repost() {
+		input.setStatus(OrderType.STATUS_3_Repost);
+		orderService.update2(input);
+		return orderGoto();
 	}
 	
 	public String orderGoto() {
 		order = orderService.get(input.getId());
-		return "orderTake";
+		
+		switch (order.getStatus()) {
+		case OrderType.STATUS_2_Taked:
+			return "orderTake";
+		case OrderType.STATUS_3_Repost:
+			return "order3Repost";
+		default:
+			return "orderTake";
+		}
 	}
 	
 	public String orderCancel() {

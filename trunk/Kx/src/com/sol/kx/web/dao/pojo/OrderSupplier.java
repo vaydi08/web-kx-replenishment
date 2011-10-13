@@ -52,4 +52,13 @@ public class OrderSupplier extends Pojo{
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+
+	@Override
+	public String toString() {
+		return "OrderSupplier ["
+				+ (contact != null ? "contact=" + contact + ", " : "")
+				+ (id != null ? "id=" + id + ", " : "")
+				+ (name != null ? "name=" + name + ", " : "")
+				+ (remark != null ? "remark=" + remark : "") + "]";
+	}
 }

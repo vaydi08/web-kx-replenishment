@@ -36,7 +36,7 @@ public class OrderSupplierServiceImpl extends BaseServiceImpl<OrderSupplier> imp
 			return new ComboBoxBean();
 		}
 	}
-	
+		
 	@Override
 	protected BaseDao getDao() {
 		return orderSupplierDao;
