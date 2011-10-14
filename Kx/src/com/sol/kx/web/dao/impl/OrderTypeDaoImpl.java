@@ -62,6 +62,28 @@ public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 		return (Integer)dataConsole.findReturn(SQL_MAIN_SELF_COUNT, Types.INTEGER, params);
 	}
 	
+	
+	@Value("${sql.order.all.find}")
+	private String SQL_MAIN_ALL;
+	
+	public List<OrderType> findAll(int page,int pageSize) throws Exception {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("select * from(select top ").append(pageSize).append(" * From (");
+		sb.append("select top ").append(page * pageSize).append(SQL_MAIN_ALL.substring(6)).append(") find1 order by id asc) find2 order by id desc");
+		
+		return dataConsole.find(sb.toString(),OrderType.class,
+				dataConsole.parseSmap(OrderType.class, "id","pname","shopname","pcode","fromwho","ordertime","status","username"),
+				null);
+	}
+	
+	@Value("${sql.order.all.findcount}")
+	private String SQL_MAIN_ALL_COUNT;
+	
+	public int findAllCount() throws SQLException {
+		return (Integer)dataConsole.findReturn(SQL_MAIN_ALL_COUNT, Types.INTEGER, null);
+	}
+	
 	@Value("${sql.order.get}")
 	private String SQL_GET;
 	

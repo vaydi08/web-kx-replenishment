@@ -20,7 +20,9 @@ import com.sol.kx.web.service.OrderService;
 @Controller
 @Scope("session")
 @Results({@Result(name = "orderTake",location = "/order/orderTake.jsp"),
-		  @Result(name = "order3Repost",location = "/order/order3Repost.jsp")})
+		  @Result(name = "order3Repost",location = "/order/order3Repost.jsp"),
+		  @Result(name = "order4Over",location = "/order/self.html",type = "redirect"),
+		  @Result(name = "orderInfo",location = "/order/orderInfo.jsp")})
 public class OrderAction extends BaseAction<OrderType>{
 
 	private static final long serialVersionUID = 1L;
@@ -43,6 +45,11 @@ public class OrderAction extends BaseAction<OrderType>{
 		return DATA;
 	}
 	
+	public String managerAll() {
+		pagerBean = orderService.findAll(pagerBean);
+		return DATA;
+	}
+	
 	private OrderType order;
 	
 	public String orderTake() {
@@ -58,6 +65,12 @@ public class OrderAction extends BaseAction<OrderType>{
 		return orderGoto();
 	}
 	
+	public String order4Over() {
+		input.setStatus(OrderType.STATUS_4_OrderOver);
+		orderService.update2(input);
+		return "order4Over";
+	}
+	
 	public String orderGoto() {
 		order = orderService.get(input.getId());
 		
@@ -66,9 +79,16 @@ public class OrderAction extends BaseAction<OrderType>{
 			return "orderTake";
 		case OrderType.STATUS_3_Repost:
 			return "order3Repost";
+		case OrderType.STATUS_4_OrderOver:
+			return "order4Over";
 		default:
 			return "orderTake";
 		}
+	}
+	
+	public String orderInfo() {
+		order = orderService.get(input.getId());
+		return "orderInfo";
 	}
 	
 	public String orderCancel() {

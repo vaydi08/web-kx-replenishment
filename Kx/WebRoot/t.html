@@ -10,14 +10,43 @@
     <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
 <script type="text/javascript" src="script/easyui/jquery-1.6.min.js"></script>
 
+<!-- EASYUI -->
+	<link rel="stylesheet" type="text/css" href="script/easyui/themes/default/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="script/easyui/themes/icon.css"/>
+
+	<script type="text/javascript" src="script/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="script/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script>
 $(document).ready(function(){
-	alert($("input[name=a.b]").attr("id"));
+	$("#box").datebox({required:true});
 });
+
+var test = function() {
+	alert($("#box").datebox('isValid'));
+}
+
+
 </script>
+<style>
+#img {
+	-moz-opacity:.75;
+	filter:alpha(opacity=75);
+	opacity:.75;
+	}
+#block {
+	background:url("script/easyui/themes/icons/ok.png") no-repeat;
+	background-position:left bottom;
+	}
+</style>
   </head>
   
   <body>
-    <input name="a.b" id="a"/>
+    <input id="box" />
+    <a href="javascript:test()">test</a>
+    
+    <div id="block" alt="水印掩码层">
+    <img src="images/product/1.png" id="img" alt="图片"/>
+    </div>
+    
   </body>
 </html>

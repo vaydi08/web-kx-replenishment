@@ -2,6 +2,11 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 {
 	"total":<s:property value="pagerBean.count"/>,
+	"reserve":[
+	<s:iterator value="pagerBean.reserve" status="st">
+	"<s:property escape="false"/>"<s:if test="not #st.last">,</s:if>
+	</s:iterator>
+	],
 	"rows":[
 	<s:iterator value="pagerBean.dataList" status="st">
 	{

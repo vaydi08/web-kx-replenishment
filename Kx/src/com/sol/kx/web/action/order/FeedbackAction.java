@@ -1,5 +1,8 @@
 package com.sol.kx.web.action.order;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -20,7 +23,18 @@ public class FeedbackAction extends BaseAction<OrderFeedback>{
 	
 	public String manager() {
 		pagerBean = orderFeedbackService.find2(input);
+		OrderFeedback lastFeedback = pagerBean.getDataList().get(0);
+		for(OrderFeedback feedback : pagerBean.getDataList())
+			if(feedback.getSettime().getTime() >= lastFeedback.getSettime().getTime())
+				lastFeedback = feedback;
+		pagerBean.setReserve(new Object[]{lastFeedback.getId()});
 		return DATA;
+	}
+	
+	@Override
+	public String edit2() {
+		input.setFeedbacktime(new Timestamp(new Date().getTime()));
+		return super.edit2();
 	}
 	
 	@Override

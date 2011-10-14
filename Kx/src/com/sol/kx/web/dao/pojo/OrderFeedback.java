@@ -31,6 +31,9 @@ public class OrderFeedback extends Pojo{
 	
 	@Column(name = "feedback")
 	private String feedback;
+	
+	@Column(name = "feedbacktime")
+	private Timestamp feedbacktime;
 
 	public Integer getId() {
 		return id;
@@ -88,12 +91,21 @@ public class OrderFeedback extends Pojo{
 		this.ordernum = ordernum;
 	}
 
+	public Timestamp getFeedbacktime() {
+		return feedbacktime;
+	}
+
+	public void setFeedbacktime(Timestamp feedbacktime) {
+		this.feedbacktime = feedbacktime;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderFeedback ["
 				+ (contact != null ? "contact=" + contact + ", " : "")
 				+ (feedback != null ? "feedback=" + feedback + ", " : "")
-				+ (id != null ? "id=" + id + ", " : "")
+				+ (feedbacktime != null ? "feedbacktime=" + feedbacktime + ", "
+						: "") + (id != null ? "id=" + id + ", " : "")
 				+ (orderid != null ? "orderid=" + orderid + ", " : "")
 				+ (ordernum != null ? "ordernum=" + ordernum + ", " : "")
 				+ (settime != null ? "settime=" + settime + ", " : "")

@@ -8,5 +8,7 @@ public interface OrderService extends BaseService<OrderType>{
 	
 	public PagerBean<OrderType> findSelf(PagerBean<OrderType> bean,Integer userid);
 	
+	public PagerBean<OrderType> findAll(PagerBean<OrderType> bean);
+	
 	public OrderType get(Integer id);
 }
