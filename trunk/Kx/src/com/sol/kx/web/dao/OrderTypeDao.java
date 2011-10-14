@@ -13,5 +13,8 @@ public interface OrderTypeDao extends BaseDao {
 	public List<OrderType> findSelf(int page,int pageSize,Integer userid) throws Exception;
 	public int findSelfCount(Integer userid) throws SQLException;
 	
+	public List<OrderType> findAll(int page,int pageSize) throws Exception;
+	public int findAllCount() throws SQLException;
+	
 	public OrderType get(Integer id) throws Exception;
 }

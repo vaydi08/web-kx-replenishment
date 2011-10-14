@@ -44,6 +44,20 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderType> implements Orde
 		}
 	}
 	
+	public PagerBean<OrderType> findAll(PagerBean<OrderType> bean) {
+		Logger.SERVICE.ldebug("查询[order_type]全部数据",bean.getPage(),bean.getPageSize());
+
+		try {
+			return setBeanValue(bean, 
+					orderTypeDao.findAll(bean.getPage(), bean.getPageSize()), 
+					orderTypeDao.findAllCount());
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("查询order_type错误", e);
+			bean.setException(e);
+			return bean;
+		}
+	}
+	
 	public OrderType get(Integer id) {
 		Logger.SERVICE.ldebug("查询[order_type]指定数据",id);
 

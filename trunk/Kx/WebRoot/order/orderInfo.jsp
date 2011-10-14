@@ -26,41 +26,17 @@
 	<script type="text/javascript" src="../script/sol-easyui-action.js"></script>
 
 	<script>
+	var statusMap = {'-1':{text:'已取消',color:'#708090'},
+			'1':{text:'等待处理',color:'#00FFFF'},
+			'2':{text:'已接单,等待确认',color:'#D2691E'},
+			'3':{text:'供应商反馈',color:'#00008B'},
+			'4':{text:'供应商发货',color:'#1E90FF'},
+			'5':{text:'发送产品',color:'#D2B48C'},
+			'6':{text:'订购完成',color:'#00FFFF'}};
+	
 	$(document).ready(function() {
-		$("#supplier").combobox({
-			width:151,
-			url:"supplier!suppliers.action",
-			valueField:'text',
-			onSelect:function(record) {
-				$("#supplier_contact").val(record.reserve);
-			}
-		});
-
-		$("#successForm").form({
-			url:'feedback!edit2.action',
-			success:function(data){
-				var result = eval('(' + data + ')');
-				if(result.success)
-					location.href = 'order!order4Over.action?input.id=' + <s:property value="order.id"/>;
-				else
-					$.messager.show({title:"Error",msg:result.msg});
-			}
-		});
-
-		$("#failForm").form({
-			url:'feedback!add2.action',
-			onSubmit:function() {return $("#form").form('validate');},
-			success:function(data){
-				var result = eval('(' + data + ')');
-				if(result.success)
-					location.href = 'order!order3Repost.action?input.id=<s:property value="order.id"/>';
-				else
-					$.messager.show({title:"Error",msg:result.msg});
-			}
-		});
-
 		$("#listTable").datagrid({
-			height:200,
+			height:400,
 			title:"供应商情况列表",
 			style:{'background-color':'#fafafa'},
 			url:'feedback!manager.action?input.orderid=<s:property value="order.id"/>',
@@ -68,21 +44,10 @@
 				$("#feedbackid").val(data.reserve[0]);
 			}
 		});
+
+		$("#status").text(statusMap[<s:property value="order.status"/>].text);
 	});
 
-	var cancelOrder = function() {
-		$.messager.prompt('取消确认', '确定要取消此订单,订单取消后就不能再进行处理<br/>请输入订单取消的原因:', function(r){
-			if(r!= null && r != '') {
-				$.post('order!orderCancel.action',{'input.id':<s:property value="order.id"/>,'input.cancelReason':r},function(data){
-					var result = eval('(' + data + ')');
-					if(result.success)
-						location.href = 'self.html';
-					else
-						$.messager.show({title:"Error",msg:result.msg});
-				});
-			}
-		});
-	}
 	</script>
 	
 	</head>
@@ -134,48 +99,11 @@
 			
 			<div class="clear"></div>
 			
-			<div class="easyui-tabs" style="height:200px;background-color:#fafafa;" title="反馈情况" iconCls="icon-ok">
-				<div title="正常发货" iconCls="icon-ok" style="padding:20px;">  
-			        <form id="successForm" method="post">
-			        <input type="hidden" id="feedbackid" name="input.id" />
-			        <p style="width:280px;margin-bottom:5px;">供应商反馈情况:　<input type="text" name="input.feedback" value="正常发货"/></p>
-			        <p style="width:280px;height:20px;text-align:center;"><a href="javascript:void(0)" class="easyui-linkbutton" plain="true" iconCls="icon-save" onclick="$('#successForm').submit()">提　交</a></p>
-			        </form>
-			    </div>
-			    <div title="供应商无货" iconCls="icon-cancel" style="padding:20px;">  
-			        <form id="failForm" method="post">
-					<input type="hidden" name="input.orderid" value="<s:property value="order.id"/>" />
-					<table cellpadding="0" cellspacing="0" width="700">
-					<tbody>
-					<tr>
-					<td height="30">更换供应商</td>
-					<td><select id="supplier" name="input.supplier"></select>
-					</td>
-					<td>联系人</td><td><input type="text" id="supplier_contact" name="input.contact"/></td>
-					<td></td>
-					</tr>
-					<tr>
-					<td height="30">订购重量(数量)</td><td colspan="3"><input class="easyui-numberbox" required="true" min="1" precision="0" type="text" name="input.ordernum" /></td>
-					</tr>
-					<tr>
-					<td height="30" colspan="4" align="center"><a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="$('#failForm').submit()">提交</a></td><td></td>
-					</tr>
-					</tbody>
-					</table>
-					</form>
-			    </div>
-			    <div title="部分发货" iconCls="icon-undo" style="padding:20px;">  
-			        
-			    </div>
-			</div>
-			
-			<div class="clear"></div>
-			
 			<div class="easyui-panel" style="height:70px;padding:10px;background-color:#fafafa;" title="业务处理" iconCls="icon-redo">
 			<table cellpadding="0" cellspacing="0" width="700">
 			<tbody>
 			<tr>
-			<td>订单处理: 等待确认 -> <span style="color:red">确认成功,供应商反馈</span> -> 供应商回复 -> 订购完成 -> 货品输送</td>
+			<td>订单处理状态: <span id="status"></span></td>
 			</tr>
 			</tbody>
 			</table>

@@ -118,18 +118,19 @@
 	        <a href="info/CategoryManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">分类列表</a>  
 	        <a href="info/QuickLocator.html" target="mainFrame" class="easyui-linkbutton" plain="true">快速检索</a>  
 	    </div>  
-	    <div title="核定数据" iconCls="icon-d2" style="padding:10px;">  
+	    <div title="核定数据" iconCls="icon-d2" style="overflow:hidden;padding:10px;">  
 	        <a href="stock/CheckChoose.html" target="mainFrame" class="easyui-linkbutton" plain="true">核定数据</a>
 	        <a href="stock/CheckedManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">已作核定</a>  
 	    </div>  
-	    <div title="智能比对" iconCls="icon-d2" style="padding:10px;">  
+	    <div title="智能比对" iconCls="icon-d2" style="overflow:hidden;padding:10px;">  
 	        <a href="compare/CompareUpload.html" target="mainFrame" class="easyui-linkbutton" plain="true">比对数据</a>
 	    </div>
-	    <div title="订购系统" iconCls="icon-d2" style="padding:10px;">  
+	    <div title="订购系统" iconCls="icon-d2" style="overflow:hidden;padding:10px;">  
 	        <a href="order/self.html" target="mainFrame" class="easyui-linkbutton" plain="true">我的订单</a>
+	        <a href="order/all.html" target="mainFrame" class="easyui-linkbutton" plain="true">全部订单</a>
 	        <a href="order/orderSupplier.html" target="mainFrame" class="easyui-linkbutton" plain="true">供应商列表</a>
 	    </div>
-	    <div title="系统管理" iconCls="icon-d2" style="padding:10px;">  
+	    <div title="系统管理" iconCls="icon-d2" style="overflow:hidden;padding:10px;">  
 	        <a href="UserManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">用户管理</a>
 	    </div>
 	   </div>
