@@ -10,7 +10,7 @@ a img {border:0px;}
 select {width:150px;}
 
 .clear {height:15px;}
-.topStr {position:relative;top:40px;left:700px;font-weight:bold}
+.topStr {position:relative;top:10px;left:700px;font-weight:bold}
 
 
 .golden_1 { background:url(golden_1.png) no-repeat; width:174px; text-align:center; line-height:60px; font-size:16px; font-weight:bold; color:#333; text-indent:20px } 

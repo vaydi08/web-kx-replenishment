@@ -18,12 +18,9 @@
 	<script type="text/javascript" src="script/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script>
 $(document).ready(function(){
-	$("#box").datebox({required:true});
+	
 });
 
-var test = function() {
-	alert($("#box").datebox('isValid'));
-}
 
 
 </script>
@@ -41,11 +38,13 @@ var test = function() {
   </head>
   
   <body>
-    <input id="box" />
-    <a href="javascript:test()">test</a>
-    
-    <div id="block" alt="水印掩码层">
-    <img src="images/product/1.png" id="img" alt="图片"/>
+    <input type="button" id="btn" value="aaa"/>
+    <div>
+    <table style="border:1px solid #1E90FF">
+    <tr><td height="30" width="50" align="center" valign="middle"><img src="script/easyui/themes/default/images/tree_loading.gif"/></td>
+    <td width="150">正在处理数据...</td>
+    </tr>
+    </table>
     </div>
     
   </body>
