@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import com.sol.kx.web.common.Constants;
 import com.sol.kx.web.common.Logger;
 import com.sol.kx.web.dao.CompareDao;
+import com.sol.kx.web.dao.pojo.CargoCompare;
 import com.sol.kx.web.dao.pojo.Compare;
 
 @Repository
@@ -261,4 +262,97 @@ public class CompareDaoImpl implements CompareDao{
 		updateSql(SQL_CARGO_STOCK_DATAUPDATE, serial,num,weight,pcode);
 	}
 	
+	// cargo compare
+	@Value("${sql.compare.cargo.createtb}")
+	private String SQL_CARGO_COMPARE_CREATETB;
+	
+	public void cargoCompareCreateTb() throws SQLException {
+		updateSql(SQL_CARGO_COMPARE_CREATETB);
+	}
+	
+	@Value("${sql.compare.cargo.findstock}")
+	private String SQL_CARGO_COMPARE_FINDSTOCK;
+	
+	public List<CargoCompare> cargoFindStock() throws SQLException {
+		String sql = SQL_CARGO_COMPARE_FINDSTOCK.replace(":tablename", tablename);
+		log.ldebug("Query:" + sql);
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = connection.prepareStatement(sql,
+					ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			rs = ps.executeQuery();
+			List<CargoCompare> list = new ArrayList<CargoCompare>(100);
+			while(rs.next()) {
+				CargoCompare cargoCompare = new CargoCompare(
+						rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getDouble(4));
+				list.add(cargoCompare);
+			}
+			
+			return list;
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			if(rs != null)
+				rs.close();
+			if(ps != null)
+				ps.close();
+		}
+	}
+	
+	@Value("${sql.compare.cargo.updatetb}")
+	private String SQL_CARGO_COMPARE_UPDATETB;
+	
+	public void cargoCompareUpdateTb(CargoCompare cargoCompare) throws SQLException {
+		updateSql(SQL_CARGO_COMPARE_UPDATETB, 
+				cargoCompare.getSerial(),cargoCompare.getNum(),
+				cargoCompare.getWeight(),cargoCompare.getPid(),
+				cargoCompare.getWeight());
+	}
+	
+	@Value("${sql.compare.cargo.result}")
+	private String SQL_CARGO_COMPARE_RESULT;
+	
+	public List<CargoCompare> cargoFindResult() throws SQLException {
+		String sql = SQL_CARGO_COMPARE_RESULT.replace(":tablename", tablename);
+		log.ldebug("Query:" + sql);
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = connection.prepareStatement(sql,
+					ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			rs = ps.executeQuery();
+			List<CargoCompare> list = new ArrayList<CargoCompare>(100);
+			while(rs.next()) {
+				CargoCompare cargoCompare = new CargoCompare();
+				cargoCompare.setId(rs.getInt(1));
+				cargoCompare.setPname(rs.getString(2));
+				cargoCompare.setPid(rs.getInt(3));
+				cargoCompare.setPcode(rs.getString(4));
+				cargoCompare.setShopname(rs.getString(5));
+				cargoCompare.setShopid(rs.getInt(6));
+				cargoCompare.setMinweight(rs.getDouble(7));
+				cargoCompare.setMaxweight(rs.getDouble(8));
+				cargoCompare.setStock(rs.getInt(9));
+				cargoCompare.setStocknow(rs.getInt(10));
+				cargoCompare.setSaletime(rs.getTimestamp(11));
+				cargoCompare.setSerial(rs.getString(12));
+				cargoCompare.setNum(rs.getInt(13));
+				cargoCompare.setWeight(rs.getDouble(14));
+				
+				list.add(cargoCompare);
+			}
+			
+			return list;
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			if(rs != null)
+				rs.close();
+			if(ps != null)
+				ps.close();
+		}
+	}
 }

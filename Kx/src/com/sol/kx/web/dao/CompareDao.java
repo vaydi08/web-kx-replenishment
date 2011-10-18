@@ -3,6 +3,7 @@ package com.sol.kx.web.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.sol.kx.web.dao.pojo.CargoCompare;
 import com.sol.kx.web.dao.pojo.Compare;
 
 public interface CompareDao {
@@ -37,4 +38,10 @@ public interface CompareDao {
 	public void cargoStockCreateTempTable() throws SQLException;
 	public void cargoStockRemoveTempTable() throws SQLException;
 	public void cargoStockDataUpdate(String serial,Integer num,String pcode,Double weight) throws SQLException;
+	
+	// cargo compare
+	public void cargoCompareCreateTb() throws SQLException;
+	public List<CargoCompare> cargoFindStock() throws SQLException;
+	public void cargoCompareUpdateTb(CargoCompare cargoCompare) throws SQLException;
+	public List<CargoCompare> cargoFindResult() throws SQLException;
 }
