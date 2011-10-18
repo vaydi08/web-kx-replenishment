@@ -1,6 +1,8 @@
 package com.sol.kx.web.action.compare;
 
 import java.io.File;
+import java.sql.SQLException;
+
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,8 @@ import com.sol.kx.web.service.BaseService;
 import com.sol.kx.web.service.CompareService;
 import com.sol.kx.web.service.bean.PagerBean;
 
-@Results({@Result(name = "compare",location = "/compare/compare.jsp")})
+@Results({@Result(name = "compare",location = "/compare/compare.jsp"),
+	@Result(name = "input",location = "/t.jsp")})
 public class CompareAction extends BaseAction<Compare>{
 
 	private static final long serialVersionUID = 1L;
@@ -27,6 +30,15 @@ public class CompareAction extends BaseAction<Compare>{
 	
 	public String uploadSupply() {
 		supplyBean = compareService.compareSupply(supplyFile, shopid,stocktype);
+		return "compare";
+	}
+	
+	private File cargoSupplyFile;
+	private File cargoSaleFile;
+	private File cargoStockFile;
+	
+	public String uploadCargoSupply() {
+		supplyBean = compareService.compareCargo(cargoSupplyFile, cargoSaleFile, cargoStockFile, stocktype);
 		return "compare";
 	}
 	
@@ -54,6 +66,18 @@ public class CompareAction extends BaseAction<Compare>{
 
 	public PagerBean<Compare> getSupplyBean() {
 		return supplyBean;
+	}
+
+	public void setCargoSupplyFile(File cargoSupplyFile) {
+		this.cargoSupplyFile = cargoSupplyFile;
+	}
+
+	public void setCargoSaleFile(File cargoSaleFile) {
+		this.cargoSaleFile = cargoSaleFile;
+	}
+
+	public void setCargoStockFile(File cargoStockFile) {
+		this.cargoStockFile = cargoStockFile;
 	}
 
 

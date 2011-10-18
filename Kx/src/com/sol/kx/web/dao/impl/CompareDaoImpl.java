@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import org.sol.util.c3p0.DataConsoleAnnotation;
@@ -30,7 +31,7 @@ public class CompareDaoImpl implements CompareDao{
 	private String tablename;
 	
 	private void setTablename() {
-		this.tablename = "stock" + StringUtil.formatDateCompactNow();
+		this.tablename = StringUtil.formatDateCompactNow();
 	}
 	
 	public CompareDaoImpl() {
@@ -163,4 +164,101 @@ public class CompareDaoImpl implements CompareDao{
 				ps.close();
 		}
 	}
+	
+	
+	// CARGO
+	
+	private void updateSql(String sql,Object... objs) throws SQLException {
+		sql = sql.replace(":tablename", tablename);
+		log.debug("Update:" + sql);
+		
+		PreparedStatement ps = connection.prepareStatement(sql);
+		try {
+			if(objs != null && objs.length > 0)
+				for(int i = 0; i < objs.length; i ++)
+					ps.setObject(i + 1, objs[i]);
+			
+			ps.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(ps != null)
+				ps.close();
+		}
+	}
+	
+	// cargo supply
+	@Value("${sql.compare.cargo.supply.temp}")
+	private String SQL_CARGO_SUPPLY_TEMP;
+	
+	public void cargoSupplyCreateTempTable(Integer stocktype) throws SQLException {
+		updateSql(SQL_CARGO_SUPPLY_TEMP,stocktype);
+	}
+	
+	@Value("${sql.compare.cargo.supply.removetemp}")
+	private String SQL_CARGO_SUPPLY_REMOVETEMP;
+	
+	public void cargoSupplyRemoveTempTable() throws SQLException {
+		updateSql(SQL_CARGO_SUPPLY_REMOVETEMP);
+	}
+	
+	@Value("${sql.compare.cargo.supply.update}")
+	private String SQL_CARGO_SUPPLY_DATAUPDATE;
+	
+	public void cargoSupplyDataUpdate(String pcode,String shopname,Double weight) throws SQLException {
+		updateSql(SQL_CARGO_SUPPLY_DATAUPDATE, shopname,pcode,weight);
+	}
+	
+	// cargo sale
+	@Value("${sql.compare.cargo.sale.temp}")
+	private String SQL_CARGO_SALE_TEMP;
+	
+	public void cargoSaleCreateTempTable() throws SQLException {
+		updateSql(SQL_CARGO_SALE_TEMP);
+	}
+	
+	@Value("${sql.compare.cargo.sale.removetemp}")
+	private String SQL_CARGO_SALE_REMOVETEMP;
+	
+	public void cargoSaleRemoveTempTable() throws SQLException {
+		updateSql(SQL_CARGO_SALE_REMOVETEMP);
+	}
+	
+	@Value("${sql.compare.cargo.sale.update}")
+	private String SQL_CARGO_SALE_DATAUPDATE;
+	
+	public void cargoSaleDataUpdate(String serial,Integer sale,long saletime,String shopname,String pcode,Double weight,Integer stocktype) throws SQLException {
+		updateSql(SQL_CARGO_SALE_DATAUPDATE, serial,sale,new Timestamp(saletime),shopname,pcode,stocktype,weight);
+	}
+	
+	@Value("${sql.compare.cargo.sale.delete}")
+	private String SQL_CARGO_SALE_DELTE;
+	
+	public void cargoSaleDateDelete(String serial) throws SQLException {
+		updateSql(SQL_CARGO_SALE_DELTE, serial);
+	}
+	
+	// cargo stock
+	@Value("${sql.compare.cargo.stock.temp}")
+	private String SQL_CARGO_STOCK_TEMP;
+	
+	public void cargoStockCreateTempTable() throws SQLException {
+		updateSql(SQL_CARGO_STOCK_TEMP);
+	}
+	
+	@Value("${sql.compare.cargo.stock.removetemp}")
+	private String SQL_CARGO_STOCK_REMOVETEMP;
+	
+	public void cargoStockRemoveTempTable() throws SQLException {
+		updateSql(SQL_CARGO_STOCK_REMOVETEMP);
+	}
+	
+	@Value("${sql.compare.cargo.stock.update}")
+	private String SQL_CARGO_STOCK_DATAUPDATE;
+	
+	public void cargoStockDataUpdate(String serial,Integer num,String pcode,Double weight) throws SQLException {
+		updateSql(SQL_CARGO_STOCK_DATAUPDATE, serial,num,weight,pcode);
+	}
+	
 }

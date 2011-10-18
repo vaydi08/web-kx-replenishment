@@ -52,44 +52,15 @@
 			$(div).dialog('close');
 		}
 		
-		$("#shopDiv").find(".panelSelect").panelSelect({
-			'url':'../info/info-shop!findChoose.action',
-			onClick:divClick
-		});
-
-		$(".chooseHref").click(function() {
-			closeDialog();
-			
-			var div = $(this).attr("div");
-			$(div).dialog('open');
-			//var offset = $(this).offset();
-			//$(div).dialog('move',{left:offset.left + $(this).width() + 50,top:offset.top});
-
-			$('body').data('div',div);
-			$('body').data('result',$(this).attr('result'));
-		});
-
-		var closeDialog = function() {
-			$('.easyui-dialog').each(function(){
-				$(this).dialog('close');
-			});
-		}
-
 		$("#next").click(function() {
-			var shop = $("#shop").attr("value");
 
-			if(shop == null || shop == 0) {
-				$.messager.show({title:'Error',msg:'选项值未设置，请选择一个分店'});
-				return;
-			}
-
-			if($("#uploadStockFile").val() == null || $("#uploadStockFile").val() == "") {
+			if($("#cargoSupplyFile").val() == null || $("#cargoSupplyFile").val() == "" ||
+				$("#cargoSaleFile").val() == null || $("#cargoSaleFile").val() == "" ||	
+				$("#cargoStockFile").val() == null || $("#cargoStockFile").val() == "") {
 				$.messager.show({title:'Error',msg:'请选择上传文件'});
 				return;
 			}
 			
-			$("#shopid").val(shop);
-
 			$("#loadingDiv").show();
 			
 			$("form").submit();
@@ -103,7 +74,7 @@
 	<body>
 		<div id="right">
 			<div id="query" style="padding:10px">
-			<form action="compare!uploadSupply.action" method="post" enctype="multipart/form-data">
+			<form action="compare!uploadCargoSupply.action" method="post" enctype="multipart/form-data">
 				<table cellpadding="0" cellspacing="0" border="0" align="center">
 				<tbody>
 					<tr>
@@ -112,13 +83,16 @@
 					<td width="100"><input type="radio" name="stocktype" value="2"/>节假日</td>
 					</tr>
 					<tr>
-					<td height="50">门店信息</td>
-					<td><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#shopDiv" result="#shop" plain="true">选择</a></td>
-					<td><span id="shop"></span><input type="hidden" name="shopid" id="shopid"/></td>
+					<td height="50">库存数据</td>
+					<td colspan="2"><input type="file" name="cargoSupplyFile" id="cargoSupplyFile"/></td>
 					</tr>
 					<tr>
-					<td height="50">金管家数据</td>
-					<td colspan="2"><input type="file" name="supplyFile" id="uploadStockFile"/></td>
+					<td height="50">销售数据</td>
+					<td colspan="2"><input type="file" name="cargoSaleFile" id="cargoSaleFile"/></td>
+					</tr>
+					<tr>
+					<td height="50">进货数据</td>
+					<td colspan="2"><input type="file" name="cargoStockFile" id="cargoStockFile"/></td>
 					</tr>
 					<tr>
 					<td colspan="3" height="50" align="center">

@@ -31,86 +31,46 @@
 	}
 	#left a {color:#F6AB00;font-weight:bold;letter-spacing:5px;width:100%;}
 
-	#top { width:1024px;height:71px; clear:both; background:url(images/title_bar.jpg) no-repeat}
-	#left { float:left; width:160px !important;width:200px; padding:10px; background:#555; text-align:center;height:700px;overflow-y:auto;overflow-x:hidden;}
+	#top {background:url(images/title_bar.jpg) no-repeat}
+	#left {height:100%; padding:10px; background:#555; text-align:center;overflow-x:hidden;}
 	#left li { list-style-type:none}
 	
-	#mainFrame {width:843px !important; width:820px;margin:0px;padding:0px;height:725px !important;height:704px;}
+	#mainFrame {width:843px !important; width:820px;margin:0px;padding:0px;height:700px;}
+	
+	
+   .icon-d1{
+		background:url('images/button/d1.png') no-repeat;
+	}
+	.icon-d2{
+		background:url('images/button/d2.png') no-repeat;
+	}
 	</style>
 	
 	<script>
-	$(document).ready(function() {
-		$("#left").height($(document).height() - $("#top").height() - 50);
-		$("#main").height($(document).height() - $("#top").height() - 50);
-		$("#mainFrame").height($(document).height() - $("#top").height() - 50);
-	
+	$(document).ready(function() {	
 		$("#menu").accordion({
-			height:$("#left").height()-20
+			height:$("#left").height()
 		});
 
-		
 	});
 	</script>
   </head>
   
   <body>
     <s:bean name="java.util.Date" var="now" />
-    <div id='top'>
+    
+    <table border="0" cellpadding="0" cellspacing="0">
+    <!-- TOP -->
+    <tr><td id='top' width="1024" height="71" colspan="2">
     <div class='topStr'>当前用户：<s:property value="#session[@com.sol.kx.web.common.Constants@SESSION_USER].username" /> <s:date name="#now" format="yyyy / MM / dd"/> 
     <a href='sys!login.action?input.username=sol&input.password=940430'>重新登录</a> 
     <a href="sys!main.action" target="mainFrame">首页</a></div>
-    </div>
+    </td></tr>
     
-    <div id="main" style="clear:both;width:1024px;height:700px">
-    <div id="left">
-    <!-- 
-	  <ul>
-	    <li><a href="#" class="menu"><img src="images/leftbutton/left1.png"/></a>
-	      <ul class="submenu" id="memu1">
-	        <li><a target="mainFrame" href='info/ProductManager.html'><img src="images/leftbutton/ls1_1.png"/></a></li>
-	        <li><a target="mainFrame" href='info/ShopManager.html'><img src="images/leftbutton/ls1_4.png"/></a></li>
-	        <li><a target="mainFrame" href='info/CategoryManager.html'><img src="images/leftbutton/ls1_6.png"/></a></li>
-	      </ul>
-	    </li>
-	    <li><a target="mainFrame" href='stock/CheckChoose.html'><img src="images/leftbutton/heding.png"/></a>
-	    </li>
-	    <li><a target="mainFrame" href='compare/compare.html'><img src="images/leftbutton/daoru.png"/></a>
-	    </li>
-	    <li><a href="#" class="menu"><img src="images/leftbutton/fenxi.png"/></a>
-	      <ul class="submenu" id="memu1">
-	        <li><a target="mainFrame"  href="history/import.html"><img src="images/leftbutton/ls4_1.png"/></a></li>
-	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls4_2.png"/></a></li>
-	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls4_3.png"/></a></li>
-	      </ul>
-	    </li>
-	    <li><a href="#" class="menu"><img src="images/leftbutton/fenhuo.png"/></a>
-	      <ul class="submenu" id="memu1">
-	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls1.png"/></a></li>
-	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls1.png"/></a></li>
-	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls3.png"/></a></li>
-	        <li><a target="mainFrame"  href=""><img src="images/leftbutton/ls4.png"/></a></li>
-	      </ul>
-	    </li>
-	    <li><a href="order/orderManager.html" target="mainFrame"><img src="images/leftbutton/dinggou.png"/></a>
-	    </li>
-	    <li><a href="#" class="menu"><img src="images/leftbutton/system.png"/></a>
-	      <ul class="submenu" id="memu1">
-	        <li><a target="mainFrame"  href="system/userManager.html"><img src="images/leftbutton/ls7_1.png"/></a></li>
-	        <li><a target="mainFrame"  href="system/authManager.html"><img src="images/leftbutton/ls7_2.png"/></a></li>
-	        <li><a target="mainFrame"  href="system/system.html"><img src="images/leftbutton/ls7_3.png"/></a></li>
-	      </ul>
-	    </li>
-
-	  </ul>
-	   -->
-	   <style>
-	   .icon-d1{
-			background:url('images/button/d1.png') no-repeat;
-		}
-		.icon-d2{
-			background:url('images/button/d2.png') no-repeat;
-		}
-	   </style>
+    <!-- MAIN -->
+    <tr>
+    <!-- LEFT -->
+    <td id="left" width="160" height=700">
 	   <div id="menu">
 		<div title="基础数据" iconCls="icon-d1" selected="true" style="overflow:hidden;padding:10px;">  
 	        <a href="info/ProductManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">产品数据</a>
@@ -124,6 +84,7 @@
 	    </div>  
 	    <div title="智能比对" iconCls="icon-d2" style="overflow:hidden;padding:10px;">  
 	        <a href="compare/CompareUpload.html" target="mainFrame" class="easyui-linkbutton" plain="true">比对数据</a>
+	        <a href="compare/CargoUpload.html" target="mainFrame" class="easyui-linkbutton" plain="true">智能分货</a>
 	    </div>
 	    <div title="订购系统" iconCls="icon-d2" style="overflow:hidden;padding:10px;">  
 	        <a href="order/self.html" target="mainFrame" class="easyui-linkbutton" plain="true">我的订单</a>
@@ -134,9 +95,13 @@
 	        <a href="UserManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">用户管理</a>
 	    </div>
 	   </div>
-	</div>
-	
-	<iframe src="sys!main.action" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" name="mainFrame" id="mainFrame"></iframe>
-    </div>
+    </td>
+    <!-- FRAME -->
+    <td style="background-color:#f6ab46">
+    <iframe src="sys!main.action" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" name="mainFrame" id="mainFrame"></iframe>
+    </td>
+    </tr>
+    </table>
+
   </body>
 </html>
