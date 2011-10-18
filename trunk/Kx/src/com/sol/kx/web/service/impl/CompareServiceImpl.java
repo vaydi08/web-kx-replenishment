@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.sol.kx.web.dao.BaseDao;
 import com.sol.kx.web.dao.CompareDao;
+import com.sol.kx.web.dao.pojo.CargoCompare;
 import com.sol.kx.web.dao.pojo.Compare;
 import com.sol.kx.web.service.CompareService;
 import com.sol.kx.web.service.bean.PagerBean;
@@ -121,7 +122,19 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 //			dao.cargoSaleRemoveTempTable();
 //			dao.cargoStockRemoveTempTable();
 			
-			dao.commit();
+			// 比对
+			// 生成结果集
+			dao.cargoCompareCreateTb();
+			// 获取进货表
+			List<CargoCompare> cargoCompares = dao.cargoFindStock();
+			for(CargoCompare cargoCompare : cargoCompares)
+				dao.cargoCompareUpdateTb(cargoCompare);
+			
+			List<CargoCompare> result = dao.cargoFindResult();
+			System.out.println(result);
+			
+//			dao.commit();
+			dao.rollback();
 			System.out.println(errList);
 			//bean.setDataList(list);
 			return bean;
