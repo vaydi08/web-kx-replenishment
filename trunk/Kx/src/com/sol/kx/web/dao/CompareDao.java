@@ -40,8 +40,10 @@ public interface CompareDao {
 	public void cargoStockDataUpdate(String serial,Integer num,String pcode,Double weight) throws SQLException;
 	
 	// cargo compare
-	public void cargoCompareCreateTb() throws SQLException;
+	public void cargoCompareCreateTb(Integer minallot) throws SQLException;
 	public List<CargoCompare> cargoFindStock() throws SQLException;
-	public void cargoCompareUpdateTb(CargoCompare cargoCompare) throws SQLException;
+	public void cargoStockUpdate(String shopname,String serial,Double weight) throws SQLException;
+	public Object[] cargoCompareUpdateTb(CargoCompare cargoCompare) throws SQLException;
 	public List<CargoCompare> cargoFindResult() throws SQLException;
+	public Object[] cargoCompareUpdateTbNormal(CargoCompare cargoCompare) throws SQLException;
 }

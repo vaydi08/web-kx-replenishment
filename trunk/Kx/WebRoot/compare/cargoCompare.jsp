@@ -34,36 +34,77 @@
 </head>
 <body style="padding:10px;">
 	<div class="easyui-tabs" style="height:600px">
-	<div title="补货建议单" style="padding:10px;">
+	<div title="分货单" style="padding:10px;">
+
+		<table class="easyui-datagrid" fitColumns="true" nowrap="true" singleSelect="true">
+		<thead>
+		<tr>
+		<th field="shopname" width="80">门店名称</th>
+		<th field="pname" width="80">产品名称</th>
+		<th field="pcode" width="80">产品代码</th>
+		<th field="minweight" width="80">克重范围</th>
+		<th field="stock" width="80">核定库存</th>
+		<th field="stocknow" width="80">实际库存</th>
+		<th field="saletime" width="80">最后销售时间</th>
+		<th field="serial" width="80">配货流水号</th>
+		<th field="num" width="80">配货数量</th>
+		<th field="minallot" width="80">至少还需配货</th>
+		</tr>
+		</thead>
+		<s:iterator value="cargoBean.dataList">
+		<tr>
+		<td><s:property value="shopname" /></td>
+		<td><s:property value="pname" /></td>
+		<td><s:property value="pcode" /></td>
+		<td><s:property value="minweight" /> - <s:property value="maxweight" /></td>
+		<td><s:property value="stock" /></td>
+		<td><s:property value="stocknow" /></td>
+		<td><s:property value="saletime" /></td>
+		<td><s:property value="serial" /></td>
+		<td><s:property value="num" /></td>
+		<td><s:property value="minallot" /></td>
+		</tr>
+		</s:iterator>
+		</table>
+
+	</div>
 	
-	<s:if test="supplyBean.hasException()">
-		<s:property value="supplyBean.exception" />
-	</s:if>
-	<s:else>
+	<div title="货品分配" style="padding:10px">
 		<table class="easyui-datagrid" fitColumns="true" nowrap="true" singleSelect="true">
 		<thead>
 		<tr>
 		<th field="pname" width="80">产品名称</th>
 		<th field="pcode" width="80">产品代码</th>
-		<th field="minweight" width="80">克重范围</th>
-		<th field="stock" width="80">核定库存</th>
-		<th field="kucun" width="80">实际库存</th>
-		<th field="need" width="80">建议补货量</th>
+		<th field="serial" width="80">流水号</th>
+		<th field="weight" width="80">克重</th>
+		<th field="shopname" width="80">分配门店</th>
 		</tr>
 		</thead>
-		<s:iterator value="supplyBean.dataList">
+		<s:iterator value="cargoBean.stockList">
 		<tr>
 		<td><s:property value="pname" /></td>
 		<td><s:property value="pcode" /></td>
-		<td><s:property value="minweight" /> - <s:property value="maxweight" /></td>
-		<td><s:property value="stock" /></td>
-		<td><s:property value="kucun" /></td>
-		<td><s:property value="need" /></td>
+		<td><s:property value="serial" />
+		<td><s:property value="weight" /></td>
+		<td><s:property value="shopname" /></td>
 		</tr>
 		</s:iterator>
 		</table>
-	</s:else>
 	</div>
+	
+	<s:if test="cargoBean.hasException()">
+	<div title="处理异常" style="padding:10px" iconCls="icon-cancel">
+	<s:property value="cargoBean.exception"/>
+	</div>
+	</s:if>
+	
+	<s:if test="cargoBean.hasReserve()">
+	<div title="异常信息" style="padding:10px" iconCls="icon-cancel">
+	<s:iterator value="cargoBean.reserve[0]">
+	<p><s:property/></p>
+	</s:iterator>
+	</div>
+	</s:if>
 	
 	<div title="下载数据" style="padding:10px" iconCls="icon-save">
 	

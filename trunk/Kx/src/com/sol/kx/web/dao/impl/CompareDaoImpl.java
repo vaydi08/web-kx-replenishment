@@ -1,11 +1,14 @@
 package com.sol.kx.web.dao.impl;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import org.sol.util.c3p0.DataConsoleAnnotation;
 import org.sol.util.common.StringUtil;
@@ -169,9 +172,9 @@ public class CompareDaoImpl implements CompareDao{
 	
 	// CARGO
 	
-	private void updateSql(String sql,Object... objs) throws SQLException {
+	private int updateSql(String sql,Object... objs) throws SQLException {
 		sql = sql.replace(":tablename", tablename);
-		log.debug("Update:" + sql);
+		log.ldebug("Update:" + sql,objs);
 		
 		PreparedStatement ps = connection.prepareStatement(sql);
 		try {
@@ -179,7 +182,7 @@ public class CompareDaoImpl implements CompareDao{
 				for(int i = 0; i < objs.length; i ++)
 					ps.setObject(i + 1, objs[i]);
 			
-			ps.execute();
+			return ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw e;
@@ -262,12 +265,19 @@ public class CompareDaoImpl implements CompareDao{
 		updateSql(SQL_CARGO_STOCK_DATAUPDATE, serial,num,weight,pcode);
 	}
 	
+	@Value("${sql.compare.cargo.updatestock}")
+	private String SQL_CARGO_STOCK_UPDATE;
+	
+	public void cargoStockUpdate(String shopname,String serial,Double weight) throws SQLException {
+		updateSql(SQL_CARGO_STOCK_UPDATE, shopname,serial,weight);
+	}
+	
 	// cargo compare
 	@Value("${sql.compare.cargo.createtb}")
 	private String SQL_CARGO_COMPARE_CREATETB;
 	
-	public void cargoCompareCreateTb() throws SQLException {
-		updateSql(SQL_CARGO_COMPARE_CREATETB);
+	public void cargoCompareCreateTb(Integer minallot) throws SQLException {
+		updateSql(SQL_CARGO_COMPARE_CREATETB,minallot,minallot);
 	}
 	
 	@Value("${sql.compare.cargo.findstock}")
@@ -283,10 +293,12 @@ public class CompareDaoImpl implements CompareDao{
 			ps = connection.prepareStatement(sql,
 					ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 			rs = ps.executeQuery();
-			List<CargoCompare> list = new ArrayList<CargoCompare>(100);
+			List<CargoCompare> list = new LinkedList<CargoCompare>();
 			while(rs.next()) {
 				CargoCompare cargoCompare = new CargoCompare(
-						rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getDouble(4));
+						rs.getInt(1),rs.getString(2),rs.getString(3),
+						rs.getString(4),rs.getInt(5),rs.getDouble(6),
+						rs.getString(7));
 				list.add(cargoCompare);
 			}
 			
@@ -304,11 +316,75 @@ public class CompareDaoImpl implements CompareDao{
 	@Value("${sql.compare.cargo.updatetb}")
 	private String SQL_CARGO_COMPARE_UPDATETB;
 	
-	public void cargoCompareUpdateTb(CargoCompare cargoCompare) throws SQLException {
-		updateSql(SQL_CARGO_COMPARE_UPDATETB, 
-				cargoCompare.getSerial(),cargoCompare.getNum(),
-				cargoCompare.getWeight(),cargoCompare.getPid(),
-				cargoCompare.getWeight());
+	public Object[] cargoCompareUpdateTb(CargoCompare cargoCompare) throws SQLException {
+		String sql = SQL_CARGO_COMPARE_UPDATETB.replace(":tablename", tablename);
+		log.ldebug("Query:" + sql,cargoCompare.getPid(),cargoCompare.getWeight(),cargoCompare.getSerial(),cargoCompare.getNum());
+		
+		CallableStatement cs = null;
+		ResultSet rs = null;
+		
+		try {
+			cs = connection.prepareCall(sql);
+			cs.registerOutParameter(1, Types.REAL);
+			cs.setString(2,Integer.toString(cargoCompare.getPid()));
+			cs.setString(3, cargoCompare.getWeight().toString());
+			cs.setString(4, cargoCompare.getSerial() + ",");
+			cs.setString(5, Integer.toString(cargoCompare.getNum()));
+			rs = cs.executeQuery();
+			
+			if(rs.next()) {
+				Integer rowcount = rs.getInt(1);
+				String shopname = rs.getString(2);
+				
+				return new Object[]{rowcount,shopname};
+			}
+			
+			return null;
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			if(rs != null)
+				rs.close();
+			if(cs != null)
+				cs.close();
+		}
+	}
+	
+	@Value("${sql.compare.cargo.updatetb_normal}")
+	private String SQL_CARGO_COMPARE_UPDATE_NORMAL;
+	
+	public Object[] cargoCompareUpdateTbNormal(CargoCompare cargoCompare) throws SQLException {
+		String sql = SQL_CARGO_COMPARE_UPDATE_NORMAL.replace(":tablename", tablename);
+		log.ldebug("Query:" + sql);
+		
+		CallableStatement cs = null;
+		ResultSet rs = null;
+		
+		try {
+			cs = connection.prepareCall(sql);
+			cs.registerOutParameter(1, Types.REAL);
+			cs.setString(2,Integer.toString(cargoCompare.getPid()));
+			cs.setString(3, cargoCompare.getWeight().toString());
+			cs.setString(4, cargoCompare.getSerial() + ",");
+			cs.setString(5, Integer.toString(cargoCompare.getNum()));
+			rs = cs.executeQuery();
+			
+			if(rs.next()) {
+				Integer rowcount = rs.getInt(1);
+				String shopname = rs.getString(2);
+				
+				return new Object[]{rowcount,shopname};
+			}
+			
+			return null;
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			if(rs != null)
+				rs.close();
+			if(cs != null)
+				cs.close();
+		}
 	}
 	
 	@Value("${sql.compare.cargo.result}")
@@ -340,7 +416,7 @@ public class CompareDaoImpl implements CompareDao{
 				cargoCompare.setSaletime(rs.getTimestamp(11));
 				cargoCompare.setSerial(rs.getString(12));
 				cargoCompare.setNum(rs.getInt(13));
-				cargoCompare.setWeight(rs.getDouble(14));
+				cargoCompare.setMinallot(rs.getInt(14));
 				
 				list.add(cargoCompare);
 			}

@@ -1,19 +1,20 @@
 package com.sol.kx.web.action.compare;
 
 import java.io.File;
-import java.sql.SQLException;
 
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sol.kx.web.action.BaseAction;
+import com.sol.kx.web.dao.pojo.CargoCompare;
 import com.sol.kx.web.dao.pojo.Compare;
 import com.sol.kx.web.service.BaseService;
 import com.sol.kx.web.service.CompareService;
 import com.sol.kx.web.service.bean.PagerBean;
 
 @Results({@Result(name = "compare",location = "/compare/compare.jsp"),
+	@Result(name = "cargoCompare",location = "/compare/cargoCompare.jsp"),
 	@Result(name = "input",location = "/t.jsp")})
 public class CompareAction extends BaseAction<Compare>{
 
@@ -27,19 +28,21 @@ public class CompareAction extends BaseAction<Compare>{
 	private int stocktype;
 	
 	private PagerBean<Compare> supplyBean;
+	private PagerBean<CargoCompare> cargoBean;
 	
 	public String uploadSupply() {
 		supplyBean = compareService.compareSupply(supplyFile, shopid,stocktype);
 		return "compare";
 	}
 	
+	private Integer minallot;
 	private File cargoSupplyFile;
 	private File cargoSaleFile;
 	private File cargoStockFile;
 	
 	public String uploadCargoSupply() {
-		supplyBean = compareService.compareCargo(cargoSupplyFile, cargoSaleFile, cargoStockFile, stocktype);
-		return "compare";
+		cargoBean = compareService.compareCargo(cargoSupplyFile, cargoSaleFile, cargoStockFile, stocktype,minallot);
+		return "cargoCompare";
 	}
 	
 	@Override
@@ -78,6 +81,14 @@ public class CompareAction extends BaseAction<Compare>{
 
 	public void setCargoStockFile(File cargoStockFile) {
 		this.cargoStockFile = cargoStockFile;
+	}
+
+	public PagerBean<CargoCompare> getCargoBean() {
+		return cargoBean;
+	}
+
+	public void setMinallot(Integer minallot) {
+		this.minallot = minallot;
 	}
 
 
