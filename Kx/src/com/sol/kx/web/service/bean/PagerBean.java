@@ -69,6 +69,10 @@ public class PagerBean<T> {
 		return exception != null;
 	}
 
+	public boolean hasReserve() {
+		return reserve != null && reserve.length > 0;
+	}
+	
 	public Object[] getReserve() {
 		return reserve;
 	}

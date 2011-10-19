@@ -17,16 +17,20 @@ public class CargoCompare {
 	private String serial;
 	private int num;
 	private Double weight;
+	private int minallot;
 	
 	public CargoCompare() {
 		
 	}
 	
-	public CargoCompare(int pid, String serial, int num, Double weight) {
+	public CargoCompare(int pid, String pname,String pcode,String serial, int num, Double weight,String shopname) {
 		this.pid = pid;
+		this.pname = pname;
+		this.pcode = pcode;
 		this.serial = serial;
 		this.num = num;
 		this.weight = weight;
+		this.shopname = shopname;
 	}
 	
 	public int getPid() {
@@ -132,5 +136,29 @@ public class CargoCompare {
 
 	public void setSaletime(Timestamp saletime) {
 		this.saletime = saletime;
+	}
+
+	@Override
+	public String toString() {
+		return "CargoCompare [id=" + id + ", "
+				+ (maxweight != null ? "maxweight=" + maxweight + ", " : "")
+				+ (minweight != null ? "minweight=" + minweight + ", " : "")
+				+ "num=" + num + ", "
+				+ (pcode != null ? "pcode=" + pcode + ", " : "") + "pid=" + pid
+				+ ", " + (pname != null ? "pname=" + pname + ", " : "")
+				+ (saletime != null ? "saletime=" + saletime + ", " : "")
+				+ (serial != null ? "serial=" + serial + ", " : "") + "shopid="
+				+ shopid + ", "
+				+ (shopname != null ? "shopname=" + shopname + ", " : "")
+				+ "stock=" + stock + ", stocknow=" + stocknow + ", "
+				+ (weight != null ? "weight=" + weight : "") + "]";
+	}
+
+	public int getMinallot() {
+		return minallot;
+	}
+
+	public void setMinallot(int minallot) {
+		this.minallot = minallot;
 	}
 }

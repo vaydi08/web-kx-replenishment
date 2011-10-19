@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -20,6 +21,7 @@ import com.sol.kx.web.dao.pojo.CargoCompare;
 import com.sol.kx.web.dao.pojo.Compare;
 import com.sol.kx.web.service.CompareService;
 import com.sol.kx.web.service.bean.PagerBean;
+import com.sol.kx.web.service.bean.PagerBean_Cargo;
 import com.sol.kx.web.service.util.PoiUtil;
 
 @Service
@@ -49,9 +51,12 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 			List<Compare> list = dao.compareSupply(shopid,stocktype);
 			
 			dao.removeTempTable();
-			dao.commit();
+			//dao.commit();
+			dao.rollback();
 			
 			bean.setDataList(list);
+			if(errList.size() > 0)
+				bean.setReserve(new Object[]{errList});
 			return bean;
 		} catch (Exception e) {
 			try {
@@ -86,11 +91,11 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 	
 	// CARGO
 	
-	public PagerBean<Compare> compareCargo(File cargoSupplyFile,File cargoSaleFile,File cargoStockFile,int stocktype) {
+	public PagerBean_Cargo compareCargo(File cargoSupplyFile,File cargoSaleFile,File cargoStockFile,int stocktype,Integer minallot) {
 		CompareDao dao = getCompareDao();
 		
 		
-		PagerBean<Compare> bean = new PagerBean<Compare>();
+		PagerBean_Cargo bean = new PagerBean_Cargo();
 		
 		try {
 			dao.startTransaction();
@@ -124,19 +129,38 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 			
 			// 比对
 			// 生成结果集
-			dao.cargoCompareCreateTb();
+			dao.cargoCompareCreateTb(minallot);
 			// 获取进货表
 			List<CargoCompare> cargoCompares = dao.cargoFindStock();
-			for(CargoCompare cargoCompare : cargoCompares)
-				dao.cargoCompareUpdateTb(cargoCompare);
+			for(Iterator<CargoCompare> it = cargoCompares.iterator(); it.hasNext();) {
+				CargoCompare cargoCompare = it.next();
+				Object[] ret = dao.cargoCompareUpdateTb(cargoCompare);
+				if((Integer)ret[0] > 0) {
+					dao.cargoStockUpdate((String)ret[1], cargoCompare.getSerial(), cargoCompare.getWeight());
+					it.remove();
+				}
+			}
+			
+			for(Iterator<CargoCompare> it = cargoCompares.iterator(); it.hasNext();) {
+				CargoCompare cargoCompare = it.next();
+				Object[] ret = dao.cargoCompareUpdateTbNormal(cargoCompare);
+				if((Integer)ret[0] > 0) {
+					dao.cargoStockUpdate((String)ret[1], cargoCompare.getSerial(), cargoCompare.getWeight());
+					it.remove();
+				}
+			}
 			
 			List<CargoCompare> result = dao.cargoFindResult();
-			System.out.println(result);
+			List<CargoCompare> stock = dao.cargoFindStock();
+//			System.out.println(cargoCompares);
 			
 //			dao.commit();
 			dao.rollback();
-			System.out.println(errList);
-			//bean.setDataList(list);
+//			System.out.println(errList);
+			bean.setDataList(result);
+			bean.setStockList(stock);
+			if(errList.size() > 0)
+				bean.setReserve(new Object[]{errList});
 			return bean;
 		} catch (Exception e) {
 			try {
