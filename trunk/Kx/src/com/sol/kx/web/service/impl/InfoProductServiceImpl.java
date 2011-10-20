@@ -105,6 +105,53 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 	}
 	
 	
+	// 导出
+	public PoiUtil createExcel() {
+		Logger.SERVICE.debug("查询[info_product + info_product_detail]数据,导出为Excel表格数据");
+		
+		PoiUtil poi = new PoiUtil();
+		
+		// 获取数据库
+		List<InfoProduct> list = null;
+		try {
+			list = infoProductDao.findExport();
+		} catch (Exception e) {
+			Logger.SERVICE.error("查询[info_product + info_product_detail]数据,导出为Excel表格数据错误",e);
+			return poi;
+		}
+		
+		poi.newRow();
+		poi.setValue(0, "产品名称");
+		poi.setValue(1, "产品代码");
+		poi.setValue(2, "克重");
+		poi.setValue(3, "成色");
+		poi.setValue(4, "规格");
+		poi.setValue(27, "备注");
+		poi.setValue(28, "图片");
+		poi.newRow();
+		poi.mergeCells(0, 0, 0, 1);
+		poi.mergeCells(1, 0, 1, 1);
+		poi.mergeCells(2, 0, 2, 1);
+		poi.mergeCells(3, 0, 3, 1);
+		poi.mergeCells(4, 0, 4, 1);
+		poi.mergeCells(27, 0, 27, 1);
+		poi.mergeCells(28, 0, 28, 1);
+		
+		// 输出到EXCEL表
+		for(InfoProduct po : list) {
+			poi.newRow();
+			poi.setValue(0, po.getPname());
+			poi.setValue(1, po.getPcode());
+			poi.setValue(2, po.getPweight());
+			poi.setValue(3, po.getQuality());
+			poi.setValue(4, po.getStand());
+			poi.setValue(27, po.getPremark());
+			poi.setValue(28, po.getImage());
+		}
+		
+		return poi;
+	}
+	
 	@Override
 	protected BaseDao getDao() {
 		return infoProductDao;

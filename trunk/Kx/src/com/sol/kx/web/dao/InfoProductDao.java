@@ -27,4 +27,6 @@ public interface InfoProductDao extends BaseDao{
 	public List<InfoProductDetail> findProductDetails(SelectEntity entity) throws Exception;
 	
 	public List<StockCheck> findQuickLocator(Integer pid) throws Exception;
+	
+	public List<InfoProduct> findExport() throws Exception;
 }

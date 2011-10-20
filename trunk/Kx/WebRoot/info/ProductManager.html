@@ -121,7 +121,9 @@
 			    toolbar:[{id:"btnadd",text:"添加产品",iconCls:"icon-add",handler:onAdd},
 			    		{id:"btnedit",text:"修改产品",iconCls:"icon-edit",handler:onEdit},
 			    		{id:"btnremove",text:"删除产品",iconCls:"icon-remove",handler:onRemove},
-			    		{id:"btnimport",text:"从Excel导入",iconCls:"icon-import",handler:onImport}
+			    		'-',
+			    		{id:"btnimport",text:"从Excel导入",iconCls:"icon-import",handler:onImport},
+			    		{id:"btnexport",text:"导出文件",iconCls:"icon-export",handler:function(){window.open('info-product!export.action')}}
 			    		],
 			    dlg:"#dlg",
 			    form:"#form",

@@ -1,8 +1,11 @@
 package com.sol.kx.web.service.util;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -12,6 +15,7 @@ import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class PoiUtil {
@@ -53,6 +57,12 @@ public class PoiUtil {
 		this.rowNo = -1;
 	}
 	
+	public PoiUtil() {
+		this.workbook = new HSSFWorkbook();
+		this.sheet = workbook.createSheet();
+		this.rowNo = -1;
+	}
+	
 	public boolean hasRow() {
 		if(rowIt.hasNext()) {
 			thisrow = rowIt.next();
@@ -73,6 +83,34 @@ public class PoiUtil {
 			return true;
 		} else
 			return false;
+	}
+	
+	public void mergeCells(int colfrom,int rowfrom,int colto,int rowto) {
+		CellRangeAddress r = new CellRangeAddress(rowfrom, rowto, colfrom, colto);
+		sheet.addMergedRegion(r);
+	}
+	
+	public void newRow() {
+		thisrow = sheet.createRow(++ rowNo);
+	}
+	
+	public void gotoRow(int row) {
+		thisrow = sheet.getRow(rowNo = row);
+	}
+	
+	public void setValue(int col,String value) {
+		Cell cell = thisrow.createCell(col);
+		cell.setCellValue(value);
+	}
+	
+	public void setValue(int col,double value) {
+		Cell cell = thisrow.createCell(col);
+		cell.setCellValue(value);
+	}
+	
+	public void setValue(int col,int value) {
+		Cell cell = thisrow.createCell(col);
+		cell.setCellValue(value);
 	}
 	
 	public Object getValue(int col,Object defaultvalue) {
@@ -142,6 +180,18 @@ public class PoiUtil {
 		default:
 			return cell.getStringValue();
 		}
+	}
+	
+	public InputStream getExcel() {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            workbook.write(baos);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        byte[] ba = baos.toByteArray();
+        ByteArrayInputStream bais = new ByteArrayInputStream(ba);
+        return bais;
 	}
 	
 	public void close() {
