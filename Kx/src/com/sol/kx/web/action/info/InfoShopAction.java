@@ -33,6 +33,7 @@ public class InfoShopAction extends BaseAction<InfoShop>{
 		List<InfoShop> list = infoShopService.findShops();
 		for(InfoShop shop : list)
 			comboboxBean.addData(shop.getName(), shop.getId());
+		comboboxBean.setFirstSelect();
 		
 		return COMBOBOX;
 	}

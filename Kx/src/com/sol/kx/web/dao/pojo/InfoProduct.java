@@ -26,6 +26,12 @@ public class InfoProduct extends Pojo{
 	@Column(name = "unit")
 	private String unit;
 	
+	private Double pweight;
+	private String quality;
+	private String stand;
+	private String image;
+	private String premark;
+	
 	public InfoProduct() {
 		type1 = new InfoCategory();
 		type2 = new InfoCategory();
@@ -121,6 +127,46 @@ public class InfoProduct extends Pojo{
 				+ (type3 != null ? "type3=" + type3 + ", " : "")
 				+ (type4 != null ? "type4=" + type4 + ", " : "")
 				+ (unit != null ? "unit=" + unit : "") + "]";
+	}
+
+	public Double getPweight() {
+		return pweight;
+	}
+
+	public void setPweight(Double pweight) {
+		this.pweight = pweight;
+	}
+
+	public String getQuality() {
+		return quality;
+	}
+
+	public void setQuality(String quality) {
+		this.quality = quality;
+	}
+
+	public String getStand() {
+		return stand;
+	}
+
+	public void setStand(String stand) {
+		this.stand = stand;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getPremark() {
+		return premark;
+	}
+
+	public void setPremark(String premark) {
+		this.premark = premark;
 	}
 	
 }

@@ -110,6 +110,17 @@ public class InfoProductDaoImpl extends BaseDaoImpl implements InfoProductDao {
 		return dataConsole.find(SQL_CODE2ID, InfoProduct.class, smap, null);
 	}
 	
+	// 导出
+	@Value("${sql.info.product.export}")
+	private String SQL_EXPORT;
+	
+	public List<InfoProduct> findExport() throws Exception {
+		return dataConsole.find(SQL_EXPORT, InfoProduct.class,
+				dataConsole.parseSmap(InfoProduct.class, "pname","pcode","pweight","quality","stand","image","premark"),
+				null);
+	}
+	
+	
 	
 	public int addProductDetail(InsertEntity entity) throws Exception {		
 		return dataConsole.updatePrepareSQL(entity.getFullSql(), entity.getCriteria().getParamList());

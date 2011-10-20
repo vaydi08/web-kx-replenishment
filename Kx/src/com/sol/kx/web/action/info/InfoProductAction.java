@@ -1,5 +1,6 @@
 package com.sol.kx.web.action.info;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -16,11 +17,16 @@ import com.sol.kx.web.dao.pojo.InfoProductDetail;
 import com.sol.kx.web.dao.pojo.StockCheck;
 import com.sol.kx.web.service.BaseService;
 import com.sol.kx.web.service.InfoProductService;
+import com.sol.kx.web.service.util.PoiUtil;
 
 @Controller
 @Scope("session")
 @Results({@Result(name = "productDetail",location = "/info/ProductDetail.jsp"),
-		  @Result(name = "quickLocatorStock",location = "/info/QuickLocatorStock.jsp")})
+		  @Result(name = "quickLocatorStock",location = "/info/QuickLocatorStock.jsp"),
+		  @Result(name = "export",type = "stream",params = 
+			{"contentType","application/octet-stream;charset=UTF-8",
+			"contentDisposition","attachment;filename=\"Goods.xls\"",
+			"inputName","exportFile"})})
 public class InfoProductAction extends BaseAction<InfoProduct>{
 
 	private static final long serialVersionUID = 1L;
@@ -96,6 +102,14 @@ public class InfoProductAction extends BaseAction<InfoProduct>{
 		return "quickLocatorStock";
 	}
 	
+	private InputStream exportFile;
+	
+	public String export() {
+		PoiUtil poi = infoProductService.createExcel();
+		exportFile = poi.getExcel();
+		return "export";
+	}
+	
 	/**
 	 * 子内容列表
 	 */
@@ -133,6 +147,10 @@ public class InfoProductAction extends BaseAction<InfoProduct>{
 
 	public Map<String,List<StockCheck>> getQuickLocatorStockList() {
 		return quickLocatorStockList;
+	}
+
+	public InputStream getExportFile() {
+		return exportFile;
 	}
 
 }

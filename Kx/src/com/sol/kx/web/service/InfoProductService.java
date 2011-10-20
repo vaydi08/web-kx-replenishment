@@ -11,6 +11,7 @@ import com.sol.kx.web.dao.pojo.InfoProductDetail;
 import com.sol.kx.web.dao.pojo.StockCheck;
 import com.sol.kx.web.service.bean.ImportResultBean;
 import com.sol.kx.web.service.bean.PagerBean;
+import com.sol.kx.web.service.util.PoiUtil;
 
 public interface InfoProductService extends BaseService<InfoProduct>{
 	public PagerBean<InfoProduct> find(PagerBean<InfoProduct> bean,Condition condition);
@@ -21,4 +22,6 @@ public interface InfoProductService extends BaseService<InfoProduct>{
 	public ImportResultBean[] importExcel(File[] files,int startrow);
 	
 	public Map<String,List<StockCheck>> findQuickLocator(Integer pid);
+	
+	public PoiUtil createExcel();
 }
