@@ -87,6 +87,10 @@ public class StockCheck extends Pojo{
 	public void setStocktype(Short stocktype) {
 		this.stocktype = stocktype;
 	}
+	
+	public void setStocktype(String stocktype) {
+		this.stocktype = Short.parseShort(stocktype);
+	}
 
 	@Override
 	public String toString() {
