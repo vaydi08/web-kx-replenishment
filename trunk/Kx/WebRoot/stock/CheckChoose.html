@@ -19,9 +19,6 @@
 	<script type="text/javascript" src="../script/easyui/jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="../script/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="../script/easyui/locale/easyui-lang-zh_CN.js"></script>
-	
-	<!-- EXTENSION -->
-	<script type=text/javascript src="../script/easyui/datagrid-detailview.js"></script>
 
 	<!-- DEFAULT -->
 	<script type="text/javascript" src="../script/sol-easyui-action.js"></script>
@@ -34,6 +31,14 @@
 	<script type="text/javascript" src="../script/sol/panelSelect.js"></script>
 	<script>
 	$(document).ready(function() {
+		$("#query").panel({
+			title:'选择门店及分类',
+			width:800,
+			height:500,
+
+			style:{'background-color':'#fafafa'}
+		});
+		
 		var divClick = function(value,text) {
 			var div = $('body').data('div');
 			var result = $('body').data('result');
@@ -119,15 +124,15 @@
 	</head>
 	<body>
 		<div id="right">
-			<div id="query">
-				<table cellpadding="0" cellspacing="0" border="0">
+			<div id="query" style="padding:10px">
+				<table cellpadding="0" cellspacing="0" border="0" style="position:relative;left:20px">
 				<thead>
 					<tr><th height="50">选择核定门店 及 分类</th></tr>
 				</thead>
 				<tbody>
 					<tr>
 					<td height="50">核定类型</td>
-					<td><select id="stocktype"><option value="1">一般</option><option value="2">节假日</option></select></td>
+					<td width="200"><input type="radio" id="stocktype" value="1" checked="checked"/>一般&nbsp;<input type="radio" id="stocktype" value="2" />节假日</td>
 					</tr>
 					<tr>
 					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#shopDiv" result="#shop" plain="true" iconCls="icon-tip">选择门店</a></td>

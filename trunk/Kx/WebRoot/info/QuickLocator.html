@@ -51,7 +51,9 @@
 				}
 			}
 
-			typeStr += str + "</strong>&nbsp;<a href='javascript:void(0);' onclick=copyToClipboard('" + str + "')>复制到剪贴板</a></td>";
+			var quickSearch = "<a href='javascript:void(0);' onclick=\"quickLocator('" + str + "','')\">快速检索</a>";
+			$("#queryValue").searchbox('setValue',str);
+			typeStr += str + "</strong>&nbsp;<a href='javascript:void(0);' onclick=copyToClipboard('" + str + "')>复制到剪贴板</a>&nbsp;" + quickSearch + "</td>";
 			$("#typeTr").html(typeStr);
 		}
 		//查询面板下拉菜单

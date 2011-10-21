@@ -70,14 +70,14 @@
 				},'-',{
 					id:'myorder',
 					text:'我的订单',
-					iconCls:'icon-ok',
+					//iconCls:'icon-ok',
 					handler:function(){
 						location.href='order/self.html';
 					}
-				},'-',{
+				},{
 					id:'allorder',
 					text:'全部订单',
-					iconCls:'icon-ok',
+					//iconCls:'icon-ok',
 					handler:function(){
 						location.href='order/all.html';
 					}

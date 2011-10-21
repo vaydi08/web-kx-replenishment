@@ -10,6 +10,7 @@
 	<constant name="struts.multipart.maxSize" value="90000000"/>
 
 	<package name="web-base" extends="convention-default">
+	<!-- 
 		<interceptors>
 			<interceptor name="authority" class="userAuthInterceptor" />
 			<interceptor-stack name="loginDefaultStack">
@@ -19,7 +20,7 @@
 		</interceptors>
 		
 		<default-interceptor-ref name="loginDefaultStack" />
-		
+		 -->
 		<global-results>
 			<result name="login" type="redirect">/user/preLogin.action</result>
 			<result name="result">/result.jsp</result>
