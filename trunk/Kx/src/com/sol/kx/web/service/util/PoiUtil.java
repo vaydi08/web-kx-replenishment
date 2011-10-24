@@ -57,9 +57,13 @@ public class PoiUtil {
 		this.rowNo = -1;
 	}
 	
-	public PoiUtil() {
+	public PoiUtil(String newsheet) {
 		this.workbook = new HSSFWorkbook();
-		this.sheet = workbook.createSheet();
+		newSheet(newsheet);
+	}
+	
+	public void newSheet(String newsheet) {
+		this.sheet = workbook.createSheet(newsheet);
 		this.rowNo = -1;
 	}
 	
@@ -90,6 +94,11 @@ public class PoiUtil {
 		sheet.addMergedRegion(r);
 	}
 	
+	public void autoSize(int col) {
+//		sheet.autoSizeColumn(col);
+		sheet.setColumnWidth(col, 3000);
+	}
+	
 	public void newRow() {
 		thisrow = sheet.createRow(++ rowNo);
 	}
@@ -99,8 +108,10 @@ public class PoiUtil {
 	}
 	
 	public void setValue(int col,String value) {
-		Cell cell = thisrow.createCell(col);
-		cell.setCellValue(value);
+		if(value != null) {
+			Cell cell = thisrow.createCell(col);
+			cell.setCellValue(value);
+		}
 	}
 	
 	public void setValue(int col,double value) {

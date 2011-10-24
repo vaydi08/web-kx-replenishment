@@ -106,9 +106,12 @@
 	</div>
 	</s:if>
 	
+	<s:if test="not cargoBean.hasException() && cargoBean.dataList.size() > 0">
 	<div title="下载数据" style="padding:10px" iconCls="icon-save">
-	
+	<a href="compare!downloadCargo.action" class="easyui-linkbutton" iconCls="icon-export" plain="true">下载文档</a>
 	</div>
+	</s:if>
+	
 	</div>
 </body>
 </html>

@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import org.sol.util.common.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -87,6 +88,32 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 		}
 		
 		poi.close();
+	}
+	
+	public PoiUtil exportDownloadSupply(List<Compare> list) {
+		PoiUtil poi = new PoiUtil("补货建议单");
+		poi.newRow();
+		poi.setValue(0, "产品名称");
+		poi.setValue(1, "产品代码");
+		poi.setValue(2, "克重范围");
+		poi.setValue(3, "核定库存");
+		poi.setValue(4, "实际库存");
+		poi.setValue(5, "建设补货量");
+		
+		for(Compare po : list) {
+			poi.newRow();
+			poi.setValue(0, po.getPname());
+			poi.setValue(1, po.getPcode());
+			poi.setValue(2, po.getMinweight() + "-" + po.getMaxweight());
+			poi.setValue(3, po.getStock());
+			poi.setValue(4, po.getKucun());
+			poi.setValue(5, po.getNeed());
+		}
+		
+		for(int i = 0; i < 6; i ++)
+			poi.autoSize(i);
+		
+		return poi;
 	}
 	
 	// CARGO
@@ -248,6 +275,65 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 		
 		poi.close();
 	}
+	
+	public PoiUtil exportDownloadCargo(PagerBean<CargoCompare> cargoBean) {
+		PoiUtil poi = new PoiUtil("分货单");
+		poi.newRow();
+		poi.setValue(0, "门店名称");
+		poi.setValue(1, "产品名称");
+		poi.setValue(2, "产品代码");
+		poi.setValue(3, "克重范围");
+		poi.setValue(4, "核定库存");
+		poi.setValue(5, "实际库存");
+		poi.setValue(6, "最后销售时间");
+		poi.setValue(7, "配货流水号 ");
+		poi.setValue(8, "配货数量");
+		poi.setValue(9, "至少还需配货");
+		
+		for(CargoCompare po : cargoBean.getDataList()) {
+			poi.newRow();
+			poi.setValue(0, po.getShopname());
+			poi.setValue(1, po.getPname());
+			poi.setValue(2, po.getPcode());
+			poi.setValue(3, po.getMinweight() + "-" + po.getMaxweight());
+			poi.setValue(4, po.getStock());
+			poi.setValue(5, po.getStocknow());
+			if(po.getSaletime() != null)
+				poi.setValue(6, StringUtil.formatTimestamp(po.getSaletime()));
+			poi.setValue(7, po.getSerial());
+			poi.setValue(8, po.getNum());
+			if(po.getMinallot() > 0)
+				poi.setValue(9, po.getMinallot());
+		}
+		
+		for(int i = 0; i < 9; i ++)
+			poi.autoSize(i);
+		
+		
+		poi.newSheet("货品分配");
+		poi.newRow();
+		poi.setValue(0, "产品名称");
+		poi.setValue(1, "产品代码");
+		poi.setValue(2, "流水号 ");
+		poi.setValue(3, "克重");
+		poi.setValue(4, "分配门店");
+		
+		for(CargoCompare po : ((PagerBean_Cargo)cargoBean).getStockList()) {
+			poi.newRow();
+			poi.setValue(0, po.getPname());
+			poi.setValue(1, po.getPcode());
+			poi.setValue(2, po.getSerial());
+			poi.setValue(3, po.getWeight());
+			if(po.getShopname() != null)
+				poi.setValue(4, po.getShopname());
+		}
+		
+		for(int i = 0; i < 5; i ++)
+			poi.autoSize(i);
+		
+		return poi;
+	}
+	
 	
 	
 	@Override
