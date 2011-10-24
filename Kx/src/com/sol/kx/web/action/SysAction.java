@@ -1,5 +1,12 @@
 package com.sol.kx.web.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +18,7 @@ import com.sol.kx.web.common.Constants;
 import com.sol.kx.web.dao.pojo.SysUser;
 import com.sol.kx.web.service.BaseService;
 import com.sol.kx.web.service.SysService;
+import com.sol.kx.web.service.bean.ResultBean;
 
 @Controller
 @Scope("session")
@@ -35,9 +43,26 @@ public class SysAction extends BaseAction<SysUser> {
 		SysUser user = sysService.login(input);
 		if(user != null) {
 			ActionContext.getContext().getSession().put(Constants.SESSION_USER, user);
-			return "loginOk";
-		} else
-			return "loginFail";
+			result = ResultBean.RESULT_SUCCESS();
+		} else {
+			result = ResultBean.RESULT_ERR("用户名 / 密码有误,请重新尝试登录");
+		}
+		return RESULT;
+	}
+	
+	public void logout() {
+		ActionContext.getContext().getSession().remove(Constants.SESSION_USER);
+		
+		PrintWriter out = null;
+		try {
+			HttpServletRequest req = (HttpServletRequest)ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+			out = ((HttpServletResponse)ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE)).getWriter();
+			out.print("<html><head><script>top.location.href='" + req.getContextPath() + "/login.html'</script></head><body></body></html>");
+			out.flush();
+		} catch (IOException e) {
+		} finally {
+			out.close();
+		}
 	}
 	
 	public String index() {
