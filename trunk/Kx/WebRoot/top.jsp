@@ -17,6 +17,6 @@
   
   <body>
   	<s:bean name="java.util.Date" var="now" />
-    <div id='top'><div class='topStr'>当前用户：<s:property value="#session[@com.sol.kx.web.common.Constants@SESSION_USER]" /> <s:date name="#now" format="yyyy / MM / dd"/> <a href='sys!login.action?input.username=sol&input.password=940430'>重新登录</a> <a href="sys!main.action" target="mainFrame">首页</a></div></div>
+    <div id='top'><div class='topStr'>当前用户：<s:property value="#session[@com.sol.kx.web.common.Constants@SESSION_USER]" /> <s:date name="#now" format="yyyy / MM / dd"/> <a href='sys!logout.action'>退出登录</a> <a href="sys!main.action" target="mainFrame">首页</a></div></div>
   </body>
 </html>

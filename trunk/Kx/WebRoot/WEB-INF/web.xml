@@ -21,9 +21,17 @@
 		<filter-name>UserAuth</filter-name>
 		<filter-class>com.sol.kx.web.interceptor.UserAuthFilter</filter-class>
 	</filter>
+	<filter>
+		<filter-name>LoginAuth</filter-name>
+		<filter-class>com.sol.kx.web.interceptor.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginAuth</filter-name>
+		<url-pattern>/sys!main.action</url-pattern>
+	</filter-mapping>
 	<filter-mapping>
 		<filter-name>UserAuth</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/info/*</url-pattern>
 	</filter-mapping>
 
 
