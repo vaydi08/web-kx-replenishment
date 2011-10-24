@@ -35,11 +35,6 @@
 <body style="padding:10px;">
 	<div class="easyui-tabs" style="height:600px">
 	<div title="补货建议单" style="padding:10px;">
-	
-	<s:if test="supplyBean.hasException()">
-		<s:property value="supplyBean.exception" />
-	</s:if>
-	<s:else>
 		<table class="easyui-datagrid" fitColumns="true" nowrap="true" singleSelect="true">
 		<thead>
 		<tr>
@@ -62,12 +57,28 @@
 		</tr>
 		</s:iterator>
 		</table>
-	</s:else>
 	</div>
 	
+	<s:if test="supplyBean.hasException()">
+	<div title="处理异常" style="padding:10px" iconCls="icon-cancel">
+	<s:property value="supplyBean.exception"/>
+	</div>
+	</s:if>
+	
+	<s:if test="supplyBean.hasReserve()">
+	<div title="异常信息" style="padding:10px" iconCls="icon-cancel">
+	<s:iterator value="supplyBean.reserve[0]">
+	<p><s:property/></p>
+	</s:iterator>
+	</div>
+	</s:if>
+	
+	<s:if test="not supplyBean.hasException() && supplyBean.dataList.size() > 0">
 	<div title="下载数据" style="padding:10px" iconCls="icon-save">
-	
+		<a href="compare!downloadSupply.action" class="easyui-linkbutton" iconCls="icon-export" plain="true">下载文档</a>
 	</div>
+	</s:if>
+	
 	</div>
 </body>
 </html>

@@ -105,8 +105,15 @@ public class InfoProductAction extends BaseAction<InfoProduct>{
 	private InputStream exportFile;
 	
 	public String export() {
-		PoiUtil poi = infoProductService.createExcel();
-		exportFile = poi.getExcel();
+		PoiUtil poi = null;
+		try {
+			poi = infoProductService.createExcel();
+			exportFile = poi.getExcel();
+		} catch (Exception e) {
+			if(poi != null)
+				poi.close();
+		}
+		
 		return "export";
 	}
 	
