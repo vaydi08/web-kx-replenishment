@@ -109,7 +109,7 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 	public PoiUtil createExcel() {
 		Logger.SERVICE.debug("查询[info_product + info_product_detail]数据,导出为Excel表格数据");
 		
-		PoiUtil poi = new PoiUtil();
+		PoiUtil poi = new PoiUtil("产品数据");
 		
 		// 获取数据库
 		List<InfoProduct> list = null;

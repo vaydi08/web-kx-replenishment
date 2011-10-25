@@ -31,11 +31,14 @@ public class LoginFilter implements Filter{
 		SysUser user = (SysUser) session.getAttribute(Constants.SESSION_USER);
 		
 		if(user == null) {
-			HttpServletResponse res = (HttpServletResponse)sres;
-			PrintWriter out = res.getWriter();
-			out.print("<html><head><script>top.location.href='" + req.getContextPath() + "/login.html'</script></head><body></body></html>");
-			out.flush();
-			out.close();
+			PrintWriter out = null;
+			try {
+				out = ((HttpServletResponse)sres).getWriter();
+				out.print("<html><head><script>top.location.href='" + req.getContextPath() + "/login.html'</script></head><body></body></html>");
+				out.flush();
+			} finally {
+				out.close();
+			}
 		} else
 			fc.doFilter(req,sres);
 	}
