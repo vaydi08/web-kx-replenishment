@@ -1,0 +1,109 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title></title>
+    
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<!-- NORMAL STYLE -->
+	<link rel="stylesheet" type="text/css" href="../images/style_easyui.css" />
+	
+	<!-- EASYUI -->
+	<link rel="stylesheet" type="text/css" href="../script/easyui/themes/default/easyui.css" />
+	<link rel="stylesheet" type="text/css" href="../script/easyui/themes/icon.css" />
+
+	<script type="text/javascript" src="../script/easyui/jquery-1.6.min.js"></script>
+	<script type="text/javascript" src="../script/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../script/easyui/jquery.edatagrid.js"></script>
+	<script type="text/javascript" src="../script/easyui/locale/easyui-lang-zh_CN.js"></script>
+
+	<!-- DEFAULT -->
+	<script type="text/javascript" src="../script/sol-easyui-action.js"></script>
+
+	<script>
+	var groupMap = [
+		{text:'系统管理组',value:1},
+		{text:'管理员组',value:2},
+		{text:'操作员组',value:3},
+		{text:'访问组',value:4}
+	     ];
+	$(document).ready(function() {
+		$("#listTable").edatagrid({
+			width:800,
+			height:600,
+			title:"员工列表",
+			style:{'background-color':'#fff'},
+			url:"sys!manager.action",
+			saveUrl: 'sys!add2.action',
+			updateUrl: 'sys!edit2.action',
+			destroyUrl: 'sys!delete2.action',
+			multi:false,
+
+    		onAfterEdit:function(){setTimeout("$('#listTable').edatagrid('reload');",500);},
+			onDestroy:function(){setTimeout("$('#listTable').edatagrid('reload');",500);}
+		});
+
+
+		$.extend($.fn.datagrid.defaults.editors, {   
+		    solpassword: {   
+		        init: function(container, options){
+		            var input = $('<input type="password" class="datagrid-editable-input" />').appendTo(container);   
+		            return input;   
+		        },   
+		        getValue: function(target){   
+		            return $(target).val();   
+		        },   
+		        setValue: function(target, value){   
+		            $(target).val(value);   
+		        },   
+		        resize: function(target, width){   
+		            var input = $(target);   
+		            if ($.boxModel == true){   
+		                input.width(width - (input.outerWidth() - input.width()));   
+		            } else {   
+		                input.width(width);   
+		            }   
+		        }   
+		    }   
+		}); 
+	});
+
+	var groupformatter = function(groupid,rowData,rowIndex) {
+		for(var key in groupMap) {
+			if(groupMap[key].value == groupid)
+				return groupMap[key].text;
+		}
+	}
+
+	var passwordformatter = function(value,rowData,rowIndex) {
+		return "********";
+	}
+	</script>
+	
+	</head>
+	<body>
+		<div id="right">
+		<table id="listTable" toolbar="#toolbar" rownumbers="true" fitColumns="true" singleSelect="true">
+		<thead>
+		<tr>
+		<th field="username" width="80" editor="{type:'validatebox',options:{required:true,validType:'length[1,20]'}}">用户名</th>
+		<th field="password" width="80" formatter="passwordformatter" editor="{type:'solpassword',options:{required:true,validType:'length[1,20]'}}">密码</th>
+		<th field="shorttel" width="80" editor="{type:'validatebox',options:{required:true,validType:'length[1,20]'}}">集团短号</th>
+		<th field="groupid" width="80" formatter="groupformatter" editor="{type:'combobox',options:{required:true,data:groupMap}}">群组名称</th>
+		</tr>
+		</thead>
+		</table>
+		
+		<div id="toolbar">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#listTable').edatagrid('addRow')">新增</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#listTable').edatagrid('destroyRow')">删除</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#listTable').edatagrid('saveRow')">保存</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#listTable').edatagrid('cancelRow')">取消</a>
+		</div>
+		</div>
+	</body>
+</html>
