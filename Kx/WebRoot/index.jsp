@@ -93,7 +93,7 @@
 	        <a href="order/orderSupplier.html" target="mainFrame" class="easyui-linkbutton" plain="true">供应商列表</a>
 	    </div>
 	    <div title="系统管理" iconCls="icon-d2" style="overflow:hidden;padding:10px;">  
-	        <a href="UserManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">用户管理</a>
+	        <a href="sys/UserManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">用户管理</a>
 	    </div>
 	   </div>
     </td>

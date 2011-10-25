@@ -65,11 +65,12 @@
 		<url-pattern>*.action</url-pattern>
 	</filter-mapping>
 
-
+	<!-- 
 	<jsp-config>
 		<taglib>
 			<taglib-uri>/sol-tag</taglib-uri>
 			<taglib-location>/WEB-INF/taglib/SoLTag</taglib-location>
 		</taglib>
 	</jsp-config>
+	 -->
 </web-app>

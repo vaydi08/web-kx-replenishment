@@ -1,6 +1,7 @@
 package com.sol.kx.web.interceptor;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -9,6 +10,12 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.sol.util.common.ContextUtil;
+
+import com.sol.kx.web.common.Constants;
+import com.sol.kx.web.dao.pojo.SysUser;
+import com.sol.kx.web.service.SysAuthService;
 
 public class UserAuthFilter implements Filter{
 
@@ -17,19 +24,35 @@ public class UserAuthFilter implements Filter{
 		
 	}
 
-	public void doFilter(ServletRequest sreq, ServletResponse res,
+	public void doFilter(ServletRequest sreq, ServletResponse sres,
 			FilterChain fc) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest)sreq;
-		String path = req.getContextPath();
+		HttpServletResponse res = (HttpServletResponse)sres;
 		
-		System.out.println(req.getRequestURI());
+		SysUser user = (SysUser) req.getSession().getAttribute(Constants.SESSION_USER);
 		
-		fc.doFilter(req,res);
+		if(user == null) {
+			PrintWriter out = null;
+			try {
+				out = res.getWriter();
+				out.print("<html><head><script>top.location.href='" + req.getContextPath() + "/login.html'</script></head><body></body></html>");
+				out.flush();
+			} finally {
+				out.close();
+			}
+			return;
+		}
+		
+		if(sysAuthService.checkAuth(req.getRequestURI(), user))
+			fc.doFilter(req,res);
+		else
+			req.getRequestDispatcher("/403.html").forward(req, sres);
 	}
 
+	private SysAuthService sysAuthService;
+	
 	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
-		
+		sysAuthService = ContextUtil.getObject(SysAuthService.class);
 	}
 
 }

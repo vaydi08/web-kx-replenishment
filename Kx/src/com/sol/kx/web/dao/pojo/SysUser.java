@@ -69,4 +69,16 @@ public class SysUser extends Pojo{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	@Override
+	public String toString() {
+		return "SysUser ["
+				+ (description != null ? "description=" + description + ", "
+						: "")
+				+ (groupid != null ? "groupid=" + groupid + ", " : "")
+				+ (groupname != null ? "groupname=" + groupname + ", " : "")
+				+ (id != null ? "id=" + id + ", " : "")
+				+ (password != null ? "password=" + password + ", " : "")
+				+ (shorttel != null ? "shorttel=" + shorttel + ", " : "")
+				+ (username != null ? "username=" + username : "") + "]";
+	}
 }
