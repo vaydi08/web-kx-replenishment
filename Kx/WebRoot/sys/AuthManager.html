@@ -1,0 +1,104 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title></title>
+    
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<!-- NORMAL STYLE -->
+	<link rel="stylesheet" type="text/css" href="../images/style_easyui.css" />
+	
+	<!-- EASYUI -->
+	<link rel="stylesheet" type="text/css" href="../script/easyui/themes/default/easyui.css" />
+	<link rel="stylesheet" type="text/css" href="../script/easyui/themes/icon.css" />
+
+	<script type="text/javascript" src="../script/easyui/jquery-1.6.min.js"></script>
+	<script type="text/javascript" src="../script/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../script/easyui/jquery.edatagrid.js"></script>
+	<script type="text/javascript" src="../script/easyui/locale/easyui-lang-zh_CN.js"></script>
+
+	<!-- DEFAULT -->
+	<script type="text/javascript" src="../script/sol-easyui-action.js"></script>
+
+	<script>
+
+	$(document).ready(function() {
+		var statusFormatter = function(value,rowData,rowIndex) {
+			return value == "1" ? "允许" : "不允许";
+		}
+
+		var p = function(groupid) {
+			return {
+				width:800,
+				height:600,
+				title:"权限分配表",
+				style:{'background-color':'#fff'},
+				url:"auth!manager2.action?input.groupid=" + groupid,
+				saveUrl: '',
+				updateUrl: 'auth!edit2.action',
+				destroyUrl: '',
+				fitColumns:true,
+				singleSelect:true,
+				columns:[[   
+		            {field:'description',title:'名称',width:100},   
+		            {field:'uri',title:'访问路径',width:100},   
+		            {field:'status',title:'许可状态',width:100,formatter:statusFormatter,editor:{type:'checkbox',options:{on:'1',off:'0'}}}   
+				]],
+				
+				onAfterEdit:function(){setTimeout("$('#listTable').edatagrid('reload');",500);},
+				onDestroy:function(){setTimeout("$('#listTable').edatagrid('reload');",500);},
+
+				onLoadSuccess:function(data){if(groupid=2)p2load=true;if(groupid=3)p3load=true;}
+			}
+		}
+
+		$("#listTable").edatagrid(p(2));
+
+		
+		
+		$.extend($.fn.datagrid.defaults.editors, {   
+		    solpassword: {   
+		        init: function(container, options){
+		            var input = $('<input type="password" class="datagrid-editable-input" />').appendTo(container);   
+		            return input;   
+		        },   
+		        getValue: function(target){   
+		            return $(target).val();   
+		        },   
+		        setValue: function(target, value){   
+		            $(target).val(value);   
+		        },   
+		        resize: function(target, width){   
+		            var input = $(target);   
+		            if ($.boxModel == true){   
+		                input.width(width - (input.outerWidth() - input.width()));   
+		            } else {   
+		                input.width(width);   
+		            }   
+		        }   
+		    }   
+		}); 
+	});
+	</script>
+	
+	</head>
+	<body>
+		<div id="right">
+		
+		
+		
+		<table id="listTable" toolbar="#toolbar" >
+		</table>
+		
+		<div id="toolbar">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#listTable').edatagrid('saveRow')">保存</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#listTable').edatagrid('cancelRow')">取消</a>
+		</div>
+		
+		</div>
+	</body>
+</html>
