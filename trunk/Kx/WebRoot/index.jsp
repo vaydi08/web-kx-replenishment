@@ -26,8 +26,9 @@
 	body {
 		font-family: "微软雅黑";
 		font-size:12px;
+		background:#e5e5e5;
 		width:1024px;
-		background:#e5e5e5
+		overflow:hidden;
 	}
 	#left a {color:#F6AB00;font-weight:bold;letter-spacing:5px;width:100%;}
 
@@ -51,7 +52,8 @@
 		$("#menu").accordion({
 			height:$("#left").height()
 		});
-
+		$('body').width(1024);
+		alert($(document).width());
 	});
 	</script>
   </head>
@@ -60,16 +62,15 @@
     <s:bean name="java.util.Date" var="now" />
     
     <table border="0" cellpadding="0" cellspacing="0">
-    <!-- TOP -->
+
     <tr><td id='top' width="1024" height="71" colspan="2">
     <div class='topStr'>当前用户：<s:property value="#session[@com.sol.kx.web.common.Constants@SESSION_USER].username" /> <s:date name="#now" format="yyyy / MM / dd"/> 
     <a href='sys!logout.action'>退出登录</a>
     <a href="sys!main.action" target="mainFrame">首页</a></div>
     </td></tr>
     
-    <!-- MAIN -->
+
     <tr>
-    <!-- LEFT -->
     <td id="left" width="160" height=700">
 	   <div id="menu">
 		<div title="基础数据" iconCls="icon-d1" selected="true" style="overflow:hidden;padding:10px;">  
@@ -94,10 +95,11 @@
 	    </div>
 	    <div title="系统管理" iconCls="icon-d2" style="overflow:hidden;padding:10px;">  
 	        <a href="sys/UserManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">用户管理</a>
+	        <a href="sys/AuthManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">权限分配</a>
 	    </div>
 	   </div>
     </td>
-    <!-- FRAME -->
+
     <td style="background-color:#f6ab46">
     <iframe src="sys!main.action" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" name="mainFrame" id="mainFrame"></iframe>
     </td>

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +14,7 @@ import com.sol.kx.web.dao.SysAuthDao;
 import com.sol.kx.web.dao.pojo.SysAuth;
 import com.sol.kx.web.dao.pojo.SysUser;
 import com.sol.kx.web.service.SysAuthService;
+import com.sol.kx.web.service.bean.PagerBean;
 
 @Service
 public class SysAuthServiceImpl extends BaseServiceImpl<SysAuth> implements SysAuthService{
@@ -54,7 +54,21 @@ public class SysAuthServiceImpl extends BaseServiceImpl<SysAuth> implements SysA
 			groupAuth[auth.getGroupid() - 1] = (auth.getStatus() == 1);
 		}
 		
-		Logger.SERVICE.linfo("用户鉴权情况:",authMap.toString());
+		//Logger.SERVICE.linfo("用户鉴权情况:",authMap.toString());
+	}
+	
+	@Override
+	public PagerBean<SysAuth> findByPage2(PagerBean<SysAuth> bean, SysAuth obj) {
+		Logger.SERVICE.ldebug("查询[sys_auth]数据",obj.getGroupid());
+		try {
+			return setBeanValue(bean, 
+					sysAuthDao.findAuth(obj.getGroupid()), 
+					sysAuthDao.findAuthCount(obj.getGroupid()));
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("查询sys_auth错误", e);
+			bean.setException(e);
+			return bean;
+		}
 	}
 	
 	@Override

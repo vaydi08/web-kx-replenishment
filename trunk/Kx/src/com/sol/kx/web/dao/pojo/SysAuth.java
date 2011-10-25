@@ -5,7 +5,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "sys_auth")
-public class SysAuth {
+public class SysAuth extends Pojo{
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private Integer id;
 	
@@ -17,6 +20,7 @@ public class SysAuth {
 	private Integer uriid;
 	private String uri;
 	private String uriname;
+	private String description;
 	
 	@Column(name = "status")
 	private Integer status;
@@ -77,9 +81,19 @@ public class SysAuth {
 		this.status = status;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	@Override
 	public String toString() {
 		return "SysAuth ["
+				+ (description != null ? "description=" + description + ", "
+						: "")
 				+ (groupdesc != null ? "groupdesc=" + groupdesc + ", " : "")
 				+ (groupid != null ? "groupid=" + groupid + ", " : "")
 				+ (id != null ? "id=" + id + ", " : "")
