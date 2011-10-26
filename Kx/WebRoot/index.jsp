@@ -39,12 +39,22 @@
 	#mainFrame {width:843px !important; width:820px;margin:0px;padding:0px;height:700px;}
 	
 	
-   .icon-d1{
-		background:url('images/button/d1.png') no-repeat;
+   .icon-info{
+		background:url('images/menu/info.png') no-repeat;
 	}
-	.icon-d2{
-		background:url('images/button/d2.png') no-repeat;
+	.icon-compare{
+		background:url('images/menu/compare.png') no-repeat;
 	}
+	.icon-sys{
+		background:url('images/menu/sys.png') no-repeat;
+	}
+	.icon-stock{
+		background:url('images/menu/stock.png') no-repeat;
+	}
+	.icon-order{
+		background:url('images/menu/order.png') no-repeat;
+	}
+	
 	</style>
 	
 	<script>
@@ -52,8 +62,6 @@
 		$("#menu").accordion({
 			height:$("#left").height()
 		});
-		$('body').width(1024);
-		alert($(document).width());
 	});
 	</script>
   </head>
@@ -73,29 +81,30 @@
     <tr>
     <td id="left" width="160" height=700">
 	   <div id="menu">
-		<div title="基础数据" iconCls="icon-d1" selected="true" style="overflow:hidden;padding:10px;">  
+		<div title="基础数据" iconCls="icon-info" selected="true" style="overflow:hidden;padding:10px;">  
 	        <a href="info/ProductManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">产品数据</a>
 	        <a href="info/ShopManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">门店数据</a>  
 	        <a href="info/CategoryManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">分类列表</a>  
 	        <a href="info/QuickLocator.html" target="mainFrame" class="easyui-linkbutton" plain="true">快速检索</a>  
 	    </div>  
-	    <div title="核定数据" iconCls="icon-d2" style="overflow:hidden;padding:10px;">  
+	    <div title="核定数据" iconCls="icon-stock" style="overflow:hidden;padding:10px;">  
 	        <a href="stock/CheckChoose.html" target="mainFrame" class="easyui-linkbutton" plain="true">核定数据</a>
 	        <a href="stock/CheckedManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">已作核定</a>  
 	    </div>  
-	    <div title="智能比对" iconCls="icon-d2" style="overflow:hidden;padding:10px;">  
+	    <div title="智能比对" iconCls="icon-compare" style="overflow:hidden;padding:10px;">  
 	        <a href="compare/CompareUpload.html" target="mainFrame" class="easyui-linkbutton" plain="true">比对数据</a>
 	        <a href="compare/CargoUpload.html" target="mainFrame" class="easyui-linkbutton" plain="true">智能分货</a>
 	    </div>
-	    <div title="订购系统" iconCls="icon-d2" style="overflow:hidden;padding:10px;">  
+	    <div title="订购系统" iconCls="icon-order" style="overflow:hidden;padding:10px;">  
 	        <a href="order/self.html" target="mainFrame" class="easyui-linkbutton" plain="true">我的订单</a>
 	        <a href="order/all.html" target="mainFrame" class="easyui-linkbutton" plain="true">全部订单</a>
 	        <a href="sys!index.action" target="_top" class="easyui-linkbutton" plain="true">未处理订单</a>
 	        <a href="order/orderSupplier.html" target="mainFrame" class="easyui-linkbutton" plain="true">供应商列表</a>
 	    </div>
-	    <div title="系统管理" iconCls="icon-d2" style="overflow:hidden;padding:10px;">  
+	    <div title="系统管理" iconCls="icon-sys" style="overflow:hidden;padding:10px;">  
 	        <a href="sys/UserManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">用户管理</a>
 	        <a href="sys/AuthManager.html" target="mainFrame" class="easyui-linkbutton" plain="true">权限分配</a>
+	        <a href="sys/ReloadConfig.html" target="mainFrame" class="easyui-linkbutton" plain="true">重载配置</a>
 	    </div>
 	   </div>
     </td>

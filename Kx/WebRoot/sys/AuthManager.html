@@ -34,7 +34,7 @@
 		var p = function(groupid) {
 			return {
 				width:800,
-				height:600,
+				height:550,
 				title:"权限分配表",
 				style:{'background-color':'#fff'},
 				url:"auth!manager2.action?input.groupid=" + groupid,
@@ -58,30 +58,13 @@
 
 		$("#listTable").edatagrid(p(2));
 
-		
-		
-		$.extend($.fn.datagrid.defaults.editors, {   
-		    solpassword: {   
-		        init: function(container, options){
-		            var input = $('<input type="password" class="datagrid-editable-input" />').appendTo(container);   
-		            return input;   
-		        },   
-		        getValue: function(target){   
-		            return $(target).val();   
-		        },   
-		        setValue: function(target, value){   
-		            $(target).val(value);   
-		        },   
-		        resize: function(target, width){   
-		            var input = $(target);   
-		            if ($.boxModel == true){   
-		                input.width(width - (input.outerWidth() - input.width()));   
-		            } else {   
-		                input.width(width);   
-		            }   
-		        }   
-		    }   
-		}); 
+		$("#queryPanel").queryPanel();
+
+		$("#group").combobox({
+			onSelect:function(record) {
+				$("#listTable").edatagrid(p(record.value));
+			}
+		});
 	});
 	</script>
 	
@@ -89,6 +72,13 @@
 	<body>
 		<div id="right">
 		
+		<div id="queryPanel">
+			<select id="group">
+				<option value="2" selected="selected">管理员组</option>
+				<option value="3">操作员组</option>
+				<option value="4">访问组</option>
+			</select>
+		</div>
 		
 		
 		<table id="listTable" toolbar="#toolbar" >
