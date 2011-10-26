@@ -18,6 +18,11 @@ public class AuthAction extends BaseAction<SysAuth>{
 	@Autowired
 	private SysAuthService sysAuthService;
 	
+	public String reloadAuthConfig() {
+		result = sysAuthService.reloadAuthConfig();
+		return RESULT;
+	}
+	
 	@Override
 	protected BaseService<SysAuth> getService() {
 		return sysAuthService;

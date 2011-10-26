@@ -13,9 +13,5 @@ public class Constants {
 	
 	// 分页大小
 	public static int pageSize = 10;
-	
-	public class SESSION {
-		public static final String user = "SYS.User";
-	}
 
 }

@@ -15,6 +15,7 @@ import com.sol.kx.web.dao.pojo.SysAuth;
 import com.sol.kx.web.dao.pojo.SysUser;
 import com.sol.kx.web.service.SysAuthService;
 import com.sol.kx.web.service.bean.PagerBean;
+import com.sol.kx.web.service.bean.ResultBean;
 
 @Service
 public class SysAuthServiceImpl extends BaseServiceImpl<SysAuth> implements SysAuthService{
@@ -33,6 +34,10 @@ public class SysAuthServiceImpl extends BaseServiceImpl<SysAuth> implements SysA
 	
 	@PostConstruct
 	public void init() {
+		reloadAuthConfig();
+	}
+	
+	public ResultBean reloadAuthConfig() {
 		Logger.SERVICE.debug("获取用户权限列表");
 		List<SysAuth> list = null;
 		try {
@@ -40,7 +45,7 @@ public class SysAuthServiceImpl extends BaseServiceImpl<SysAuth> implements SysA
 		} catch (Exception e) {
 			Logger.SERVICE.debug("获取用户权限列表 出错");
 			authMap = new HashMap<String,Boolean[]>(0);
-			return;
+			return ResultBean.RESULT_ERR(e.getMessage());
 		}
 		
 		authMap = new HashMap<String,Boolean[]>(20);
@@ -54,7 +59,7 @@ public class SysAuthServiceImpl extends BaseServiceImpl<SysAuth> implements SysA
 			groupAuth[auth.getGroupid() - 1] = (auth.getStatus() == 1);
 		}
 		
-		//Logger.SERVICE.linfo("用户鉴权情况:",authMap.toString());
+		return ResultBean.RESULT_SUCCESS();
 	}
 	
 	@Override
