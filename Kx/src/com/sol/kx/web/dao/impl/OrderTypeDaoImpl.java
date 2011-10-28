@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import com.sol.kx.web.dao.OrderTypeDao;
+import com.sol.kx.web.dao.pojo.InfoProductDetail;
 import com.sol.kx.web.dao.pojo.OrderType;
 
 @Repository
@@ -96,6 +97,21 @@ public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 		params.add(id);
 		return dataConsole.get(OrderType.class, SQL_GET, smap, params);
 	}
+	
+	// 选择产品
+	@Value("${sql.stock.product.get}")
+	private String SQL_CHOOSEPRODUCT;
+	
+	public List<InfoProductDetail> findChooseProduct(String pcode) throws Exception {
+		List<Object> params = new ArrayList<Object>(1);
+		params.add(pcode);
+		
+		return dataConsole.find(SQL_CHOOSEPRODUCT, InfoProductDetail.class, 
+				dataConsole.parseSmap(InfoProductDetail.class, 
+						"id","quality","image","pweight","stand","pname"), params);
+	}
+	
+	
 	
 	@Override
 	protected <X> X get(Class<X> clazz, String sql, Integer id)

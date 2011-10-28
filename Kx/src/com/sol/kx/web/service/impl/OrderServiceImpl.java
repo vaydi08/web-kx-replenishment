@@ -1,11 +1,14 @@
 package com.sol.kx.web.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sol.kx.web.common.Logger;
 import com.sol.kx.web.dao.BaseDao;
 import com.sol.kx.web.dao.OrderTypeDao;
+import com.sol.kx.web.dao.pojo.InfoProductDetail;
 import com.sol.kx.web.dao.pojo.OrderType;
 import com.sol.kx.web.service.OrderService;
 import com.sol.kx.web.service.bean.PagerBean;
@@ -65,6 +68,17 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderType> implements Orde
 			return orderTypeDao.get(id);
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("查询order_type指定数据错误", e);
+			return null;
+		}
+	}
+	
+	// 选择产品
+	public List<InfoProductDetail> findChooseProduct(String pcode) {
+		Logger.SERVICE.ldebug("查询[info_product_detail]对应pcode产品列表", pcode);
+		try {
+			return orderTypeDao.findChooseProduct(pcode);
+		} catch (Exception e) {
+			Logger.SERVICE.ldebug("查询[info_product_detail]对应pcode产品列表错误", e);
 			return null;
 		}
 	}

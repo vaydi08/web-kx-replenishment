@@ -3,6 +3,7 @@ package com.sol.kx.web.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.sol.kx.web.dao.pojo.InfoProductDetail;
 import com.sol.kx.web.dao.pojo.OrderType;
 
 public interface OrderTypeDao extends BaseDao {
@@ -17,4 +18,6 @@ public interface OrderTypeDao extends BaseDao {
 	public int findAllCount() throws SQLException;
 	
 	public OrderType get(Integer id) throws Exception;
+	
+	public List<InfoProductDetail> findChooseProduct(String pcode) throws Exception;
 }

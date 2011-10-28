@@ -1,12 +1,20 @@
 package com.sol.kx.web.dao.pojo;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "info_product_detail")
-public class InfoProductDetail {
+public class InfoProductDetail extends Pojo{
+	
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	private Integer id;
+	
 	@Column(name = "pid")
 	private Integer pid;
+	private String pname;
 	
 	@Column(name = "quality")
 	private String quality;
@@ -71,11 +79,28 @@ public class InfoProductDetail {
 		this.premark = premark;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getPname() {
+		return pname;
+	}
+
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+
 	@Override
 	public String toString() {
-		return "InfoProductDetail ["
+		return "InfoProductDetail [" + (id != null ? "id=" + id + ", " : "")
 				+ (image != null ? "image=" + image + ", " : "")
 				+ (pid != null ? "pid=" + pid + ", " : "")
+				+ (pname != null ? "pname=" + pname + ", " : "")
 				+ (premark != null ? "premark=" + premark + ", " : "")
 				+ (pweight != null ? "pweight=" + pweight + ", " : "")
 				+ (quality != null ? "quality=" + quality + ", " : "")
