@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>upload.html</title>
+		<meta http-equiv="keywords" content="enter,your,keywords,here" />
+		<meta http-equiv="description" content="A short description of this page." />
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		
+		<link href="script/swfupload/default.css" rel="stylesheet" type="text/css" />
+    
+	    <script type="text/javascript" src="script/swfupload/swfupload.js"></script>
+		<script type="text/javascript" src="script/swfupload/swfupload.queue.js"></script>
+		<script type="text/javascript" src="script/swfupload/fileprogress.js"></script>
+		<script type="text/javascript" src="script/swfupload/handlers.js"></script>
+	
+		<script>
+		var swfu;
+		window.onload = function (){
+			swfu = new SWFUpload({
+				upload_url:"img!upload.action",
+				flash_url:"script/swfupload/swfupload.swf",
+
+				file_upload_limit:1,
+				custom_settings : {
+					//progressTarget : "fsUploadProgress",
+					cancelButtonId : "btnCancel"
+				},
+
+				button_image_url: "script/swfupload/TestImageNoText_65x29.png",
+				button_width: "65",
+				button_height: "29",
+				button_placeholder_id: "spanButtonPlaceHolder",
+				button_text: '<span class="theFont">上传</span>',
+				button_text_style: ".theFont { font-size: 16; }",
+				button_text_left_padding: 12,
+				button_text_top_padding: 3,
+
+				file_queued_handler : fileQueued,
+				file_queue_error_handler : fileQueueError,
+				file_dialog_complete_handler : fileDialogComplete,
+				upload_start_handler : uploadStart,
+				upload_progress_handler : uploadProgress,
+				upload_error_handler : uploadError,
+				upload_success_handler : uploadSuccess,
+				upload_complete_handler : uploadComplete,
+				queue_complete_handler : queueComplete
+			});
+		}
+		</script>
+	</head>
+	<body>
+		<div class="fieldset flash" id="fsUploadProgress" style="display:none">
+			<span class="legend">Upload Queue</span>
+		</div>
+		<div id="divStatus" style="display:none">0 Files Uploaded</div>
+
+		<div>
+			<span id="spanButtonPlaceHolder"></span>
+			<input id="btnCancel" type="button" value="取消正在上传的文件" onclick="swfu.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;" />
+		</div>
+	</body>
+</html>
