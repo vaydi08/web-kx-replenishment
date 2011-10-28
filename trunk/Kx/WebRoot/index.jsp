@@ -99,6 +99,7 @@
 	        <a href="order/self.html" target="mainFrame" class="easyui-linkbutton" plain="true">我的订单</a>
 	        <a href="order/all.html" target="mainFrame" class="easyui-linkbutton" plain="true">全部订单</a>
 	        <a href="sys!index.action" target="_top" class="easyui-linkbutton" plain="true">未处理订单</a>
+	        <a href="order/order.html" target="mainFrame" class="easyui-linkbutton" plain="true">订购货品</a>
 	        <a href="order/orderSupplier.html" target="mainFrame" class="easyui-linkbutton" plain="true">供应商列表</a>
 	    </div>
 	    <div title="系统管理" iconCls="icon-sys" style="overflow:hidden;padding:10px;">  

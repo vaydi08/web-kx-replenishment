@@ -1,0 +1,217 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title></title>
+    
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<!-- NORMAL STYLE -->
+	<link rel="stylesheet" type="text/css" href="../images/style_easyui.css" />
+	
+	<!-- EASYUI -->
+	<link rel="stylesheet" type="text/css" href="../script/easyui/themes/default/easyui.css" />
+	<link rel="stylesheet" type="text/css" href="../script/easyui/themes/icon.css" />
+
+	<script type="text/javascript" src="../script/easyui/jquery-1.6.min.js"></script>
+	<script type="text/javascript" src="../script/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../script/easyui/locale/easyui-lang-zh_CN.js"></script>
+
+	<!-- DEFAULT -->
+	<script type="text/javascript" src="../script/sol-easyui-action.js"></script>
+	
+	
+	<style>
+	.panelSelect td {padding:3px}
+	.panelSelect a:hover {border:1px solid blue}
+	.panelSelect a{border:0px solid blue;color:#aaa;padding:5px}
+	</style>
+	<script type="text/javascript" src="../script/sol/panelSelect.js"></script>
+	<script type="text/javascript" src="../script/sol/productSelect.js"></script>
+	
+	<script>
+
+	$(document).ready(function() {
+		var types = ['','','',''];
+		var typeSelect = function(level,code,text) {
+			types[level - 1] = code;
+
+			var str = '';
+			for(i = 0; i < 4; i ++) {
+				if(types[i] != '')
+					str += types[i];
+				else {
+					$("#pcode").text('');
+					$("#pdid").val('');
+					$("#chooseProduct").hide();
+					return;
+				}
+			}
+
+			$("#pcode").text(str);
+			$("#chooseProduct").show();
+		}
+		
+		//查询面板下拉菜单
+		$("#type1").mycombo({
+			url:"../info/info-category!combobox.action?clevel=1",
+			onSelect:function(record) {
+				typeSelect(1,record.reserve,record.text);
+			}
+		});
+		$("#type2").mycombo({
+			url:"../info/info-category!combobox.action?clevel=2",
+			onSelect:function(record) {
+				typeSelect(2,record.reserve,record.text);
+			}
+		});
+		$("#type3").mycombo({
+			url:"../info/info-category!combobox.action?clevel=3",
+			onSelect:function(record) {
+				typeSelect(3,record.reserve,record.text);
+			}
+		});
+		$("#type4").mycombo({
+			url:"../info/info-category!combobox.action?clevel=4",
+			onSelect:function(record) {
+				typeSelect(4,record.reserve,record.text);
+			}
+		});
+
+
+		var divClick = function(value,text) {
+			var div = $('body').data('div');
+			var result = $('body').data('result');
+			var input = $('body').data('input');
+			$(result).text(text);
+			$(input).val(value);
+
+			$(div).dialog('close');
+		}
+		$("#shopDiv").find(".panelSelect").panelSelect({
+			'url':'../info/info-shop!findChoose.action',
+			onClick:divClick
+		});
+
+		$("#chooseProduct").click(function() {
+			closeDialog();
+
+			$('body').data('div',"#productDiv");
+			$('body').data('result',"#pname");
+			$('body').data('input',"#pdid");
+			
+			$("#productSelect").productSelect({
+				'url':'order!chooseProduct.action?pcode=' + $("#pcode").text(),
+				onClick:divClick
+			});
+
+			$("#productDiv").dialog('open');
+		});
+		
+
+		$(".chooseHref").click(function() {
+			closeDialog();
+			
+			var div = $(this).attr("div");
+			$(div).dialog('open');
+			var input = $(this).attr("input");
+
+			$('body').data('div',div);
+			$('body').data('result',$(this).attr('result'));
+			$('body').data('input',input);
+		});
+
+		var closeDialog = function() {
+			$('.easyui-dialog').each(function(){
+				$(this).dialog('close');
+			});
+		}
+
+
+
+		$("#form").form({
+			url:'order!add2.action',
+			onSubmit:function() {
+				if($("#pdid").val() == "" || $("#shopid").val() == "" || !$("#form").form('validate')) {
+					$.messager.show({title:'ERROR',msg:'输入项不能为空,请填写完整'});
+					return false;
+				}
+			},
+			success:function(data) {
+				var result = eval('(' + data + ')');
+				if(result.success){
+					alert("已发出订单");
+					location.href = '../sys!main.action';
+				}else
+					$.messager.show({title:"Error",msg:result.msg});
+			}
+		});
+	});
+
+	</script>
+	</head>
+	<body>
+	<div id="right" >
+		
+		<div id="order" class="easyui-panel" style="padding:10px;background-color:#fff" title="订购货品">
+		<form id="form" method="post">
+		<input type="hidden" name="input.status" value="1"/>
+			<table border="0" cellpadding="0" cellspacing="0" width="600">
+			<tr>
+			<td colspan="3">
+				<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+				<td width="120">选择产品</td>
+				<td width="120"><select id="type1"></select></td>
+				<td width="120"><select id="type2"></select></td>
+				<td width="120"><select id="type3"></select></td>
+				<td width="120"><select id="type4"></select></td>
+				</tr>
+				<tr><td colspan="5">&nbsp;</td></tr>
+				<tr>
+				<td></td>
+				<td><span id="pcode"></span><a href="javascript:void(0)" class="easyui-linkbutton" div="#productDiv" result="#pname" input="#pdid" plain="true" id="chooseProduct" style="display:none">选择</a>
+				</td>
+				<td id="pname" colspan="2"></td>
+				<td><input type="hidden" name="input.pdid" id="pdid"/></td>
+				</tr>
+				</table>
+			</td>
+			</tr>
+			<tr><td colspan="3"><hr size="1"/></td></tr>
+			<tr>
+				<td width="120" height="50">选择门店</td>
+				<td width="170"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#shopDiv" result="#shop" input="#shopid" plain="true">选择</a></td>
+				<td width="360" align="left"><span id="shop"></span><input type="hidden" name="input.shopid" id="shopid"/></td>
+			</tr>
+			<tr>
+				<td height="50">订购人</td>
+				<td><input type="text" class="easyui-validatebox" required="true" validType="length[1,20]" name="input.fromwho" id="fromwho"/></td>
+				<td><input type="text" class="easyui-numberbox" required="true" min="1" name="input.num" id="num" style="width:40px"/>件</td>
+			</tr>
+			<tr>
+				<td height="50">要求期限</td>
+				<td><input type="text" class="easyui-datetimebox" required="true" name="input.requesttime" id="requesttime" style="width:150px"/></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td height="50" colspan="2" align="center"><a href="javascript:void(0)" class="easyui-linkbutton" plain="true" iconCls="icon-ok" onclick="$('#form').submit()">提　交</a></td>
+				<td></td>
+			</tr>
+			</table>
+		</form>
+		</div>
+		
+	</div>
+	
+	<div id="shopDiv" class="easyui-dialog" closeable="true" title="Choose" modal="false" style="width:600px;height:500px" cache="false" closed="true">
+		<div class="panelSelect"></div>
+	</div>
+	<div id="productDiv" class="easyui-dialog" closeable="true" title="Choose" modal="false" style="width:600px;height:500px" cache="false" closed="true">
+		<div id="productSelect"></div>
+	</div>
+	</body>
+</html>

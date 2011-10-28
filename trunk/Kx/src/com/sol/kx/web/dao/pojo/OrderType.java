@@ -14,8 +14,8 @@ public class OrderType extends Pojo{
 	@Id
 	private Integer id;
 	
-	@Column(name = "pid")
-	private Integer pid;
+	@Column(name = "pdid")
+	private Integer pdid;
 	private String pname;
 	private String pcode;
 	private Double pweight;
@@ -28,6 +28,9 @@ public class OrderType extends Pojo{
 	
 	@Column(name = "fromwho")
 	private String fromwho;
+	
+	@Column(name = "num")
+	private Integer num;
 	
 	@Column(name = "ordertime")
 	private Timestamp ordertime;
@@ -67,12 +70,12 @@ public class OrderType extends Pojo{
 		this.id = id;
 	}
 
-	public Integer getPid() {
-		return pid;
+	public Integer getPdid() {
+		return pdid;
 	}
 
-	public void setPid(Integer pid) {
-		this.pid = pid;
+	public void setPdid(Integer pdid) {
+		this.pdid = pdid;
 	}
 
 	public Integer getShopid() {
@@ -207,6 +210,14 @@ public class OrderType extends Pojo{
 		this.stand = stand;
 	}
 
+	public Integer getNum() {
+		return num;
+	}
+
+	public void setNum(Integer num) {
+		this.num = num;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderType ["
@@ -217,9 +228,10 @@ public class OrderType extends Pojo{
 				+ (gettime != null ? "gettime=" + gettime + ", " : "")
 				+ (id != null ? "id=" + id + ", " : "")
 				+ (image != null ? "image=" + image + ", " : "")
+				+ (num != null ? "num=" + num + ", " : "")
 				+ (ordertime != null ? "ordertime=" + ordertime + ", " : "")
 				+ (pcode != null ? "pcode=" + pcode + ", " : "")
-				+ (pid != null ? "pid=" + pid + ", " : "")
+				+ (pdid != null ? "pdid=" + pdid + ", " : "")
 				+ (pname != null ? "pname=" + pname + ", " : "")
 				+ (pweight != null ? "pweight=" + pweight + ", " : "")
 				+ (requesttime != null ? "requesttime=" + requesttime + ", "

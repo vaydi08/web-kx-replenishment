@@ -2,6 +2,7 @@ package com.sol.kx.web.action.order;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionContext;
 import com.sol.kx.web.action.BaseAction;
 import com.sol.kx.web.common.Constants;
+import com.sol.kx.web.dao.pojo.InfoProductDetail;
 import com.sol.kx.web.dao.pojo.OrderType;
 import com.sol.kx.web.dao.pojo.SysUser;
 import com.sol.kx.web.service.BaseService;
@@ -22,7 +24,8 @@ import com.sol.kx.web.service.OrderService;
 @Results({@Result(name = "orderTake",location = "/order/orderTake.jsp"),
 		  @Result(name = "order3Repost",location = "/order/order3Repost.jsp"),
 		  @Result(name = "order4Over",location = "/order/self.html",type = "redirect"),
-		  @Result(name = "orderInfo",location = "/order/orderInfo.jsp")})
+		  @Result(name = "orderInfo",location = "/order/orderInfo.jsp"),
+		  @Result(name = "chooseProduct",location = "/order/chooseData.jsp")})
 public class OrderAction extends BaseAction<OrderType>{
 
 	private static final long serialVersionUID = 1L;
@@ -101,6 +104,13 @@ public class OrderAction extends BaseAction<OrderType>{
 		return RESULT;
 	}
 	
+	private String pcode;
+	private List<InfoProductDetail> productList;
+	public String chooseProduct() {
+		productList = orderService.findChooseProduct(pcode);
+		return "chooseProduct";
+	}
+	
 	
 	@Override
 	protected BaseService<OrderType> getService() {
@@ -114,6 +124,14 @@ public class OrderAction extends BaseAction<OrderType>{
 
 	public OrderType getOrder() {
 		return order;
+	}
+
+	public void setPcode(String pcode) {
+		this.pcode = pcode;
+	}
+
+	public List<InfoProductDetail> getProductList() {
+		return productList;
 	}
 
 	
