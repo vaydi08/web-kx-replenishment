@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Resource name="jdbc/mainfesto" 
+		type="com.mchange.v2.c3p0.ComboPooledDataSource"
+		maxPoolSize="20" 
+		minPoolSize="2"
+		initialPoolSize="10"
+		acquireIncrement="2"
+		idleConnectionTestPeriod="60"
+		preferredTestQuery="select 1"
+		testConnectionOnCheckin="true"
+		numHelperThreads="10"
+		checkoutTimeout="10000"
+		factory="org.apache.naming.factory.BeanFactory" 
+		user="" password=""
+		driverClass="org.sqlite.JDBC" 
+		jdbcUrl="jdbc:sqlite:F:/workspace_me/lx_mainfesto/src/db.sqlite" />
+
+</Context>

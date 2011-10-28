@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring"/>
+	<constant name="struts.convention.package.locators" value="action" />
+	<constant name="struts.convention.package.locators.basePackage" value="com.sol.lx.mainfesto" />
+
+	<constant name="struts.convention.default.parent.package" value="web-base" />
+	
+	<constant name="struts.multipart.maxSize" value="90000000"/>
+
+	<package name="web-base" extends="convention-default">
+	<!-- 
+		<interceptors>
+			<interceptor name="authority" class="userAuthInterceptor" />
+			<interceptor-stack name="loginDefaultStack">
+				<interceptor-ref name="authority" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="loginDefaultStack" />
+		 -->
+		<global-results>
+			<result name="login" type="redirect">/user/preLogin.action</result>
+			<result name="result">/result.jsp</result>
+			<result name="data">/data.jsp</result>
+			<result name="combobox">/combobox.jsp</result>
+		</global-results>
+	</package>
+
+</struts>   
