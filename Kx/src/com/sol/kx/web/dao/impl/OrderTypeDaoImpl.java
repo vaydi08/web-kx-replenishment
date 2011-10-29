@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sol.kx.web.dao.OrderTypeDao;
 import com.sol.kx.web.dao.pojo.InfoProductDetail;
+import com.sol.kx.web.dao.pojo.OrderCount;
 import com.sol.kx.web.dao.pojo.OrderType;
 
 @Repository
@@ -25,7 +26,7 @@ public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 		sb.append("select top ").append(page * pageSize).append(SQL_MAIN_UNTAKE.substring(6)).append(") find1 order by id asc) find2 order by id desc");
 
 		return dataConsole.find(sb.toString(),OrderType.class,
-				dataConsole.parseSmap(OrderType.class, "id","pname","shopname","pcode","fromwho","ordertime"),
+				dataConsole.parseSmap(OrderType.class, "id","pname","shopname","pcode","fromwho","ordertime","num"),
 				null);
 	}
 	
@@ -50,7 +51,7 @@ public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 		params.add(userid);
 		
 		return dataConsole.find(sb.toString(),OrderType.class,
-				dataConsole.parseSmap(OrderType.class, "id","pname","shopname","pcode","fromwho","ordertime","status"),
+				dataConsole.parseSmap(OrderType.class, "id","pname","shopname","pcode","fromwho","ordertime","status","num"),
 				params);
 	}
 	
@@ -74,7 +75,7 @@ public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 		sb.append("select top ").append(page * pageSize).append(SQL_MAIN_ALL.substring(6)).append(") find1 order by id asc) find2 order by id desc");
 		
 		return dataConsole.find(sb.toString(),OrderType.class,
-				dataConsole.parseSmap(OrderType.class, "id","pname","shopname","pcode","fromwho","ordertime","status","username"),
+				dataConsole.parseSmap(OrderType.class, "id","pname","shopname","pcode","fromwho","ordertime","status","username","num"),
 				null);
 	}
 	
@@ -99,7 +100,7 @@ public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 	}
 	
 	// 选择产品
-	@Value("${sql.stock.product.get}")
+	@Value("${sql.order.product.get}")
 	private String SQL_CHOOSEPRODUCT;
 	
 	public List<InfoProductDetail> findChooseProduct(String pcode) throws Exception {
@@ -109,6 +110,19 @@ public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 		return dataConsole.find(SQL_CHOOSEPRODUCT, InfoProductDetail.class, 
 				dataConsole.parseSmap(InfoProductDetail.class, 
 						"id","quality","image","pweight","stand","pname"), params);
+	}
+	
+	// 订购统计
+	@Value("${sql.order.count}")
+	private String SQL_ORDERCOUNT;
+	
+	public OrderCount findOrderCount(Integer userid) throws Exception {
+		List<Object> params = new ArrayList<Object>(1);
+		params.add(userid);
+		params.add(userid);
+		
+		return dataConsole.get(OrderCount.class, SQL_ORDERCOUNT, dataConsole.parseSmap(OrderCount.class, 
+				"untake","mytake","alert"), params);
 	}
 	
 	

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.sol.kx.web.dao.pojo.InfoProductDetail;
+import com.sol.kx.web.dao.pojo.OrderCount;
 import com.sol.kx.web.dao.pojo.OrderType;
 
 public interface OrderTypeDao extends BaseDao {
@@ -20,4 +21,5 @@ public interface OrderTypeDao extends BaseDao {
 	public OrderType get(Integer id) throws Exception;
 	
 	public List<InfoProductDetail> findChooseProduct(String pcode) throws Exception;
+	public OrderCount findOrderCount(Integer userid) throws Exception;
 }

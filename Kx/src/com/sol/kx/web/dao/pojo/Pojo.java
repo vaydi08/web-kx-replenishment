@@ -3,6 +3,7 @@ package com.sol.kx.web.dao.pojo;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +36,7 @@ public class Pojo implements Serializable{
 		for(Field field : fields) {
 			// 字段名
 			String fieldname = field.getName();
-			if(fieldname.equals("serialVersionUID"))
+			if(Modifier.isStatic(field.getModifiers()))
 				continue;
 			// 变量名
 			String mapname = (name == null) ? fieldname : name + "_" + fieldname;

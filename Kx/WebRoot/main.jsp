@@ -98,7 +98,7 @@
 		<div class="list" >
 
 			<table id="listTable" iconCls="icon-tip" nowrap="true" singleSelect="true"
-				 pagination="true" rownumbers="true">
+				 pagination="true" rownumbers="true" showFooter="true">
 			<thead>
 			<tr>
 			<th field="id" width="100">订单编号</th>
@@ -106,6 +106,7 @@
 			<th field="pcode" width="100">产品代码</th>
 			<th field="shopname" width="100">订购门店</th>
 			<th field="fromwho" width="100">下单人员</th>
+			<th field="num" width="100">订购数量</th>
 			<th field="ordertime" width="100">下单时间</th>
 			</tr>
 			</thead>
@@ -115,9 +116,9 @@
 		<div>
 		<table border="0" cellspacing="0" cellpadding="0" align="center" width="540" style="position:relative;bottom:-200px">
 		<tr>
-		<td><a href="compare/compare.html"><img src="images/1_03.png" /></a></td>
-		<td><a href="compare/compare.html"><img src="images/1_05.png" /></a></td>
-		<td><a href="order/purchase.html"><img src="images/1_06.png" /></a></td>
+		<td><a href="compare/CompareUpload.html"><img src="images/1_03.png" /></a></td>
+		<td><a href="info/QuickLocator.html"><img src="images/1_05.png" /></a></td>
+		<td><a href="order/order.html"><img src="images/1_06.png" /></a></td>
 		</tr>
 		</table>
 		</div>
