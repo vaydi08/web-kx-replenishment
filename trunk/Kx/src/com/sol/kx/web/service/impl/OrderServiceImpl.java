@@ -9,6 +9,7 @@ import com.sol.kx.web.common.Logger;
 import com.sol.kx.web.dao.BaseDao;
 import com.sol.kx.web.dao.OrderTypeDao;
 import com.sol.kx.web.dao.pojo.InfoProductDetail;
+import com.sol.kx.web.dao.pojo.OrderCount;
 import com.sol.kx.web.dao.pojo.OrderType;
 import com.sol.kx.web.service.OrderService;
 import com.sol.kx.web.service.bean.PagerBean;
@@ -19,13 +20,16 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderType> implements Orde
 	@Autowired
 	private OrderTypeDao orderTypeDao;
 	
-	public PagerBean<OrderType> findUntake(PagerBean<OrderType> bean) {
+	public PagerBean<OrderType> findUntake(PagerBean<OrderType> bean,Integer userid) {
 		Logger.SERVICE.ldebug("查询[order_type]未处理数据",bean.getPage(),bean.getPageSize());
 
 		try {
-			return setBeanValue(bean, 
+			PagerBean<OrderType> out = setBeanValue(bean, 
 					orderTypeDao.findUntake(bean.getPage(), bean.getPageSize()), 
 					orderTypeDao.findUntakeCount());
+			OrderCount count = orderTypeDao.findOrderCount(userid);
+			out.setReserve(new Object[]{count.getUntake(),count.getMytake(),count.getAlert()});
+			return out;
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("查询order_type错误", e);
 			bean.setException(e);

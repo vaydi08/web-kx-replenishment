@@ -36,7 +36,7 @@ public class OrderAction extends BaseAction<OrderType>{
 	
 	// 首页 未处理订单
 	public String managerUntake() {		
-		pagerBean = orderService.findUntake(pagerBean);
+		pagerBean = orderService.findUntake(pagerBean,((SysUser) ActionContext.getContext().getSession().get(Constants.SESSION_USER)).getId());
 		return DATA;
 	}
 	

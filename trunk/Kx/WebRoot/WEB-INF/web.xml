@@ -33,7 +33,22 @@
 		<filter-name>UserAuth</filter-name>
 		<url-pattern>/info/*</url-pattern>
 	</filter-mapping>
-
+	<filter-mapping>
+		<filter-name>UserAuth</filter-name>
+		<url-pattern>/stock/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>UserAuth</filter-name>
+		<url-pattern>/compare/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>UserAuth</filter-name>
+		<url-pattern>/order/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>UserAuth</filter-name>
+		<url-pattern>/sys/*</url-pattern>
+	</filter-mapping>
 
 	<!-- SPRING -->
 	<listener>

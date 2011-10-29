@@ -16,4 +16,9 @@
 	}<s:if test="not #st.last">,</s:if>
 	</s:iterator>
 	]
+	<s:if test="pagerBean.hasReserve()">
+	,"footer":[{"id":"未处理订单:","ordertime":"<s:property value="pagerBean.reserve[0]"/>"},
+	{"id":"我正处理的订单:","ordertime":"<s:property value="pagerBean.reserve[1]"/>"},
+	{"id":"订购期限小于7天的订单:","ordertime":"<s:property value="pagerBean.reserve[2]"/>"}]
+	</s:if>
 }

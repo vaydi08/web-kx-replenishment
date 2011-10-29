@@ -86,8 +86,8 @@
 	});
 	$.extend($.fn.validatebox.defaults.rules, {   
 	    compareWeight: {   
-	        validator: function(value, param){   
-	            return value > $('body').data('minweight');   
+	        validator: function(value, param){
+	            return Number(value) > Number($('body').data('minweight'));   
 	        },   
 	        message: '输入范围有误'  
 	    }   

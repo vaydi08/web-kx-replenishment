@@ -13,6 +13,7 @@ import java.util.Locale;
 
 import org.sol.util.common.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,13 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 		return ctx.getBean(CompareDao.class);
 	}
 	
+	@Value("${supply.startrow}")
+	private Integer SUPPLY_STARTROW;
+	@Value("${supply.pcode}")
+	private Integer SUPPLY_PCODE;
+	@Value("${supply.pweight}")
+	private Integer SUPPLY_PWEIGHT;
+	
 	public PagerBean<Compare> compareSupply(File uploadFile,int shopid,int stocktype) {
 		CompareDao dao = getCompareDao();
 		
@@ -47,7 +55,7 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 			
 			// 填充数据
 			List<String> errList = new ArrayList<String>();
-			readSupplyFile(uploadFile, 2, dao, errList);
+			readSupplyFile(uploadFile, SUPPLY_STARTROW, dao, errList);
 			
 			List<Compare> list = dao.compareSupply(shopid,stocktype);
 			
@@ -81,7 +89,7 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 				continue;
 			
 			try {
-				dao.insertSupplyTempTable(poi.getValue(5, "").toString(), (Double)poi.getValue(6, 0));
+				dao.insertSupplyTempTable(poi.getValue(SUPPLY_PCODE-1, "").toString(), (Double)poi.getValue(SUPPLY_PWEIGHT-1, 0));
 			} catch (Exception e) {
 				errList.add("第" + poi.getRowNo() + "行数据导入失败,原因:" + e.getMessage());
 			}
@@ -116,6 +124,41 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 		return poi;
 	}
 	
+	
+	@Value("${cargo.supply.startrow}")
+	private Integer CARGO_SUPPLY_STARTROW;
+	@Value("${cargo.supply.pcode}")
+	private Integer CARGO_SUPPLY_PCODE;
+	@Value("${cargo.supply.shopname}")
+	private Integer CARGO_SUPPLY_SHOPNAME;
+	@Value("${cargo.supply.pweight}")
+	private Integer CARGO_SUPPLY_PWEIGHT;
+	
+	@Value("${cargo.sale.startrow}")
+	private Integer CARGO_SALE_STARTROW;
+	@Value("${cargo.sale.serial}")
+	private Integer CARGO_SALE_SERIAL;
+	@Value("${cargo.sale.num}")
+	private Integer CARGO_SALE_NUM;
+	@Value("${cargo.sale.saletime}")
+	private Integer CARGO_SALE_TIME;
+	@Value("${cargo.sale.shopname}")
+	private Integer CARGO_SALE_SHOPNAME;
+	@Value("${cargo.sale.pcode}")
+	private Integer CARGO_SALE_PCODE;
+	@Value("${cargo.sale.pweight}")
+	private Integer CARGO_SALE_PWEIGHT;
+	
+	@Value("${cargo.stock.startrow}")
+	private Integer CARGO_STOCK_STARTROW;
+	@Value("${cargo.stock.serial}")
+	private Integer CARGO_STOCK_SERIAL;
+	@Value("${cargo.stock.num}")
+	private Integer CARGO_STOCK_NUM;
+	@Value("${cargo.stock.pcode}")
+	private Integer CARGO_STOCK_PCODE;
+	@Value("${cargo.stock.pweight}")
+	private Integer CARGO_STOCK_PWEIGHT;
 	// CARGO
 	
 	public PagerBean_Cargo compareCargo(File cargoSupplyFile,File cargoSaleFile,File cargoStockFile,int stocktype,Integer minallot) {
@@ -132,7 +175,7 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 			
 			// 填充数据
 			List<String> errList = new ArrayList<String>();
-			readCargoSupplyFile(cargoSupplyFile, 2, dao, errList);
+			readCargoSupplyFile(cargoSupplyFile, CARGO_SUPPLY_STARTROW, dao, errList);
 			
 			
 			// sale
@@ -140,7 +183,7 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 			dao.cargoSaleCreateTempTable();
 			
 			// 填充数据
-			readCargoSaleFile(cargoSaleFile, 2, dao, errList,stocktype);
+			readCargoSaleFile(cargoSaleFile, CARGO_SALE_STARTROW, dao, errList,stocktype);
 			
 			
 			// stock
@@ -148,7 +191,7 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 			dao.cargoStockCreateTempTable();
 			
 			// 填充数据
-			readCargoStockFile(cargoStockFile, 2, dao, errList);
+			readCargoStockFile(cargoStockFile, CARGO_STOCK_STARTROW, dao, errList);
 			
 //			dao.cargoSupplyRemoveTempTable();
 //			dao.cargoSaleRemoveTempTable();
@@ -211,7 +254,7 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 				continue;
 			
 			try {
-				dao.cargoSupplyDataUpdate(poi.getValue(5, "").toString(), poi.getValue(0, "").toString(), (Double)poi.getValue(6, 0));
+				dao.cargoSupplyDataUpdate(poi.getValue(CARGO_SUPPLY_PCODE-1, "").toString(), poi.getValue(CARGO_SUPPLY_SHOPNAME-1, "").toString(), (Double)poi.getValue(CARGO_SUPPLY_PWEIGHT-1, 0));
 			} catch (Exception e) {
 				errList.add("库存数据 - 第" + poi.getRowNo() + "行数据导入失败,原因:" + e.getMessage());
 			}
@@ -230,21 +273,21 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 				continue;
 			
 			try {
-				String serial = (String)poi.getValue(0, "");
-				Integer sale = ((Double)poi.getValue(2, 1)).intValue();
+				String serial = (String)poi.getValue(CARGO_SALE_SERIAL-1, "");
+				Integer sale = ((Double)poi.getValue(CARGO_SALE_NUM-1, 1)).intValue();
 				if(sale < 0) {
 					dao.cargoSaleDateDelete(serial);
 					continue;
 				}
 				long saletime;
 				try {
-					saletime = df.parse((String)poi.getValue(5,"")).getTime();
+					saletime = df.parse((String)poi.getValue(CARGO_SALE_TIME-1,"")).getTime();
 				} catch (Exception e) {
 					saletime = (new Date()).getTime();
 				}
-				String shopname = (String)poi.getValue(1, "");
-				String pcode = (String)poi.getValue(58, "");
-				Double weight = (Double)poi.getValue(59, 0.0);
+				String shopname = (String)poi.getValue(CARGO_SALE_SHOPNAME-1, "");
+				String pcode = (String)poi.getValue(CARGO_SALE_PCODE-1, "");
+				Double weight = (Double)poi.getValue(CARGO_SALE_PWEIGHT-1, 0.0);
 				
 				dao.cargoSaleDataUpdate(serial, sale, saletime, shopname, pcode, weight, stocktype);
 			} catch (Exception e) {
@@ -263,10 +306,10 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 				continue;
 			
 			try {
-				String serial = (String)poi.getValue(0, "");
-				Integer num = ((Double)poi.getValue(1, 1)).intValue();
-				String pcode = (String)poi.getValue(2, "");
-				Double weight = (Double)poi.getValue(3, 0.0);
+				String serial = (String)poi.getValue(CARGO_STOCK_SERIAL-1, "");
+				Integer num = ((Double)poi.getValue(CARGO_STOCK_NUM-1, 1)).intValue();
+				String pcode = (String)poi.getValue(CARGO_STOCK_PCODE-1, "");
+				Double weight = (Double)poi.getValue(CARGO_STOCK_PWEIGHT-1, 0.0);
 				dao.cargoStockDataUpdate(serial,num,pcode,weight);
 			} catch (Exception e) {
 				errList.add("进货数据 - 第" + poi.getRowNo() + "行数据导入失败,原因:" + e.getMessage());
