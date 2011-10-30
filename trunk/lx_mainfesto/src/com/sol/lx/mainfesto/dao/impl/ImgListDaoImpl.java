@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.sol.lx.mainfesto.dao.ImgListDao;
 import com.sol.lx.mainfesto.dao.pojo.ImgList;
 
-@Repository
+//@Repository
 public class ImgListDaoImpl extends BaseDaoImpl implements ImgListDao{
 	@Value("${sql.img_list.find}")
 	private String SQL_FIND;
