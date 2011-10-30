@@ -19,7 +19,7 @@ public interface InfoProductService extends BaseService<InfoProduct>{
 	
 	public List<InfoProductDetail> findProductDetails(Integer pid);
 	
-	public ImportResultBean[] importExcel(File[] files,int startrow);
+	public ImportResultBean[] importExcel(File[] files);
 	
 	public Map<String,List<StockCheck>> findQuickLocator(Integer pid);
 	

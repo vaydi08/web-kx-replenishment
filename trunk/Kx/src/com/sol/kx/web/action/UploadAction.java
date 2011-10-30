@@ -43,7 +43,7 @@ public class UploadAction extends ActionSupport{
 		
 		success = true;
 		
-		result = infoProductService.importExcel(Filedata,3);
+		result = infoProductService.importExcel(Filedata);
 		
 		return "importResult";
 	}

@@ -14,6 +14,7 @@ import org.sol.util.c3p0.dataEntity2.Criteria;
 import org.sol.util.c3p0.dataEntity2.InsertEntity;
 import org.sol.util.c3p0.dataEntity2.SelectEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.sol.kx.web.common.Logger;
@@ -105,6 +106,23 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 	}
 	
 	
+	@Value("${product.startrow}")
+	private Integer PRODUCT_STARTROW;
+	@Value("${product.pname}")
+	private Integer PRODUCT_PNAME;
+	@Value("${product.pcode}")
+	private Integer PRODUCT_PCODE;
+	@Value("${product.pweight}")
+	private Integer PRODUCT_PWEIGHT;
+	@Value("${product.quality}")
+	private Integer PRODUCT_QUALITY;
+	@Value("${product.stand}")
+	private Integer PRODUCT_STAND;
+	@Value("${product.remark}")
+	private Integer PRODUCT_REMARK;
+	@Value("${product.image}")
+	private Integer PRODUCT_IMAGE;
+	
 	// 导出
 	public PoiUtil createExcel() {
 		Logger.SERVICE.debug("查询[info_product + info_product_detail]数据,导出为Excel表格数据");
@@ -140,13 +158,13 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 		// 输出到EXCEL表
 		for(InfoProduct po : list) {
 			poi.newRow();
-			poi.setValue(0, po.getPname());
-			poi.setValue(1, po.getPcode());
-			poi.setValue(2, po.getPweight());
-			poi.setValue(3, po.getQuality());
-			poi.setValue(4, po.getStand());
-			poi.setValue(27, po.getPremark());
-			poi.setValue(28, po.getImage());
+			poi.setValue(PRODUCT_PNAME, po.getPname());
+			poi.setValue(PRODUCT_PCODE, po.getPcode());
+			poi.setValue(PRODUCT_PWEIGHT, po.getPweight());
+			poi.setValue(PRODUCT_QUALITY, po.getQuality());
+			poi.setValue(PRODUCT_STAND, po.getStand());
+			poi.setValue(PRODUCT_REMARK, po.getPremark());
+			poi.setValue(PRODUCT_IMAGE, po.getImage());
 		}
 		
 		return poi;
@@ -164,10 +182,10 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 	 * 导入相关
 	 */
 	
-	public ImportResultBean[] importExcel(File[] files,int startrow) {
+	public ImportResultBean[] importExcel(File[] files) {
 		ImportResultBean[] result = new ImportResultBean[files.length];
 		for(int i = 0; i < files.length; i ++)
-			result[i] = process(files[i],startrow);
+			result[i] = process(files[i],PRODUCT_STARTROW);
 		
 		return result;
 	}
@@ -212,16 +230,16 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 	}
 	
 	private void saveProduct(PoiUtil poi,Map<String,Integer> map,Map<String,Integer> codeMap,ImportResultBean result) throws Exception {
-		String pname = poi.getValue(0,"产品名称").toString();
-		String pcode = poi.getValue(1,"").toString();
+		String pname = poi.getValue(PRODUCT_PNAME,"产品名称").toString();
+		String pcode = poi.getValue(PRODUCT_PCODE,"").toString();
 		if(pcode.equals("") || pcode.length() != 6)
 			throw new Exception("产品代码为空 或者 产品代码长度错误");
 		
-		Double pweight = (Double) poi.getValue(2,0.0);
-		String quality = poi.getValue(3,"成色").toString();
-		String stand = poi.getValue(4,"规格").toString();
-		String premark = poi.getValue(27,"").toString();
-		String image = poi.getValue(28,"").toString();
+		Double pweight = (Double) poi.getValue(PRODUCT_PWEIGHT,0.0);
+		String quality = poi.getValue(PRODUCT_QUALITY,"成色").toString();
+		String stand = poi.getValue(PRODUCT_STAND,"规格").toString();
+		String premark = poi.getValue(PRODUCT_REMARK,"").toString();
+		String image = poi.getValue(PRODUCT_IMAGE,"").toString();
 		
 		Integer type1 = map.get("1" + pcode.substring(0,1));
 		Integer type2 = map.get("2" + pcode.substring(1,2));
