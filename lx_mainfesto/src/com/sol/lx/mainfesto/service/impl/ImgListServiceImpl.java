@@ -11,7 +11,7 @@ import com.sol.lx.mainfesto.dao.ImgListDao;
 import com.sol.lx.mainfesto.dao.pojo.ImgList;
 import com.sol.lx.mainfesto.service.ImgListService;
 
-@Service
+//@Service
 public class ImgListServiceImpl extends BaseServiceImpl<ImgList> implements ImgListService {
 
 	@Autowired
