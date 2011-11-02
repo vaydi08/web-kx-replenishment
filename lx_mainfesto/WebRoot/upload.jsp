@@ -1,3 +1,3 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-{success:"<s:property value="success"/>",file:"<s:property value="#session.tempImg"/>"}
+{success:<s:property value="success"/>,file:"<s:property value="file"/>",text:"<s:property value="text.replace('\n','|')" escape="false"/>"}
