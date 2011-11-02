@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>upload.html</title>
+		<title>中街大悦城 活动</title>
 		<meta http-equiv="keywords" content="enter,your,keywords,here" />
 		<meta http-equiv="description" content="A short description of this page." />
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -13,8 +13,18 @@
 		<script type="text/javascript" src="script/swfupload/swfupload.queue.js"></script>
 		<script type="text/javascript" src="script/swfupload/fileprogress.js"></script>
 		<script type="text/javascript" src="script/swfupload/handlers.js"></script>
-	
+		
+		<script type="text/javascript" src="script/jquery/jquery.js"></script>
+		
+		<style>
+		body{background:url('images/background.jpg');text-align:center;}
+		table{text-align:left;}
+		</style>
+		
 		<script>
+		var param = {text:'',file:''};
+		
+		var loadMsg = '<img src="images/loading.gif"/>正在处理中...请稍候';
 		var swfu;
 		window.onload = function (){
 
@@ -22,19 +32,21 @@
 				upload_url:"img!upload.action",
 				flash_url:"script/swfupload/swfupload.swf",
 				file_upload_limit:0,
+				post_params:{text:$("#text").val()},
 				custom_settings : {
 					//progressTarget : "fsUploadProgress",
 					cancelButtonId : "btnCancel"
 				},
 
-				button_image_url: "script/swfupload/TestImageNoText_65x29.png",
-				button_width: "65",
-				button_height: "29",
+				button_image_url: "images/upload_btnmark1.gif",
+				button_width: "400",
+				button_height: "300",
 				button_placeholder_id: "spanButtonPlaceHolder",
-				button_text: '<span class="theFont">上传</span>',
-				button_text_style: ".theFont { font-size: 16; }",
-				button_text_left_padding: 12,
-				button_text_top_padding: 3,
+				//button_text: '<span class="theFont">上传图片</span>',
+				button_text_style: ".theFont { font-size: 12px; }",
+				button_text_left_padding: 5,
+				button_text_top_padding: 1,
+				button_cursor:-2,
 
 				button_action:-100,
 				
@@ -42,34 +54,132 @@
 				file_queued_handler : fileQueued,
 				file_queue_error_handler : fileQueueError,
 				file_dialog_complete_handler : fileDialogComplete,
-				upload_start_handler : uploadStart,
+				upload_start_handler : function() {$("#loadMsg").html(loadMsg);},
 				upload_progress_handler : uploadProgress,
 				upload_error_handler : uploadError,
 				upload_success_handler : function(file,data) {
+					$("#loadMsg").html('');
+	
 					var ret = eval('(' + data + ')');
 
+					$("#swfuploaddiv").hide();
+					$("#temp").show();
+
+					param.file = ret.file;
+					param.text = ret.text;
+					//alert(data);
 					if(ret.success) {
-						"img!tempImg.action";
+						$("#temp").attr("src","temp/" + param.file + ".jpg");
+					} else {
+						$("#temp").attr("src","temp/" + param.file);
 					}
 				},
 				upload_complete_handler : uploadComplete,
 				queue_complete_handler : queueComplete
 			});
 		}
+
+
+		var src;
+		var textTemp = function() {
+			$("#loadMsg").html(loadMsg);
+			param.text = $("#text").val();
+			$.post('img!textTemp.action',param,function(data){
+
+				$("#loadMsg").html('');
+				
+				var ret = eval('(' + data + ')');
+
+				param.file = ret.file;
+				//param.text = ret.text;
+	//alert(param.file+" "+param.text);			
+				if(ret.success) {
+					$("#temp").attr("src","images/unupload.gif");
+					src = "temp/" + param.file + ".jpg?" + Math.random();
+					setTimeout('$("#temp").attr("src",src);',500);
+				} 
+			});
+		}
+
+		function weibo(url,title,pic) {
+			url = encodeURIComponent(url);
+			title = encodeURIComponent(title);
+			pic = encodeURIComponent(pic);
+			var a = "http://service.weibo.com/share/share.php?url=" + url + "&appkey=&title=" + title + "&pic=" + pic + "&ralateUid=1844262925";
+			location.href=a;
+		}
+		
+		var submit = function() {
+			if(param.text != "" && param.file != "") {
+				$.post('img!submit.action',param,function(data){
+					var ret = eval('(' + data + ')');
+	
+					if(ret.success) {
+						weibo('http://weibo.com/syjoycity',ret.text,'http://dyc.com/mainfesto/pic/' + ret.file);
+					} else {
+						alert("抱歉,有错误产生,不能正常提交,请重试");
+					}
+				});
+			}
+		}
 		</script>
 	</head>
 	<body>
+		<table cellpadding="0" cellspacing="0" border="0" width="" align="center">
+		<tr><td colspan="5" height="45">&nbsp;</td></tr>
+		<tr>
+		<td width="242">
+		&nbsp;
+		</td>
+		<td width="38">&nbsp;</td>
+		<td width="408">
+		&nbsp;
+		</td>
+		<td width="38">&nbsp;</td>
+		<td width="280" height="30">
+		<iframe width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" frameborder="No" border="0" src="http://widget.weibo.com/relationship/followbutton.php?width=63&height=24&uid=1844262925&style=1&btn=red&dpc=1"></iframe>
+		</td>
+		</tr>
+				
+		<tr>
+		<td style="background:url('images/upload1.gif') no-repeat;" height="385">
+		<textarea id="text" rows="4" cols="22" style="margin-top:85px;margin-left:12px;background:transparent;border:0px;overflow:hidden;"></textarea>
+		<br/>
+		<div align="right" style="margin-top:25px"><a href="javascript:void(0)" onclick="textTemp()"><img src="images/btn_text.gif"/></a></div>
+		<div align="right" id="loadMsg"></div>
+		</td>
+		<td>&nbsp;</td>
+		<td style="background:url('images/upload2.gif') no-repeat;">
+		<div style="height:50px">&nbsp;</div>
+		<img id="temp" width="400" height="300" src="images/unupload.gif" style="padding-left:5px;display:none"/>
+		<div align="center" id="swfuploaddiv">
+			<div id="spanButtonPlaceHolder" style="width:400px;height:300px"></div>
+			<div style="position:absolute;left:-1000px"><input id="btnCancel" type="button" value="取消上传" onclick="swfu.cancelQueue();" disabled="disabled" /></div>
+		</div>
+		</td>
+		<td>&nbsp;</td>
+		<td style="background:url('images/upload3.gif') no-repeat;">
+		<div style="margin-top:58px"><a href="http://weibo.com/syjoycity"><img src="images/up_xuzhi.gif"/></a></div>
+		<div style="margin-top:10px"><a href="javascript:void(0)" onclick="submit()"><img src="images/up_submit.gif"/></a></div>
+		<div style="margin-top:160px"><a href="http://weibo.com/syjoycity"><img src="images/up_huodong.gif"/></a></div>
+		<div style="margin-top:10px"><a href="http://weibo.com/syjoycity"><img src="images/up_link1.gif"/></a><a href="#"><img src="images/up_link2.gif"/></a></div>
+		</td>
+		</tr>
+		
+		<tr><td>&nbsp;</td></tr>
+		<tr>
+		<td colspan="5" align="center">
+		<img src="images/upload4.gif" onclick="location.href='img!list.action'"/>
+		</td>
+		</tr>
+		</table>
+	
+	
+	
 		<div class="fieldset flash" id="fsUploadProgress" style="position:absolute;left:-1000px">
 			<span class="legend">Upload Queue</span>
 		</div>
 		<div id="divStatus" style="position:absolute;left:-1000px">0 Files Uploaded</div>
 
-		<div>
-		<img id="temp" width="400"/>
-		</div>
-		<div>
-			<span id="spanButtonPlaceHolder"></span>
-			<input id="btnCancel" type="button" value="取消正在上传的文件" onclick="swfu.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;" />
-		</div>
 	</body>
 </html>
