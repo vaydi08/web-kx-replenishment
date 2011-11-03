@@ -9,5 +9,6 @@ public interface ImgListService extends BaseService<ImgList>{
 	public List<ImgList> find();
 	public boolean insert(String image,String text);
 		
-	public boolean pressText(String[] pressText, File srcImgFile,int color);
+	public void compress(File tempImg,String savePath);
+	public boolean pressText(String text1,String text2, File srcImgFile,int color,int x,int y);
 }

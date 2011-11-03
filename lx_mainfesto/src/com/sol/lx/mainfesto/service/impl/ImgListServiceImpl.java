@@ -3,12 +3,15 @@ package com.sol.lx.mainfesto.service.impl;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -20,6 +23,8 @@ import com.sol.lx.mainfesto.dao.BaseDao;
 import com.sol.lx.mainfesto.dao.ImgListDao;
 import com.sol.lx.mainfesto.dao.pojo.ImgList;
 import com.sol.lx.mainfesto.service.ImgListService;
+import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 @Service
 public class ImgListServiceImpl extends BaseServiceImpl<ImgList> implements ImgListService {
@@ -47,21 +52,52 @@ public class ImgListServiceImpl extends BaseServiceImpl<ImgList> implements ImgL
 	}
 	
 	
+	public void compress(File tempImg,String savePath) {
+		File dest = new File(savePath,tempImg.getName());
+		FileOutputStream out = null;
+		
+		Image srcImg = null;
+		try {
+			srcImg = ImageIO.read(tempImg);
+			int srcImgWidth = srcImg.getWidth(null);
+			int srcImgHeight = srcImg.getHeight(null);
+			
+			BufferedImage bufImg = new BufferedImage(srcImgWidth, srcImgHeight,
+					BufferedImage.TYPE_INT_RGB);
+			bufImg.getGraphics().drawImage(srcImg, 0,0,srcImgWidth,srcImgHeight,null);
+			
+			out = new FileOutputStream(dest);
+			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+			encoder.encode(bufImg);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(out != null)
+				try {
+					out.close();
+				} catch (IOException e) {
+				}
+		}
+		
+	}
+	
 	@Value("${fontname}")
 	private String fontName;
-	@Value("${font_x}")
-	private int font_x;
-	@Value("${font_y}")
-	private int font_y;
 	@Value("${fontsize}")
 	private int fontSize;
 	
-	public boolean pressText(String[] pressText, File srcImgFile,int color) {
+	private static Map<TextAttribute,Object> fontAttr;
+	static {
+		fontAttr = new HashMap<TextAttribute, Object>();
+		fontAttr.put(TextAttribute.FAMILY,"黑体");
+		fontAttr.put(TextAttribute.WEIGHT,3.0f);
+		fontAttr.put(TextAttribute.SIZE,250);
+	}
+	public boolean pressText(String text1,String text2, File srcImgFile,int color,int x,int y) {
 		
 		File dest = new File(srcImgFile.getParent(), srcImgFile.getName() + ".jpg");
 		FileOutputStream out = null;
-		
-		
+
 		try {
 			out = new FileOutputStream(dest);
 		
@@ -74,16 +110,14 @@ public class ImgListServiceImpl extends BaseServiceImpl<ImgList> implements ImgL
 					BufferedImage.TYPE_INT_RGB);
 			Graphics g = bufImg.createGraphics();
 			g.drawImage(srcImg, 0, 0, srcImgWidth, srcImgHeight, null);
-			Font font = new Font(fontName, Font.BOLD, fontSize);
+			Font font = new Font(fontAttr);
 			g.setFont(font);
 			
-			int y = font_y;
-			if(pressText != null && pressText.length > 0) {
-				for(String text : pressText) {
-					g.drawString(text, font_x, y);
-					y += fontSize;
-				}
-			}
+			g.drawString("光棍最", x, y);
+			y += fontSize;
+			g.drawString(text1, x, y);
+			y += fontSize;
+			g.drawString("因为是" + text2, x, y);
 			
 			g.dispose();
 			// 输出图片
