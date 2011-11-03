@@ -19,10 +19,15 @@
 		<style>
 		body{background:url('images/background.jpg');text-align:center;}
 		table{text-align:left;}
+		
+		#text1Div{margin-top:90px;margin-left:20px;color:#000;font-family:'黑体';font-size:26px;font-weight:bold;}
+		#text1Div #text1{background:transparent;border:0px;border-bottom:1px solid #000;margin-bottom:0px;margin-left:5px;}
+		#text2Div{margin-left:20px;color:#000;font-family:'黑体';font-size:26px;font-weight:bold;}
+		#text2Div #text2{background:transparent;border:0px;border-bottom:1px solid #000;margin-bottom:0px;margin-left:5px;}
 		</style>
 		
 		<script>
-		var param = {text:'',file:''};
+		var param = {text1:'',text2:'',x:'40',y:'200',color:'1',file:''};
 		
 		var loadMsg = '<img src="images/loading.gif"/>正在处理中...请稍候';
 		var swfu;
@@ -32,7 +37,7 @@
 				upload_url:"img!upload.action",
 				flash_url:"script/swfupload/swfupload.swf",
 				file_upload_limit:0,
-				post_params:{text:$("#text").val()},
+				post_params:{text1:$("#text1").val(),text2:$("#text2").val(),x:param.x,y:param.y,color:param.color},
 				custom_settings : {
 					//progressTarget : "fsUploadProgress",
 					cancelButtonId : "btnCancel"
@@ -66,7 +71,11 @@
 					$("#temp").show();
 
 					param.file = ret.file;
-					param.text = ret.text;
+					param.text1 = ret.text1;
+					param.text2 = ret.text2;
+					param.x = ret.x;
+					param.y = ret.y;
+					param.color = ret.color;
 					//alert(data);
 					if(ret.success) {
 						$("#temp").attr("src","temp/" + param.file + ".jpg");
@@ -83,7 +92,8 @@
 		var src;
 		var textTemp = function() {
 			$("#loadMsg").html(loadMsg);
-			param.text = $("#text").val();
+			param.text1 = $("#text1").val();
+			param.text2 = $("#text2").val();
 			$.post('img!textTemp.action',param,function(data){
 
 				$("#loadMsg").html('');
@@ -91,7 +101,11 @@
 				var ret = eval('(' + data + ')');
 
 				param.file = ret.file;
-				//param.text = ret.text;
+				param.text1 = ret.text1;
+				param.text2 = ret.text2;
+				param.x = ret.x;
+				param.y = ret.y;
+				param.color = ret.color;
 	//alert(param.file+" "+param.text);			
 				if(ret.success) {
 					$("#temp").attr("src","images/unupload.gif");
@@ -110,12 +124,12 @@
 		}
 		
 		var submit = function() {
-			if(param.text != "" && param.file != "") {
+			if(param.text1 != "" && param.text2 != "" && param.file != "") {
 				$.post('img!submit.action',param,function(data){
 					var ret = eval('(' + data + ')');
 	
 					if(ret.success) {
-						weibo('http://weibo.com/syjoycity',ret.text,'http://dyc.com/mainfesto/pic/' + ret.file);
+						weibo('http://www.shenyangjoycity.com/mainfesto/index.html',ret.text,'http://www.shenyangjoycity.com:8080/mainfesto/pic/' + ret.file);
 					} else {
 						alert("抱歉,有错误产生,不能正常提交,请重试");
 					}
@@ -137,15 +151,17 @@
 		</td>
 		<td width="38">&nbsp;</td>
 		<td width="280" height="30">
-		<iframe width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" frameborder="No" border="0" src="http://widget.weibo.com/relationship/followbutton.php?width=63&height=24&uid=1844262925&style=1&btn=red&dpc=1"></iframe>
+		<!-- <iframe width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" frameborder="No" border="0" src="http://widget.weibo.com/relationship/followbutton.php?width=63&height=24&uid=1844262925&style=1&btn=red&dpc=1"></iframe> -->
 		</td>
 		</tr>
 				
 		<tr>
 		<td style="background:url('images/upload1.gif') no-repeat;" height="385">
-		<textarea id="text" rows="4" cols="22" style="margin-top:85px;margin-left:12px;background:transparent;border:0px;overflow:hidden;"></textarea>
+		<!-- <textarea id="text" rows="4" cols="22" style="margin-top:85px;margin-left:12px;background:transparent;border:0px;overflow:hidden;"></textarea> -->
+		<div id="text1Div">光棍最<input type="text" id="text1" name="text1" maxlength="10" size="5"/></div>
+		<div id="text2Div">因为<span style="font-size:20px">是</span><input type="text" id="text2" name="text2" maxlength="10" size="5"/></div>
 		<br/>
-		<div align="right" style="margin-top:25px"><a href="javascript:void(0)" onclick="textTemp()"><img src="images/btn_text.gif"/></a></div>
+		<div align="right" style="margin-top:45px"><a href="javascript:void(0)" onclick="textTemp()"><img src="images/btn_text.gif"/></a></div>
 		<div align="right" id="loadMsg"></div>
 		</td>
 		<td>&nbsp;</td>
@@ -156,13 +172,21 @@
 			<div id="spanButtonPlaceHolder" style="width:400px;height:300px"></div>
 			<div style="position:absolute;left:-1000px"><input id="btnCancel" type="button" value="取消上传" onclick="swfu.cancelQueue();" disabled="disabled" /></div>
 		</div>
+		<div>
+			<input type="button" id="s_white" value="白"/>
+			<input type="button" id="s_white" value="黑"/>
+			<input type="button" id="s_white" value="左上"/>
+			<input type="button" id="s_white" value="左下"/>
+			<input type="button" id="s_white" value="右上"/>
+			<input type="button" id="s_white" value="右下"/>
+		</div>
 		</td>
 		<td>&nbsp;</td>
 		<td style="background:url('images/upload3.gif') no-repeat;">
-		<div style="margin-top:58px"><a href="http://weibo.com/syjoycity"><img src="images/up_xuzhi.gif"/></a></div>
+		<div style="margin-top:58px;width:18px">&nbsp;</div>
 		<div style="margin-top:10px"><a href="javascript:void(0)" onclick="submit()"><img src="images/up_submit.gif"/></a></div>
-		<div style="margin-top:160px"><a href="http://weibo.com/syjoycity"><img src="images/up_huodong.gif"/></a></div>
-		<div style="margin-top:10px"><a href="http://weibo.com/syjoycity"><img src="images/up_link1.gif"/></a><a href="#"><img src="images/up_link2.gif"/></a></div>
+		<div style="margin-top:160px"><a href="http://weibo.com/syjoycity" target="_blank"><img src="images/up_huodong.gif"/></a></div>
+		<div style="margin-top:10px"><a href="http://weibo.com/syjoycity" target="_blank"><img src="images/up_link1.gif"/></a><a href="http://weibo.com/syjoycity" target="_blank"><img src="images/up_link2.gif"/></a></div>
 		</td>
 		</tr>
 		
