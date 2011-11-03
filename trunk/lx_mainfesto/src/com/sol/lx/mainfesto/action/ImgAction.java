@@ -41,17 +41,22 @@ public class ImgAction extends ActionSupport {
 
 	public String upload() {
 		String urlTemp = ServletActionContext.getServletContext().getRealPath("/temp");
-		File dest = new File(urlTemp,Filedata[0].getName());
-
-		Filedata[0].renameTo(dest);
+//		File dest = new File(urlTemp,Filedata[0].getName());
+//
+//		Filedata[0].renameTo(dest);
 //		ActionContext.getContext().getSession().put("tempImg", dest.getName());
-		file = dest.getName();
+		imgListService.compress(Filedata[0], urlTemp);
+		file = Filedata[0].getName();
 		
 		success = pressText();
 		return "upload";
 	}
 
-	private String text;
+	private String text1;
+	private String text2;
+	private int x;
+	private int y;
+	private int color;
 	private String file;
 	
 	public String textTemp() {
@@ -63,13 +68,11 @@ public class ImgAction extends ActionSupport {
 	}
 	
 	private boolean pressText() {
-//		String image = (String) ActionContext.getContext().getSession().get("tempImg");
-//		String text = (String) ActionContext.getContext().getSession().get("tempText");
-		
-		if(file != null && !file.equals("") && text != null && !text.equals("")) {
+		if(file != null && !file.equals("") && text1 != null && text2 != null) {
 			String urlTemp = ServletActionContext.getServletContext().getRealPath("/temp");
 			File img = new File(urlTemp,file);
-			return imgListService.pressText(text.split("\n"), img, Color.WHITE.getRGB());
+			Color c = (color == 1) ? Color.white : Color.black;
+			return imgListService.pressText(text1,text2, img, c.getRGB(),x,y);
 		} else
 			return false;
 	}
@@ -87,7 +90,7 @@ public class ImgAction extends ActionSupport {
 		img.renameTo(dest);
 		temp.delete();
 		
-		success = imgListService.insert(file, text);
+		success = imgListService.insert(file, text1+text2);
 		
 //		ActionContext.getContext().getSession().remove("tempImg");
 //		ActionContext.getContext().getSession().remove("tempText");
@@ -110,19 +113,51 @@ public class ImgAction extends ActionSupport {
 		return splitLen;
 	}
 
-	public void setText(String text) {
-		this.text = text;
-	}
-
 	public String getFile() {
 		return file;
 	}
 
-	public String getText() {
-		return text;
-	}
-
 	public void setFile(String file) {
 		this.file = file;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public void setColor(int color) {
+		this.color = color;
+	}
+
+	public String getText1() {
+		return text1;
+	}
+
+	public void setText1(String text1) {
+		this.text1 = text1;
+	}
+
+	public String getText2() {
+		return text2;
+	}
+
+	public void setText2(String text2) {
+		this.text2 = text2;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public int getColor() {
+		return color;
 	}
 }
