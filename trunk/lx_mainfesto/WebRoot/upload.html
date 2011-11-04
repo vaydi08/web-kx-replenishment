@@ -24,6 +24,8 @@
 		#text1Div #text1{background:transparent;border:0px;border-bottom:1px solid #000;margin-bottom:0px;margin-left:5px;}
 		#text2Div{margin-left:20px;color:#000;font-family:'黑体';font-size:26px;font-weight:bold;}
 		#text2Div #text2{background:transparent;border:0px;border-bottom:1px solid #000;margin-bottom:0px;margin-left:5px;}
+		
+		#s_btn_div input {width:60px;height:30px;background:url('images/s_reload.gif');border:0px;}
 		</style>
 		
 		<script>
@@ -157,9 +159,9 @@
 			if(param.text1 != "" && param.text2 != "" && param.file != "") {
 				$.post('img!submit.action',param,function(data){
 					var ret = eval('(' + data + ')');
-	
+					var title = "光棍最" + ret.text1 + " 因为是" + ret.text2;
 					if(ret.success) {
-						weibo('http://www.shenyangjoycity.com/mainfesto/index.html',ret.text,'http://www.shenyangjoycity.com:8080/mainfesto/pic/' + ret.file);
+						weibo('http://www.shenyangjoycity.com/mainfesto/index.html',title,'http://www.shenyangjoycity.com:8080/mainfesto/pic/' + ret.file);
 					} else {
 						alert("抱歉,有错误产生,不能正常提交,请重试");
 					}
@@ -181,7 +183,7 @@
 		</td>
 		<td width="38">&nbsp;</td>
 		<td width="280" height="30">
-		<!-- <iframe width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" frameborder="No" border="0" src="http://widget.weibo.com/relationship/followbutton.php?width=63&height=24&uid=1844262925&style=1&btn=red&dpc=1"></iframe> -->
+		<iframe width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" frameborder="No" border="0" src="http://widget.weibo.com/relationship/followbutton.php?width=63&height=24&uid=1844262925&style=1&btn=red&dpc=1"></iframe>
 		</td>
 		</tr>
 				
@@ -203,14 +205,14 @@
 			<div id="spanButtonPlaceHolder" style="width:400px;height:300px"></div>
 			<div style="position:absolute;left:-1000px"><input id="btnCancel" type="button" value="取消上传" onclick="swfu.cancelQueue();" disabled="disabled" /></div>
 		</div>
-		<div style="margin-top:5px">
-			<input type="button" id="s_white" value="白" onclick="colorTemp('1')"/>
-			<input type="button" id="s_black" value="黑" onclick="colorTemp('0')"/>
-			<input type="button" id="s_leftup" value="左上" onclick="locationTemp('10','50')"/>
-			<input type="button" id="s_leftdown" value="左下" onclick="locationTemp('10','160')"/>
-			<input type="button" id="s_rightup" value="右上" onclick="locationTemp(230-$('#text2').val().length*50,'50')"/>
-			<input type="button" id="s_rightdown" value="右下" onclick="locationTemp(230-$('#text2').val().length*50,'160')"/>
-			<input type="button" id="s_reloadPic" value="刷新图片" onclick="reloadPic()"/>
+		<div style="margin-top:5px" id="s_btn_div">
+			<input type="button" id="s_white" onclick="colorTemp('1')" style="background:url('images/s_white.gif');"/>
+			<input type="button" id="s_black" onclick="colorTemp('0')" style="background:url('images/s_black.gif');"/>
+			<input type="button" id="s_leftup" onclick="locationTemp('10','50')" style="background:url('images/s_leftup.gif');"/>
+			<input type="button" id="s_leftdown" onclick="locationTemp('10','160')" style="background:url('images/s_leftdown.gif');"/>
+			<input type="button" id="s_rightup" onclick="locationTemp(230-$('#text2').val().length*50,'50')" style="background:url('images/s_rightup.gif');"/>
+			<input type="button" id="s_rightdown" onclick="locationTemp(230-$('#text2').val().length*50,'160')" style="background:url('images/s_rightdown.gif');"/>
+			<input type="button" id="s_reloadPic" onclick="reloadPic()" style="background:url('images/s_reload.gif');"/>
 		</div>
 		</td>
 		<td>&nbsp;</td>
@@ -225,7 +227,7 @@
 		<tr><td>&nbsp;</td></tr>
 		<tr>
 		<td colspan="5" align="center">
-		<img src="images/upload4.gif" onclick="location.href='img!list.action'"/>
+		<img src="images/upload4.gif" onclick="location.href='img!list.action'" style="cursor:pointer;"/>
 		</td>
 		</tr>
 		</table>
