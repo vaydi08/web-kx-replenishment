@@ -1,5 +1,6 @@
 package com.sol.lx.mainfesto.service.impl;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -59,8 +60,8 @@ public class ImgListServiceImpl extends BaseServiceImpl<ImgList> implements ImgL
 		Image srcImg = null;
 		try {
 			srcImg = ImageIO.read(tempImg);
-			int srcImgWidth = srcImg.getWidth(null);
-			int srcImgHeight = srcImg.getHeight(null);
+			int srcImgWidth = 400;
+			int srcImgHeight = 300;
 			
 			BufferedImage bufImg = new BufferedImage(srcImgWidth, srcImgHeight,
 					BufferedImage.TYPE_INT_RGB);
@@ -81,19 +82,21 @@ public class ImgListServiceImpl extends BaseServiceImpl<ImgList> implements ImgL
 		
 	}
 	
-	@Value("${fontname}")
-	private String fontName;
-	@Value("${fontsize}")
-	private int fontSize;
-	
 	private static Map<TextAttribute,Object> fontAttr;
 	static {
 		fontAttr = new HashMap<TextAttribute, Object>();
 		fontAttr.put(TextAttribute.FAMILY,"黑体");
 		fontAttr.put(TextAttribute.WEIGHT,3.0f);
-		fontAttr.put(TextAttribute.SIZE,250);
+		fontAttr.put(TextAttribute.SIZE,50);
 	}
-	public boolean pressText(String text1,String text2, File srcImgFile,int color,int x,int y) {
+	private static Map<TextAttribute,Object> fontAttrText1;
+	static {
+		fontAttrText1 = new HashMap<TextAttribute, Object>();
+		fontAttrText1.put(TextAttribute.FAMILY,"黑体");
+		fontAttrText1.put(TextAttribute.WEIGHT,3.0f);
+		fontAttrText1.put(TextAttribute.SIZE,70);
+	}
+	public boolean pressText(String text1,String text2, File srcImgFile,Color color,int x,int y) {
 		
 		File dest = new File(srcImgFile.getParent(), srcImgFile.getName() + ".jpg");
 		FileOutputStream out = null;
@@ -111,12 +114,17 @@ public class ImgListServiceImpl extends BaseServiceImpl<ImgList> implements ImgL
 			Graphics g = bufImg.createGraphics();
 			g.drawImage(srcImg, 0, 0, srcImgWidth, srcImgHeight, null);
 			Font font = new Font(fontAttr);
+			Font fontText1 = new Font(fontAttrText1);
+			
 			g.setFont(font);
+			g.setColor(color);
 			
 			g.drawString("光棍最", x, y);
-			y += fontSize;
+			y += fontText1.getSize();
+			g.setFont(fontText1);
 			g.drawString(text1, x, y);
-			y += fontSize;
+			g.setFont(font);
+			y += font.getSize();
 			g.drawString("因为是" + text2, x, y);
 			
 			g.dispose();

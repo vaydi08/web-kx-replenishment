@@ -1,5 +1,6 @@
 package com.sol.lx.mainfesto.service;
 
+import java.awt.Color;
 import java.io.File;
 import java.util.List;
 
@@ -10,5 +11,5 @@ public interface ImgListService extends BaseService<ImgList>{
 	public boolean insert(String image,String text);
 		
 	public void compress(File tempImg,String savePath);
-	public boolean pressText(String text1,String text2, File srcImgFile,int color,int x,int y);
+	public boolean pressText(String text1,String text2, File srcImgFile,Color color,int x,int y);
 }

@@ -72,7 +72,7 @@ public class ImgAction extends ActionSupport {
 			String urlTemp = ServletActionContext.getServletContext().getRealPath("/temp");
 			File img = new File(urlTemp,file);
 			Color c = (color == 1) ? Color.white : Color.black;
-			return imgListService.pressText(text1,text2, img, c.getRGB(),x,y);
+			return imgListService.pressText(text1,text2, img, c,x,y);
 		} else
 			return false;
 	}

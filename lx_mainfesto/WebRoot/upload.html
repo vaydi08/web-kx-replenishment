@@ -17,7 +17,7 @@
 		<script type="text/javascript" src="script/jquery/jquery.js"></script>
 		
 		<style>
-		body{background:url('images/background.jpg');text-align:center;}
+		body{text-align:center;}
 		table{text-align:left;}
 		
 		#text1Div{margin-top:90px;margin-left:20px;color:#000;font-family:'黑体';font-size:26px;font-weight:bold;}
@@ -27,7 +27,7 @@
 		</style>
 		
 		<script>
-		var param = {text1:'',text2:'',x:'40',y:'200',color:'1',file:''};
+		var param = {text1:'',text2:'',x:'10',y:'50',color:'1',file:''};
 		
 		var loadMsg = '<img src="images/loading.gif"/>正在处理中...请稍候';
 		var swfu;
@@ -36,8 +36,9 @@
 			swfu = new SWFUpload({
 				upload_url:"img!upload.action",
 				flash_url:"script/swfupload/swfupload.swf",
+				file_size_limit:"2048",
 				file_upload_limit:0,
-				post_params:{text1:$("#text1").val(),text2:$("#text2").val(),x:param.x,y:param.y,color:param.color},
+				//post_params:{text1:$("#text1").val(),text2:$("#text2").val(),x:param.x,y:param.y,color:param.color},
 				custom_settings : {
 					//progressTarget : "fsUploadProgress",
 					cancelButtonId : "btnCancel"
@@ -57,9 +58,13 @@
 				
 
 				file_queued_handler : fileQueued,
-				file_queue_error_handler : fileQueueError,
+				file_queue_error_handler : function(){alert('哦,对不起,上传照片最大只能2M');},
 				file_dialog_complete_handler : fileDialogComplete,
-				upload_start_handler : function() {$("#loadMsg").html(loadMsg);},
+				upload_start_handler : function() {
+					var post = {text1:$("#text1").val(),text2:$("#text2").val(),x:param.x,y:param.y,color:param.color};
+					swfu.setPostParams(post);
+					$("#loadMsg").html(loadMsg);
+				},
 				upload_progress_handler : uploadProgress,
 				upload_error_handler : uploadError,
 				upload_success_handler : function(file,data) {
@@ -78,41 +83,66 @@
 					param.color = ret.color;
 					//alert(data);
 					if(ret.success) {
-						$("#temp").attr("src","temp/" + param.file + ".jpg");
+						src = "image.jsp?img=" + param.file + ".jpg&tmp=" + Math.random();
+						$("#temp").attr("src",src);
 					} else {
-						$("#temp").attr("src","temp/" + param.file);
+						src = "image.jsp?img=" + param.file;
+						$("#temp").attr("src",src);
 					}
+					
 				},
 				upload_complete_handler : uploadComplete,
 				queue_complete_handler : queueComplete
 			});
 		}
-
+		var setParam = function(ret) {
+			param.file = ret.file;
+			param.text1 = ret.text1;
+			param.text2 = ret.text2;
+			param.x = ret.x;
+			param.y = ret.y;
+			param.color = ret.color;
+		}
 
 		var src;
 		var textTemp = function() {
+			if($("#text1").val().length + $("#text2").val().length > 10) {
+				alert('心声只能写10个哦');
+				return;
+			}
+				
 			$("#loadMsg").html(loadMsg);
 			param.text1 = $("#text1").val();
 			param.text2 = $("#text2").val();
 			$.post('img!textTemp.action',param,function(data){
-
-				$("#loadMsg").html('');
-				
 				var ret = eval('(' + data + ')');
 
-				param.file = ret.file;
-				param.text1 = ret.text1;
-				param.text2 = ret.text2;
-				param.x = ret.x;
-				param.y = ret.y;
-				param.color = ret.color;
-	//alert(param.file+" "+param.text);			
+				setParam(ret);		
 				if(ret.success) {
-					$("#temp").attr("src","images/unupload.gif");
-					src = "temp/" + param.file + ".jpg?" + Math.random();
-					setTimeout('$("#temp").attr("src",src);',500);
-				} 
+					//$("#temp").attr("src","image.jsp?img=images/unupload.gif");
+					document.getElementById("temp").src='images/unupload.gif';
+					//src = "image.jsp?tmp1=" + Math.random() + "&img=" + param.file + ".jpg&tmp=" + Math.random();
+					src = "temp/" + param.file + ".jpg?tmp=" + Math.random();
+					setTimeout('document.getElementById("temp").src="temp/" + param.file + ".jpg?tmp=" + Math.random();',1000);
+				}
+
+				$("#loadMsg").html('');
 			});
+		}
+
+		var reloadPic = function() {
+			document.getElementById("temp").src='images/unupload.gif';
+			setTimeout('document.getElementById("temp").src="temp/" + param.file + ".jpg?tmp=" + Math.random();',500);
+		}
+
+		var colorTemp = function(color) {
+			param.color = color;
+			textTemp();
+		}
+		var locationTemp = function(x,y) {
+			param.x = x;
+			param.y = y;
+			textTemp();
 		}
 
 		function weibo(url,title,pic) {
@@ -136,11 +166,11 @@
 				});
 			}
 		}
+
 		</script>
 	</head>
 	<body>
 		<table cellpadding="0" cellspacing="0" border="0" width="" align="center">
-		<tr><td colspan="5" height="45">&nbsp;</td></tr>
 		<tr>
 		<td width="242">
 		&nbsp;
@@ -167,18 +197,20 @@
 		<td>&nbsp;</td>
 		<td style="background:url('images/upload2.gif') no-repeat;">
 		<div style="height:50px">&nbsp;</div>
-		<img id="temp" width="400" height="300" src="images/unupload.gif" style="padding-left:5px;display:none"/>
+		<!-- <img id="temp" width="400" height="300" src="images/unupload.gif" style="padding-left:5px;display:none"/> -->
+		<iframe frameborder="0" marginheight="0" marginwidth="0" width="400" height="300" scrolling="no" id="temp" style="display:none"></iframe>
 		<div align="center" id="swfuploaddiv">
 			<div id="spanButtonPlaceHolder" style="width:400px;height:300px"></div>
 			<div style="position:absolute;left:-1000px"><input id="btnCancel" type="button" value="取消上传" onclick="swfu.cancelQueue();" disabled="disabled" /></div>
 		</div>
-		<div>
-			<input type="button" id="s_white" value="白"/>
-			<input type="button" id="s_white" value="黑"/>
-			<input type="button" id="s_white" value="左上"/>
-			<input type="button" id="s_white" value="左下"/>
-			<input type="button" id="s_white" value="右上"/>
-			<input type="button" id="s_white" value="右下"/>
+		<div style="margin-top:5px">
+			<input type="button" id="s_white" value="白" onclick="colorTemp('1')"/>
+			<input type="button" id="s_black" value="黑" onclick="colorTemp('0')"/>
+			<input type="button" id="s_leftup" value="左上" onclick="locationTemp('10','50')"/>
+			<input type="button" id="s_leftdown" value="左下" onclick="locationTemp('10','160')"/>
+			<input type="button" id="s_rightup" value="右上" onclick="locationTemp(230-$('#text2').val().length*50,'50')"/>
+			<input type="button" id="s_rightdown" value="右下" onclick="locationTemp(230-$('#text2').val().length*50,'160')"/>
+			<input type="button" id="s_reloadPic" value="刷新图片" onclick="reloadPic()"/>
 		</div>
 		</td>
 		<td>&nbsp;</td>
