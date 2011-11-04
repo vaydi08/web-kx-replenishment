@@ -17,6 +17,10 @@ public class InfoCategory extends Pojo{
 	private String cname;
 	@Column(name = "clevel")
 	private Integer clevel;
+	@Column(name = "parent")
+	private Integer parent;
+	@Column(name = "image")
+	private String image;
 	
 	public InfoCategory() {
 	}
@@ -55,13 +59,31 @@ public class InfoCategory extends Pojo{
 		this.id = id;
 	}
 
+	public Integer getParent() {
+		return parent;
+	}
+
+	public void setParent(Integer parent) {
+		this.parent = parent == null ? 0 : parent;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	@Override
 	public String toString() {
 		return "InfoCategory ["
 				+ (ccode != null ? "ccode=" + ccode + ", " : "")
 				+ (clevel != null ? "clevel=" + clevel + ", " : "")
 				+ (cname != null ? "cname=" + cname + ", " : "")
-				+ (id != null ? "id=" + id : "") + "]";
+				+ (id != null ? "id=" + id + ", " : "")
+				+ (image != null ? "image=" + image + ", " : "")
+				+ (parent != null ? "parent=" + parent : "") + "]";
 	}
 
 }

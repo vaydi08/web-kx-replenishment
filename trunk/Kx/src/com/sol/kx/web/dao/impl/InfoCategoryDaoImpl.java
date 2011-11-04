@@ -17,18 +17,36 @@ import com.sol.kx.web.dao.pojo.InfoCategory;
 
 @Repository
 public class InfoCategoryDaoImpl extends BaseDaoImpl implements InfoCategoryDao {
-	@Value("${sql.info.category.find.type}")
-	private String SQL_CATEGORY_TYPE;
+	@Value("${sql.info.category.find.type1}")
+	private String SQL_CATEGORY_TYPE1;
 	
-	public List<InfoCategory> findCategoryType(int clevel) throws Exception {
+	public List<InfoCategory> findCategoryType1(int clevel) throws Exception {
 		DataConsoleAnnotation dataConsole = new DataConsoleAnnotation(Constants.DB, Constants.TRANS_TIMEOUT);
 		Map<String,Class<?>> smap = new HashMap<String, Class<?>>(3);
 		smap.put("id",Integer.class);
 		smap.put("ccode",String.class);
 		smap.put("cname",String.class);
+		smap.put("image",String.class);
 		
 		List<Object> list = new ArrayList<Object>(1);
 		list.add(clevel);
+		return dataConsole.find(SQL_CATEGORY_TYPE1,InfoCategory.class, smap, list);
+	}
+	
+	@Value("${sql.info.category.find.type}")
+	private String SQL_CATEGORY_TYPE;
+	
+	public List<InfoCategory> findCategoryType(int clevel,int parent) throws Exception {
+		DataConsoleAnnotation dataConsole = new DataConsoleAnnotation(Constants.DB, Constants.TRANS_TIMEOUT);
+		Map<String,Class<?>> smap = new HashMap<String, Class<?>>(3);
+		smap.put("id",Integer.class);
+		smap.put("ccode",String.class);
+		smap.put("cname",String.class);
+		smap.put("image",String.class);
+		
+		List<Object> list = new ArrayList<Object>(1);
+		list.add(clevel);
+		list.add(parent);
 		return dataConsole.find(SQL_CATEGORY_TYPE,InfoCategory.class, smap, list);
 	}
 

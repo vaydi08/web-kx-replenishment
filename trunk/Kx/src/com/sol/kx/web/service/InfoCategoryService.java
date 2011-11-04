@@ -13,7 +13,8 @@ public interface InfoCategoryService extends BaseService<InfoCategory>{
 	 * @param clevel
 	 * @return
 	 */
-	public ComboBoxBean findCategoryType(int clevel,String defaultText);
+	public ComboBoxBean findCategoryType1(int clevel,String defaultText);
+	public ComboBoxBean findCategoryType(int clevel,int parent,String defaultText);
 
 	/**
 	 * 查询分类名称-ID映射表 <'clevel+cname',id>
@@ -29,5 +30,6 @@ public interface InfoCategoryService extends BaseService<InfoCategory>{
 	public Map<String,Integer> findCategoryChoose(InfoCategory input);
 	
 	public PagerBean<InfoCategory> findCustom(PagerBean<InfoCategory> bean,InfoCategory obj);
-		
+	
+	public String saveUploadPic(String picData,InfoCategory input);
 }
