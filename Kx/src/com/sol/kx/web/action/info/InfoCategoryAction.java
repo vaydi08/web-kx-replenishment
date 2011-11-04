@@ -1,22 +1,14 @@
 package com.sol.kx.web.action.info;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import sun.misc.BASE64Decoder;
-
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 import com.sol.kx.web.action.BaseAction;
 import com.sol.kx.web.dao.pojo.InfoCategory;
 import com.sol.kx.web.service.BaseService;
@@ -25,7 +17,8 @@ import com.sol.kx.web.service.bean.ComboBoxBean;
 
 @Controller
 @Scope("session")
-@Results({@Result(name = "choose",location = "/stock/chooseData.jsp")})
+@Results({@Result(name = "choose",location = "/stock/chooseData.jsp"),
+	@Result(name = "panelSelect",location = "/panelSelectData.jsp")})
 public class InfoCategoryAction extends BaseAction<InfoCategory>{
 
 	private static final long serialVersionUID = 1L;
@@ -43,6 +36,7 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 		return new InfoCategory();
 	}
 	
+	@Override
 	public String manager() {
 		InfoCategory obj = defaultQuery();
 		pagerBean = infoCategoryService.findCustom(pagerBean, obj);
@@ -82,6 +76,11 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 
 	public ComboBoxBean getComboboxBean() {
 		return comboboxBean;
+	}
+	
+	public String findType4Select() {
+		pagerBean = infoCategoryService.find2(input);
+		return "panelSelect";
 	}
 	
 	public String findChoose() {

@@ -25,6 +25,14 @@
 
 	<!-- DEFAULT -->
 	<script type="text/javascript" src="../script/sol-easyui-action.js"></script>
+	
+	<style>
+	.panelSelect td {padding:3px}
+	.panelSelect a:hover {border:1px solid blue}
+	.panelSelect a{border:0px solid blue;color:#aaa;padding:5px}
+	</style>
+	<script type="text/javascript" src="../script/sol/categoryType4Select.js"></script>
+	
 		<script>
 		var onImport = function() {
 			$("#upload").dialog('open');
@@ -73,7 +81,7 @@
 				$("#add_type2").combobox('setValue',0);
 				$("#add_type3").combobox('setValue',0);
 				$("#add_type4").combobox('setValue',0);
-				$("#unit").validatebox('setValue','件');
+				//$("#unit").validatebox('setValue','件');
 			}
 			var onEdit = function() {
 				var row = $("#listTable").datagrid('getSelected');
@@ -199,6 +207,12 @@
 				width:100,
 				editable:false,
 				onSelect:function(row) {
+					$("#categoryType4Select").categoryType4Select({
+						'url':'info-category!findType4Select.action',
+				     	'queryParams':{'input.clevel':'4','input.parent':row.value}
+					});
+
+					$("#categoryType4Div").dialog('open');
 				}
 			});
 
@@ -274,7 +288,7 @@
 		</td>
 		
 		<td width="140" >
-		<select id="add_type4" name="input.type4.id"></select>
+		
 		</td>
 		</tr>
 		
@@ -311,6 +325,10 @@
 	
 	<div title="导入文件" style="width:600px;height:300px" modal="true" id="upload" closed="true">
 	<iframe frameborder="0" src="upload2.html" width="600" height="300"/>
+	</div>
+	
+	<div id="categoryType4Div" class="easyui-dialog" closeable="true" title="Choose" modal="false" style="width:600px;height:500px" cache="false" closed="true">
+		<div id="categoryType4Select"></div>
 	</div>
   </body>
 </html>
