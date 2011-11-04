@@ -95,7 +95,7 @@ public class InfoCategoryServiceImpl extends BaseServiceImpl<InfoCategory> imple
 		
 		List<InfoCategory> list = null;
 		try {
-			list = infoCategoryDao.findCategoryType(input.getClevel());
+			list = infoCategoryDao.findCategoryType(input.getClevel(),input.getParent());
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("查询[Info_category]分类映射产生错误", e);
 			return map;
