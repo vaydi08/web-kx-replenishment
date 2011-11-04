@@ -1,4 +1,4 @@
-package org.sol.util.c3p0;
+package org.sol.util.c3p0_v1;
 
 import java.sql.Connection;
 import java.sql.SQLException;
