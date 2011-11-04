@@ -47,17 +47,61 @@
 					else if(value == 2)
 						return '<span>小类</span>';
 					else if(value == 3)
-						return '<span>货型1</span>';
+						return '<span>货型</span>';
 					else if(value == 4)
-						return '<span>货型2</span>';
+						return '<span>款式</span>';
 			        }
 		        }
 		    ]],
-		    toolbar:"#toolbar"
+		    toolbar:"#toolbar",
+		    view: detailview,
+			detailFormatter:function(index,row){   
+		        return '<DIV style="padding-bottom: 5px; padding-left: 0px; padding-right: 0px; padding-top: 5px" id="ddv-' + index + '"></DIV>';   
+		    },   
+		    onExpandRow: function(index,row) {
+		        $('#ddv-'+index).panel({   
+		            border:false,   
+		            cache:false,   
+		            href:'../image.jsp?img=../upload/etc/' + row.image,
+		            onLoad:function(){
+		                $('#listTable').datagrid('fixDetailRowHeight',index);   
+		            }   
+		        });   
+		        $('#listTable').datagrid('fixDetailRowHeight',index);   
+		    }
 		});
 
-		$("#dlg").crud();
+		$("#dlg").crud({width:750,height:500});
+
+		// 类别选择事件
+		$("#clevel").change(function(){
+			var clevel = $(this).val();
+
+			if(clevel > 1) {
+				$("#parent").combobox('reload','info-category!combobox1.action?clevel=' + (clevel-1));
+			} else {
+				$("#parent").combobox('reload','info-category!combobox1.action?clevel=0');
+				$("#parent").combobox('clear');
+			}
+		});
+
+		$("#parent").combobox({url:'info-category!combobox1.action?clevel=0'});
+
+
+		// cam
+		document.getElementById("WebVideoCap1").stop();
+		document.getElementById("WebVideoCap1").hiddenControllButtons();
+		document.getElementById("WebVideoCap1").autofill(636,false);
+		$("#startcam").click(function(){
+			document.getElementById("WebVideoCap1").clear();
+			document.getElementById("WebVideoCap1").start();
+		});
+		$("#cap").click(function(){
+			document.getElementById("WebVideoCap1").cap();
+			$("#picData").val(document.getElementById('WebVideoCap1').jpegBase64Data);
+		});
 	});
+
 	</script>
   </head>
   
@@ -88,8 +132,8 @@
 			<table id="listTable">
 			</table>
 			<div id="toolbar">
-				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="onAddBtn('info-category!add.action')">添加分类</a>
-				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="onEditBtn('info-category!edit.action')">修改分类</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$('#camTr').show();onAddBtn('info-category!add.action')">添加分类</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$('#camTr').hide();onEditBtn('info-category!edit.action')">修改分类</a>
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="onRemoveBtn('info-category!delete.action')">删除分类</a>
 			</div>
 		</div>
@@ -101,24 +145,63 @@
 		<input type="hidden" name="input.id" id="id" />
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
-		<td width="70" height="30">类别代码</td>
-		<td width="230"><input type="text" name="input.ccode" id="ccode" required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
-		</tr><tr>
-		<td width="70" >类别名称</td>
-		<td width="230"><input type="text" name="input.cname" id="cname"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
-		</tr>
-		<tr>
 		<td width="70" height="30">类　　别</td>
-		<td>
-		<select name="input.clevel">
+		<td width="630">
+		<select name="input.clevel" id="clevel">
 		<option value="1" selected="selected">大类</option>
 		<option value="2">小类</option>
 		<option value="3">货型</option>
 		<option value="4">款式</option>
 		</select>
+		从属于 <select name="input.parent" id="parent"></select>
 		</td>
 		</tr>	
+		<tr>
+		<td height="30">类别代码</td>
+		<td><input type="text" name="input.ccode" id="ccode" required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
+		</tr><tr>
+		<td height="30">类别名称</td>
+		<td><input type="text" name="input.cname" id="cname"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
+		</tr>
+		
+		<tr id="camTr">
+		<td height="250">照片采集</td>
+		<td>
+		<input type="button" id="startcam" value="启动摄像头"/>
+		<input type="button" id="cap" value="照相"/>
+		<input type="hidden" id="picData" name="picData">
+		<object classid="clsid:34681DB3-58E6-4512-86F2-9477F1A9F3D8"
+			id="WebVideoCap1"  codebase="../cabs/Package.cab#version=1,0,0,50" width="636" height="238">
+			<param name="Visible" value="0">
+			<param name="AutoScroll" value="0">
+			<param name="AutoSize" value="0">
+			<param name="AxBorderStyle" value="1">
+			<param name="Caption" value="WebVideoCap">
+			<param name="Color" value="4278190095">
+			<param name="Font" value="宋体">
+			<param name="KeyPreview" value="0">
+			<param name="PixelsPerInch" value="96">
+			<param name="PrintScale" value="1">
+			<param name="Scaled" value="-1">
+			<param name="DropTarget" value="0">
+			<param name="HelpFile" value>
+			<param name="PopupMode" value="0">
+			<param name="ScreenSnap" value="0">
+			<param name="SnapBuffer" value="10">
+			<param name="DockSite" value="0">
+			<param name="DoubleBuffered" value="0">
+			<param name="ParentDoubleBuffered" value="0">
+			<param name="UseDockManager" value="0">
+			<param name="Enabled" value="-1">
+			<param name="AlignWithMargins" value="0">
+			<param name="ParentCustomHint" value="-1">
+			<param name="jpegBase64Data" value>
+			<param name="bmpBase64Data" value>
+		</object>
+		</td>
+		</tr>
 		</table>
+		
 	</form>
 	</div>
 	

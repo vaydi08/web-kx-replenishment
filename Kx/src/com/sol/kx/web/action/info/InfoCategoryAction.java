@@ -1,14 +1,22 @@
 package com.sol.kx.web.action.info;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import sun.misc.BASE64Decoder;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 import com.sol.kx.web.action.BaseAction;
 import com.sol.kx.web.dao.pojo.InfoCategory;
 import com.sol.kx.web.service.BaseService;
@@ -41,7 +49,16 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 		return DATA;
 	}
 	
+	// 添加
+	private String picData;
+	@Override
+	public String add() {
+		infoCategoryService.saveUploadPic(picData, input);
+		return super.add();
+	}
+	
 	private Integer clevel;
+	private Integer parent;
 	
 	private static final Map<Integer,String> defaultMap = new HashMap<Integer, String>();
 	static {
@@ -51,12 +68,20 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 		defaultMap.put(4, "- 款式 -");
 	}
 	
+	private ComboBoxBean comboboxBean;
+	
 	public String combobox() {
+		comboboxBean = infoCategoryService.findCategoryType(clevel,parent,defaultMap.get(clevel));
+		return COMBOBOX;
+	}
+	
+	public String combobox1() {
+		comboboxBean = infoCategoryService.findCategoryType1(clevel,defaultMap.get(clevel));
 		return COMBOBOX;
 	}
 
 	public ComboBoxBean getComboboxBean() {
-		return infoCategoryService.findCategoryType(clevel,defaultMap.get(clevel));
+		return comboboxBean;
 	}
 	
 	public String findChoose() {
@@ -68,6 +93,17 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 
 	public void setClevel(Integer clevel) {
 		this.clevel = clevel;
+	}
+
+	public void setPicData(String picData) {
+		this.picData = picData;
+	}
+
+	public void setParent(Integer parent) {
+		this.parent = parent;
+	}
+	public void setParent(String parent) {
+		this.parent = Integer.parseInt(parent);
 	}
 
 }

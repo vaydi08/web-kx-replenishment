@@ -147,31 +147,59 @@
 			});
 
 			//查询面板下拉菜单
-			$("#type1").mycombo({
-				url:"info-category!combobox.action?clevel=1"
+			$("#type1").combobox({
+				url:"info-category!combobox.action?clevel=1&parent=0",
+				width:100,
+				editable:false,
+				onSelect:function(row) {
+					if(row.value > 0)
+						$("#type2").combobox('reload',"info-category!combobox.action?clevel=2&parent=" + row.value);
+				}
 			});
-			$("#type2").mycombo({
-				url:"info-category!combobox.action?clevel=2"
+			$("#type2").combobox({
+				width:100,
+				editable:false,
+				onSelect:function(row) {
+					if(row.value > 0)
+						$("#type3").combobox('reload',"info-category!combobox.action?clevel=3&parent=" + row.value);
+				}
 			});
-			$("#type3").mycombo({
-				url:"info-category!combobox.action?clevel=3"
+			$("#type3").combobox({
+				width:100,
+				editable:false,
+				onSelect:function(row) {
+					if(row.value > 0)
+						$("#type4").combobox('reload',"info-category!combobox.action?clevel=4&parent=" + row.value);
+				}
 			});
-			$("#type4").mycombo({
-				url:"info-category!combobox.action?clevel=4"
+			$("#type4").combobox({
+				width:100,
+				editable:false
 			});
 
 			//添加面板下拉菜单
-			$("#add_type1").mycombo({
-				url:"info-category!combobox.action?clevel=1"
+			$("#add_type1").combobox({
+				url:"info-category!combobox.action?clevel=1&parent=0",
+				width:100,
+				editable:false,
+				onSelect:function(row) {
+					if(row.value > 0)
+						$("#add_type2").combobox('reload',"info-category!combobox.action?clevel=2&parent=" + row.value);
+				}
 			});
-			$("#add_type2").mycombo({
-				url:"info-category!combobox.action?clevel=2"
+			$("#add_type2").combobox({
+				width:100,
+				editable:false,
+				onSelect:function(row) {
+					if(row.value > 0)
+						$("#add_type3").combobox('reload',"info-category!combobox.action?clevel=3&parent=" + row.value);
+				}
 			});
-			$("#add_type3").mycombo({
-				url:"info-category!combobox.action?clevel=3"
-			});
-			$("#add_type4").mycombo({
-				url:"info-category!combobox.action?clevel=4"
+			$("#add_type3").combobox({
+				width:100,
+				editable:false,
+				onSelect:function(row) {
+				}
 			});
 
 		});

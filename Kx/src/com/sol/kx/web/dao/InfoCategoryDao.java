@@ -12,7 +12,8 @@ public interface InfoCategoryDao extends BaseDao{
 	 * @return
 	 * @throws Exception
 	 */
-	public List<InfoCategory> findCategoryType(int clevel) throws Exception;
+	public List<InfoCategory> findCategoryType1(int clevel) throws Exception;
+	public List<InfoCategory> findCategoryType(int clevel,int parent) throws Exception;
 
 	/**
 	 * 查询分类名称-id映射表
