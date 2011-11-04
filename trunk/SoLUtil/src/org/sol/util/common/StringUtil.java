@@ -78,6 +78,7 @@ public class StringUtil {
 	private static final DateFormat df_full = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static final DateFormat df_compact = new SimpleDateFormat("ddHHmmssS");
 	
+	
 	public static Timestamp parseTimestampShort(String input) {
 		Date date = new Date();
 		try {
