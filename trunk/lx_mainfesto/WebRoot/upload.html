@@ -159,7 +159,7 @@
 			if(param.text1 != "" && param.text2 != "" && param.file != "") {
 				$.post('img!submit.action',param,function(data){
 					var ret = eval('(' + data + ')');
-					var title = "光棍最" + ret.text1 + " 因为是" + ret.text2;
+					var title = "#光棍秀# 光棍最" + ret.text1 + " 因为" + ret.text2 + " 快来秀自己身边的光棍吧!";
 					if(ret.success) {
 						weibo('http://www.shenyangjoycity.com/mainfesto/index.html',title,'http://www.shenyangjoycity.com:8080/mainfesto/pic/' + ret.file);
 					} else {
@@ -191,7 +191,7 @@
 		<td style="background:url('images/upload1.gif') no-repeat;" height="385">
 		<!-- <textarea id="text" rows="4" cols="22" style="margin-top:85px;margin-left:12px;background:transparent;border:0px;overflow:hidden;"></textarea> -->
 		<div id="text1Div">光棍最<input type="text" id="text1" name="text1" maxlength="10" size="5"/></div>
-		<div id="text2Div">因为<span style="font-size:20px">是</span><input type="text" id="text2" name="text2" maxlength="10" size="5"/></div>
+		<div id="text2Div">因为<input type="text" id="text2" name="text2" maxlength="10" size="5"/></div>
 		<br/>
 		<div align="right" style="margin-top:45px"><a href="javascript:void(0)" onclick="textTemp()"><img src="images/btn_text.gif"/></a></div>
 		<div align="right" id="loadMsg"></div>
@@ -209,25 +209,25 @@
 			<input type="button" id="s_white" onclick="colorTemp('1')" style="background:url('images/s_white.gif');"/>
 			<input type="button" id="s_black" onclick="colorTemp('0')" style="background:url('images/s_black.gif');"/>
 			<input type="button" id="s_leftup" onclick="locationTemp('10','50')" style="background:url('images/s_leftup.gif');"/>
-			<input type="button" id="s_leftdown" onclick="locationTemp('10','160')" style="background:url('images/s_leftdown.gif');"/>
-			<input type="button" id="s_rightup" onclick="locationTemp(230-$('#text2').val().length*50,'50')" style="background:url('images/s_rightup.gif');"/>
-			<input type="button" id="s_rightdown" onclick="locationTemp(230-$('#text2').val().length*50,'160')" style="background:url('images/s_rightdown.gif');"/>
+			<input type="button" id="s_leftdown" onclick="locationTemp('10','180')" style="background:url('images/s_leftdown.gif');"/>
+			<input type="button" id="s_rightup" onclick="locationTemp(300-$('#text2').val().length*40,'50')" style="background:url('images/s_rightup.gif');"/>
+			<input type="button" id="s_rightdown" onclick="locationTemp(300-$('#text2').val().length*40,'180')" style="background:url('images/s_rightdown.gif');"/>
 			<input type="button" id="s_reloadPic" onclick="reloadPic()" style="background:url('images/s_reload.gif');"/>
 		</div>
 		</td>
 		<td>&nbsp;</td>
 		<td style="background:url('images/upload3.gif') no-repeat;">
-		<div style="margin-top:58px;width:18px">&nbsp;</div>
-		<div style="margin-top:10px"><a href="javascript:void(0)" onclick="submit()"><img src="images/up_submit.gif"/></a></div>
-		<div style="margin-top:160px"><a href="http://weibo.com/syjoycity" target="_blank"><img src="images/up_huodong.gif"/></a></div>
+		<div style="margin-top:48px;width:18px">&nbsp;</div>
+		<div><a href="javascript:void(0)" onclick="submit()"><img src="images/up_submit.gif"/></a></div>
+		<div style="margin-top:180px"><a href="http://weibo.com/syjoycity" target="_blank"><img src="images/up_huodong.gif"/></a></div>
 		<div style="margin-top:10px"><a href="http://weibo.com/syjoycity" target="_blank"><img src="images/up_link1.gif"/></a><a href="http://weibo.com/syjoycity" target="_blank"><img src="images/up_link2.gif"/></a></div>
 		</td>
 		</tr>
 		
 		<tr><td>&nbsp;</td></tr>
 		<tr>
-		<td colspan="5" align="center">
-		<img src="images/upload4.gif" onclick="location.href='img!list.action'" style="cursor:pointer;"/>
+		<td colspan="5" align="center" style="width:966px;height:550px;background:url('images/upload4.gif') no-repeat center;cursor:pointer;" onclick="location.href='img!list.action'">
+		<iframe src="img!list2.action" frameborder="0" marginheight="0" marginwidth="0" width="860" height="190" scrolling="no" id="list" style="margin-top:340px;margin-left:95px"></iframe>
 		</td>
 		</tr>
 		</table>
