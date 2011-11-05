@@ -17,7 +17,6 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.sol.lx.mainfesto.dao.BaseDao;
@@ -42,7 +41,7 @@ public class ImgListServiceImpl extends BaseServiceImpl<ImgList> implements ImgL
 			return null;
 		}
 	}
-	
+		
 	public boolean insert(String image,String text) {
 		try {
 			return imgListDao.insert(image,text) == 1;
@@ -87,14 +86,14 @@ public class ImgListServiceImpl extends BaseServiceImpl<ImgList> implements ImgL
 		fontAttr = new HashMap<TextAttribute, Object>();
 		fontAttr.put(TextAttribute.FAMILY,"黑体");
 		fontAttr.put(TextAttribute.WEIGHT,3.0f);
-		fontAttr.put(TextAttribute.SIZE,50);
+		fontAttr.put(TextAttribute.SIZE,40);
 	}
 	private static Map<TextAttribute,Object> fontAttrText1;
 	static {
 		fontAttrText1 = new HashMap<TextAttribute, Object>();
 		fontAttrText1.put(TextAttribute.FAMILY,"黑体");
 		fontAttrText1.put(TextAttribute.WEIGHT,3.0f);
-		fontAttrText1.put(TextAttribute.SIZE,70);
+		fontAttrText1.put(TextAttribute.SIZE,60);
 	}
 	public boolean pressText(String text1,String text2, File srcImgFile,Color color,int x,int y) {
 		
@@ -125,7 +124,7 @@ public class ImgListServiceImpl extends BaseServiceImpl<ImgList> implements ImgL
 			g.drawString(text1, x, y);
 			g.setFont(font);
 			y += font.getSize();
-			g.drawString("因为是" + text2, x, y);
+			g.drawString("因为" + text2, x, y);
 			
 			g.dispose();
 			// 输出图片

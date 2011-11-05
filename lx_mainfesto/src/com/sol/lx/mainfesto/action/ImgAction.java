@@ -18,8 +18,10 @@ import com.sol.lx.mainfesto.service.ImgListService;
 
 @Controller
 @Scope("session")
-@Results( { @Result(name = "imgList", location = "/main.jsp"),
-		@Result(name = "upload", location = "/upload.jsp") })
+@Results( { 
+	@Result(name = "imgList", location = "/main.jsp"),
+	@Result(name = "imgList2", location = "/main2.jsp"),
+	@Result(name = "upload", location = "/upload.jsp") })
 public class ImgAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
@@ -34,6 +36,12 @@ public class ImgAction extends ActionSupport {
 		imgList = imgListService.find();
 		splitLen = (int) Math.ceil(imgList.size() / 3.0);
 		return "imgList";
+	}
+	
+	public String list2() {
+		imgList = imgListService.find();
+		splitLen = (int) Math.ceil(imgList.size() / 3.0);
+		return "imgList2";
 	}
 
 	private File[] Filedata;
