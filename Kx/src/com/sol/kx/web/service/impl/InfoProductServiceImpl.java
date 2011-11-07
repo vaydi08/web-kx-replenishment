@@ -1,7 +1,9 @@
 package com.sol.kx.web.service.impl;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
 import org.sol.util.c3p0.Condition;
 import org.sol.util.c3p0.dataEntity2.Criteria;
 import org.sol.util.c3p0.dataEntity2.InsertEntity;
@@ -16,6 +19,8 @@ import org.sol.util.c3p0.dataEntity2.SelectEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import sun.misc.BASE64Decoder;
 
 import com.sol.kx.web.common.Logger;
 import com.sol.kx.web.dao.BaseDao;
@@ -27,6 +32,7 @@ import com.sol.kx.web.service.InfoCategoryService;
 import com.sol.kx.web.service.InfoProductService;
 import com.sol.kx.web.service.bean.ImportResultBean;
 import com.sol.kx.web.service.bean.PagerBean;
+import com.sol.kx.web.service.bean.ResultBean;
 import com.sol.kx.web.service.util.PoiUtil;
 
 @Service
@@ -299,8 +305,8 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 			return null;
 		}
 	}
-	private void addDetail(InfoProductDetail infoProductDetail) {
-		Logger.SERVICE.debug("导入产品-详细 " + infoProductDetail.toString());
+	public void addDetail(InfoProductDetail infoProductDetail) {
+		Logger.SERVICE.debug("导入(添加)产品-详细 " + infoProductDetail.toString());
 		
 		try {
 			InsertEntity entity = new InsertEntity();
@@ -310,5 +316,42 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 			exceptionHandler.onDatabaseException("导入infoProductDetail错误", e);
 		}
 		
+	}
+	public ResultBean addProductDetail(InfoProductDetail infoProductDetail) {
+		Logger.SERVICE.ldebug("插入[info_product_detail]数据", infoProductDetail.toString());
+		try {
+			InsertEntity entity = new InsertEntity();
+			entity.init(infoProductDetail,false);
+			infoProductDao.addProductDetail(entity);
+			return ResultBean.RESULT_SUCCESS();
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("插入记录错误", e);
+			return ResultBean.RESULT_ERR(e.getMessage());
+		}
+	}
+	public String saveUploadPic(String picData,InfoProductDetail input) {
+		String filename = null;
+		OutputStream fos = null;
+		try {
+			BASE64Decoder decode=new BASE64Decoder();
+			byte[] datas=decode.decodeBuffer(picData);
+			filename = "pd_" + input.getPid() + "_" + input.getPweight().toString().replace(".", "_") + ".jpg";
+			String savePath = ServletActionContext.getServletContext().getRealPath("/upload/p");
+			File file=new File(savePath,filename);
+			fos=new FileOutputStream(file);
+			fos.write(datas);
+			fos.flush();
+			input.setImage(filename);
+			return filename;
+		} catch (Exception e) {
+			exceptionHandler.onSaveUpload(filename, picData, e);
+			return null;
+		} finally {
+			if(fos != null)
+				try {
+					fos.close();
+				} catch (IOException e) {
+				}
+		}
 	}
 }
