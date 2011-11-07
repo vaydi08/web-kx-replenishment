@@ -133,7 +133,7 @@ public class InfoCategoryServiceImpl extends BaseServiceImpl<InfoCategory> imple
 		try {
 			BASE64Decoder decode=new BASE64Decoder();
 			byte[] datas=decode.decodeBuffer(picData);
-			filename = "category_" + input.getClevel() + "_" + input.getCcode() + input.getCname() + ".jpg";
+			filename = "category_" + input.getClevel() + "_" + input.getCcode() + ".jpg";
 			String savePath = ServletActionContext.getServletContext().getRealPath("/upload/etc");
 			File file=new File(savePath,filename);
 			fos=new FileOutputStream(file);

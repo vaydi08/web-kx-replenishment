@@ -31,7 +31,7 @@
     <td><s:property value="pweight" /></td>
     <td><s:property value="stand" /></td>
     <td><s:property value="premark" /></td>
-    <td><img src="../images/product/<s:property value="image" />" height="80"/></td>
+    <td><img src="../upload/p/<s:property value="image" />" height="80"/></td>
     </tr>
     </s:iterator>
     </tbody>

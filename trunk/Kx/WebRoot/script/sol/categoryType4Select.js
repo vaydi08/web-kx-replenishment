@@ -3,7 +3,7 @@ $.fn.categoryType4Select = function(options) {
      var defaults = {
      	'url':'',
      	'queryParams':{},
-     	onClick:function(value,text){}
+     	onClick:function(value,text,id){}
      }
      
      var opts = $.extend(defaults,options);
@@ -26,7 +26,7 @@ $.fn.categoryType4Select = function(options) {
          var i = 1;
          html += '<tr>';
          for(row = 0; row < params.length; row=row+1) {
-        	 html += '<td height="30" width="150" align="center" valign="middle"><a href="javascript:void(0)" value="' + params[row].id + '">' + 
+        	 html += '<td height="30" width="150" align="center" valign="middle"><a href="javascript:void(0)" value="' + params[row].ccode + '" id="' + params[row].id + '">' + 
         	 '<img border="0" width="150" src="../upload/etc/' + params[row].image + '"/><br/>' + 
         	 params[row].cname + '&nbsp;' + params[row].ccode +
         	 '</a></td><td width="10">&nbsp;</td>';
@@ -44,9 +44,10 @@ $.fn.categoryType4Select = function(options) {
          // 绑定点击事件
          ctrl.find('a').click(function() {
         	 var value = $(this).attr("value");
+        	 var id = $(this).attr("id");
         	 var text = $(this).text();
         	 
-        	 opts.onClick(value,text);
+        	 opts.onClick(value,text,id);
          });
      }
 };      

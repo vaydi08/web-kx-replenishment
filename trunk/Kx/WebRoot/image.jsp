@@ -18,6 +18,6 @@
   </head>
   
   <body>
-	<img src="${param.img}"/>
+	<img src="${param.img}" height="100"/>
   </body>
 </html>
