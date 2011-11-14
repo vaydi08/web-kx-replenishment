@@ -37,6 +37,19 @@
 		var onImport = function() {
 			$("#upload").dialog('open');
 		}
+
+		var checkPcode = function(pcode) {
+			$.post('info-product!checkPcode.action',{'pcode':pcode},function(data){
+				var result = eval('(' + data + ')');
+				if(result.success)
+					$("#isExistsPcode").val('0');
+				else {
+					$("#isExistsPcode").val('1');
+					$.messager.show({title:"Error",msg:result.msg});
+				}
+			});
+		}
+		
 		$(function(){
 			// 上传对话框
 			$("#upload").dialog({
@@ -54,12 +67,46 @@
 					var type3 = $("#type3").combobox('getValue');
 					var type4 = $("#type4").combobox('getValue');
 
-					return {"queryType":queryType,"queryValue":value,"type1":type1,"type2":type2,"type3":type3,"type4":type4};
+					var queryObject = {"queryType":queryType,"queryValue":value};
+					if(Number(type1) > 0)
+						queryObject['input.type1'] = type1;
+					if(Number(type2) > 0)
+						queryObject['input.type2'] = type2;
+					if(Number(type3) > 0)
+						queryObject['input.type3'] = type3;
+					if(Number(type4) > 0)
+						queryObject['input.type4'] = type4;
+					
+					return queryObject;
 				}
 			});
 
 			$("#dlg").crud({
+				width:700,
+				height:500,
 				onSubmit:function() {
+					// 图片上传形式
+					if($(".picType:checked").val() == "file") {
+						$("#form").attr("enctype","multipart/form-data");
+						if($("#picFile").val() == "") {
+							$.messager.show({title:'Field',msg:"请选择上传图片"});
+							return false;
+						}
+					} else {
+						$("#form").attr("enctype","application/x-www-form-urlencoded");
+						if($("#picData").val() == "") {
+							$.messager.show({title:'Field',msg:"请使用摄像头照相"});
+							return false;
+						}
+					}
+
+					// 是否存在重复pcode
+					if($("#isExistsPcode").val() == '1') {
+						$.messager.show({title:"Error",msg:'商品代码重复,请重新选择'});
+						return false;
+					}
+
+					// 检查分类
 					var type1 = $("#add_type1").combobox('getValue');
 					var type2 = $("#add_type2").combobox('getValue');
 					var type3 = $("#add_type3").combobox('getValue');
@@ -68,16 +115,19 @@
 					if(!(type1 > 0 && type2 > 0 && type3 > 0 && type4 > 0 && $("#form").form('validate'))){
 						$.messager.show({title:'Field',msg:"数据请填写不完整"});
 						return false;
-					} else
-						return true;
+					}
 				}
 			});
 
 			var onAdd = function() {
-				form_url = "info-product!add.action";
+				form_url = "info-product!add2.action";
 				$("#dlg").dialog('open');
 				$("#form").form('clear');
 				$("#unit").val('件');
+				$(".picType:eq(0)").click();
+
+				document.getElementById("WebVideoCap1").stop();
+				document.getElementById("WebVideoCap1").clear();
 			}
 			var onEdit = function() {
 				var row = $("#listTable").datagrid('getSelected');
@@ -96,7 +146,7 @@
 				if(row) {
 					$.messager.confirm('确认删除','将要删除此产品,删除操作不可恢复,请确认?',function(b){
 						if(b) {
-							$.post("info-product!delete.action",{"input.id":row.id},function(data){
+							$.post("info-product!delete2.action",{"input.id":row.id},function(data){
 								var result = eval('(' + data + ')');
 								if(result.success)
 									$("#listTable").datagrid('reload');
@@ -107,24 +157,24 @@
 					})
 				}
 			}
+
+			
+			$("#pcode").change(function() {
+				setTimeout('checkPcode("' + $(this).val() + '")',500);
+			});
 			// 数据表格
 			$("#listTable").grid({
 				title:"产品列表",
-				url:"info-product!manager.action",
+				url:"info-product!manager2.action",
 				multi:false,
 				columns:[[
 			        {field:'type',title:'类别',width:120,
 				        formatter:function(value,rec) {
-							return rec.type1_cname + "-" + rec.type2_cname + "-" + rec.type3_cname + "-" + rec.type4_cname;
+							return rec.type1name + "-" + rec.type2name + "-" + rec.type3name + "-" + rec.type4name;
 			        }},
 			        {field:'pname',title:'产品名称',width:80},
 			        {field:'pcode',title:'产品代码',width:80},
-			        {field:'unit',title:'单位',width:40},
-			        {field:'action',title:'操作',width:40,align:'center',
-				        formatter:function(value,row,index) {
-							return '<a href="javascript:void(0)" onclick="newProductDetail(' + row.id + ')">添加明细</a>';
-			        	}
-		        	}
+			        {field:'unit',title:'单位',width:40}
 			    ]],
 			    //tools:[{"type":"add","text":"添加产品"},{"type":"edit","text":"修改产品"},{"type":"-"},{"type":"remove","text":"删除产品"},{"type":"-"},{"type":"other","text":"添加分类"}],
 			    toolbar:[{id:"btnadd",text:"添加产品",iconCls:"icon-add",handler:onAdd},
@@ -139,14 +189,14 @@
 			    addUrl:"info-product!add.action",
 			    editUrl:"info-product!edit.action",
 				view: detailview,
-				detailFormatter:function(index,row){   
+				detailFormatter:function(index,row){
 			        return '<DIV style="padding-bottom: 5px; padding-left: 0px; padding-right: 0px; padding-top: 5px" id="ddv-' + index + '"></DIV>';   
 			    },   
 			    onExpandRow: function(index,row) {
 			        $('#ddv-'+index).panel({   
 			            border:false,   
 			            cache:false,   
-			            href:'info-product!details.action?pid=' + row.id,
+			            href:'../image.jsp?img=' + row.image,
 			            onLoad:function(){
 			                $('#listTable').datagrid('fixDetailRowHeight',index);   
 			            }   
@@ -223,30 +273,21 @@
 					     		$("#categoryType4Div").dialog('close');
 
 					     		$("#pcode").val(addTypeCode.join(''));
+					     		checkPcode($("#pcode").val());
 					     		$("#add_type4").val(id);
+
+					     		$("#dlg").dialog('open');
 						     }
 						});
 	
 						$("#categoryType4Div").dialog('open');
+						$("#dlg_newtype4").data('type3row',row);
+
+						$("#dlg").dialog('close');
 					}
 				}
 			});
 
-
-			// new product detail
-			$("#form2").form({
-				url:'info-product-detail!add2.action',
-				onSubmit:function() {
-					if($("#picData").val() == "") {
-						$.messager.show({title:'ERROR',msg:'照片数据未采集'});
-						return false;
-					}
-					return $("#form2").form('validate');
-				},
-				success:function(data) {
-					$("#newProductDetailDiv").dialog('close');
-				}
-			});
 			// cam
 			document.getElementById("WebVideoCap1").stop();
 			document.getElementById("WebVideoCap1").hiddenControllButtons();
@@ -259,15 +300,60 @@
 				document.getElementById("WebVideoCap1").cap();
 				$("#picData").val(document.getElementById('WebVideoCap1').jpegBase64Data);
 			});
-		});
 
-		var newProductDetail = function(id) {
-			$("#newProductDetailDiv").dialog('open');
-			$("#form2").form('clear');
-			$("#form2").find("#pid").val(id);
-			document.getElementById("WebVideoCap1").stop();
-			document.getElementById("WebVideoCap1").clear();
-		}
+
+
+			// type4相关
+			$("#dlg_newtype4").dialog({width:750,height:500,closed:true,
+				saveBtn:"#t4_dlg-save",cancelBtn:"#t4_dlg-cancel"});
+			$("#t4_dlg-cancel").click(function(){
+				$("#dlg_newtype4").dialog('close');
+			});
+			$("#t4_dlg-save").click(function(){
+				$("#form_newtype4").submit();
+			});
+			$("#form_newtype4").form({
+				url:'info-category!add.action',
+				onSubmit:function(){return $("#t4_picData").val() != "" && $("#form_newtype4").form('validate');},
+				success:function(data){
+					var result = eval('(' + data + ')');
+					if(result.success) {
+						$("#dlg_newtype4").dialog('close');
+						
+						var row = $("#dlg_newtype4").data('type3row');
+						$("#categoryType4Select").categoryType4Select({
+							'url':'info-category!findType4Select.action',
+					     	'queryParams':{'input.clevel':'4','input.parent':row.value},
+					     	onClick : function(value,text,id) {
+					     		addTypeCode[3] = value;
+					     		$("#categoryType4Div").dialog('close');
+
+					     		$("#pcode").val(addTypeCode.join(''));
+					     		checkPcode($("#pcode").val());
+					     		$("#add_type4").val(id);
+
+					     		$("#dlg").dialog('open');
+						     }
+						});
+					} else
+						$.messager.show({title:"Error",msg:result.msg});
+				}
+			});
+			// cam
+			document.getElementById("WebVideoCap2").stop();
+			document.getElementById("WebVideoCap2").hiddenControllButtons();
+			document.getElementById("WebVideoCap2").autofill(636,false);
+			$("#t4_startcam").click(function(){
+				document.getElementById("WebVideoCap2").clear();
+				$("#t4_picData").val('');
+				document.getElementById("WebVideoCap2").start();
+			});
+			$("#t4_cap").click(function(){
+				document.getElementById("WebVideoCap2").cap();
+				$("#t4_picData").val(document.getElementById('WebVideoCap2').jpegBase64Data);
+			});
+			
+		});
 
 		
 	</script>
@@ -321,33 +407,53 @@
 			<table id="listTable"></table>
 
 		</div>
+
+	</div>
+	
+	<div id="dlg" buttons="#dlg-buttons" style="padding:10px 20px" model="true">
+	<input type="hidden" id="isExistsPcode" value="0" />
+	<form id="form" method="post" >
+	<table cellpadding="0" cellspacing="0" border="0">
+		<tr>
+		<td width="140" height="30">
+		<select id="add_type1" name="input.type1"></select>
+		</td>
 		
-		<div id="categoryType4Div" class="easyui-dialog" closeable="true" title="Choose" modal="false" style="width:600px;height:500px" cache="false" closed="true">
-			<div id="categoryType4Select"></div>
-		</div>
+		<td width="140" >
+		<select id="add_type2" name="input.type2"></select>
+		</td>
 		
-		<div id="newProductDetailDiv" class="easyui-dialog" buttons="#form2_btn" closeable="true" title="Choose" modal="true" style="width:700px;height:500px;padding:10px 20px" cache="false" closed="true">
-			<form id="form2" method="post">
-			<input type="hidden" name="input.pid" id="pid"/>
-			<table cellpadding="0" cellspacing="0" border="0">
-			<tr>
-			<td width="80" height="30">成色</td>
-			<td width="650"><input type="text" name="input.quality" required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
-			</tr>
-			<tr>
-			<td height="30">金重</td>
-			<td><input type="text" name="input.pweight" required="true" class="easyui-numberbox" min="0.1" precision="2"/></td>
-			</tr>
-			<tr>
-			<td height="30">规格</td>
-			<td><input type="text" name="input.stand" required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
-			</tr>
-			<tr>
-			<td height="30">备注</td>
-			<td><input type="text" name="input.premark" validType="length[0,20]" class="easyui-validatebox"/></td>
-			</tr>
-			</table>
-			<table cellpadding="0" cellspacing="0" border="0">
+		<td width="140" >
+		<select id="add_type3" name="input.type3"></select>
+		</td>
+		
+		<td width="140" >
+		<input type="hidden" name="input.type4" id="add_type4"/>
+		</td>
+		</tr>
+		
+	</table>
+
+		
+		<div class="clear5"></div>
+		
+		<input type="hidden" name="input.id" id="id" />
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tr>
+		<td width="70" height="30">商品品名</td>
+		<td width="230"><input type="text" name="input.pname" value="" id="pname" required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
+		<td width="70" >商品代码</td>
+		<td width="230"><input type="text" name="input.pcode" value="" id="pcode" /></td>
+		</tr>
+		<tr>
+		<td width="70" height="30">单　　位</td>
+		<td colspan="3"><input type="text" name="input.unit" id="unit" value="件"/></td>
+		</tr>
+		
+		</table>
+		<table cellpadding="0" cellspacing="0" border="0">
+			<tr><td height="30"><input type="radio" class="picType" value="webcap" name="picType" onclick='$("#camTr").show();$("#fileTr").hide();' checked="checked"/>使用摄像头&nbsp;
+			<input type="radio" class="picType" value="file" name="picType" onclick='$("#fileTr").show();$("#camTr").hide();'/>使用上传图片</td></tr>
 			<tr id="camTr">
 			<td>
 			<input type="button" id="startcam" value="启动摄像头"/>
@@ -383,69 +489,94 @@
 			</object>
 			</td>
 			</tr>
+			<tr id="fileTr" style="display:nonoe">
+			<td height="30"><input type="file" name="picFile" id="picFile" accept="image/*"/></td>
+			</tr>
 			</table>
-			</form>
-		</div>
-		
-		<div id="form2_btn">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" id="form2_save" onclick="$('#form2').submit()">保存</a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" id="form2_cancel" onclick="$('#newProductDetailDiv').dialog('close')">取消</a>
-		</div>
-	</div>
-	
-	<div id="dlg" buttons="#dlg-buttons" style="padding:10px 20px" model="true">
-	<form id="form" method="post" >
-	<table cellpadding="0" cellspacing="0" border="0">
-		<tr>
-		<td width="140" height="30">
-		<select id="add_type1" name="input.type1.id"></select>
-		</td>
-		
-		<td width="140" >
-		<select id="add_type2" name="input.type2.id"></select>
-		</td>
-		
-		<td width="140" >
-		<select id="add_type3" name="input.type3.id"></select>
-		</td>
-		
-		<td width="140" >
-		<input type="hidden" name="input.type4.id" id="add_type4"/>
-		</td>
-		</tr>
-		
-	</table>
-
-		
-		<div class="clear5"></div>
-		
-		<input type="hidden" name="input.id" id="id" />
-		<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
-		<td width="70" height="30">商品品名</td>
-		<td width="230"><input type="text" name="input.pname" value="" id="pname" required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
-		<td width="70" >商品代码</td>
-		<td width="230"><input type="text" name="input.pcode" value="" id="pcode" /></td>
-		</tr>
-		<tr>
-		<td width="70" height="30">单　　位</td>
-		<td colspan="3"><input type="text" name="input.unit" id="unit" value="件"/></td>
-		</tr>
-		
-		</table>
 	</form>
 	</div>
 	
+	<div id="categoryType4Div" class="easyui-dialog" closeable="true" title="选择款式" modal="false" style="width:600px;height:500px;position:relative;z-index:9" cache="false" closed="true">
+		<div id="categoryType4Select"></div>
+	</div>
+		
 	<div id="dlg-buttons">
 		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" id="dlg-save">保存</a>
 		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" id="dlg-cancel">取消</a>
 	</div>
 	
+	
+	
+	
+	
+	<div id="dlg_newtype4" buttons="#dlg_newtype4-buttons" style="padding:10px 20px" title="新款式">
+	<form id="form_newtype4" method="post" >
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tr>
+		<td width="70" height="30">类　　别</td>
+		<td width="630">
+		<select name="input.clevel" id="clevel">
+		<option value="4" selected="selected">款式</option>
+		</select>
+		从属于 <span id="parentText"></span><input name="input.parent" id="parent" readonly="readonly" type="hidden"/>
+		</td>
+		</tr>	
+		<tr>
+		<td height="30">类别代码</td>
+		<td><input type="text" name="input.ccode" id="ccode" required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
+		</tr><tr>
+		<td height="30">类别名称</td>
+		<td><input type="text" name="input.cname" id="cname"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
+		</tr>
+		
+		<tr id="camTr">
+		<td height="250">照片采集</td>
+		<td>
+		<input type="button" id="t4_startcam" value="启动摄像头"/>
+		<input type="button" id="t4_cap" value="照相"/>
+		<input type="hidden" id="t4_picData" name="picData"/>
+		<object classid="clsid:34681DB3-58E6-4512-86F2-9477F1A9F3D8"
+			id="WebVideoCap2"  codebase="../cabs/Package.cab#version=1,0,0,50" width="636" height="238">
+			<param name="Visible" value="0"/>
+				<param name="AutoScroll" value="0"/>
+				<param name="AutoSize" value="0"/>
+				<param name="AxBorderStyle" value="1"/>
+				<param name="Caption" value="WebVideoCap"/>
+				<param name="Color" value="4278190095"/>
+				<param name="Font" value="宋体"/>
+				<param name="KeyPreview" value="0"/>
+				<param name="PixelsPerInch" value="96"/>
+				<param name="PrintScale" value="1"/>
+				<param name="Scaled" value="-1"/>
+				<param name="DropTarget" value="0"/>
+				<param name="HelpFile" value=""/>
+				<param name="PopupMode" value="0"/>
+				<param name="ScreenSnap" value="0"/>
+				<param name="SnapBuffer" value="10"/>
+				<param name="DockSite" value="0"/>
+				<param name="DoubleBuffered" value="0"/>
+				<param name="ParentDoubleBuffered" value="0"/>
+				<param name="UseDockManager" value="0"/>
+				<param name="Enabled" value="-1"/>
+				<param name="AlignWithMargins" value="0"/>
+				<param name="ParentCustomHint" value="-1"/>
+				<param name="jpegBase64Data" value=""/>
+				<param name="bmpBase64Data" value=""/>
+		</object>
+		</td>
+		</tr>
+		</table>
+		
+	</form>
+	</div>
+	
+	<div id="dlg_newtype4-buttons">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" id="t4_dlg-save">保存</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" id="t4_dlg-cancel">取消</a>
+	</div>
+	
 	<div title="导入文件" style="width:600px;height:300px" modal="true" id="upload" closed="true">
 	<iframe frameborder="0" src="upload2.html" width="600" height="300"/>
 	</div>
-	
-	
-	
   </body>
 </html>

@@ -25,9 +25,11 @@ import sun.misc.BASE64Decoder;
 import com.sol.kx.web.common.Logger;
 import com.sol.kx.web.dao.BaseDao;
 import com.sol.kx.web.dao.InfoProductDao;
+import com.sol.kx.web.dao.pojo.InfoCategory;
 import com.sol.kx.web.dao.pojo.InfoProduct;
 import com.sol.kx.web.dao.pojo.InfoProductDetail;
 import com.sol.kx.web.dao.pojo.StockCheck;
+import com.sol.kx.web.service.ImageService;
 import com.sol.kx.web.service.InfoCategoryService;
 import com.sol.kx.web.service.InfoProductService;
 import com.sol.kx.web.service.bean.ImportResultBean;
@@ -40,18 +42,31 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 	
 	@Autowired
 	private InfoProductDao infoProductDao;
+	@Autowired
+	private ImageService imageService;
 	
-	public PagerBean<InfoProduct> find(PagerBean<InfoProduct> bean,Condition condition) {		
-		Logger.SERVICE.ldebug("查询[info_product]数据",bean.getPage(),bean.getPageSize(),
-				(condition != null ? Arrays.deepToString(condition.getParams().toArray()) : ""));
+	public PagerBean<InfoProduct> findByPage2(PagerBean<InfoProduct> bean,InfoProduct obj) {		
+		Logger.SERVICE.ldebug("查询[info_product]数据",bean.getPage(),bean.getPageSize(),obj.toString());
 		try {
+			Criteria criteria = new Criteria();
+			criteria.byPojo(obj, true);
 			return setBeanValue(bean, 
-					infoProductDao.find(bean.getPage(), bean.getPageSize(), condition),
-					infoProductDao.findCount(condition));
+					infoProductDao.find(bean.getPage(), bean.getPageSize(), criteria),
+					infoProductDao.findCount(obj));
 		} catch (Exception e) {
 			bean.setException(e);
 			exceptionHandler.onDatabaseException("查询[info_product]时的错误", e);
 			return bean;
+		}
+	}
+	
+	public ResultBean checkExists(String pcode) {
+		try {
+			return (infoProductDao.checkExists(pcode)) ? 
+					ResultBean.RESULT_ERR("已存在的商品代码,请重新选择") : ResultBean.RESULT_SUCCESS();
+		} catch (SQLException e) {
+			exceptionHandler.onDatabaseException("查询[info_product]重复记录时的错误", e);
+			return ResultBean.RESULT_ERR("数据库错误");
 		}
 	}
 	
@@ -329,29 +344,31 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 			return ResultBean.RESULT_ERR(e.getMessage());
 		}
 	}
-	public String saveUploadPic(String picData,InfoProductDetail input) {
-		String filename = null;
-		OutputStream fos = null;
+	
+	// 保存摄像头图片
+	public String saveUploadPic(String picData,InfoProduct input) {
+		String filename = input.getPcode() + ".jpg";
+		
 		try {
-			BASE64Decoder decode=new BASE64Decoder();
-			byte[] datas=decode.decodeBuffer(picData);
-			filename = "pd_" + input.getPid() + "_" + input.getPweight().toString().replace(".", "_") + ".jpg";
-			String savePath = ServletActionContext.getServletContext().getRealPath("/upload/p");
-			File file=new File(savePath,filename);
-			fos=new FileOutputStream(file);
-			fos.write(datas);
-			fos.flush();
+			imageService.save(picData, filename);
 			input.setImage(filename);
 			return filename;
 		} catch (Exception e) {
 			exceptionHandler.onSaveUpload(filename, picData, e);
 			return null;
-		} finally {
-			if(fos != null)
-				try {
-					fos.close();
-				} catch (IOException e) {
-				}
+		}
+	}
+	// 保存上传图片
+	public String saveUploadPic(File img,InfoProduct input) {
+		String filename = input.getPcode() + ".jpg";
+		
+		try {
+			imageService.save(img, filename);
+			input.setImage(filename);
+			return filename;
+		} catch (Exception e) {
+			exceptionHandler.onSaveUpload(filename, "", e);
+			return null;
 		}
 	}
 }

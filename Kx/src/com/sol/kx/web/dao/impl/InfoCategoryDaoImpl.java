@@ -73,6 +73,8 @@ public class InfoCategoryDaoImpl extends BaseDaoImpl implements InfoCategoryDao 
 			dataEntity.like("ccode", obj.getCcode());
 		if(obj.getCname() != null)
 			dataEntity.like("cname", obj.getCname());
+		if(obj.getParent() != null)
+			dataEntity.eq("parent", obj.getParent());
 		
 		return dataConsole.findByPage(clazz, dataEntity, page, pageSize, order);
 	}

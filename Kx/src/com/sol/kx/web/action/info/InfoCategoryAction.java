@@ -36,9 +36,19 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 		return new InfoCategory();
 	}
 	
+	private Integer type1;
+	private Integer type2;
+	private Integer type3;
+	
 	@Override
 	public String manager() {
 		InfoCategory obj = defaultQuery();
+		if(type1 != null && type1 > 0)
+			obj.setParent(type1);
+		if(type2 != null && type2 > 0)
+			obj.setParent(type2);
+		if(type3 != null && type3 > 0)
+			obj.setParent(type3);
 		pagerBean = infoCategoryService.findCustom(pagerBean, obj);
 		return DATA;
 	}
@@ -47,7 +57,8 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 	private String picData;
 	@Override
 	public String add() {
-		infoCategoryService.saveUploadPic(picData, input);
+		if(picData != null && !picData.isEmpty())
+			infoCategoryService.saveUploadPic(picData, input);
 		return super.add();
 	}
 	
@@ -103,6 +114,18 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 	}
 	public void setParent(String parent) {
 		this.parent = Integer.parseInt(parent);
+	}
+
+	public void setType1(Integer type1) {
+		this.type1 = type1;
+	}
+
+	public void setType2(Integer type2) {
+		this.type2 = type2;
+	}
+
+	public void setType3(Integer type3) {
+		this.type3 = type3;
 	}
 
 }

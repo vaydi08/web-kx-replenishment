@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.sol.util.c3p0.Condition;
+import org.sol.util.c3p0.dataEntity2.Criteria;
 import org.sol.util.c3p0.dataEntity2.InsertEntity;
 import org.sol.util.c3p0.dataEntity2.SelectEntity;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,14 +21,27 @@ import com.sol.kx.web.dao.pojo.StockCheck;
 
 @Repository
 public class InfoProductDaoImpl extends BaseDaoImpl implements InfoProductDao {
+	// 查找产品列表
 	@Value("${sql.info.product.find}")
 	private String SQL_FINDPRODUCT;
-	@Value("${sql.info.product.count}")
-	private String SQL_FINDCOUNT;
 	
-	public List<InfoProduct> find(int page, int pageSize,Condition condition) throws Exception {
-
-		return dataConsole.findByPage(InfoProduct.class, SQL_FINDPRODUCT,condition, page, pageSize);
+	public List<InfoProduct> find(int page, int pageSize,Criteria criteria) throws Exception {
+		String sql = SQL_FINDPRODUCT + criteria.getWhereSql();
+		return super.findByPage2(InfoProduct.class, sql, "info_product", "id", 
+				page, pageSize, "p.", dataConsole.parseSmap(InfoProduct.class, 
+						"id","type1","type1name","type2","type2name","type3","type3name",
+						"type4","type4name","pname","pcode","unit","image"), 
+				criteria.getParamListWithoutId());
+	}
+	
+	// 查找是否存在重复记录
+	@Value("${sql.info.product.checkexists}")
+	private String SQL_FIND_CHECKEXISTS;
+	
+	public boolean checkExists(String pcode) throws SQLException {
+		List<Object> param = new ArrayList<Object>(1);
+		param.add(pcode);
+		return (Integer)dataConsole.findReturn(SQL_FIND_CHECKEXISTS, Types.INTEGER, param) == 1;
 	}
 	
 	@Value("${sql.info.product.find.fuzzy}")
@@ -66,11 +80,7 @@ public class InfoProductDaoImpl extends BaseDaoImpl implements InfoProductDao {
 		params.add(pid);
 		return dataConsole.find(SQL_QUICKLOCATOR,StockCheck.class, smap,params);
 	}
-	
-	public int findCount(Condition condition) throws Exception {
-		return dataConsole.findCount(SQL_FINDCOUNT, condition);
-	}
-	
+		
 	@Value("${sql.info.product.count.fuzzy}")
 	private String SQL_FINDCOUNT_FUZZY;
 	
