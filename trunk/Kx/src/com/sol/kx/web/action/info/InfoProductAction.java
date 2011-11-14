@@ -1,12 +1,12 @@
 package com.sol.kx.web.action.info;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
-import org.sol.util.c3p0.Condition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -43,47 +43,27 @@ public class InfoProductAction extends BaseAction<InfoProduct>{
 	protected InfoProduct newPojo() {
 		return new InfoProduct();
 	}
-	
-	private int type1;
-	private int type2;
-	private int type3;
-	private int type4;
 
+	private String picType;
+	private File picFile;
+	private String picData;
 	
-	/**
-	 * 列表
-	 * @return
-	 */
 	@Override
-	public String manager() {
-		Condition condition = defaultCondition();
-
-		if(type1 > 0) {
-			if(condition == null)
-				condition = new Condition();
-			condition.addWhere("type1 = ?", type1);
-		}
+	public String add2() {
+		if(picType.equals("webcap"))
+			infoProductService.saveUploadPic(picData, input);
+		else if(picType.equals("file"))
+			infoProductService.saveUploadPic(picFile, input);
 			
-		if(type2 > 0) {
-			if(condition == null)
-				condition = new Condition();
-			condition.addWhere("type2 = ?", type2);
-		}
-		if(type3 > 0) {
-			if(condition == null)
-				condition = new Condition();
-			condition.addWhere("type3 = ?", type3);
-		}
-		if(type4 > 0) {
-			if(condition == null)
-				condition = new Condition();
-			condition.addWhere("type4 = ?", type4);
-		}
-		
-		pagerBean = infoProductService.find(pagerBean, condition);
-		return DATA;
+		return super.add2();
 	}
 	
+	private String pcode;
+	
+	public String checkPcode() {
+		result = infoProductService.checkExists(pcode);
+		return RESULT;
+	}
 	/**
 	 * 快速定位列表
 	 */
@@ -128,22 +108,6 @@ public class InfoProductAction extends BaseAction<InfoProduct>{
 		return "productDetail";
 	}
 
-	public void setType1(int type1) {
-		this.type1 = type1;
-	}
-
-	public void setType2(int type2) {
-		this.type2 = type2;
-	}
-
-	public void setType3(int type3) {
-		this.type3 = type3;
-	}
-
-	public void setType4(int type4) {
-		this.type4 = type4;
-	}
-
 	public void setPid(Integer pid) {
 		this.pid = pid;
 	}
@@ -158,6 +122,22 @@ public class InfoProductAction extends BaseAction<InfoProduct>{
 
 	public InputStream getExportFile() {
 		return exportFile;
+	}
+
+	public void setPicData(String picData) {
+		this.picData = picData;
+	}
+
+	public void setPicType(String picType) {
+		this.picType = picType;
+	}
+
+	public void setPicFile(File picFile) {
+		this.picFile = picFile;
+	}
+
+	public void setPcode(String pcode) {
+		this.pcode = pcode;
 	}
 
 }

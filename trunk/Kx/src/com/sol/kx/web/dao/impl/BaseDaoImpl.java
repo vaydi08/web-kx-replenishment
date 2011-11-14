@@ -212,6 +212,26 @@ public abstract class BaseDaoImpl implements BaseDao{
 
 		return dataConsole.find(sb.toString(), entity.getClazz(), entity.getSmap(), entity.getCriteria().getParamList());
 	}
+	public <X> List<X> findByPage2(Class<X> clazz,String sql,String tablename,String sort,int page,int pageSize,String prefix,Map<String,Class<?>> smap,List<Object> params) throws Exception {
+		return dataConsole.find(buildPageSql(sql,tablename,sort,page,pageSize,prefix),clazz, smap, params);
+	}
+	private String buildPageSql(String sql,String tablename,String sort,int page,int pageSize,String prefix) {
+		StringBuilder sb = new StringBuilder();
+		if(page > 1) {
+			sb.append("declare @id nvarchar(100);");
+			sb.append("select @id=min(").append(sort).append(") from (select top ").append(page * pageSize).append(" ").append(sort).append(" from ").append(tablename).append(" order by ").append(sort).append(" desc) tb1;");
+		}
+		sb.append("set ROWCOUNT ").append(pageSize).append(";");
+		sb.append(sql);
+		if(page > 1)
+			sb.append((sql.contains("where")) ? " and " :" where ").append(prefix).append(sort).append("<@id");
+		sb.append(" order by ").append(prefix).append(sort).append(" desc;");
+		sb.append("set ROWCOUNT 0");
+		return sb.toString();
+	}
+	private String buildPageSql(String sql,String tablename,String sort,int page,int pageSize) {
+		return buildPageSql(sql, tablename, sort, page, pageSize,"");
+	}
 	public int findCount(Object obj) throws Exception {
 		return dataConsole.findCount(obj);
 	}

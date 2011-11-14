@@ -27,7 +27,7 @@ $.fn.categoryType4Select = function(options) {
          html += '<tr>';
          for(row = 0; row < params.length; row=row+1) {
         	 html += '<td height="30" width="150" align="center" valign="middle"><a href="javascript:void(0)" value="' + params[row].ccode + '" id="' + params[row].id + '">' + 
-        	 '<img border="0" width="150" src="../upload/etc/' + params[row].image + '"/><br/>' + 
+        	 '<img border="0" width="150" src="../pic.action?img=' + params[row].image + '"/><br/>' + 
         	 params[row].cname + '&nbsp;' + params[row].ccode +
         	 '</a></td><td width="10">&nbsp;</td>';
  	 	
@@ -35,6 +35,8 @@ $.fn.categoryType4Select = function(options) {
         		html += '</tr><tr>';
         	 }
          }
+         
+         html += '<td height="30" width="150" align="center" valign="middle"><input type="button" id="newType4" value="增加新款式" style="border:1px solid #666;"/></td>'
          
          html += '</tr>';
          html += '</table>';
@@ -48,6 +50,14 @@ $.fn.categoryType4Select = function(options) {
         	 var text = $(this).text();
         	 
         	 opts.onClick(value,text,id);
+         });
+         
+         ctrl.find('#newType4').click(function() {
+        	 $("#dlg_newtype4").dialog('open');
+        	 
+        	 var row = $("#dlg_newtype4").data('type3row');
+        	 $("#dlg_newtype4").find("#parentText").text(row.text);
+        	 $("#dlg_newtype4").find("#parent").val(row.value);
          });
      }
 };      

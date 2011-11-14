@@ -11,42 +11,38 @@ public class InfoProduct extends Pojo{
 	
 	@Id
 	private Integer id;
-	@Column(columnDefinition = "id,cname", name = "type1")
-	private InfoCategory type1;
-	@Column(columnDefinition = "id,cname", name = "type2")
-	private InfoCategory type2;
-	@Column(columnDefinition = "id,cname", name = "type3")
-	private InfoCategory type3;
-	@Column(columnDefinition = "id,cname", name = "type4")
-	private InfoCategory type4;
+	@Column(name = "type1")
+	private Integer type1;
+	@Column(name = "type2")
+	private Integer type2;
+	@Column(name = "type3")
+	private Integer type3;
+	@Column(name = "type4")
+	private Integer type4;
 	@Column(name = "pname")
 	private String pname;
 	@Column(name = "pcode")
 	private String pcode;
 	@Column(name = "unit")
 	private String unit;
-	
-	private Double pweight;
-	private String quality;
-	private String stand;
+	@Column(name = "image")
 	private String image;
-	private String premark;
+	
+	private String type1name;
+	private String type2name;
+	private String type3name;
+	private String type4name;
 	
 	public InfoProduct() {
-		type1 = new InfoCategory();
-		type2 = new InfoCategory();
-		type3 = new InfoCategory();
-		type4 = new InfoCategory();
-		unit = "件";
 	}
 	
 	public InfoProduct(Integer type1, Integer type2,Integer type3, 
 			Integer type4, String pname, String pcode,String unit) {
 		this();
-		this.type1.setId(type1);
-		this.type2.setId(type2);
-		this.type3.setId(type3);
-		this.type4.setId(type4);
+		this.type1 = type1;
+		this.type2 = type2;
+		this.type3 = type3;
+		this.type4 = type4;
 		this.pname = pname;
 		this.pcode = pcode;
 		this.unit = unit;
@@ -76,38 +72,6 @@ public class InfoProduct extends Pojo{
 		this.pname = pname;
 	}
 
-	public InfoCategory getType1() {
-		return type1;
-	}
-
-	public void setType1(InfoCategory type1) {
-		this.type1 = type1;
-	}
-
-	public InfoCategory getType2() {
-		return type2;
-	}
-
-	public void setType2(InfoCategory type2) {
-		this.type2 = type2;
-	}
-
-	public InfoCategory getType3() {
-		return type3;
-	}
-
-	public void setType3(InfoCategory type3) {
-		this.type3 = type3;
-	}
-
-	public InfoCategory getType4() {
-		return type4;
-	}
-
-	public void setType4(InfoCategory type4) {
-		this.type4 = type4;
-	}
-
 	@Override
 	public Integer getId() {
 		return id;
@@ -115,42 +79,6 @@ public class InfoProduct extends Pojo{
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	@Override
-	public String toString() {
-		return "InfoProduct [" + (id != null ? "id=" + id + ", " : "")
-				+ (pcode != null ? "pcode=" + pcode + ", " : "")
-				+ (pname != null ? "pname=" + pname + ", " : "")
-				+ (type1 != null ? "type1=" + type1 + ", " : "")
-				+ (type2 != null ? "type2=" + type2 + ", " : "")
-				+ (type3 != null ? "type3=" + type3 + ", " : "")
-				+ (type4 != null ? "type4=" + type4 + ", " : "")
-				+ (unit != null ? "unit=" + unit : "") + "]";
-	}
-
-	public Double getPweight() {
-		return pweight;
-	}
-
-	public void setPweight(Double pweight) {
-		this.pweight = pweight;
-	}
-
-	public String getQuality() {
-		return quality;
-	}
-
-	public void setQuality(String quality) {
-		this.quality = quality;
-	}
-
-	public String getStand() {
-		return stand;
-	}
-
-	public void setStand(String stand) {
-		this.stand = stand;
 	}
 
 	public String getImage() {
@@ -161,12 +89,120 @@ public class InfoProduct extends Pojo{
 		this.image = image;
 	}
 
-	public String getPremark() {
-		return premark;
+	public Integer getType1() {
+		return type1;
 	}
 
-	public void setPremark(String premark) {
-		this.premark = premark;
+	public void setType1(Integer type1) {
+		this.type1 = type1;
 	}
-	
+
+	public Integer getType2() {
+		return type2;
+	}
+
+	public void setType2(Integer type2) {
+		this.type2 = type2;
+	}
+
+	public Integer getType3() {
+		return type3;
+	}
+
+	public void setType3(Integer type3) {
+		this.type3 = type3;
+	}
+
+	public Integer getType4() {
+		return type4;
+	}
+
+	public void setType4(Integer type4) {
+		this.type4 = type4;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("InfoProduct [");
+		if (id != null) {
+			builder.append("id=");
+			builder.append(id);
+			builder.append(", ");
+		}
+		if (image != null) {
+			builder.append("image=");
+			builder.append(image);
+			builder.append(", ");
+		}
+		if (pcode != null) {
+			builder.append("pcode=");
+			builder.append(pcode);
+			builder.append(", ");
+		}
+		if (pname != null) {
+			builder.append("pname=");
+			builder.append(pname);
+			builder.append(", ");
+		}
+		if (type1 != null) {
+			builder.append("type1=");
+			builder.append(type1);
+			builder.append(", ");
+		}
+		if (type2 != null) {
+			builder.append("type2=");
+			builder.append(type2);
+			builder.append(", ");
+		}
+		if (type3 != null) {
+			builder.append("type3=");
+			builder.append(type3);
+			builder.append(", ");
+		}
+		if (type4 != null) {
+			builder.append("type4=");
+			builder.append(type4);
+			builder.append(", ");
+		}
+		if (unit != null) {
+			builder.append("unit=");
+			builder.append(unit);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+
+	public String getType1name() {
+		return type1name;
+	}
+
+	public void setType1name(String type1name) {
+		this.type1name = type1name;
+	}
+
+	public String getType2name() {
+		return type2name;
+	}
+
+	public void setType2name(String type2name) {
+		this.type2name = type2name;
+	}
+
+	public String getType3name() {
+		return type3name;
+	}
+
+	public void setType3name(String type3name) {
+		this.type3name = type3name;
+	}
+
+	public String getType4name() {
+		return type4name;
+	}
+
+	public void setType4name(String type4name) {
+		this.type4name = type4name;
+	}
+
 }
