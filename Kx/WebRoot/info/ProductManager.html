@@ -85,21 +85,22 @@
 				width:700,
 				height:500,
 				onSubmit:function() {
-					// 图片上传形式
-					if($(".picType:checked").val() == "file") {
-						$("#form").attr("enctype","multipart/form-data");
-						if($("#picFile").val() == "") {
-							$.messager.show({title:'Field',msg:"请选择上传图片"});
-							return false;
-						}
-					} else {
-						$("#form").attr("enctype","application/x-www-form-urlencoded");
-						if($("#picData").val() == "") {
-							$.messager.show({title:'Field',msg:"请使用摄像头照相"});
-							return false;
+					if(form_url == "info-product!add2.action") {
+						// 图片上传形式
+						if($(".picType:checked").val() == "file") {
+							$("#form").attr("enctype","multipart/form-data");
+							if($("#picFile").val() == "") {
+								$.messager.show({title:'Field',msg:"请选择上传图片"});
+								return false;
+							}
+						} else {
+							$("#form").attr("enctype","application/x-www-form-urlencoded");
+							if($("#picData").val() == "") {
+								$.messager.show({title:'Field',msg:"请使用摄像头照相"});
+								return false;
+							}
 						}
 					}
-
 					// 是否存在重复pcode
 					if($("#isExistsPcode").val() == '1') {
 						$.messager.show({title:"Error",msg:'商品代码重复,请重新选择'});
@@ -132,14 +133,16 @@
 			var onEdit = function() {
 				var row = $("#listTable").datagrid('getSelected');
 				if (row){
-					form_url = "info-product!edit.action";
+					form_url = "info-product!edit2.action";
 					$("#dlg").dialog('open');
 					$("#form").form('load',row);
 				}
-				$("#add_type1").combobox('setValue',row.type1_id);
-				$("#add_type2").combobox('setValue',row.type2_id);
-				$("#add_type3").combobox('setValue',row.type3_id);
-				//$("#add_type4").combobox('setValue',row.type4_id);
+				$("#add_type1").combobox('select',row.type1);
+				$("#dlg").data("type2select",row.type2);
+				$("#dlg").data("type3select",row.type3);
+				$("#dlg").data("type4select",row.type4);
+				
+				$("#camTable").hide();
 			}
 			var onRemove = function() {
 				var row = $("#listTable").datagrid('getSelected');
@@ -257,6 +260,13 @@
 						$("#add_type3").combobox('reload',"info-category!combobox.action?clevel=3&parent=" + row.value);
 						addTypeCode[1] = row.reserve;
 					}
+				},
+				onLoadSuccess:function() {
+					var type2 = $("#dlg").data("type2select");
+					if(type2) {
+						$("#add_type2").combobox('select',type2);
+						$("#dlg").removeData("type2select");
+					}
 				}
 			});
 			$("#add_type3").combobox({
@@ -284,6 +294,19 @@
 						$("#dlg_newtype4").data('type3row',row);
 
 						$("#dlg").dialog('close');
+					}
+				},
+				onLoadSuccess:function() {
+					var type3 = $("#dlg").data("type3select");
+					if(type3) {
+						$("#add_type3").combobox('setValue',type3);
+						$("#dlg").removeData("type3select");
+					}
+
+					var type4 = $("#dlg").data("type4select");
+					if(type4) {
+						$("#add_type4").val(type4);
+						$("#dlg").removeData("type4select");
 					}
 				}
 			});
@@ -451,7 +474,7 @@
 		</tr>
 		
 		</table>
-		<table cellpadding="0" cellspacing="0" border="0">
+		<table cellpadding="0" cellspacing="0" border="0" id="camTable">
 			<tr><td height="30"><input type="radio" class="picType" value="webcap" name="picType" onclick='$("#camTr").show();$("#fileTr").hide();' checked="checked"/>使用摄像头&nbsp;
 			<input type="radio" class="picType" value="file" name="picType" onclick='$("#fileTr").show();$("#camTr").hide();'/>使用上传图片</td></tr>
 			<tr id="camTr">

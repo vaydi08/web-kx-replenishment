@@ -7,16 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.sol.util.c3p0.Condition;
 import org.sol.util.c3p0.dataEntity2.Criteria;
-import org.sol.util.c3p0.dataEntity2.InsertEntity;
-import org.sol.util.c3p0.dataEntity2.SelectEntity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import com.sol.kx.web.dao.InfoProductDao;
 import com.sol.kx.web.dao.pojo.InfoProduct;
-import com.sol.kx.web.dao.pojo.InfoProductDetail;
 import com.sol.kx.web.dao.pojo.StockCheck;
 
 @Repository
@@ -95,30 +91,22 @@ public class InfoProductDaoImpl extends BaseDaoImpl implements InfoProductDao {
 	private String SQL_INSERT_NOTEXISTS;
 	
 	public int addNotExists(InfoProduct infoProduct) throws SQLException {
-		List<Object> list = new ArrayList<Object>(8);
-		list.add(infoProduct.getType1().getId());
-		list.add(infoProduct.getType2().getId());
-		list.add(infoProduct.getType3().getId());
-		list.add(infoProduct.getType4().getId());
-		list.add(infoProduct.getPname());
-		list.add(infoProduct.getPcode());
-		list.add(infoProduct.getUnit());
-		
 		return dataConsole.insertPrepareSQLAndReturnKey(SQL_INSERT_NOTEXISTS,
-				infoProduct.getType1().getId(),infoProduct.getType2().getId(),infoProduct.getType3().getId(),
-				infoProduct.getType4().getId(),infoProduct.getPname(),infoProduct.getPcode(),infoProduct.getUnit());
+				infoProduct.getType1(),infoProduct.getType2(),infoProduct.getType3(),
+				infoProduct.getType4(),infoProduct.getPname(),infoProduct.getPcode(),
+				infoProduct.getImage(),infoProduct.getPcode());
 	}
 	
-	@Value("${sql.info.product.find.code2id}")
-	private String SQL_CODE2ID;
-	
-	public List<InfoProduct> findCode2Id() throws Exception {
-		Map<String,Class<?>> smap = new HashMap<String, Class<?>>(2);
-		smap.put("id", Integer.class);
-		smap.put("pcode", String.class);
-		
-		return dataConsole.find(SQL_CODE2ID, InfoProduct.class, smap, null);
-	}
+//	@Value("${sql.info.product.find.code2id}")
+//	private String SQL_CODE2ID;
+//	
+//	public List<InfoProduct> findCode2Id() throws Exception {
+//		Map<String,Class<?>> smap = new HashMap<String, Class<?>>(2);
+//		smap.put("id", Integer.class);
+//		smap.put("pcode", String.class);
+//		
+//		return dataConsole.find(SQL_CODE2ID, InfoProduct.class, smap, null);
+//	}
 	
 	// 导出
 	@Value("${sql.info.product.export}")
@@ -126,18 +114,8 @@ public class InfoProductDaoImpl extends BaseDaoImpl implements InfoProductDao {
 	
 	public List<InfoProduct> findExport() throws Exception {
 		return dataConsole.find(SQL_EXPORT, InfoProduct.class,
-				dataConsole.parseSmap(InfoProduct.class, "pname","pcode","pweight","quality","stand","image","premark"),
+				dataConsole.parseSmap(InfoProduct.class, "pname","pcode","image"),
 				null);
 	}
-	
-	
-	
-	public int addProductDetail(InsertEntity entity) throws Exception {		
-		return dataConsole.updatePrepareSQL(entity.getFullSql(), entity.getCriteria().getParamList());
-	}
 
-	
-	public List<InfoProductDetail> findProductDetails(SelectEntity entity) throws Exception {
-		return find2(entity);
-	}
 }
