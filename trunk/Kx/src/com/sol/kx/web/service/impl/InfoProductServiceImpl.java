@@ -1,33 +1,22 @@
 package com.sol.kx.web.service.impl;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.struts2.ServletActionContext;
-import org.sol.util.c3p0.Condition;
 import org.sol.util.c3p0.dataEntity2.Criteria;
-import org.sol.util.c3p0.dataEntity2.InsertEntity;
-import org.sol.util.c3p0.dataEntity2.SelectEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import sun.misc.BASE64Decoder;
-
 import com.sol.kx.web.common.Logger;
 import com.sol.kx.web.dao.BaseDao;
 import com.sol.kx.web.dao.InfoProductDao;
-import com.sol.kx.web.dao.pojo.InfoCategory;
 import com.sol.kx.web.dao.pojo.InfoProduct;
-import com.sol.kx.web.dao.pojo.InfoProductDetail;
 import com.sol.kx.web.dao.pojo.StockCheck;
 import com.sol.kx.web.service.ImageService;
 import com.sol.kx.web.service.InfoCategoryService;
@@ -45,6 +34,7 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 	@Autowired
 	private ImageService imageService;
 	
+	@Override
 	public PagerBean<InfoProduct> findByPage2(PagerBean<InfoProduct> bean,InfoProduct obj) {		
 		Logger.SERVICE.ldebug("查询[info_product]数据",bean.getPage(),bean.getPageSize(),obj.toString());
 		try {
@@ -110,43 +100,26 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 		}
 	}
 	
-	public List<InfoProductDetail> findProductDetails(Integer pid) {
-		Logger.SERVICE.ldebug("查询[info_product_detail]数据",pid);
-		
-		SelectEntity entity = new SelectEntity();
-		Criteria criteria = new Criteria();
-		criteria.eq("pid", pid);
-		entity.init(InfoProductDetail.class, criteria);
-		
-		try {
-			return infoProductDao.findProductDetails(entity);
-		} catch (Exception e) {
-			exceptionHandler.onDatabaseException("查询[info_product_detail]时的错误", e);
-			return null;
-		}
-	}
-	
-	
 	@Value("${product.startrow}")
 	private Integer PRODUCT_STARTROW;
 	@Value("${product.pname}")
 	private Integer PRODUCT_PNAME;
 	@Value("${product.pcode}")
 	private Integer PRODUCT_PCODE;
-	@Value("${product.pweight}")
-	private Integer PRODUCT_PWEIGHT;
-	@Value("${product.quality}")
-	private Integer PRODUCT_QUALITY;
-	@Value("${product.stand}")
-	private Integer PRODUCT_STAND;
-	@Value("${product.remark}")
-	private Integer PRODUCT_REMARK;
+//	@Value("${product.pweight}")
+//	private Integer PRODUCT_PWEIGHT;
+//	@Value("${product.quality}")
+//	private Integer PRODUCT_QUALITY;
+//	@Value("${product.stand}")
+//	private Integer PRODUCT_STAND;
+//	@Value("${product.remark}")
+//	private Integer PRODUCT_REMARK;
 	@Value("${product.image}")
 	private Integer PRODUCT_IMAGE;
 	
 	// 导出
 	public PoiUtil createExcel() {
-		Logger.SERVICE.debug("查询[info_product + info_product_detail]数据,导出为Excel表格数据");
+		Logger.SERVICE.debug("查询[info_product]数据,导出为Excel表格数据");
 		
 		PoiUtil poi = new PoiUtil("产品数据");
 		
@@ -155,7 +128,7 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 		try {
 			list = infoProductDao.findExport();
 		} catch (Exception e) {
-			Logger.SERVICE.error("查询[info_product + info_product_detail]数据,导出为Excel表格数据错误",e);
+			Logger.SERVICE.error("查询[info_product]数据,导出为Excel表格数据错误",e);
 			return poi;
 		}
 		
@@ -179,13 +152,9 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 		// 输出到EXCEL表
 		for(InfoProduct po : list) {
 			poi.newRow();
-			poi.setValue(PRODUCT_PNAME, po.getPname());
-			poi.setValue(PRODUCT_PCODE, po.getPcode());
-			poi.setValue(PRODUCT_PWEIGHT, po.getPweight());
-			poi.setValue(PRODUCT_QUALITY, po.getQuality());
-			poi.setValue(PRODUCT_STAND, po.getStand());
-			poi.setValue(PRODUCT_REMARK, po.getPremark());
-			poi.setValue(PRODUCT_IMAGE, po.getImage());
+			poi.setValue(PRODUCT_PNAME-1, po.getPname());
+			poi.setValue(PRODUCT_PCODE-1, po.getPcode());
+			poi.setValue(PRODUCT_IMAGE-1, po.getImage());
 		}
 		
 		return poi;
@@ -224,7 +193,7 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 		// mapping
 		Map<String,Integer> map = infoCategoryService.findCategoryMapping();
 		
-		Map<String,Integer> codeMap = findCode2Id();
+//		Map<String,Integer> codeMap = findCode2Id();
 		// result
 		ImportResultBean result = new ImportResultBean();
 		try {
@@ -235,7 +204,7 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 					continue;
 				
 				try {
-					saveProduct(poi, map,codeMap,result);
+					saveProduct(poi, map,result);
 				} catch (Exception e) {
 					result.anError(poi.getRowNo() + " - " + e.getMessage());
 				}
@@ -250,17 +219,17 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 		return result;
 	}
 	
-	private void saveProduct(PoiUtil poi,Map<String,Integer> map,Map<String,Integer> codeMap,ImportResultBean result) throws Exception {
-		String pname = poi.getValue(PRODUCT_PNAME,"产品名称").toString();
-		String pcode = poi.getValue(PRODUCT_PCODE,"").toString();
+	private void saveProduct(PoiUtil poi,Map<String,Integer> map,ImportResultBean result) throws Exception {
+		String pname = poi.getValue(PRODUCT_PNAME-1,"产品名称").toString();
+		String pcode = poi.getValue(PRODUCT_PCODE-1,"").toString();
 		if(pcode.equals("") || pcode.length() != 6)
 			throw new Exception("产品代码为空 或者 产品代码长度错误");
 		
-		Double pweight = (Double) poi.getValue(PRODUCT_PWEIGHT,0.0);
-		String quality = poi.getValue(PRODUCT_QUALITY,"成色").toString();
-		String stand = poi.getValue(PRODUCT_STAND,"规格").toString();
-		String premark = poi.getValue(PRODUCT_REMARK,"").toString();
-		String image = poi.getValue(PRODUCT_IMAGE,"").toString();
+//		Double pweight = (Double) poi.getValue(PRODUCT_PWEIGHT,0.0);
+//		String quality = poi.getValue(PRODUCT_QUALITY,"成色").toString();
+//		String stand = poi.getValue(PRODUCT_STAND,"规格").toString();
+//		String premark = poi.getValue(PRODUCT_REMARK,"").toString();
+		String image = poi.getValue(PRODUCT_IMAGE-1,"").toString();
 		
 		Integer type1 = map.get("1" + pcode.substring(0,1));
 		Integer type2 = map.get("2" + pcode.substring(1,2));
@@ -271,43 +240,30 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 			throw new Exception("无效的产品代码");
 		
 		InfoProduct infoProduct = new InfoProduct();
-		infoProduct.getType1().setId(type1);
-		infoProduct.getType2().setId(type2);
-		infoProduct.getType3().setId(type3);
-		infoProduct.getType4().setId(type4);
+		infoProduct.setType1(type1);
+		infoProduct.setType2(type2);
+		infoProduct.setType3(type3);
+		infoProduct.setType4(type4);
 		infoProduct.setPname(pname);
 		infoProduct.setPcode(pcode);
+		infoProduct.setImage(image);
 		
-		Integer pid = codeMap.get(pcode);
-		if(pid == null) {
-			pid = addProduct(infoProduct, result);
-			codeMap.put(pcode, pid);
-		}
-		
-		InfoProductDetail infoProductDetail = new InfoProductDetail();
-		infoProductDetail.setPid(pid);
-		infoProductDetail.setPweight(pweight);
-		infoProductDetail.setQuality(quality);
-		infoProductDetail.setStand(stand);
-		infoProductDetail.setPremark(premark);
-		infoProductDetail.setImage(image);
-		
-		addDetail(infoProductDetail);
+		addProduct(infoProduct, result);
 	}
 	
-	private Map<String,Integer> findCode2Id() {
-		Logger.SERVICE.debug("查询产品编号列表");
-		try {
-			List<InfoProduct> infoProducts = infoProductDao.findCode2Id();
-			Map<String, Integer> map = new HashMap<String, Integer>(infoProducts.size());
-			for(InfoProduct infoProduct : infoProducts)
-				map.put(infoProduct.getPcode(), infoProduct.getId());
-			return map;
-		} catch (Exception e) {
-			exceptionHandler.onDatabaseException("导入InfoProduct错误", e);
-			return new HashMap<String, Integer>();
-		}
-	}
+//	private Map<String,Integer> findCode2Id() {
+//		Logger.SERVICE.debug("查询产品编号列表");
+//		try {
+//			List<InfoProduct> infoProducts = infoProductDao.findCode2Id();
+//			Map<String, Integer> map = new HashMap<String, Integer>(infoProducts.size());
+//			for(InfoProduct infoProduct : infoProducts)
+//				map.put(infoProduct.getPcode(), infoProduct.getId());
+//			return map;
+//		} catch (Exception e) {
+//			exceptionHandler.onDatabaseException("导入InfoProduct错误", e);
+//			return new HashMap<String, Integer>();
+//		}
+//	}
 	private Integer addProduct(InfoProduct infoProduct,ImportResultBean result) {
 		Logger.SERVICE.debug("导入产品 " + infoProduct.toString());
 		try {
@@ -320,31 +276,7 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 			return null;
 		}
 	}
-	public void addDetail(InfoProductDetail infoProductDetail) {
-		Logger.SERVICE.debug("导入(添加)产品-详细 " + infoProductDetail.toString());
-		
-		try {
-			InsertEntity entity = new InsertEntity();
-			entity.init(infoProductDetail,false);
-			infoProductDao.addProductDetail(entity);
-		} catch (Exception e) {
-			exceptionHandler.onDatabaseException("导入infoProductDetail错误", e);
-		}
-		
-	}
-	public ResultBean addProductDetail(InfoProductDetail infoProductDetail) {
-		Logger.SERVICE.ldebug("插入[info_product_detail]数据", infoProductDetail.toString());
-		try {
-			InsertEntity entity = new InsertEntity();
-			entity.init(infoProductDetail,false);
-			infoProductDao.addProductDetail(entity);
-			return ResultBean.RESULT_SUCCESS();
-		} catch (Exception e) {
-			exceptionHandler.onDatabaseException("插入记录错误", e);
-			return ResultBean.RESULT_ERR(e.getMessage());
-		}
-	}
-	
+
 	// 保存摄像头图片
 	public String saveUploadPic(String picData,InfoProduct input) {
 		String filename = input.getPcode() + ".jpg";

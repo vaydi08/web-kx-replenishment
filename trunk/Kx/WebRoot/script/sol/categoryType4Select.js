@@ -3,6 +3,7 @@ $.fn.categoryType4Select = function(options) {
      var defaults = {
      	'url':'',
      	'queryParams':{},
+     	'newType4':true,
      	onClick:function(value,text,id){}
      }
      
@@ -36,7 +37,8 @@ $.fn.categoryType4Select = function(options) {
         	 }
          }
          
-         html += '<td height="30" width="150" align="center" valign="middle"><input type="button" id="newType4" value="增加新款式" style="border:1px solid #666;"/></td>'
+         if(opts.newType4)
+        	 html += '<td height="30" width="150" align="center" valign="middle"><input type="button" id="newType4" value="增加新款式" style="border:1px solid #666;"/></td>'
          
          html += '</tr>';
          html += '</table>';

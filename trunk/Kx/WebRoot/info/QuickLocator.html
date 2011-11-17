@@ -29,17 +29,17 @@
 	<!-- CLIPBOARD -->
 	<script type="text/javascript" src="../script/clipboard.js"></script>
 	
+	<style>
+	.panelSelect td {padding:3px}
+	.panelSelect a:hover {border:1px solid blue}
+	.panelSelect a{border:0px solid blue;color:#aaa;padding:5px}
+	</style>
+	<script type="text/javascript" src="../script/sol/categoryType4Select.js"></script>
+	
 	<script>
 	$(document).ready(function() {
 		var types = ['','','',''];
-		var typeSelect = function(level,code,text) {
-			types[level - 1] = code;
-
-			if(code != '')
-				$("#type" + level + "Tr").html('<td height="20">类别</td><td>' + text + '</td><td>代码</td><td>' + code + '</td>');
-			else
-				$("#type" + level + "Tr").html('');
-
+		$("#typeSelect").click(function() {
 			var typeStr = '<td height="20">产品代码:</td><td colspan="4"><strong>';
 			var str = '';
 			for(i = 0; i < 4; i ++) {
@@ -55,30 +55,55 @@
 			$("#queryValue").searchbox('setValue',str);
 			typeStr += str + "</strong>&nbsp;<a href='javascript:void(0);' onclick=copyToClipboard('" + str + "')>复制到剪贴板</a>&nbsp;" + quickSearch + "</td>";
 			$("#typeTr").html(typeStr);
-		}
+		});
 		//查询面板下拉菜单
-		$("#type1").mycombo({
-			url:"info-category!combobox.action?clevel=1",
-			onSelect:function(record) {
-				typeSelect(1,record.reserve,record.text);
+		$("#type1").combobox({
+			url:"info-category!combobox.action?clevel=1&parent=0",
+			width:100,
+			editable:false,
+			onSelect:function(row) {
+				if(row.value > 0) {
+					$("#type2").combobox('reload',"info-category!combobox.action?clevel=2&parent=" + row.value);
+					types[0] = row.reserve;
+				} else 
+					types[0] = '';
 			}
 		});
-		$("#type2").mycombo({
-			url:"info-category!combobox.action?clevel=2",
-			onSelect:function(record) {
-				typeSelect(2,record.reserve,record.text);
+		$("#type2").combobox({
+			width:100,
+			editable:false,
+			onSelect:function(row) {
+				if(row.value > 0) {
+					$("#type3").combobox('reload',"info-category!combobox.action?clevel=3&parent=" + row.value);
+					types[1] = row.reserve;
+				} else 
+					types[1] = '';
 			}
 		});
-		$("#type3").mycombo({
-			url:"info-category!combobox.action?clevel=3",
-			onSelect:function(record) {
-				typeSelect(3,record.reserve,record.text);
-			}
-		});
-		$("#type4").mycombo({
-			url:"info-category!combobox.action?clevel=4",
-			onSelect:function(record) {
-				typeSelect(4,record.reserve,record.text);
+		$("#type3").combobox({
+			width:100,
+			editable:false,
+			onSelect:function(row) {
+			if(row.value > 0) {
+				types[2] = row.reserve;
+				
+				$("#categoryType4Select").categoryType4Select({
+					'url':'info-category!findType4Select.action',
+			     	'queryParams':{'input.clevel':'4','input.parent':row.value},
+			     	'newType4':false,
+			     	onClick : function(value,text,id) {
+			     		$("#categoryType4Div").dialog('close');
+
+			     		$("#type4").val(id);
+			     		$("#type4Str").text(text);
+
+			     		types[3] = value;
+				     }
+				});
+
+				$("#categoryType4Div").dialog('open');
+			} else 
+				types[2] = '';
 			}
 		});
 
@@ -174,7 +199,13 @@
 		<td width="120"><select id="type1"></select></td>
 		<td width="120"><select id="type2"></select></td>
 		<td width="120"><select id="type3"></select></td>
-		<td width="120"><select id="type4"></select></td>
+		<td width="120">
+		<input type="hidden" id="type4"/><span id="type4Str"></span>
+		<div id="categoryType4Div" class="easyui-dialog" closeable="true" title="选择款式" modal="false" style="width:600px;height:500px;position:relative;z-index:9" cache="false" closed="true">
+			<div id="categoryType4Select"></div>
+		</div>
+		</td>
+		<td width="120"><a href="javascript:void(0)" id="typeSelect" class="easyui-linkbutton" iconCls="icon-search" plain="true">检索代码</a></td>
 		</tr>
 		<tr><td colspan="5">&nbsp;</td></tr>
 		<tr id="type1Tr"></tr>
