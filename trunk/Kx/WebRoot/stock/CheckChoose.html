@@ -48,6 +48,39 @@
 
 			$(div).dialog('close');
 		}
+
+		var type2PanelSelect = function(value,text) {
+			divClick(value,text);
+
+			$("#type2Div").find(".panelSelect").panelSelect({
+				'url':getUrl(2),
+				onClick:type3PanelSelect
+			});
+		}
+
+		var type3PanelSelect = function(value,text) {
+			divClick(value,text);
+
+			$("#type3Div").find(".panelSelect").panelSelect({
+				'url':getUrl(3),
+				onClick:type4PanelSelect
+			});
+		}
+
+		var type4PanelSelect = function(value,text) {
+			divClick(value,text);
+
+			$("#type4Div").find(".panelSelect").panelSelect({
+				'url':getUrl(4),
+				onClick:divClick
+			});
+		}
+
+		var getUrl = function(level) {
+			var parent = $("#type" + (level-1)).attr("value");
+			var url = "../info/info-category!findChoose.action?input.clevel=" + level + "&input.parent=" + parent;
+			return url;
+		}
 		
 		$("#shopDiv").find(".panelSelect").panelSelect({
 			'url':'../info/info-shop!findChoose.action',
@@ -55,23 +88,8 @@
 		});
 
 		$("#type1Div").find(".panelSelect").panelSelect({
-			'url':'../info/info-category!findChoose.action?input.clevel=1',
-			onClick:divClick
-		});
-
-		$("#type2Div").find(".panelSelect").panelSelect({
-			'url':'../info/info-category!findChoose.action?input.clevel=2',
-			onClick:divClick
-		});
-
-		$("#type3Div").find(".panelSelect").panelSelect({
-			'url':'../info/info-category!findChoose.action?input.clevel=3',
-			onClick:divClick
-		});
-
-		$("#type4Div").find(".panelSelect").panelSelect({
-			'url':'../info/info-category!findChoose.action?input.clevel=4',
-			onClick:divClick
+			'url':'../info/info-category!findChoose.action?input.clevel=1&input.parent=0',
+			onClick:type2PanelSelect
 		});
 
 		$(".chooseHref").click(function() {
@@ -132,7 +150,7 @@
 				<tbody>
 					<tr>
 					<td height="50">核定类型</td>
-					<td width="200"><input type="radio" id="stocktype" value="1" checked="checked"/>一般&nbsp;<input type="radio" id="stocktype" value="2" />节假日</td>
+					<td width="200"><input type="radio" id="stocktype" value="1" checked="checked" name="stocktype"/>一般&nbsp;<input type="radio" id="stocktype" value="2" name="stocktype"/>节假日</td>
 					</tr>
 					<tr>
 					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#shopDiv" result="#shop" plain="true" iconCls="icon-tip">选择门店</a></td>

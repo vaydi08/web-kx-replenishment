@@ -41,6 +41,7 @@ public class StockCheckDaoImpl extends BaseDaoImpl implements StockCheckDao {
 		smap.put("id", Integer.class);
 		smap.put("pname", String.class);
 		smap.put("pcode", String.class);
+		smap.put("image", String.class);
 		dataEntity.setSmap(smap);
 		
 		return super.find(InfoProduct.class,SQL_PRODUCTLIST,dataEntity,page,pageSize,"id");

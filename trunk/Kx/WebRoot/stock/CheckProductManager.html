@@ -62,12 +62,18 @@
 			// 数据表格
 			$("#listTable").grid({
 				title:"产品列表",
+				height:600,
 				url:"check!productList.action",
 				queryParams:queryString,
 				multi:false,
 				columns:[[
 			        {field:'pname',title:'产品名称',width:80},
-			        {field:'pcode',title:'产品代码',width:80}
+			        {field:'pcode',title:'产品代码',width:80},
+			        {field:'image',title:'产品图片',width:80,align:'center',
+				        formatter:function(value,row,index){
+							return '<img src="../pic.action?img=' + value + '" height="50"/>';
+				        },
+				        styler:function(value,row,index){return 'cursor:pointer';}}
 			    ]],
 			    //tools:[{"type":"add","text":"添加产品"},{"type":"edit","text":"修改产品"},{"type":"-"},{"type":"remove","text":"删除产品"},{"type":"-"},{"type":"other","text":"添加分类"}],
 			    toolbar:[{id:"btnadd",text:"核定数据",iconCls:"icon-add",handler:gotoCheck}],
@@ -76,6 +82,12 @@
 					$("#shopname").val(data.shopname);
 					$("#typename").val(data.typename);
 					$("#stocktype").val(queryString.stocktype == 1 ? "一般" : "节假日");
+				},
+				onClickCell:function(index,field,value) {
+					if(field == "image") {
+						$("#largeImg").attr("src","../pic.action?img=" + value);
+						$("#imgDiv").dialog('open');
+					}
 				}
 			    
 			});
@@ -110,7 +122,13 @@
 			<table id="listTable"></table>
 
 		</div>
+		
+		<div id="imgDiv" class="easyui-dialog" modal="true" style="width:400px;height:400px;background-color:#fafafa" title="图片" closed="true" closeable="true">
+			<table align="center" width="100%" height="100%">
+			<tr><td align="center" valign="middle"><img id="largeImg"/></td></tr>
+			</table>
+		</div>
 	</div>
-
+	
   </body>
 </html>
