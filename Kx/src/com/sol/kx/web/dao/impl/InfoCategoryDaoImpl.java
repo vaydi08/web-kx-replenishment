@@ -1,5 +1,7 @@
 package com.sol.kx.web.dao.impl;
 
+import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,13 +9,13 @@ import java.util.Map;
 
 import org.sol.util.c3p0.DataConsoleAnnotation;
 import org.sol.util.c3p0.dataEntity.CountDataEntity;
-import org.sol.util.c3p0.dataEntity.SelectDataEntity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import com.sol.kx.web.common.Constants;
 import com.sol.kx.web.dao.InfoCategoryDao;
 import com.sol.kx.web.dao.pojo.InfoCategory;
+
 
 @Repository
 public class InfoCategoryDaoImpl extends BaseDaoImpl implements InfoCategoryDao {
@@ -63,20 +65,30 @@ public class InfoCategoryDaoImpl extends BaseDaoImpl implements InfoCategoryDao 
 		
 		return find(SQL_CATEGORY_MAPPING,InfoCategory.class,smap,list);
 	}
-
-	public List<InfoCategory> findCustom(Class<InfoCategory> clazz, InfoCategory obj, int page, int pageSize,
-			String order) throws Exception {
-		SelectDataEntity dataEntity = new SelectDataEntity(clazz);
-		dataEntity.orderDesc("id");
+	
+	@Value("${sql.info.product.categoryGetPname}")
+	private String SQL_PRODUCT_PNAME;
+	
+	public String generatePname(Integer parent,String code) throws SQLException {
+		List<Object> param = new ArrayList<Object>();
+		param.add(code);
+		param.add(parent);
+		param.add(parent);
+		param.add(parent);
 		
-		if(obj.getCcode() != null)
-			dataEntity.like("ccode", obj.getCcode());
-		if(obj.getCname() != null)
-			dataEntity.like("cname", obj.getCname());
-		if(obj.getParent() != null)
-			dataEntity.eq("parent", obj.getParent());
+		return (String)dataConsole.findReturn(SQL_PRODUCT_PNAME,12, param);
+	}
+	
+	// 查找是否存在重复记录
+	@Value("${sql.info.product.categoryExists}")
+	private String SQL_FIND_CHECKEXISTS;
+	
+	public boolean checkExists(String code,Integer level) throws SQLException {
+		List<Object> param = new ArrayList<Object>(1);
+		param.add(code);
+		param.add(level);
 		
-		return dataConsole.findByPage(clazz, dataEntity, page, pageSize, order);
+		return (Integer)dataConsole.findReturn(SQL_FIND_CHECKEXISTS, Types.INTEGER, param) == 1;
 	}
 	
 	public int findCountCustom(InfoCategory obj) throws Exception {

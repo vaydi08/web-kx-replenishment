@@ -1,5 +1,6 @@
 package com.sol.kx.web.service.impl;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,7 @@ import com.sol.kx.web.dao.pojo.InfoCategory;
 import com.sol.kx.web.service.ImageService;
 import com.sol.kx.web.service.InfoCategoryService;
 import com.sol.kx.web.service.bean.ComboBoxBean;
-import com.sol.kx.web.service.bean.PagerBean;
+import com.sol.kx.web.service.bean.ResultBean;
 
 @Service
 public class InfoCategoryServiceImpl extends BaseServiceImpl<InfoCategory> implements InfoCategoryService{
@@ -107,24 +108,28 @@ public class InfoCategoryServiceImpl extends BaseServiceImpl<InfoCategory> imple
 		return map;
 	}
 	
-
-	public PagerBean<InfoCategory> findCustom(PagerBean<InfoCategory> bean,
-			InfoCategory obj) {
-		Logger.SERVICE.ldebug("查询[info_category]数据",bean.getPage(),bean.getPageSize(),obj.toString());
-				
+	public String generateProductPcode(InfoCategory input) {
+		Logger.SERVICE.ldebug("根据分类获取产品代码数据", input.toString());
 		try {
-			return setBeanValue(bean, 
-					infoCategoryDao.findCustom(InfoCategory.class, obj, bean.getPage(), bean.getPageSize(),"id"),
-					infoCategoryDao.findCountCustom(obj));
+			return infoCategoryDao.generatePname(input.getParent(), input.getCcode());
 		} catch (Exception e) {
-			bean.setException(e);
-			exceptionHandler.onDatabaseException("查询[info_category]时的错误", e);
-			return bean;
+			exceptionHandler.onDatabaseException("插入记录错误", e);
+			return null;
 		}
 	}
 	
-	public String saveUploadPic(String picData,InfoCategory input) {
-		String filename = "category_" + input.getClevel() + "_" + input.getCcode() + ".jpg";
+	public ResultBean checkExists(String pcode,Integer level) {
+		try {
+			return (infoCategoryDao.checkExists(pcode,level)) ? 
+					ResultBean.RESULT_ERR("已存在的商品代码,请重新输入") : ResultBean.RESULT_SUCCESS();
+		} catch (SQLException e) {
+			exceptionHandler.onDatabaseException("查询[info_category]重复记录时的错误", e);
+			return ResultBean.RESULT_ERR("数据库错误");
+		}
+	}
+	
+	public String saveUploadPic(String picData,String image,InfoCategory input) {
+		String filename = image + ".jpg";
 		
 		try {
 			imageService.save(picData, filename);

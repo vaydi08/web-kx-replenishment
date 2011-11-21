@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.sol.kx.web.dao.pojo.InfoCategory;
 import com.sol.kx.web.service.bean.ComboBoxBean;
-import com.sol.kx.web.service.bean.PagerBean;
+import com.sol.kx.web.service.bean.ResultBean;
 
 public interface InfoCategoryService extends BaseService<InfoCategory>{
 
@@ -28,8 +28,9 @@ public interface InfoCategoryService extends BaseService<InfoCategory>{
 	 * @return
 	 */
 	public Map<String,Integer> findCategoryChoose(InfoCategory input);
+		
+	public String saveUploadPic(String picData,String image,InfoCategory input);
 	
-	public PagerBean<InfoCategory> findCustom(PagerBean<InfoCategory> bean,InfoCategory obj);
-	
-	public String saveUploadPic(String picData,InfoCategory input);
+	public String generateProductPcode(InfoCategory input);
+	public ResultBean checkExists(String pcode,Integer level);
 }

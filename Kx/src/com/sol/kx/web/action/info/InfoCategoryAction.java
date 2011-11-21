@@ -18,7 +18,7 @@ import com.sol.kx.web.service.bean.ComboBoxBean;
 @Controller
 @Scope("session")
 @Results({@Result(name = "choose",location = "/stock/chooseData.jsp"),
-	@Result(name = "panelSelect",location = "/panelSelectData.jsp")})
+	@Result(name = "chainInsertProduct",type="chain",location="insertProduct")})
 public class InfoCategoryAction extends BaseAction<InfoCategory>{
 
 	private static final long serialVersionUID = 1L;
@@ -49,17 +49,23 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 			obj.setParent(type2);
 		if(type3 != null && type3 > 0)
 			obj.setParent(type3);
-		pagerBean = infoCategoryService.findCustom(pagerBean, obj);
+		pagerBean = infoCategoryService.findByPage2(pagerBean, obj);
 		return DATA;
 	}
 	
-	// 添加
 	private String picData;
+	
 	@Override
 	public String add() {
 		if(picData != null && !picData.isEmpty())
-			infoCategoryService.saveUploadPic(picData, input);
+			infoCategoryService.saveUploadPic(picData,infoCategoryService.generateProductPcode(input),input);
+		
 		return super.add();
+	}
+	
+	public String checkCode() {
+		result = infoCategoryService.checkExists(input.getCcode(),input.getClevel());
+		return RESULT;
 	}
 	
 	private Integer clevel;
@@ -70,7 +76,6 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 		defaultMap.put(1, "- 大类 -");
 		defaultMap.put(2, "- 小类 -");
 		defaultMap.put(3, "- 货型 -");
-		defaultMap.put(4, "- 款式 -");
 	}
 	
 	private ComboBoxBean comboboxBean;
@@ -88,12 +93,7 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 	public ComboBoxBean getComboboxBean() {
 		return comboboxBean;
 	}
-	
-	public String findType4Select() {
-		pagerBean = infoCategoryService.find2(input);
-		return "panelSelect";
-	}
-	
+		
 	public String findChoose() {
 		return "choose";
 	}
@@ -103,10 +103,6 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 
 	public void setClevel(Integer clevel) {
 		this.clevel = clevel;
-	}
-
-	public void setPicData(String picData) {
-		this.picData = picData;
 	}
 
 	public void setParent(Integer parent) {
@@ -126,6 +122,10 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 
 	public void setType3(Integer type3) {
 		this.type3 = type3;
+	}
+
+	public void setPicData(String picData) {
+		this.picData = picData;
 	}
 
 }

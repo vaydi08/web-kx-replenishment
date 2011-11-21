@@ -208,5 +208,9 @@ public abstract class BaseAction<T> extends ActionSupport{
 		return input;
 	}
 
+	public void setResult(ResultBean result) {
+		this.result = result;
+	}
+
 
 }
