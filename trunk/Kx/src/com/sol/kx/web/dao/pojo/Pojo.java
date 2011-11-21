@@ -11,6 +11,9 @@ public class Pojo implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+	protected String prefix = "";
+	
+	
 	public Map<String,Object> getJson() {
 		Map<String,Object> map = new HashMap<String, Object>();
 		
@@ -57,4 +60,12 @@ public class Pojo implements Serializable{
 	}
 	
 	public Integer getId(){return 0;}
+
+	public String getPrefix() {
+		return prefix;
+	}
+
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
+	}
 }

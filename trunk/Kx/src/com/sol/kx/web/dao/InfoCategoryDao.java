@@ -1,5 +1,6 @@
 package com.sol.kx.web.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.sol.kx.web.dao.pojo.InfoCategory;
@@ -22,8 +23,8 @@ public interface InfoCategoryDao extends BaseDao{
 	 */
 	public List<InfoCategory> findCategoryMapping() throws Exception;
 	
-	public List<InfoCategory> findCustom(Class<InfoCategory> clazz, InfoCategory obj, int page, int pageSize,
-			String order) throws Exception;
+	public String generatePname(Integer parent,String code) throws SQLException;
+	public boolean checkExists(String code,Integer level) throws SQLException;
 	
 	public int findCountCustom(InfoCategory obj) throws Exception;
 }

@@ -13,23 +13,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sol.kx.web.common.Logger;
 import com.sol.kx.web.dao.BaseDao;
+import com.sol.kx.web.dao.pojo.Pojo;
 import com.sol.kx.web.service.BaseService;
 import com.sol.kx.web.service.bean.PagerBean;
 import com.sol.kx.web.service.bean.ResultBean;
 
-public abstract class BaseServiceImpl<T> implements BaseService<T>{
+public abstract class BaseServiceImpl<T extends Pojo> implements BaseService<T>{
 
 	protected abstract BaseDao getDao();
 	
 	@Autowired
 	protected ExceptionHandler exceptionHandler;
 	
-	protected PagerBean<T> setBeanValue(PagerBean<T> bean,List<T> dataList,int count) {
+	protected PagerBean<T> setBeanValue(PagerBean<T> bean,List<?> dataList,int count) {
 		if(bean == null)
 			bean = new PagerBean<T>();
 		
 		bean.setException(null);
-		bean.setDataList(dataList);
+		bean.setDataList((List<T>) dataList);
 		bean.setCount(count);
 		
 		return bean;
@@ -124,8 +125,12 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 			selectEntity.init(obj);
 			CountEntity countEntity = new CountEntity();
 			countEntity.init(obj);
+
 			return setBeanValue(bean, 
-					getDao().findByPage2(selectEntity, bean.getPage(), bean.getPageSize(), "id"), 
+//					getDao().findByPage2(selectEntity, bean.getPage(), bean.getPageSize(), "id"),
+					getDao().findByPage2(obj.getClass(),selectEntity.getFullSql(),
+							obj.getClass().getAnnotation(Table.class).name(),selectEntity.getCriteria().getIdname(),
+							bean.getPage(),bean.getPageSize(),obj.getPrefix(),selectEntity.getSmap(),selectEntity.getCriteria().getParamList()),
 					getDao().findCount2(countEntity));
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("查询" + obj.getClass().getAnnotation(Table.class).name() + "错误", e);

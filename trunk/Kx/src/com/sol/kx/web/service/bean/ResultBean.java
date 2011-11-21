@@ -6,6 +6,8 @@ public class ResultBean {
 	// 提交请求错误信息
 	private String resultErrMsg;
 	
+	private Object reserve;
+	
 	public boolean isResultSuccess() {
 		return resultSuccess;
 	}
@@ -40,5 +42,11 @@ public class ResultBean {
 		bean.setResultSuccess(false);
 		bean.setResultErrMsg(msg);
 		return bean;
+	}
+	public Object getReserve() {
+		return reserve;
+	}
+	public void setReserve(Object reserve) {
+		this.reserve = reserve;
 	}
 }

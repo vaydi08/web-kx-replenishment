@@ -83,7 +83,24 @@
 		    }
 		});
 
-		$("#dlg").crud({width:750,height:500});
+		$("#dlg").crud({width:750,height:500,
+			onSubmit:function(){
+				if($("#clevel").val() == 4 && $("#picData").val() == "") {
+					$.messager.show({title:'ERROR',msg:'请照相'});
+					return false;
+				}
+
+				if($("#codeMsg").text() != '') {
+					$.messager.show({title:'ERROR',msg:'有重复记录,请确认'});
+					return false;
+				}
+
+				return $("#form").form("validate");
+			},
+			onOpen:function(){
+				document.getElementById("WebVideoCap1").stop();
+				document.getElementById("WebVideoCap1").clear();
+			}});
 
 		// 类别选择事件
 		$("#clevel").change(function(){
@@ -102,7 +119,35 @@
 				$("#camTr").hide();
 		});
 
-		$("#parent").combobox({url:'info-category!combobox1.action?clevel=0'});
+		$("#ccode").change(function() {
+			$.post('info-category!checkCode.action',{'input.ccode':$(this).val(),'input.clevel':$("#clevel").val()},function(data){
+				var result = eval('(' + data + ')');
+				if(result.success) {
+					$("#codeMsg").text('');
+					$("#codeMsg").hide();
+				} else {
+					$("#codeMsg").text(result.msg);
+					$("#codeMsg").show();
+				}
+			});
+		});
+
+		$("#parent").combobox({url:'info-category!combobox1.action?clevel=0',
+			onLoadSuccess:function(){
+				var p = $("#parent").data("row.parent");
+				if(p){
+					$("#parent").combobox('select',p);
+					$("#parent").removeData("row.parent");
+				}
+			},
+			onShowPanel:function(){
+				if($("#clevel").val() == 4)
+					$('#camTr').hide();
+			},
+			onHidePanel:function(){
+				if($("#clevel").val() == 4)
+					$('#camTr').show();
+			}});
 
 
 		// cam
@@ -142,6 +187,17 @@
 		});
 	});
 
+	function onEditBtn_category(editUrl) {
+		var row = $("#listTable").datagrid('getSelected');
+		if (row){
+			form_url = editUrl,
+			$("#dlg").dialog('open');
+			$("#form").form('load',row);
+
+			$("#parent").combobox('reload','info-category!combobox1.action?clevel=' + (Number($("#clevel").val())-1));
+			$("#parent").data("row.parent",row.parent);
+		}
+	}
 	</script>
   </head>
   
@@ -188,7 +244,7 @@
 			</table>
 			<div id="toolbar">
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$('#camTr').hide();onAddBtn('info-category!add.action')">添加分类</a>
-				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$('#camTr').hide();onEditBtn('info-category!edit.action')">修改分类</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$('#camTr').hide();onEditBtn_category('info-category!edit.action')">修改分类</a>
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="onRemoveBtn('info-category!delete.action')">删除分类</a>
 			</div>
 		</div>
@@ -213,7 +269,9 @@
 		</tr>	
 		<tr>
 		<td height="30">类别代码</td>
-		<td><input type="text" name="input.ccode" id="ccode" required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
+		<td><input type="text" name="input.ccode" id="ccode" required="true" validType="length[1,2]" class="easyui-validatebox"/>
+		&nbsp;&nbsp;<span id="codeMsg" style="display:none;color:red"></span>
+		</td>
 		</tr><tr>
 		<td height="30">类别名称</td>
 		<td><input type="text" name="input.cname" id="cname"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
