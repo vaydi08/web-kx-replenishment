@@ -37,7 +37,7 @@
 		var onImport = function() {
 			$("#upload").dialog('open');
 		}
-
+/*
 		var checkPcode = function(pcode) {
 			$.post('info-product!checkPcode.action',{'pcode':pcode},function(data){
 				var result = eval('(' + data + ')');
@@ -49,7 +49,7 @@
 				}
 			});
 		}
-		
+*/		
 		$(function(){
 			// 上传对话框
 			$("#upload").dialog({
@@ -80,7 +80,7 @@
 					return queryObject;
 				}
 			});
-
+/*
 			$("#dlg").crud({
 				width:700,
 				height:500,
@@ -160,7 +160,7 @@
 					})
 				}
 			}
-
+*/
 			
 			$("#pcode").change(function() {
 				setTimeout('checkPcode("' + $(this).val() + '")',500);
@@ -180,11 +180,11 @@
 			        {field:'unit',title:'单位',width:40}
 			    ]],
 			    //tools:[{"type":"add","text":"添加产品"},{"type":"edit","text":"修改产品"},{"type":"-"},{"type":"remove","text":"删除产品"},{"type":"-"},{"type":"other","text":"添加分类"}],
-			    toolbar:[{id:"btnadd",text:"添加产品",iconCls:"icon-add",handler:onAdd},
-			    		{id:"btnedit",text:"修改产品",iconCls:"icon-edit",handler:onEdit},
-			    		{id:"btnremove",text:"删除产品",iconCls:"icon-remove",handler:onRemove},
+			    toolbar:[{id:"btnadd",text:"添加产品",disabled:true,iconCls:"icon-add"/*,handler:onAdd*/},
+			    		{id:"btnedit",text:"修改产品",disabled:true,iconCls:"icon-edit"/*,handler:onEdit*/},
+			    		{id:"btnremove",text:"删除产品",disabled:true,iconCls:"icon-remove"/*,handler:onRemove*/},
 			    		'-',
-			    		{id:"btnimport",text:"从Excel导入",iconCls:"icon-import",handler:onImport},
+			    		{id:"btnimport",text:"从Excel导入",disabled:true,iconCls:"icon-import"/*,handler:onImport*/},
 			    		{id:"btnexport",text:"导出文件",iconCls:"icon-export",handler:function(){window.open('info-product!export.action')}}
 			    		],
 			    dlg:"#dlg",
@@ -238,7 +238,7 @@
 				width:100,
 				editable:false
 			});
-
+/*
 			var addTypeCode = ['','','',''];
 			//添加面板下拉菜单
 			$("#add_type1").combobox({
@@ -375,7 +375,7 @@
 				document.getElementById("WebVideoCap2").cap();
 				$("#t4_picData").val(document.getElementById('WebVideoCap2').jpegBase64Data);
 			});
-			
+*/
 		});
 
 		
@@ -383,7 +383,7 @@
   </head>
   
   <body>
-	
+
 	<div id="right" >
 
 		<div id="queryPanel">
@@ -433,6 +433,7 @@
 
 	</div>
 	
+	<!-- 
 	<div id="dlg" buttons="#dlg-buttons" style="padding:10px 20px" model="true">
 	<input type="hidden" id="isExistsPcode" value="0" />
 	<form id="form" method="post" >
@@ -519,6 +520,7 @@
 	</form>
 	</div>
 	
+	 
 	<div id="categoryType4Div" class="easyui-dialog" closeable="true" title="选择款式" modal="false" style="width:600px;height:500px;position:relative;z-index:9" cache="false" closed="true">
 		<div id="categoryType4Select"></div>
 	</div>
@@ -597,9 +599,11 @@
 		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" id="t4_dlg-save">保存</a>
 		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" id="t4_dlg-cancel">取消</a>
 	</div>
-	
+	 -->
+	 
 	<div title="导入文件" style="width:600px;height:300px" modal="true" id="upload" closed="true">
 	<iframe frameborder="0" src="upload2.html" width="600" height="300"/>
 	</div>
+	
   </body>
 </html>

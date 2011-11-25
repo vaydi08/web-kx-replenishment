@@ -121,7 +121,7 @@
 		// datagrid
 		$("#listTable").grid({
 			title:"产品列表",
-			url:'info-product!quickLocator.action',
+			url:'info-product!manager2.action',
 			queryParams:{queryValue:''},
 			width:'auto',
 			height:300,
@@ -129,21 +129,21 @@
 			columns:[[
 		        {field:'type',title:'类别',width:120,
 			        formatter:function(value,rec) {
-						return rec.type1_cname + "-" + rec.type2_cname + "-" + rec.type3_cname + "-" + rec.type4_cname;
+						return rec.type1name + "-" + rec.type2name + "-" + rec.type3name + "-" + rec.type4name;
 		        }},
 		        {field:'pname',title:'产品名称',width:80},
 		        {field:'pcode',title:'产品代码',width:80},
 		        {field:'unit',title:'单位',width:40}
 		    ]],
 		    view: detailview,
-			detailFormatter:function(index,row){   
+			detailFormatter:function(index,row){
 		        return '<DIV style="padding-bottom: 5px; padding-left: 0px; padding-right: 0px; padding-top: 5px" id="ddv-' + index + '"></DIV>';   
 		    },   
 		    onExpandRow: function(index,row) {
 		        $('#ddv-'+index).panel({   
 		            border:false,   
 		            cache:false,   
-		            href:'info-product!details.action?pid=' + row.id,
+		            href:'../image.jsp?img=' + row.image,
 		            onLoad:function(){
 		                $('#listTable').datagrid('fixDetailRowHeight',index);   
 		            }   

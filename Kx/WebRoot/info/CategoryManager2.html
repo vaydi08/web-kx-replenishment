@@ -133,17 +133,13 @@
 		});
 
 		$("#parent").combobox({url:'info-category!combobox1.action?clevel=0',
-			/*
 			onLoadSuccess:function(){
-			var p = $("#parent").data("row.parent");
-			alert(p);
+				var p = $("#parent").data("row.parent");
 				if(p){
-					
 					$("#parent").combobox('select',p);
 					$("#parent").removeData("row.parent");
 				}
 			},
-			*/
 			onShowPanel:function(){
 				if($("#clevel").val() == 4)
 					$('#camTr').hide();
