@@ -132,7 +132,7 @@
 				return;
 			}
 			
-			location.href = 'CheckProductManager.html?stocktype=' + $("#stocktype").val() + '&shopid=' + shop + str;
+			location.href = 'CheckProductManager.html?stocktype=' + $(".stocktype:checked").val() + '&shopid=' + shop + str;
 		});
 		
 	});
@@ -150,7 +150,7 @@
 				<tbody>
 					<tr>
 					<td height="50">核定类型</td>
-					<td width="200"><input type="radio" id="stocktype" value="1" checked="checked" name="stocktype"/>一般&nbsp;<input type="radio" id="stocktype" value="2" name="stocktype"/>节假日</td>
+					<td width="200"><input type="radio" class="stocktype" value="1" checked="checked" name="stocktype"/>一般&nbsp;<input type="radio" class="stocktype" value="2" name="stocktype"/>节假日</td>
 					</tr>
 					<tr>
 					<td height="50"><a href="javascript:void(0)" class="easyui-linkbutton chooseHref" div="#shopDiv" result="#shop" plain="true" iconCls="icon-tip">选择门店</a></td>

@@ -18,7 +18,8 @@ import com.sol.kx.web.service.bean.ComboBoxBean;
 @Controller
 @Scope("session")
 @Results({@Result(name = "choose",location = "/stock/chooseData.jsp"),
-	@Result(name = "chainInsertProduct",type="chain",location="insertProduct")})
+	@Result(name = "chainInsertProduct",type="chain",location="insertProduct"),
+	@Result(name = "panelSelect",location = "/panelSelectData.jsp")})
 public class InfoCategoryAction extends BaseAction<InfoCategory>{
 
 	private static final long serialVersionUID = 1L;
@@ -92,6 +93,11 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 
 	public ComboBoxBean getComboboxBean() {
 		return comboboxBean;
+	}
+	
+	public String findType4Select() {
+		pagerBean = infoCategoryService.find2(input);
+		return "panelSelect";
 	}
 		
 	public String findChoose() {
