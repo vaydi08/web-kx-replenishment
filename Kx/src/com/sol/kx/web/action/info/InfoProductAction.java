@@ -22,7 +22,8 @@ import com.sol.kx.web.service.util.PoiUtil;
 @Controller
 @Scope("session")
 @Results({@Result(name = "productDetail",location = "/info/ProductDetail.jsp"),
-		  @Result(name = "quickLocatorStock",location = "/info/QuickLocatorStock.jsp"),
+		  @Result(name = "quickLocatorStock",location = "/html/info/QuickLocatorStock.jsp"),
+		  @Result(name = "panelSelect",location = "/panelSelectData.jsp"),
 		  @Result(name = "export",type = "stream",params = 
 			{"contentType","application/octet-stream;charset=UTF-8",
 			"contentDisposition","attachment;filename=\"Goods.xls\"",
@@ -97,16 +98,22 @@ public class InfoProductAction extends BaseAction<InfoProduct>{
 		return "export";
 	}
 	
+	// 快速定位 type4列表
+	public String findType4Select() {
+		pagerBean = infoProductService.find2(input);
+		return "panelSelect";
+	}
+	
 	/**
 	 * 子内容列表
 	 */
 	private Integer pid;
 	private List<InfoProductDetail> detailList;
 	
-	public String details() {
-		detailList = infoProductService.findProductDetails(pid);
-		return "productDetail";
-	}
+//	public String details() {
+//		detailList = infoProductService.findProductDetails(pid);
+//		return "productDetail";
+//	}
 
 	public void setPid(Integer pid) {
 		this.pid = pid;

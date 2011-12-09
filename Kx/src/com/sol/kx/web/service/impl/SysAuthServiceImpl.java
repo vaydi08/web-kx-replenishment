@@ -28,7 +28,7 @@ public class SysAuthServiceImpl extends BaseServiceImpl<SysAuth> implements SysA
 	public boolean checkAuth(String uri,SysUser user) {
 		Boolean[] groupAuth = authMap.get(uri);
 		if(groupAuth == null)
-			return true;
+			return false;
 		return groupAuth[user.getGroupid() - 1];
 	}
 	

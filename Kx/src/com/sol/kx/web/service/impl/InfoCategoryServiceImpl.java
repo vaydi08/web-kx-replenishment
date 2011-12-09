@@ -1,10 +1,12 @@
 package com.sol.kx.web.service.impl;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.sol.util.c3p0.dataEntity2.DeleteEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,24 @@ public class InfoCategoryServiceImpl extends BaseServiceImpl<InfoCategory> imple
 	@Override
 	protected BaseDao getDao() {
 		return infoCategoryDao;
+	}
+	
+	// 用于确认删除
+	@Override
+	public ResultBean delete2(InfoCategory obj) {
+		try {
+			if(infoCategoryDao.checkDeleteExists(obj.getId()))
+				return ResultBean.RESULT_ERR("存在下级类别,不能直接进行删除");
+			else {
+				DeleteEntity entity = new DeleteEntity();
+				entity.init(obj);
+				infoCategoryDao.delete2(entity);
+				return ResultBean.RESULT_SUCCESS();
+			}
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("删除[info_category]记录时的错误", e);
+			return ResultBean.RESULT_ERR("数据库错误 " + e.getMessage());
+		}
 	}
 	
 	public ComboBoxBean findCategoryType1(int clevel,String defaultText) {
@@ -118,9 +138,9 @@ public class InfoCategoryServiceImpl extends BaseServiceImpl<InfoCategory> imple
 		}
 	}
 	
-	public ResultBean checkExists(String pcode,Integer level) {
+	public ResultBean checkExists(String pcode,Integer level,Integer parent) {
 		try {
-			return (infoCategoryDao.checkExists(pcode,level)) ? 
+			return (infoCategoryDao.checkExists(pcode,level,parent)) ? 
 					ResultBean.RESULT_ERR("已存在的商品代码,请重新输入") : ResultBean.RESULT_SUCCESS();
 		} catch (SQLException e) {
 			exceptionHandler.onDatabaseException("查询[info_category]重复记录时的错误", e);
@@ -137,6 +157,19 @@ public class InfoCategoryServiceImpl extends BaseServiceImpl<InfoCategory> imple
 			return filename;
 		} catch (Exception e) {
 			exceptionHandler.onSaveUpload(filename, picData, e);
+			return null;
+		}
+	}
+	// 保存上传图片
+	public String saveUploadPic(File img,String image,InfoCategory input) {
+		String filename = image + ".jpg";
+		
+		try {
+			imageService.save(img, filename);
+			input.setImage(filename);
+			return filename;
+		} catch (Exception e) {
+			exceptionHandler.onSaveUpload(filename, "upload file", e);
 			return null;
 		}
 	}

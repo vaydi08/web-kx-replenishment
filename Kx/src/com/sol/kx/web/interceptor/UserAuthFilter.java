@@ -42,7 +42,7 @@ public class UserAuthFilter implements Filter{
 			}
 			return;
 		}
-		
+
 		if(sysAuthService.checkAuth(req.getRequestURI(), user))
 			fc.doFilter(req,res);
 		else

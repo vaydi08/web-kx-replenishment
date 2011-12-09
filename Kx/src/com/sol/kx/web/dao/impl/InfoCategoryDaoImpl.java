@@ -83,12 +83,24 @@ public class InfoCategoryDaoImpl extends BaseDaoImpl implements InfoCategoryDao 
 	@Value("${sql.info.product.categoryExists}")
 	private String SQL_FIND_CHECKEXISTS;
 	
-	public boolean checkExists(String code,Integer level) throws SQLException {
+	public boolean checkExists(String code,Integer level,Integer parent) throws SQLException {
 		List<Object> param = new ArrayList<Object>(1);
 		param.add(code);
 		param.add(level);
+		param.add(parent);
 		
 		return (Integer)dataConsole.findReturn(SQL_FIND_CHECKEXISTS, Types.INTEGER, param) == 1;
+	}
+	
+	// 查找删除时是否存在子类别
+	@Value("${sql.info.category.deleteExists}")
+	private String SQL_DELETE_EXISTS;
+	
+	public boolean checkDeleteExists(Integer id) throws SQLException {
+		List<Object> param = new ArrayList<Object>(1);
+		param.add(id);
+		
+		return (Integer)dataConsole.findReturn(SQL_DELETE_EXISTS, Types.INTEGER, param) == 1;
 	}
 	
 	public int findCountCustom(InfoCategory obj) throws Exception {

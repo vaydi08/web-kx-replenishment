@@ -1,5 +1,6 @@
 package com.sol.kx.web.action.info;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,17 +56,20 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 	}
 	
 	private String picData;
+	private String picType;
+	private File picFile;
 	
 	@Override
 	public String add() {
-		if(picData != null && !picData.isEmpty())
+		if(picType.equals("webcap") && picData != null && !picData.isEmpty())
 			infoCategoryService.saveUploadPic(picData,infoCategoryService.generateProductPcode(input),input);
-		
-		return super.add();
+		else if(picType.equals("file") && picFile != null)
+			infoCategoryService.saveUploadPic(picFile,infoCategoryService.generateProductPcode(input),input);
+		return super.add2();
 	}
 	
 	public String checkCode() {
-		result = infoCategoryService.checkExists(input.getCcode(),input.getClevel());
+		result = infoCategoryService.checkExists(input.getCcode(),input.getClevel(),input.getParent());
 		return RESULT;
 	}
 	
@@ -132,6 +136,14 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 
 	public void setPicData(String picData) {
 		this.picData = picData;
+	}
+
+	public void setPicType(String picType) {
+		this.picType = picType;
+	}
+
+	public void setPicFile(File picFile) {
+		this.picFile = picFile;
 	}
 
 }

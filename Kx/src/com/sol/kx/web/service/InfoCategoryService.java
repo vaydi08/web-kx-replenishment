@@ -1,8 +1,10 @@
 package com.sol.kx.web.service;
 
+import java.io.File;
 import java.util.Map;
 
 import com.sol.kx.web.dao.pojo.InfoCategory;
+import com.sol.kx.web.dao.pojo.InfoProduct;
 import com.sol.kx.web.service.bean.ComboBoxBean;
 import com.sol.kx.web.service.bean.ResultBean;
 
@@ -30,7 +32,9 @@ public interface InfoCategoryService extends BaseService<InfoCategory>{
 	public Map<String,Integer> findCategoryChoose(InfoCategory input);
 		
 	public String saveUploadPic(String picData,String image,InfoCategory input);
+	public String saveUploadPic(File img,String image,InfoCategory input);
 	
 	public String generateProductPcode(InfoCategory input);
-	public ResultBean checkExists(String pcode,Integer level);
+	public ResultBean checkExists(String pcode,Integer level,Integer parent);
+	
 }
