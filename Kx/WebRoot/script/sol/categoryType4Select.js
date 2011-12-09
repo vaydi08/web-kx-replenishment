@@ -1,10 +1,16 @@
 (function($) {        
-$.fn.categoryType4Select = function(options) {      
+$.fn.categoryType4Select = function(options) {
+	if(options == 'reload') {
+		reloadData();
+		return;
+	}
+	
      var defaults = {
      	'url':'',
      	'queryParams':{},
      	'newType4':true,
-     	onClick:function(value,text,id){}
+     	onClick:function(value,html,id){},
+     	onNewType4 : function() {}
      }
      
      var opts = $.extend(defaults,options);
@@ -12,12 +18,14 @@ $.fn.categoryType4Select = function(options) {
      var ctrl = $(this);
      
      // 请求数据
-     $.post(opts.url,opts.queryParams,function(data){
-    	 var params = jQuery.parseJSON(data);
-
-    	 fillCtrl(params);
-     });
-  
+     function reloadData() {
+	     $.post(opts.url,opts.queryParams,function(data){
+	    	 var params = jQuery.parseJSON(data);
+	
+	    	 fillCtrl(params);
+	     });
+     }
+	 reloadData();
      // 填充对象
      var fillCtrl = function(params) {
          var html = "";
@@ -27,10 +35,10 @@ $.fn.categoryType4Select = function(options) {
          var i = 1;
          html += '<tr>';
          for(row = 0; row < params.length; row=row+1) {
-        	 html += '<td height="30" width="150" align="center" valign="middle"><a href="javascript:void(0)" value="' + params[row].ccode + '" id="' + params[row].id + '">' + 
-        	 '<img border="0" width="150" src="../pic.action?img=' + params[row].image + '"/><br/>' + 
-        	 params[row].cname + '&nbsp;' + params[row].ccode +
-        	 '</a></td><td width="10">&nbsp;</td>';
+        	 html += '<td height="30" width="150" align="center" valign="middle"><a href="javascript:void(0)" value="' + params[row].pcode + '" id="' + params[row].id + '">' + 
+        	 '<img border="0" width="150" src="../pic.action?img=' + params[row].image + '"/><div class="hrefHtml">' + 
+        	 params[row].pname + '<br/>' + params[row].pcode +
+        	 '</div></a></td><td width="10">&nbsp;</td>';
  	 	
         	 if(i ++ % 3 == 0) {
         		html += '</tr><tr>';
@@ -49,18 +57,12 @@ $.fn.categoryType4Select = function(options) {
          ctrl.find('a').click(function() {
         	 var value = $(this).attr("value");
         	 var id = $(this).attr("id");
-        	 var text = $(this).text();
+        	 var html = $(this).find('.hrefHtml').html();
         	 
-        	 opts.onClick(value,text,id);
+        	 opts.onClick(value,html,id);
          });
          
-         ctrl.find('#newType4').click(function() {
-        	 $("#dlg_newtype4").dialog('open');
-        	 
-        	 var row = $("#dlg_newtype4").data('type3row');
-        	 $("#dlg_newtype4").find("#parentText").text(row.text);
-        	 $("#dlg_newtype4").find("#parent").val(row.value);
-         });
+         ctrl.find('#newType4').bind('click',opts.onNewType4);
      }
 };      
 })(jQuery); 

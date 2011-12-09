@@ -189,7 +189,7 @@
 				}
 			});
 		},
-		addRow: function(jq){
+		addRow: function(jq,param){
 			return jq.each(function(){
 				var dg = $(this);
 				var opts = $.data(this, 'edatagrid').options;
@@ -201,7 +201,10 @@
 					dg.datagrid('endEdit', opts.editIndex);
 				}
 
-				dg.datagrid('appendRow', {isNewRecord:true});
+				var p = {isNewRecord:true};
+				if(param)
+					$.extend(p,param);
+				dg.datagrid('appendRow', p);
 				var rows = dg.datagrid('getRows');
 				opts.editIndex = rows.length - 1;
 				dg.datagrid('beginEdit', opts.editIndex);
