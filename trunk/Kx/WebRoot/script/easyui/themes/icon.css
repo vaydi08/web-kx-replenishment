@@ -58,3 +58,22 @@
 .icon-export{
 	background:url('icons/export.png') no-repeat;
 }
+
+.icon-info{
+	background:url('icons/menu/info.png') no-repeat;
+}
+.icon-compare{
+	background:url('icons/menu/compare.png') no-repeat;
+}
+.icon-sys{
+	background:url('icons/menu/sys.png') no-repeat;
+}
+.icon-stock{
+	background:url('icons/menu/stock.png') no-repeat;
+}
+.icon-order{
+	background:url('icons/menu/order.png') no-repeat;
+}
+.icon-gears{
+	background:url('icons/menu/gears.png') no-repeat;
+}
