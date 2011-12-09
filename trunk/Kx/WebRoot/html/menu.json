@@ -1,0 +1,35 @@
+[
+{
+"text":"基础数据",
+"iconCls":"icon-info",
+"children":[{
+	"text":"产品数据",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/info/ProductManager","ext":"html","js":"/html/info/ProductManager"}
+	},{
+	"text":"门店数据",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/info/ShopManager","ext":"html","js":"/html/info/ShopManager"}
+	},{
+	"text":"分类列表",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/info/CategoryManager","ext":"html","js":"/html/info/CategoryManager"}
+	},{
+	"text":"快速检索",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/info/QuickLocator","ext":"html","js":"/html/info/QuickLocator"}
+	}]
+},{
+"text":"核定数据",
+"iconCls":"icon-stock",
+"children":[{
+	"text":"核定数据",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/stock/CheckProductManager","ext":"html","js":"/html/stock/CheckProductManager"}
+	},{
+	"text":"已作核定",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/stock/Checked","ext":"html","js":"/html/stock/Checked"}
+	}]
+}
+]

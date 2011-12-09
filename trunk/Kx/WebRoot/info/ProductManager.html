@@ -80,6 +80,27 @@
 					return queryObject;
 				}
 			});
+
+
+			$("#dlg").crud({width:750,height:500,
+				onSubmit:function(){
+					if($("#clevel").val() == 4 && $("#picData").val() == "") {
+						$.messager.show({title:'ERROR',msg:'请照相'});
+						return false;
+					}
+
+					if($("#codeMsg").text() != '') {
+						$.messager.show({title:'ERROR',msg:'有重复记录,请确认'});
+						return false;
+					}
+
+					return $("#form").form("validate");
+				},
+				onOpen:function(){
+					document.getElementById("WebVideoCap1").stop();
+					document.getElementById("WebVideoCap1").clear();
+				}
+			});
 /*
 			$("#dlg").crud({
 				width:700,
@@ -433,122 +454,27 @@
 
 	</div>
 	
-	<!-- 
-	<div id="dlg" buttons="#dlg-buttons" style="padding:10px 20px" model="true">
-	<input type="hidden" id="isExistsPcode" value="0" />
-	<form id="form" method="post" >
-	<table cellpadding="0" cellspacing="0" border="0">
-		<tr>
-		<td width="140" height="30">
-		<select id="add_type1" name="input.type1"></select>
-		</td>
-		
-		<td width="140" >
-		<select id="add_type2" name="input.type2"></select>
-		</td>
-		
-		<td width="140" >
-		<select id="add_type3" name="input.type3"></select>
-		</td>
-		
-		<td width="140" >
-		<input type="hidden" name="input.type4" id="add_type4"/>
-		</td>
-		</tr>
-		
-	</table>
 
-		
-		<div class="clear5"></div>
-		
-		<input type="hidden" name="input.id" id="id" />
-		<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
-		<td width="70" height="30">商品品名</td>
-		<td width="230"><input type="text" name="input.pname" value="" id="pname" required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
-		<td width="70" >商品代码</td>
-		<td width="230"><input type="text" name="input.pcode" value="" id="pcode" /></td>
-		</tr>
-		<tr>
-		<td width="70" height="30">单　　位</td>
-		<td colspan="3"><input type="text" name="input.unit" id="unit" value="件"/></td>
-		</tr>
-		
-		</table>
-		<table cellpadding="0" cellspacing="0" border="0" id="camTable">
-			<tr><td height="30"><input type="radio" class="picType" value="webcap" name="picType" onclick='$("#camTr").show();$("#fileTr").hide();' checked="checked"/>使用摄像头&nbsp;
-			<input type="radio" class="picType" value="file" name="picType" onclick='$("#fileTr").show();$("#camTr").hide();'/>使用上传图片</td></tr>
-			<tr id="camTr">
-			<td>
-			<input type="button" id="startcam" value="启动摄像头"/>
-			<input type="button" id="cap" value="照相"/>
-			<input type="hidden" id="picData" name="picData"/>
-			<object classid="clsid:34681DB3-58E6-4512-86F2-9477F1A9F3D8"
-				id="WebVideoCap1"  codebase="../cabs/Package.cab#version=1,0,0,50" width="636" height="238">
-				<param name="Visible" value="0"/>
-				<param name="AutoScroll" value="0"/>
-				<param name="AutoSize" value="0"/>
-				<param name="AxBorderStyle" value="1"/>
-				<param name="Caption" value="WebVideoCap"/>
-				<param name="Color" value="4278190095"/>
-				<param name="Font" value="宋体"/>
-				<param name="KeyPreview" value="0"/>
-				<param name="PixelsPerInch" value="96"/>
-				<param name="PrintScale" value="1"/>
-				<param name="Scaled" value="-1"/>
-				<param name="DropTarget" value="0"/>
-				<param name="HelpFile" value=""/>
-				<param name="PopupMode" value="0"/>
-				<param name="ScreenSnap" value="0"/>
-				<param name="SnapBuffer" value="10"/>
-				<param name="DockSite" value="0"/>
-				<param name="DoubleBuffered" value="0"/>
-				<param name="ParentDoubleBuffered" value="0"/>
-				<param name="UseDockManager" value="0"/>
-				<param name="Enabled" value="-1"/>
-				<param name="AlignWithMargins" value="0"/>
-				<param name="ParentCustomHint" value="-1"/>
-				<param name="jpegBase64Data" value=""/>
-				<param name="bmpBase64Data" value=""/>
-			</object>
-			</td>
-			</tr>
-			<tr id="fileTr" style="display:nonoe">
-			<td height="30"><input type="file" name="picFile" id="picFile" accept="image/*"/></td>
-			</tr>
-			</table>
-	</form>
-	</div>
-	
-	 
-	<div id="categoryType4Div" class="easyui-dialog" closeable="true" title="选择款式" modal="false" style="width:600px;height:500px;position:relative;z-index:9" cache="false" closed="true">
-		<div id="categoryType4Select"></div>
-	</div>
-		
-	<div id="dlg-buttons">
-		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" id="dlg-save">保存</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" id="dlg-cancel">取消</a>
-	</div>
-	
-	
-	
-	
-	
-	<div id="dlg_newtype4" buttons="#dlg_newtype4-buttons" style="padding:10px 20px" title="新款式">
-	<form id="form_newtype4" method="post" >
-		<table border="0" cellpadding="0" cellspacing="0">
+	<div id="dlg" buttons="#dlg-buttons" style="padding:10px 20px" model="true">
+	<form id="form" method="post" >
+	<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 		<td width="70" height="30">类　　别</td>
 		<td width="630">
 		<select name="input.clevel" id="clevel">
-		<option value="4" selected="selected">款式</option>
+		<option value="1" selected="selected">大类</option>
+		<option value="2">小类</option>
+		<option value="3">货型</option>
+		<option value="4">款式</option>
 		</select>
-		从属于 <span id="parentText"></span><input name="input.parent" id="parent" readonly="readonly" type="hidden"/>
+		从属于 <select name="input.parent" id="parent"></select>
 		</td>
 		</tr>	
 		<tr>
 		<td height="30">类别代码</td>
-		<td><input type="text" name="input.ccode" id="ccode" required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
+		<td><input type="text" name="input.ccode" id="ccode" required="true" validType="length[1,2]" class="easyui-validatebox"/>
+		&nbsp;&nbsp;<span id="codeMsg" style="display:none;color:red"></span>
+		</td>
 		</tr><tr>
 		<td height="30">类别名称</td>
 		<td><input type="text" name="input.cname" id="cname"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
@@ -557,49 +483,48 @@
 		<tr id="camTr">
 		<td height="250">照片采集</td>
 		<td>
-		<input type="button" id="t4_startcam" value="启动摄像头"/>
-		<input type="button" id="t4_cap" value="照相"/>
-		<input type="hidden" id="t4_picData" name="picData"/>
+		<input type="button" id="startcam" value="启动摄像头"/>
+		<input type="button" id="cap" value="照相"/>
+		<input type="hidden" id="picData" name="picData" />
 		<object classid="clsid:34681DB3-58E6-4512-86F2-9477F1A9F3D8"
-			id="WebVideoCap2"  codebase="../cabs/Package.cab#version=1,0,0,50" width="636" height="238">
-			<param name="Visible" value="0"/>
-				<param name="AutoScroll" value="0"/>
-				<param name="AutoSize" value="0"/>
-				<param name="AxBorderStyle" value="1"/>
-				<param name="Caption" value="WebVideoCap"/>
-				<param name="Color" value="4278190095"/>
-				<param name="Font" value="宋体"/>
-				<param name="KeyPreview" value="0"/>
-				<param name="PixelsPerInch" value="96"/>
-				<param name="PrintScale" value="1"/>
-				<param name="Scaled" value="-1"/>
-				<param name="DropTarget" value="0"/>
-				<param name="HelpFile" value=""/>
-				<param name="PopupMode" value="0"/>
-				<param name="ScreenSnap" value="0"/>
-				<param name="SnapBuffer" value="10"/>
-				<param name="DockSite" value="0"/>
-				<param name="DoubleBuffered" value="0"/>
-				<param name="ParentDoubleBuffered" value="0"/>
-				<param name="UseDockManager" value="0"/>
-				<param name="Enabled" value="-1"/>
-				<param name="AlignWithMargins" value="0"/>
-				<param name="ParentCustomHint" value="-1"/>
-				<param name="jpegBase64Data" value=""/>
-				<param name="bmpBase64Data" value=""/>
+			id="WebVideoCap1"  codebase="../cabs/Package.cab#version=1,0,0,50" width="636" height="238">
+			<param name="Visible" value="0" />
+			<param name="AutoScroll" value="0" />
+			<param name="AutoSize" value="0" />
+			<param name="AxBorderStyle" value="1" />
+			<param name="Caption" value="WebVideoCap" />
+			<param name="Color" value="4278190095" />
+			<param name="Font" value="宋体" />
+			<param name="KeyPreview" value="0" />
+			<param name="PixelsPerInch" value="96" />
+			<param name="PrintScale" value="1" />
+			<param name="Scaled" value="-1" />
+			<param name="DropTarget" value="0" />
+			<param name="HelpFile" value="" />
+			<param name="PopupMode" value="0" />
+			<param name="ScreenSnap" value="0" />
+			<param name="SnapBuffer" value="10" />
+			<param name="DockSite" value="0" />
+			<param name="DoubleBuffered" value="0" />
+			<param name="ParentDoubleBuffered" value="0" />
+			<param name="UseDockManager" value="0" />
+			<param name="Enabled" value="-1" />
+			<param name="AlignWithMargins" value="0" />
+			<param name="ParentCustomHint" value="-1" />
+			<param name="jpegBase64Data" value="" />
+			<param name="bmpBase64Data" value="" />
 		</object>
 		</td>
 		</tr>
 		</table>
-		
 	</form>
 	</div>
 	
-	<div id="dlg_newtype4-buttons">
-		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" id="t4_dlg-save">保存</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" id="t4_dlg-cancel">取消</a>
+	<div id="dlg-buttons">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" id="dlg-save">保存</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" id="dlg-cancel">取消</a>
 	</div>
-	 -->
+
 	 
 	<div title="导入文件" style="width:600px;height:300px" modal="true" id="upload" closed="true">
 	<iframe frameborder="0" src="upload2.html" width="600" height="300"/>

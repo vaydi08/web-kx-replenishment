@@ -1,0 +1,50 @@
+
+<div id="queryPanel">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td><select id="stocktype"><option value="1">一般</option><option value="2">节假日</option></select></td>
+<td width="20">&nbsp;</td>
+<td><select id="shop"></select></td>
+<td width="20">&nbsp;</td>
+<td><select id="type1"></select></td>
+<td width="20">&nbsp;</td>
+<td><select id="type2"></select></td>
+<td width="20">&nbsp;</td>
+<td><select id="type3"></select></td>
+<td width="20">&nbsp;</td>
+<td><a href="javascript:void(0)" id="btn_product" class="easyui-linkbutton" plain="true" iconCls="icon-search">列出产品</a></td>
+</tr>
+</table>
+</div>
+
+
+<table id="listTable" title="产品列表" toolbar="#toolbar"></table>
+<div id="toolbar">
+	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" id="btn_stock">核定数据</a>
+</div>
+
+<div id="imgDiv" class="easyui-dialog" modal="true" maximizable="true" style="background-color:#fafafa" title="图片" closed="true" closeable="true">
+	<table align="center" width="100%" height="100%">
+	<tr><td align="center" valign="middle"><img id="largeImg"/></td></tr>
+	</table>
+</div>
+
+
+<div id="checkDiv" class="easyui-dialog" modal="true" style="width:600px;height:500px;background-color:#fafafa;padding:10px" title="核定" closed="true" closeable="true">
+	<table id="checkTable" toolbar="#check-toolbar" rownumbers="true" fitColumns="true" singleSelect="true">
+	<thead>
+	<tr>
+	<th field="minweight" width="80" editor="{type:'soltext',options:{required:true,precision:2}}">克重范围</th>
+	<th field="maxweight" width="80" editor="{type:'numberbox',options:{required:true,precision:2,validType:'compareWeight'}}"></th>
+	<th field="stock" width="80" editor="{type:'validatebox',options:{required:true}}">核定库存</th>
+	</tr>
+	</thead>
+	</table>
+	
+	<div id="check-toolbar">
+		<a href="javascript:void(0)" id="check_btn_add" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增</a>
+		<a href="javascript:void(0)" id="check_btn_del" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+		<a href="javascript:void(0)" id="check_btn_save" class="easyui-linkbutton" iconCls="icon-save" plain="true">保存</a>
+		<a href="javascript:void(0)" id="check_btn_undo" class="easyui-linkbutton" iconCls="icon-undo" plain="true">取消</a>
+	</div>
+</div>
