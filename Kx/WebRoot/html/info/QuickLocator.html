@@ -1,0 +1,117 @@
+
+<div id="queryPanel">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td>
+<input type="hidden" id="queryType" />
+<input id="EU_queryType" prompt="请输入检索条件,将在产品代码和产品名称中搜寻" menu="#EU_queryValue" style="width:600px" />
+       
+<div id="EU_queryValue" style="width:120px">
+    <div name="pcode" iconCls="icon-ok">产品代码</div>
+    <div name="pname" iconCls="icon-ok">产品名称</div>
+</div>
+</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+<td>
+<table id="listTable" title="产品列表">
+</table>
+</td>
+</tr>
+</table>
+
+</div>
+
+<div id="locator" title="快速定位" style="padding:10px">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="120">拼合产品代码</td>
+<td width="120"><select id="type1"><option value=1>123</option></select></td>
+<td width="120"><select id="type2"></select></td>
+<td width="120"><select id="type3"></select></td>
+<td>
+<span id="type4Str" style="text-align:center"></span>
+<div id="categoryType4Div" class="easyui-dialog" closeable="true" title="选择款式" modal="false" style="width:600px;height:500px;position:relative;z-index:9;padding:10px" cache="false" closed="true">
+	<div id="categoryType4Select"></div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+
+<div id="imgPanel" title="图片展示" style="padding:10px">
+<input id="img_queryType" prompt="请输入检索条件,将匹配产品代码对应的图片" menu="#img_queryValue" style="width:600px" />
+       
+<div id="img_queryValue" style="width:120px">
+    <div name="pcode" iconCls="icon-ok">产品代码</div>
+</div>
+<div id="imgPanelDiv" class="easyui-dialog" closeable="true" title="图片预览" modal="false" style="width:600px;height:500px;position:relative;z-index:9;padding:10px" cache="false" closed="true">
+	<div id="imgPanelSelect"></div>
+</div>
+</div>
+
+<div id="dlg" buttons="#dlg-buttons" title="类别" style="padding:10px 20px" closed="true">
+	<form id="form" method="post" enctype="multipart/form-data">
+	
+		<input type="hidden" name="input.id" id="id" />
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+		<td width="70" height="30">类　　别</td>
+		<td>
+		<input name="input.clevel" id="clevel" value="4" type="hidden"/>款　式
+		从属于 <select name="input.parent" id="parent"></select>
+		</td>
+		</tr>	
+		<tr>
+		<td height="30">类别代码</td>
+		<td><input type="text" name="input.ccode" id="ccode" required="true" validType="length[1,2]" class="easyui-validatebox"/>
+		&nbsp;&nbsp;<span id="codeMsg" style="color:red"></span>
+		</td>
+		</tr><tr>
+		<td height="30">类别名称</td>
+		<td><input type="text" name="input.cname" id="cname"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
+		</tr>
+		</table>
+		
+		<table border="0" cellpadding="0" cellspacing="0" id="capTable">
+		<tr>
+		<td>
+		<input type="radio" name="picType" value="webcap" onclick="$('#capTr').show();$('#fileTr').hide()"/>摄像头照片采集&nbsp;
+		<input type="radio" name="picType" value="file" onclick="$('#capTr').hide();$('#fileTr').show()"/>图片文件上传
+		</td>
+		</tr>
+		<tr id="capTr">
+		<td>
+		<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" id="startcam">启动摄像头</a>
+		<input type="hidden" id="picData" name="picData">
+		</td>
+		</tr>
+		<tr id="fileTr">
+		<td>
+		<input type="file" name="picFile" id="picFile"/>
+		</td>
+		</tr>
+		</table>
+		
+	</form>
+	
+	<div id="dlg-buttons">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" id="dlg-save">保存</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" id="dlg-cancel">取消</a>
+	</div>
+</div>
+
+<div id="stock" class="easyui-dialog" closeable="true" title="核定数量" modal="true" style="width:600px;height:500px;position:relative;z-index:9;padding:10px" cache="false" closed="true">
+	<table id="stockTable" title="核定数据">
+		<thead>  
+		    <tr>  
+		        <th field="shopname" width="60">门店名称</th>  
+		        <th field="minweight" width="60">克重范围</th>  
+		        <th field="maxweight" width="60">&nbsp;</th>  
+		        <th field="stock" width="60">核定数</th>  
+		        <th field="stocktype" width="60">核定类型</th>
+		    </tr>  
+		</thead>    
+	</table>
+</div>

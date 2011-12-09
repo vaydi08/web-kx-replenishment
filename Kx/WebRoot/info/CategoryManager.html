@@ -120,7 +120,7 @@
 		});
 
 		$("#ccode").change(function() {
-			$.post('info-category!checkCode.action',{'input.ccode':$(this).val(),'input.clevel':$("#clevel").val()},function(data){
+			$.post('info-category!checkCode.action',{'input.ccode':$(this).val(),'input.clevel':$("#clevel").val(),'input.parent':$("#parent").combobox('getValue')},function(data){
 				var result = eval('(' + data + ')');
 				if(result.success) {
 					$("#codeMsg").text('');
@@ -151,6 +151,7 @@
 			onHidePanel:function(){
 				if($("#clevel").val() == 4)
 					$('#camTr').show();
+				$("#ccode").change();
 			}});
 
 
