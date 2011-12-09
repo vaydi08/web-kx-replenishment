@@ -26,6 +26,7 @@
 			<result name="result">/result.jsp</result>
 			<result name="data">/data.jsp</result>
 			<result name="combobox">/combobox.jsp</result>
+			<result name="href">${url}.${ext}</result>
 		</global-results>
 	</package>
 
