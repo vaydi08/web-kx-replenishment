@@ -24,7 +24,8 @@ public interface InfoCategoryDao extends BaseDao{
 	public List<InfoCategory> findCategoryMapping() throws Exception;
 	
 	public String generatePname(Integer parent,String code) throws SQLException;
-	public boolean checkExists(String code,Integer level) throws SQLException;
+	public boolean checkExists(String code,Integer level,Integer parent) throws SQLException;
+	public boolean checkDeleteExists(Integer id) throws SQLException;
 	
 	public int findCountCustom(InfoCategory obj) throws Exception;
 }

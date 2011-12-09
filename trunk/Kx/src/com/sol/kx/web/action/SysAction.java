@@ -25,7 +25,7 @@ import com.sol.kx.web.service.bean.ResultBean;
 @Results({@Result(name = "loginOk",location = "/LoginResult.jsp"),
 		  @Result(name = "loginFail",location = "/Login.jsp"),
 		  @Result(name = "main",location = "/main.jsp"),
-		  @Result(name = "index",location = "/index.jsp")})
+		  @Result(name = "index",type="redirect",location = "/html/main.html")})
 public class SysAction extends BaseAction<SysUser> {
 
 	private static final long serialVersionUID = 1L;
