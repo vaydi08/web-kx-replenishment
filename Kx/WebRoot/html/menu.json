@@ -26,10 +26,31 @@
 	"text":"核定数据",
 	"iconCls":"icon-gears",
 	"attributes":{"url":"/html/stock/CheckProductManager","ext":"html","js":"/html/stock/CheckProductManager"}
-	},{
-	"text":"已作核定",
+	}]
+},{
+"text":"系统管理",
+"iconCls":"icon-stock",
+"children":[{
+	"text":"用户管理",
 	"iconCls":"icon-gears",
-	"attributes":{"url":"/html/stock/Checked","ext":"html","js":"/html/stock/Checked"}
+	"attributes":{"url":"/html/sys/UserManager","ext":"html","js":"/html/sys/UserManager"}
+	},{"text":"权限分配",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/sys/AuthManager","ext":"html","js":"/html/sys/AuthManager"}
+	},{"text":"重载配置",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/sys/ReloadConfig","ext":"html","js":"/html/sys/ReloadConfig"}
+	}]
+},{
+"text":"智能比对",
+"iconCls":"icon-stock",
+"children":[{
+	"text":"比对数据",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/compare/Supply","ext":"html","js":"/html/compare/Supply"}
+	},{"text":"智能分货",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/compare/Cargo","ext":"html","js":"/html/compare/Cargo"}
 	}]
 }
 ]

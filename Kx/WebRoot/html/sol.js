@@ -30,7 +30,7 @@ function SolConfig() {
 			panel : {
 				iconCls:"icon-search",
 				collapsible:"true",
-				style:{'padding':'10px'},
+				style:{'padding':'10px','background':'#fafafa'},
 				title:"查询条件",
 				height:90
 			}
@@ -52,6 +52,7 @@ function SolConfig() {
 	// 修改easyui默认值
 	$.extend($.fn.datagrid.defaults, {
 		style:{'padding':'10px','background-color':'#fafafa'},
+		//width:$(SOL.content).width() - 30,
 		nowrap:true,
 		singleSelect:true,
 		striped:true,
@@ -59,8 +60,53 @@ function SolConfig() {
 		rownumbers:true,
 		fitColumns:true
 	});
+	$.extend($.fn.edatagrid.defaults, {
+		style:{'background-color':'#fafafa'},
+		//width:$(SOL.content).width() - 30,
+		nowrap:true,
+		singleSelect:true,
+		striped:true,
+		pagination:true,
+		rownumbers:true,
+		fitColumns:true,
+		destroyMsg:{
+			norecord:{
+				title:'警告',
+				msg:'没有选中任何项目'
+			},
+			confirm:{
+				title:'确认',
+				msg:'删除此条记录,此操作不可恢复?'
+			}
+		},
+		destroyConfirmTitle: '确认',
+		destroyConfirmMsg: '删除此条记录,此操作不可恢复?'
+	});
 	$.extend($.fn.combobox.defaults,{width:150,editable : false});
 	$.extend($.fn.searchbox.defaults,{width:300,prompt:"请输入查询项,留空表示查询全部"});
+	
+	$.extend($.fn.datagrid.defaults.editors, {   
+	    solpassword: {   
+	        init: function(container, options){
+	            var input = $('<input type="password" class="datagrid-editable-input" />').appendTo(container);   
+	            return input;   
+	        },   
+	        getValue: function(target){   
+	            return $(target).val();   
+	        },   
+	        setValue: function(target, value){   
+	            $(target).val(value);   
+	        },   
+	        resize: function(target, width){   
+	            var input = $(target);   
+	            if ($.boxModel == true){   
+	                input.width(width - (input.outerWidth() - input.width()));   
+	            } else {   
+	                input.width(width);   
+	            }   
+	        }   
+	    }   
+	}); 
 	  
 	
 	// 显示消息
@@ -152,6 +198,9 @@ function SoLFunction() {
 	}
 	// 数据表
 	SoLFunction.prototype.grid = function(ctrl,config) {
+		// 用来设定控件高度
+		if(!config.height)
+			$.extend(config,{height:$(SOL.content).height()-110});
 		ctrl.datagrid(config);
 	}
 	// 对话框

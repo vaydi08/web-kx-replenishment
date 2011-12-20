@@ -77,7 +77,7 @@ function loadScript(content,param) {
 	
 	function init() {
 		// 初始化查询框体
-		SF.queryPanel($(ctrl.QueryPanel.Panel),{height:400},$(ctrl.QueryPanel.Search),{
+		SF.queryPanel($(ctrl.QueryPanel.Panel),{},$(ctrl.QueryPanel.Search),{
 			getparam:function(value){
 				return {"queryType":$(ctrl.QueryPanel.QueryType).val(),"queryValue":(value == null?"":value)};
 			}
@@ -87,7 +87,7 @@ function loadScript(content,param) {
 		// 数据表
 		var listTableConfig = {
 			url:"../info/info-product!manager2.action",
-			height:290,
+			height:content.height() - 300,
 			queryParams : {'input.type1' : -1},
 			columns:[[
 			        {field:'type',title:'类别',width:120,
@@ -118,9 +118,9 @@ function loadScript(content,param) {
 		    	}
 		    },
 		    onDblClickRow : function(index,row) {
-		    	$.getJSON('../info/info-product!quickLocatorStock.action',{pid:row.id},function(data) {
+		    	$.post('../info/info-product!quickLocatorStock.action',{pid:row.id},function(data) {
 		    		$(ctrl.Stock.ListTable).treegrid('loadData',data);
-		    	});
+		    	},'json');
 		    	$(ctrl.Stock.Dialog).dialog('open');
 		    }
 		}

@@ -62,6 +62,10 @@ public class PoiUtil {
 		newSheet(newsheet);
 	}
 	
+	public PoiUtil() {
+		this.workbook = new HSSFWorkbook();
+	}
+	
 	public void newSheet(String newsheet) {
 		this.sheet = workbook.createSheet(newsheet);
 		this.rowNo = -1;
