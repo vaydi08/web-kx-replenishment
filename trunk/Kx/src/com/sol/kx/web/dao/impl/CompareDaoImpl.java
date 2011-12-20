@@ -211,7 +211,7 @@ public class CompareDaoImpl implements CompareDao{
 	private String SQL_CARGO_SUPPLY_DATAUPDATE;
 	
 	public void cargoSupplyDataUpdate(String pcode,String shopname,Double weight) throws SQLException {
-		updateSql(SQL_CARGO_SUPPLY_DATAUPDATE, shopname,pcode,weight);
+		updateSql(SQL_CARGO_SUPPLY_DATAUPDATE, shopname,pcode,weight,weight);
 	}
 	
 	// cargo sale
@@ -233,7 +233,7 @@ public class CompareDaoImpl implements CompareDao{
 	private String SQL_CARGO_SALE_DATAUPDATE;
 	
 	public void cargoSaleDataUpdate(String serial,Integer sale,long saletime,String shopname,String pcode,Double weight,Integer stocktype) throws SQLException {
-		updateSql(SQL_CARGO_SALE_DATAUPDATE, serial,sale,new Timestamp(saletime),shopname,pcode,stocktype,weight);
+		updateSql(SQL_CARGO_SALE_DATAUPDATE, serial,sale,new Timestamp(saletime),shopname,pcode,stocktype,weight,weight);
 	}
 	
 	@Value("${sql.compare.cargo.sale.delete}")

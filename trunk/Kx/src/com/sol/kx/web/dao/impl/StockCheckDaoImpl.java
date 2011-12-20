@@ -72,7 +72,7 @@ public class StockCheckDaoImpl extends BaseDaoImpl implements StockCheckDao {
 	public String findCategoryNameById(int id) throws SQLException {
 		return super.findReturnString(SQL_CATEGORY_NAME, id);
 	}
-
+	
 	@Override
 	public List find2(SelectEntity entity) throws Exception {
 		entity.getCriteria().order("minweight");

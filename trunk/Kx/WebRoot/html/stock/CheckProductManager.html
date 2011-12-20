@@ -2,10 +2,6 @@
 <div id="queryPanel">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
-<td><select id="stocktype"><option value="1">一般</option><option value="2">节假日</option></select></td>
-<td width="20">&nbsp;</td>
-<td><select id="shop"></select></td>
-<td width="20">&nbsp;</td>
 <td><select id="type1"></select></td>
 <td width="20">&nbsp;</td>
 <td><select id="type2"></select></td>
@@ -30,12 +26,17 @@
 </div>
 
 
-<div id="checkDiv" class="easyui-dialog" modal="true" style="width:600px;height:500px;background-color:#fafafa;padding:10px" title="核定" closed="true" closeable="true">
-	<table id="checkTable" toolbar="#check-toolbar" rownumbers="true" fitColumns="true" singleSelect="true">
+<div id="checkDiv" modal="true" style="width:100%;height:400px;background-color:#fafafa;padding:10px" title="核定" closed="true" closeable="true">
+<div style="margin-bottom:5px">
+<select id="shop"></select>
+</div>
+
+<div style="float:left;clear:none;height:100%;margin-right:10px;" id="checkTableDiv1">
+	<table id="checkTable" toolbar="#check-toolbar" title="一般日核定">
 	<thead>
 	<tr>
-	<th field="minweight" width="80" editor="{type:'soltext',options:{required:true,precision:2}}">克重范围</th>
-	<th field="maxweight" width="80" editor="{type:'numberbox',options:{required:true,precision:2,validType:'compareWeight'}}"></th>
+	<th field="minweight" width="80" editor="{type:'soltext',options:{required:true,precision:2,datagrid:'checkTable'}}">克重范围</th>
+	<th field="maxweight" width="80" editor="{type:'numberbox',options:{required:true,precision:2,validType:'compareWeight[\'checkTable\']'}}"></th>
 	<th field="stock" width="80" editor="{type:'validatebox',options:{required:true}}">核定库存</th>
 	</tr>
 	</thead>
@@ -47,4 +48,23 @@
 		<a href="javascript:void(0)" id="check_btn_save" class="easyui-linkbutton" iconCls="icon-save" plain="true">保存</a>
 		<a href="javascript:void(0)" id="check_btn_undo" class="easyui-linkbutton" iconCls="icon-undo" plain="true">取消</a>
 	</div>
+</div>
+<div style="float:left;clear:none;height:100%;" id="checkTableDiv2">
+	<table id="checkTable2" toolbar="#check-toolbar2" title="节假日核定">
+	<thead>
+	<tr>
+	<th field="minweight" width="80" editor="{type:'soltext',options:{required:true,precision:2,datagrid:'checkTable2'}}">克重范围</th>
+	<th field="maxweight" width="80" editor="{type:'numberbox',options:{required:true,precision:2,validType:'compareWeight[\'checkTable2\']'}}"></th>
+	<th field="stock" width="80" editor="{type:'validatebox',options:{required:true}}">核定库存</th>
+	</tr>
+	</thead>
+	</table>
+	
+	<div id="check-toolbar2">
+		<a href="javascript:void(0)" id="check_btn_add2" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增</a>
+		<a href="javascript:void(0)" id="check_btn_del2" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+		<a href="javascript:void(0)" id="check_btn_save2" class="easyui-linkbutton" iconCls="icon-save" plain="true">保存</a>
+		<a href="javascript:void(0)" id="check_btn_undo2" class="easyui-linkbutton" iconCls="icon-undo" plain="true">取消</a>
+	</div>
+</div>
 </div>

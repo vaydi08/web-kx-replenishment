@@ -14,6 +14,7 @@ public abstract class BaseAction<T> extends ActionSupport{
 	private static final long serialVersionUID = 1L;
 	// 全局常量
 	public static final String DATA = "data";
+	public static final String JSONDATA = "jsondata";
 	public static final String RESULT = "result";
 	public static final String COMBOBOX = "combobox";
 	

@@ -1,5 +1,7 @@
 package com.sol.kx.web.action;
 
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import com.sol.kx.web.service.SysAuthService;
 
 @Controller
 @Scope("session")
+@Results({@Result(name="test",location="/beanTest.jsp")})
 public class UrlAction extends ActionSupport{
 
 	private static final long serialVersionUID = 1L;
@@ -31,12 +34,14 @@ public class UrlAction extends ActionSupport{
 		type = "redirect";
 	}
 	
+	@Override
 	public String execute() {
 		SysUser user = (SysUser) ActionContext.getContext().getSession().get(Constants.SESSION_USER);
 		// 检查登录状态
 		if(user == null) {
 			url = "/gologin";
 			ext = "html";
+			return HREF;
 		}
 		
 		// 检查权限系统
@@ -73,4 +78,5 @@ public class UrlAction extends ActionSupport{
 	public void setType(String type) {
 		this.type = type;
 	}
+
 }

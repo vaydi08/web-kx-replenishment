@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
+import com.sol.kx.web.action.compare.CargoBean;
+import com.sol.kx.web.action.compare.SupplyBean;
 import com.sol.kx.web.dao.BaseDao;
 import com.sol.kx.web.dao.CompareDao;
 import com.sol.kx.web.dao.pojo.CargoCompare;
@@ -43,10 +45,10 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 	@Value("${supply.pweight}")
 	private Integer SUPPLY_PWEIGHT;
 	
-	public PagerBean<Compare> compareSupply(File uploadFile,int shopid,int stocktype) {
+	public SupplyBean compareSupply(File uploadFile,int shopid) {
 		CompareDao dao = getCompareDao();
 		
-		PagerBean<Compare> bean = new PagerBean<Compare>();
+		SupplyBean bean = new SupplyBean();
 		
 		try {
 			dao.startTransaction();
@@ -57,13 +59,15 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 			List<String> errList = new ArrayList<String>();
 			readSupplyFile(uploadFile, SUPPLY_STARTROW, dao, errList);
 			
-			List<Compare> list = dao.compareSupply(shopid,stocktype);
+			List<Compare> list1 = dao.compareSupply(shopid,1);
+			List<Compare> list2 = dao.compareSupply(shopid,2);
 			
 			dao.removeTempTable();
 			//dao.commit();
 			dao.rollback();
 			
-			bean.setDataList(list);
+			bean.setStocktype1List(list1);
+			bean.setStocktype2List(list2);
 			if(errList.size() > 0)
 				bean.setReserve(new Object[]{errList});
 			return bean;
@@ -98,8 +102,17 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 		poi.close();
 	}
 	
-	public PoiUtil exportDownloadSupply(List<Compare> list) {
-		PoiUtil poi = new PoiUtil("补货建议单");
+	public PoiUtil exportDownloadSupply(SupplyBean bean) {
+		PoiUtil poi = new PoiUtil();
+		
+		exportSupplyBeanList(poi, "补货建议单 一般日", bean.getStocktype1List());
+		exportSupplyBeanList(poi, "补货建议单 节假日", bean.getStocktype2List());
+		
+		return poi;
+	}
+	
+	private void exportSupplyBeanList(PoiUtil poi,String sheetname,List<Compare> list) {
+		poi.newSheet(sheetname);
 		poi.newRow();
 		poi.setValue(0, "产品名称");
 		poi.setValue(1, "产品代码");
@@ -120,8 +133,6 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 		
 		for(int i = 0; i < 6; i ++)
 			poi.autoSize(i);
-		
-		return poi;
 	}
 	
 	
@@ -161,13 +172,33 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 	private Integer CARGO_STOCK_PWEIGHT;
 	// CARGO
 	
-	public PagerBean_Cargo compareCargo(File cargoSupplyFile,File cargoSaleFile,File cargoStockFile,int stocktype,Integer minallot) {
+	public CargoBean compareCargo(File cargoSupplyFile,File cargoSaleFile,File cargoStockFile,Integer minallot) {
 		CompareDao dao = getCompareDao();
 		
 		
-		PagerBean_Cargo bean = new PagerBean_Cargo();
+		CargoBean bean = new CargoBean();
 		
 		try {
+			fillCargoBean(dao, bean, 1, cargoSupplyFile, cargoSaleFile, cargoStockFile, minallot);
+			fillCargoBean(dao, bean, 2, cargoSupplyFile, cargoSaleFile, cargoStockFile, minallot);
+			return bean;
+		} catch (Exception e) {
+			try {
+				dao.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			exceptionHandler.onDatabaseException("处理分货数据时产生错误", e);
+			bean.setException(new Exception("数据库错误:" + e.getMessage(),e));
+			return bean;
+		} finally {
+			dao.close();
+		}
+	}
+	
+	private void fillCargoBean(CompareDao dao,CargoBean bean,int stocktype,
+			File cargoSupplyFile,File cargoSaleFile,File cargoStockFile,Integer minallot) throws Exception {
+
 			dao.startTransaction();
 			// supply
 			// 建立临时表
@@ -226,24 +257,17 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 			
 //			dao.commit();
 			dao.rollback();
-//			System.out.println(errList);
-			bean.setDataList(result);
-			bean.setStockList(stock);
+			
+			if(stocktype == 1) {
+				bean.setResultStocktype1List(result);
+				bean.setStockStocktype1List(stock);
+			} else {
+				bean.setResultStocktype2List(result);
+				bean.setStockStocktype2List(stock);
+			}
 			if(errList.size() > 0)
 				bean.setReserve(new Object[]{errList});
-			return bean;
-		} catch (Exception e) {
-			try {
-				dao.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			exceptionHandler.onDatabaseException("处理分货数据时产生错误", e);
-			bean.setException(new Exception("数据库错误:" + e.getMessage(),e));
-			return bean;
-		} finally {
-			dao.close();
-		}
+
 	}
 
 	private void readCargoSupplyFile(File file,int startrow,CompareDao dao,List<String> errList) throws IOException {

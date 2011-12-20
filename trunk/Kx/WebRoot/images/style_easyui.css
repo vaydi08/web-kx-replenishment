@@ -1,7 +1,7 @@
 @charset "utf-8";
-*{ margin:0px; padding:0px}
+*{ margin:0px; padding:0px; font-family: '微软雅黑','黑体','宋体','Arial'}
 
-body {background:#e5e5e5}
+body {background:#e5e5e5;font-family: '微软雅黑','黑体','宋体','Arial'}
 table {font-size:12px}
 
 a img {border:0px;}

@@ -47,12 +47,13 @@
 	});
 	</script>
 </head>
-<body style="width:1024px;height:768px;padding:0px;margin:0px;background:url('images/Homepage.jpg') no-repeat;">
-	<div style="position:relative;left:400px;top:430px">
+<body style="padding:0px;margin:0px;">
+<div style="width:1024px;height:768px;margin: 0 auto;background:url('images/Homepage.jpg') no-repeat;">
+	<div style="position:relative;left:400px;top:450px;">
 	<form method="post" id="form">
 	<table>
 	<tr>
-	<td height="30" width="60">用户名</td><td><input class="easyui-validatebox" id="username" name="input.username" required="true" validType="length[1,20]" style="border:1px solid #888;" onkeypress="if(event.keyCode==13) $('#form').submit();"/></td>
+	<td height="30" width="60">用户名</td><td><input class="easyui-validatebox" id="username" name="input.username" required="true" validType="length[1,20]" style="width:149px;border:1px solid #888;" onkeypress="if(event.keyCode==13) $('#form').submit();"/></td>
 	</tr>
 	<tr>
 	<td height="30">密　码</td><td><input class="easyui-validatebox" id="password" name="input.password" type="password" required="true" validType="length[1,20]" style="width:149px;border:1px solid #888;" onkeypress="if(event.keyCode==13) $('#form').submit();"/></td>
@@ -63,5 +64,6 @@
 	</table>
 	</form>
 	</div>
+</div>
 </body>
 </html>

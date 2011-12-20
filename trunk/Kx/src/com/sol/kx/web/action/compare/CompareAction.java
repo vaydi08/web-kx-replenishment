@@ -36,13 +36,13 @@ public class CompareAction extends BaseAction<Compare>{
 	private int shopid;
 	private int stocktype;
 	
-	private PagerBean<Compare> supplyBean;
+	private SupplyBean supplyBean;
 	private PagerBean<CargoCompare> cargoBean;
 	
 	public String uploadSupply() {
-		supplyBean = compareService.compareSupply(supplyFile, shopid,stocktype);
-		ActionContext.getContext().getSession().put(Constants.SESSION_DOWNLOAD_SUPPLY, supplyBean.getDataList());
-		return "compare";
+		pagerBean = compareService.compareSupply(supplyFile, shopid);
+		ActionContext.getContext().getSession().put(Constants.SESSION_DOWNLOAD_SUPPLY, pagerBean.getDataList());
+		return JSONDATA;
 	}
 	
 	private InputStream exportFile;

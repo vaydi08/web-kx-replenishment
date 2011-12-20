@@ -2,6 +2,10 @@ package com.sol.kx.web.service.bean;
 
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.sol.kx.web.common.Constants;
 
 public class PagerBean<T> {
@@ -23,6 +27,23 @@ public class PagerBean<T> {
 		count = 0;
 		
 		exception = null;
+	}
+	
+	public String getJson() {
+		JSONObject json = new JSONObject();
+		try {
+			json.put("success", exception == null);
+			if(exception != null) {
+				json.put("msg", this.exception.getMessage());
+			}
+			json.put("total", this.count);
+			if(this.dataList != null)
+				json.put("rows", new JSONArray(this.dataList));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return json.toString();
 	}
 
 	public List<T> getDataList() {

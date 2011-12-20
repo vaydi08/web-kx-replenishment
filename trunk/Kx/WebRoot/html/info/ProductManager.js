@@ -151,7 +151,20 @@ function loadScript(content,param) {
 		$(ctrl.Dialog).dialog('open');
 	});
 	$(ctrl.Toolbar.Del).click(function() {
-		SF.confirm($(ctrl.ListTable),'../info/info-category!delete2.action');
+		var row = $(ctrl.ListTable).datagrid('getSelected');
+		if(row) {
+			$.messager.confirm('确认删除','将要删除此记录,删除操作不可恢复,请确认?',function(b){
+				if(b) {
+					$.post('../info/info-category!delete2.action',{"input.id":row.type4},function(data){
+						var result = eval('(' + data + ')');
+						if(result.success)
+							$(ctrl.ListTable).datagrid('reload');
+						else
+							SOL.showError(result.msg);
+					});
+				}
+			})
+		}
 	});
 	$(ctrl.Toolbar.Edit).click(function() {
 		var row = $(ctrl.ListTable).datagrid('getSelected');
