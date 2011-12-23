@@ -7,8 +7,6 @@ import javax.persistence.Table;
 @Table(name = "info_product")
 public class InfoProduct extends Pojo{
 
-	private static final long serialVersionUID = 1L;
-	
 	@Id
 	private Integer id;
 	@Column(name = "type1")
@@ -119,58 +117,6 @@ public class InfoProduct extends Pojo{
 
 	public void setType4(Integer type4) {
 		this.type4 = type4;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("InfoProduct [");
-		if (id != null) {
-			builder.append("id=");
-			builder.append(id);
-			builder.append(", ");
-		}
-		if (image != null) {
-			builder.append("image=");
-			builder.append(image);
-			builder.append(", ");
-		}
-		if (pcode != null) {
-			builder.append("pcode=");
-			builder.append(pcode);
-			builder.append(", ");
-		}
-		if (pname != null) {
-			builder.append("pname=");
-			builder.append(pname);
-			builder.append(", ");
-		}
-		if (type1 != null) {
-			builder.append("type1=");
-			builder.append(type1);
-			builder.append(", ");
-		}
-		if (type2 != null) {
-			builder.append("type2=");
-			builder.append(type2);
-			builder.append(", ");
-		}
-		if (type3 != null) {
-			builder.append("type3=");
-			builder.append(type3);
-			builder.append(", ");
-		}
-		if (type4 != null) {
-			builder.append("type4=");
-			builder.append(type4);
-			builder.append(", ");
-		}
-		if (unit != null) {
-			builder.append("unit=");
-			builder.append(unit);
-		}
-		builder.append("]");
-		return builder.toString();
 	}
 
 	public String getType1name() {

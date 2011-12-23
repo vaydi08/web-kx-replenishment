@@ -9,8 +9,6 @@ import javax.persistence.Table;
 @Table(name = "order_type")
 public class OrderType extends Pojo{
 
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	private Integer id;
 	
@@ -150,10 +148,6 @@ public class OrderType extends Pojo{
 		this.cancelReason = cancelReason;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	public String getPname() {
 		return pname;
 	}
@@ -218,29 +212,4 @@ public class OrderType extends Pojo{
 		this.num = num;
 	}
 
-	@Override
-	public String toString() {
-		return "OrderType ["
-				+ (cancelReason != null ? "cancelReason=" + cancelReason + ", "
-						: "")
-				+ (canceltime != null ? "canceltime=" + canceltime + ", " : "")
-				+ (fromwho != null ? "fromwho=" + fromwho + ", " : "")
-				+ (gettime != null ? "gettime=" + gettime + ", " : "")
-				+ (id != null ? "id=" + id + ", " : "")
-				+ (image != null ? "image=" + image + ", " : "")
-				+ (num != null ? "num=" + num + ", " : "")
-				+ (ordertime != null ? "ordertime=" + ordertime + ", " : "")
-				+ (pcode != null ? "pcode=" + pcode + ", " : "")
-				+ (pdid != null ? "pdid=" + pdid + ", " : "")
-				+ (pname != null ? "pname=" + pname + ", " : "")
-				+ (pweight != null ? "pweight=" + pweight + ", " : "")
-				+ (requesttime != null ? "requesttime=" + requesttime + ", "
-						: "")
-				+ (shopid != null ? "shopid=" + shopid + ", " : "")
-				+ (shopname != null ? "shopname=" + shopname + ", " : "")
-				+ (stand != null ? "stand=" + stand + ", " : "")
-				+ (status != null ? "status=" + status + ", " : "")
-				+ (userid != null ? "userid=" + userid + ", " : "")
-				+ (username != null ? "username=" + username : "") + "]";
-	}
 }

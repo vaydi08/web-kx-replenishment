@@ -8,13 +8,12 @@ import org.springframework.stereotype.Service;
 import com.sol.kx.web.common.Logger;
 import com.sol.kx.web.dao.BaseDao;
 import com.sol.kx.web.dao.OrderTypeDao;
-import com.sol.kx.web.dao.pojo.InfoProductDetail;
 import com.sol.kx.web.dao.pojo.OrderCount;
 import com.sol.kx.web.dao.pojo.OrderType;
 import com.sol.kx.web.service.OrderService;
 import com.sol.kx.web.service.bean.PagerBean;
 
-@Service
+//@Service
 public class OrderServiceImpl extends BaseServiceImpl<OrderType> implements OrderService{
 
 	@Autowired

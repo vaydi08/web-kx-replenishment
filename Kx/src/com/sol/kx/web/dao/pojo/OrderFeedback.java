@@ -9,8 +9,6 @@ import javax.persistence.Table;
 @Table(name = "order_feedback")
 public class OrderFeedback extends Pojo{
 
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	private Integer id;
 	
@@ -99,16 +97,4 @@ public class OrderFeedback extends Pojo{
 		this.feedbacktime = feedbacktime;
 	}
 
-	@Override
-	public String toString() {
-		return "OrderFeedback ["
-				+ (contact != null ? "contact=" + contact + ", " : "")
-				+ (feedback != null ? "feedback=" + feedback + ", " : "")
-				+ (feedbacktime != null ? "feedbacktime=" + feedbacktime + ", "
-						: "") + (id != null ? "id=" + id + ", " : "")
-				+ (orderid != null ? "orderid=" + orderid + ", " : "")
-				+ (ordernum != null ? "ordernum=" + ordernum + ", " : "")
-				+ (settime != null ? "settime=" + settime + ", " : "")
-				+ (supplier != null ? "supplier=" + supplier : "") + "]";
-	}
 }

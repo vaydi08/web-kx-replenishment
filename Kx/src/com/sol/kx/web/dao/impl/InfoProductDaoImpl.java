@@ -71,7 +71,7 @@ public class InfoProductDaoImpl extends BaseDaoImpl implements InfoProductDao {
 	
 	public List<StockCheck> findQuickLocator(Integer pid) throws Exception {
 		Map<String,Class<?>> smap = dataConsole.parseSmap(StockCheck.class, 
-				"id","shopname","minweight","maxweight","stock","stocktype");
+				"id","shopname","minweight","maxweight","stock_type1","stock_type2");
 		List<Object> params = new ArrayList<Object>(1);
 		params.add(pid);
 		return dataConsole.find(SQL_QUICKLOCATOR,StockCheck.class, smap,params);

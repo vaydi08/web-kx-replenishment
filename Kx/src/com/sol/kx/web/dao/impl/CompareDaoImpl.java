@@ -106,16 +106,15 @@ public class CompareDaoImpl implements CompareDao{
 	@Value("${sql.compare.supply}")
 	private String SQL_COMPARE_SUPPLY;
 	
-	public List<Compare> compareSupply(int shopid,int stocktype) throws Exception {
+	public List<Compare> compareSupply(int shopid) throws Exception {
 		String sql = SQL_COMPARE_SUPPLY.replace(":tablename", tablename);
-		log.ldebug("Query:" + sql,shopid,stocktype);
+		log.ldebug("Query:" + sql,shopid);
 		
 		PreparedStatement ps = connection.prepareStatement(sql,
 				ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 		ps.setQueryTimeout(400);
 		
 		ps.setInt(1, shopid);
-		ps.setInt(2, stocktype);
 		
 		ResultSet rs = null;
 		
@@ -133,9 +132,11 @@ public class CompareDaoImpl implements CompareDao{
 				obj.setPid(rs.getInt(3));
 				obj.setMinweight(rs.getDouble(4));
 				obj.setMaxweight(rs.getDouble(5));
-				obj.setStock(rs.getInt(6));
-				obj.setKucun(rs.getInt(7));
-				obj.setNeed(rs.getInt(8));
+				obj.setStock_type1(rs.getInt(6));
+				obj.setStock_type2(rs.getInt(7));
+				obj.setKucun(rs.getInt(8));
+				obj.setNeed_stocktype1(rs.getInt(9));
+				obj.setNeed_stocktype2(rs.getInt(10));
 				
 				list.add(obj);
 			}

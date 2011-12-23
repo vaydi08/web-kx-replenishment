@@ -18,7 +18,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import com.sol.kx.web.action.compare.CargoBean;
-import com.sol.kx.web.action.compare.SupplyBean;
 import com.sol.kx.web.dao.BaseDao;
 import com.sol.kx.web.dao.CompareDao;
 import com.sol.kx.web.dao.pojo.CargoCompare;
@@ -45,10 +44,10 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 	@Value("${supply.pweight}")
 	private Integer SUPPLY_PWEIGHT;
 	
-	public SupplyBean compareSupply(File uploadFile,int shopid) {
+	public PagerBean<Compare> compareSupply(File uploadFile,int shopid) {
 		CompareDao dao = getCompareDao();
 		
-		SupplyBean bean = new SupplyBean();
+		PagerBean<Compare> bean = new PagerBean<Compare>();
 		
 		try {
 			dao.startTransaction();
@@ -59,15 +58,13 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 			List<String> errList = new ArrayList<String>();
 			readSupplyFile(uploadFile, SUPPLY_STARTROW, dao, errList);
 			
-			List<Compare> list1 = dao.compareSupply(shopid,1);
-			List<Compare> list2 = dao.compareSupply(shopid,2);
+			List<Compare> list = dao.compareSupply(shopid);
 			
 			dao.removeTempTable();
 			//dao.commit();
 			dao.rollback();
 			
-			bean.setStocktype1List(list1);
-			bean.setStocktype2List(list2);
+			bean.setDataList(list);
 			if(errList.size() > 0)
 				bean.setReserve(new Object[]{errList});
 			return bean;
@@ -102,11 +99,10 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 		poi.close();
 	}
 	
-	public PoiUtil exportDownloadSupply(SupplyBean bean) {
+	public PoiUtil exportDownloadSupply(PagerBean<Compare> bean) {
 		PoiUtil poi = new PoiUtil();
 		
-		exportSupplyBeanList(poi, "补货建议单 一般日", bean.getStocktype1List());
-		exportSupplyBeanList(poi, "补货建议单 节假日", bean.getStocktype2List());
+		exportSupplyBeanList(poi, "补货建议单", bean.getDataList());
 		
 		return poi;
 	}
@@ -117,18 +113,22 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 		poi.setValue(0, "产品名称");
 		poi.setValue(1, "产品代码");
 		poi.setValue(2, "克重范围");
-		poi.setValue(3, "核定库存");
-		poi.setValue(4, "实际库存");
-		poi.setValue(5, "建设补货量");
+		poi.setValue(3, "实际库存");
+		poi.setValue(4, "一般日 核定库存");
+		poi.setValue(5, "一般日 建设补货量");
+		poi.setValue(6, "节假日 核定库存");
+		poi.setValue(7, "节假日 建设补货量");
 		
 		for(Compare po : list) {
 			poi.newRow();
 			poi.setValue(0, po.getPname());
 			poi.setValue(1, po.getPcode());
 			poi.setValue(2, po.getMinweight() + "-" + po.getMaxweight());
-			poi.setValue(3, po.getStock());
-			poi.setValue(4, po.getKucun());
-			poi.setValue(5, po.getNeed());
+			poi.setValue(3, po.getKucun());
+			poi.setValue(4, po.getStock_type1());
+			poi.setValue(5, po.getNeed_stocktype1());
+			poi.setValue(6, po.getStock_type2());
+			poi.setValue(7, po.getNeed_stocktype2());
 		}
 		
 		for(int i = 0; i < 6; i ++)

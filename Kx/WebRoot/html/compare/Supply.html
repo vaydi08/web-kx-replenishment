@@ -24,40 +24,26 @@
 	</form>
 </div>
 
-<div id="tabs">
-	<div title="补货建议单 一般日" style="padding:10px;">
-		<table id="listTable1" class="easyui-datagrid">
-		<thead>
-		<tr>
-		<th field="pname" width="80">产品名称</th>
-		<th field="pcode" width="80">产品代码</th>
-		<th field="minweight" width="80">克重范围</th>
-		<th field="maxweight" width="80"></th>
-		<th field="stock" width="80">核定库存</th>
-		<th field="kucun" width="80">实际库存</th>
-		<th field="need" width="80">建议补货量</th>
-		</tr>
-		</thead>
-		</table>
-	</div>
+
+<div title="补货建议单 一般日" style="padding:10px;">
+	<table id="listTable" class="easyui-datagrid" pagination="true" toolbar="#toolbar" >
+	<thead>
+	<tr>
+	<th field="pname" width="80">产品名称</th>
+	<th field="pcode" width="80">产品代码</th>
+	<th field="minweight" width="80">克重范围</th>
+	<th field="maxweight" width="80"></th>
+	<th field="kucun" width="80">实际库存</th>
+	<th field="stock_type1" width="80">一般日 核定库存</th>
+	<th field="need_stocktype1" width="80">一般日 建议补货量</th>
+	<th field="stock_type2" width="80">节假日 核定库存</th>
+	<th field="need_stocktype2" width="80">节假日 建议补货量</th>
+	</tr>
+	</thead>
+	</table>
 	
-	<div title="补货建议单 节假日" style="padding:10px;">
-		<table id="listTable2" class="easyui-datagrid">
-		<thead>
-		<tr>
-		<th field="pname" width="80">产品名称</th>
-		<th field="pcode" width="80">产品代码</th>
-		<th field="minweight" width="80">克重范围</th>
-		<th field="maxweight" width="80"></th>
-		<th field="stock" width="80">核定库存</th>
-		<th field="kucun" width="80">实际库存</th>
-		<th field="need" width="80">建议补货量</th>
-		</tr>
-		</thead>
-		</table>
-	</div>
-	
-	<div title="下载文件" style="padding:10px">
-		<a href="../compare/supply!download.action" class="easyui-linkbutton" iconCls="icon-save" plain="true" id="btn_download">下载数据文件</a>
+	<div id="toolbar">
+		<a href="../compare/supply!download.action" class="easyui-linkbutton" iconCls="icon-save" plain="true" id="btn_download" disabled="true">下载数据文件</a>
 	</div>
 </div>
+

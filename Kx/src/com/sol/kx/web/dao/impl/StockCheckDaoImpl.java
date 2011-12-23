@@ -23,6 +23,7 @@ import com.sol.kx.web.common.Constants;
 import com.sol.kx.web.dao.StockCheckDao;
 import com.sol.kx.web.dao.pojo.InfoProduct;
 import com.sol.kx.web.dao.pojo.StockCheck;
+import com.sol.kx.web.dao.pojo.StockCheckSum;
 
 @Repository
 public class StockCheckDaoImpl extends BaseDaoImpl implements StockCheckDao {
@@ -124,6 +125,28 @@ public class StockCheckDaoImpl extends BaseDaoImpl implements StockCheckDao {
 			criteria.eq("id", needupdateid);
 			dataConsole.updatePrepareSQL(SQL_UPDATE_CHECK, criteria.getParamListWithoutId());
 		}
+	}
+	
+	
+	// 查询核定统计数
+	@Value("${sql.stock.check.sum}")
+	private String SQL_SUM;
+	
+	public StockCheckSum findStockCheckSum(Integer shopid,Integer pid) throws Exception {
+		List<Object> param = new ArrayList<Object>();
+		param.add(pid);
+		param.add(shopid);
+		param.add(shopid);
+		param.add(pid);
+		param.add(shopid);
+		param.add(shopid);
+		
+		return dataConsole.get(StockCheckSum.class, SQL_SUM, 
+				dataConsole.parseSmap(StockCheckSum.class, 
+						"shop_stocktype1","shop_stocktype2",
+						"shop_product_stocktype1","shop_product_stocktype2",
+						"sum_type1_stocktype1","sum_type1_stocktype2",
+						"sum_type2_stocktype1","sum_type2_stocktype2"), param);
 	}
 	
 	

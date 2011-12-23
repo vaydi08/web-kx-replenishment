@@ -2,7 +2,8 @@ package com.sol.kx.web.dao.pojo;
 
 import java.sql.Timestamp;
 
-public class CargoCompare {
+public class CargoCompare extends Pojo{
+
 	private int id;
 	private String pname;
 	private int pid;
@@ -58,7 +59,7 @@ public class CargoCompare {
 		this.weight = weight;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -136,22 +137,6 @@ public class CargoCompare {
 
 	public void setSaletime(Timestamp saletime) {
 		this.saletime = saletime;
-	}
-
-	@Override
-	public String toString() {
-		return "CargoCompare [id=" + id + ", "
-				+ (maxweight != null ? "maxweight=" + maxweight + ", " : "")
-				+ (minweight != null ? "minweight=" + minweight + ", " : "")
-				+ "num=" + num + ", "
-				+ (pcode != null ? "pcode=" + pcode + ", " : "") + "pid=" + pid
-				+ ", " + (pname != null ? "pname=" + pname + ", " : "")
-				+ (saletime != null ? "saletime=" + saletime + ", " : "")
-				+ (serial != null ? "serial=" + serial + ", " : "") + "shopid="
-				+ shopid + ", "
-				+ (shopname != null ? "shopname=" + shopname + ", " : "")
-				+ "stock=" + stock + ", stocknow=" + stocknow + ", "
-				+ (weight != null ? "weight=" + weight : "") + "]";
 	}
 
 	public int getMinallot() {

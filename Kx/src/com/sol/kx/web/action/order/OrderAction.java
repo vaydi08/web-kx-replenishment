@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionContext;
 import com.sol.kx.web.action.BaseAction;
 import com.sol.kx.web.common.Constants;
-import com.sol.kx.web.dao.pojo.InfoProductDetail;
 import com.sol.kx.web.dao.pojo.OrderType;
 import com.sol.kx.web.dao.pojo.SysUser;
 import com.sol.kx.web.service.BaseService;
@@ -30,7 +29,7 @@ public class OrderAction extends BaseAction<OrderType>{
 
 	private static final long serialVersionUID = 1L;
 
-	@Autowired
+	//@Autowired
 	private OrderService orderService;
 	
 	

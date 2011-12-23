@@ -7,8 +7,6 @@ import javax.persistence.Table;
 @Table(name = "order_supplier")
 public class OrderSupplier extends Pojo{
 
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	private Integer id;
 	
@@ -53,12 +51,4 @@ public class OrderSupplier extends Pojo{
 		this.remark = remark;
 	}
 
-	@Override
-	public String toString() {
-		return "OrderSupplier ["
-				+ (contact != null ? "contact=" + contact + ", " : "")
-				+ (id != null ? "id=" + id + ", " : "")
-				+ (name != null ? "name=" + name + ", " : "")
-				+ (remark != null ? "remark=" + remark : "") + "]";
-	}
 }

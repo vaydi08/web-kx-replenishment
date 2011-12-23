@@ -16,8 +16,8 @@
 	"shopname":"<s:property value="shopname" escape="false"/>",
 	"minweight":"<s:property value="minweight"/>",
 	"maxweight":"<s:property value="maxweight"/>",
-	"stock":"<s:property value="stock"/>",
-	"stocktype":"<s:if test="stocktype == 1">正常</s:if><s:else>节假日</s:else>"
+	"stock_type1":"<s:property value="stock_type1"/>",
+	"stock_type2":"<s:property value="stock_type2"/>"
 	}<s:if test="not #typeSt.last">,</s:if>
 	</s:iterator>
 ]}<s:if test="not #st.last">,</s:if>

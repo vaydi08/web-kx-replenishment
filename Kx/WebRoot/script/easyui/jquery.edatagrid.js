@@ -65,7 +65,7 @@
 								});
 							}
 						}
-						opts.onSave.call(target, index, row);
+						opts.onSave.call(target, index, row, data);
 					},'json');
 				}
 				if (opts.onAfterEdit) opts.onAfterEdit.call(target, index, row);
@@ -175,6 +175,8 @@
 			return jq.each(function(){
 				var dg = $(this);
 				var opts = $.data(this, 'edatagrid').options;
+				// 自定义 编辑模式 标记
+				$.data(this,'edatagrid-editmode','edit');
 				var editIndex = opts.editIndex;
 				if (editIndex != index){
 					if (dg.datagrid('validateRow', editIndex)){
@@ -193,6 +195,8 @@
 			return jq.each(function(){
 				var dg = $(this);
 				var opts = $.data(this, 'edatagrid').options;
+				// 自定义 添加模式 标记
+				$.data(this,'edatagrid-editmode','add');
 				if (opts.editIndex >= 0){
 					if (!dg.datagrid('validateRow', opts.editIndex)){
 						dg.datagrid('selectRow', opts.editIndex);
@@ -306,7 +310,7 @@
 		treeParentField: 'parentId',
 		
 		onAdd: function(index, row){},
-		onSave: function(index, row){},
+		onSave: function(index, row, data){},
 		onDestroy: function(index, row){}
 	});
 })(jQuery);

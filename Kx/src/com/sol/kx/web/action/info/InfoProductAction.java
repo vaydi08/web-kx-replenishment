@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 
 import com.sol.kx.web.action.BaseAction;
 import com.sol.kx.web.dao.pojo.InfoProduct;
-import com.sol.kx.web.dao.pojo.InfoProductDetail;
 import com.sol.kx.web.dao.pojo.StockCheck;
 import com.sol.kx.web.service.BaseService;
 import com.sol.kx.web.service.InfoProductService;
@@ -108,19 +107,9 @@ public class InfoProductAction extends BaseAction<InfoProduct>{
 	 * 子内容列表
 	 */
 	private Integer pid;
-	private List<InfoProductDetail> detailList;
-	
-//	public String details() {
-//		detailList = infoProductService.findProductDetails(pid);
-//		return "productDetail";
-//	}
 
 	public void setPid(Integer pid) {
 		this.pid = pid;
-	}
-
-	public List<InfoProductDetail> getDetailList() {
-		return detailList;
 	}
 
 	public Map<String,List<StockCheck>> getQuickLocatorStockList() {
