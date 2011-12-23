@@ -10,11 +10,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import com.sol.kx.web.dao.OrderTypeDao;
-import com.sol.kx.web.dao.pojo.InfoProductDetail;
 import com.sol.kx.web.dao.pojo.OrderCount;
 import com.sol.kx.web.dao.pojo.OrderType;
 
-@Repository
+//@Repository
 public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 	@Value("${sql.order.untake.find}")
 	private String SQL_MAIN_UNTAKE;

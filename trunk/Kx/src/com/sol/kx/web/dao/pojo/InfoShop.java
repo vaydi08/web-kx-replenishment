@@ -7,8 +7,6 @@ import javax.persistence.Table;
 @Table(name = "info_shop")
 public class InfoShop extends Pojo{
 
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	private Integer id;
 	@Column(name = "scode")
@@ -80,13 +78,6 @@ public class InfoShop extends Pojo{
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	@Override
-	public String toString() {
-		return "InfoShop [address=" + address + ", id=" + id + ", name=" + name
-				+ ", remark=" + remark + ", scode=" + scode + ", shorttel="
-				+ shorttel + ", tel=" + tel + "]";
 	}
 
 }

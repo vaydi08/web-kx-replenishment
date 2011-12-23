@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -12,13 +14,15 @@ import org.springframework.stereotype.Controller;
 import com.sol.kx.web.action.BaseAction;
 import com.sol.kx.web.dao.pojo.InfoProduct;
 import com.sol.kx.web.dao.pojo.StockCheck;
+import com.sol.kx.web.dao.pojo.StockCheckSum;
 import com.sol.kx.web.service.BaseService;
 import com.sol.kx.web.service.StockCheckService;
 import com.sol.kx.web.service.bean.PagerBean;
 
 @Controller
 @Scope("session")
-@Results({@Result(name = "productData",location = "/stock/productData.jsp")})
+@Results({@Result(name = "productData",location = "/stock/productData.jsp"),
+	@Result(name = "stockCheckSum",location = "/html/stock/stockCheckSum.jsp")})
 public class CheckAction extends BaseAction<StockCheck>{
 
 	private static final long serialVersionUID = 1L;
@@ -48,7 +52,33 @@ public class CheckAction extends BaseAction<StockCheck>{
 	
 	public String manager() {
 		pagerBean = stockCheckService.find2(input);
-		return DATA;
+		return JSONDATA;
+	}
+	
+	// 获取核定统计数
+	private String stockCheckSum;
+	
+	public String stockCheckSum() {
+		StockCheckSum sum = stockCheckService.findStockCheckSum(input);
+		JSONObject json = new JSONObject();
+		try {
+			json.put("shop_stocktype1", sum.getShop_stocktype1());
+			json.put("shop_stocktype2", sum.getShop_stocktype2());
+			json.put("shop_product_stocktype1", sum.getShop_product_stocktype1());
+			json.put("shop_product_stocktype2", sum.getShop_product_stocktype2());
+			json.put("sum_type1_stocktype1", sum.getSum_type1_stocktype1());
+			json.put("sum_type1_stocktype2", sum.getSum_type1_stocktype2());
+			json.put("sum_type2_stocktype1", sum.getSum_type2_stocktype1());
+			json.put("sum_type2_stocktype2", sum.getSum_type2_stocktype2());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		stockCheckSum = json.toString();
+		return "stockCheckSum";
+	}
+	
+	public String getStockCheckSum() {
+		return stockCheckSum;
 	}
 		
 	public void setType1(int type1) {

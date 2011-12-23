@@ -7,8 +7,6 @@ import javax.persistence.Table;
 @Table(name = "info_category")
 public class InfoCategory extends Pojo{
 
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	private Integer id;
 	@Column(name = "ccode")
@@ -74,16 +72,4 @@ public class InfoCategory extends Pojo{
 	public void setImage(String image) {
 		this.image = image;
 	}
-
-	@Override
-	public String toString() {
-		return "InfoCategory ["
-				+ (ccode != null ? "ccode=" + ccode + ", " : "")
-				+ (clevel != null ? "clevel=" + clevel + ", " : "")
-				+ (cname != null ? "cname=" + cname + ", " : "")
-				+ (id != null ? "id=" + id + ", " : "")
-				+ (image != null ? "image=" + image + ", " : "")
-				+ (parent != null ? "parent=" + parent : "") + "]";
-	}
-
 }

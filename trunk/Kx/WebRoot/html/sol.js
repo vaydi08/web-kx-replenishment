@@ -200,7 +200,7 @@ function SoLFunction() {
 	SoLFunction.prototype.grid = function(ctrl,config) {
 		// 用来设定控件高度
 		if(!config.height)
-			$.extend(config,{height:$(SOL.content).height()-110});
+			$.extend(config,{height:$(SOL.content).height()-100});
 		ctrl.datagrid(config);
 	}
 	// 对话框

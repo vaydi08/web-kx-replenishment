@@ -26,11 +26,11 @@ public class StockCheck extends Pojo{
 	@Column(name = "maxweight")
 	private Double maxweight;
 	
-	@Column(name = "stock")
-	private Integer stock;
+	@Column(name = "stock_type1")
+	private Integer stock_type1;
 	
-	@Column(name = "stocktype")
-	private Short stocktype;
+	@Column(name = "stock_type2")
+	private Integer stock_type2;
 
 	public Integer getId() {
 		return id;
@@ -72,37 +72,6 @@ public class StockCheck extends Pojo{
 		this.maxweight = maxweight;
 	}
 
-	public Integer getStock() {
-		return stock;
-	}
-
-	public void setStock(Integer stock) {
-		this.stock = stock;
-	}
-
-	public Short getStocktype() {
-		return stocktype;
-	}
-
-	public void setStocktype(Short stocktype) {
-		this.stocktype = stocktype;
-	}
-	
-	public void setStocktype(String stocktype) {
-		this.stocktype = Short.parseShort(stocktype);
-	}
-
-	@Override
-	public String toString() {
-		return "StockCheck [" + (id != null ? "id=" + id + ", " : "")
-				+ (maxweight != null ? "maxweight=" + maxweight + ", " : "")
-				+ (minweight != null ? "minweight=" + minweight + ", " : "")
-				+ (pid != null ? "pid=" + pid + ", " : "")
-				+ (shopid != null ? "shopid=" + shopid + ", " : "")
-				+ (stock != null ? "stock=" + stock + ", " : "")
-				+ (stocktype != null ? "stocktype=" + stocktype : "") + "]";
-	}
-
 	public String getPname() {
 		return pname;
 	}
@@ -118,5 +87,21 @@ public class StockCheck extends Pojo{
 	public void setShopname(String shopname) {
 		this.shopname = shopname;
 	}
-	
+
+	public Integer getStock_type1() {
+		return stock_type1;
+	}
+
+	public void setStock_type1(Integer stockType1) {
+		stock_type1 = stockType1;
+	}
+
+	public Integer getStock_type2() {
+		return stock_type2;
+	}
+
+	public void setStock_type2(Integer stockType2) {
+		stock_type2 = stockType2;
+	}
+
 }

@@ -20,7 +20,7 @@ public interface CompareDao {
 	public void insertSupplyTempTable(String pcode, Double weight)
 			throws SQLException;
 
-	public List<Compare> compareSupply(int shopid,int stocktype) throws Exception;
+	public List<Compare> compareSupply(int shopid) throws Exception;
 
 	public void removeTempTable() throws SQLException;
 	

@@ -9,11 +9,8 @@ function loadScript(content,param) {
 			Btn : $('#btn_add'),
 			LoadMsg : $('#loadMsg')
 		},
-		ListTable : {
-			Tabs : $('#tabs'),
-			T1 : $('#listTable1'),
-			T2 : $('#listTable2')
-		}
+		ListTable : $('#listTable'),
+		Btn_Download : $('#btn_download')
 	}
 	
 	function init() {
@@ -33,10 +30,11 @@ function loadScript(content,param) {
 				ctrl.QueryPanel.LoadMsg.hide();
 				var ret = $.parseJSON(data);
 				if(ret.success) {
-					loadDatagrid(ctrl.ListTable.T1,ret.stocktype1);
-					loadDatagrid(ctrl.ListTable.T2,ret.stocktype2);
+					ctrl.ListTable.datagrid('loadData',ret);
+					ctrl.Btn_Download.linkbutton('enable');
 				} else {
 					SOL.showError(ret.msg);
+					ctrl.Btn_Download.linkbutton('disable');
 				}
 			}
 		});
@@ -52,13 +50,6 @@ function loadScript(content,param) {
 			ctrl.QueryPanel.LoadMsg.show();
 			ctrl.QueryPanel.Form.submit();
 		});
-		
-		//tabs
-		ctrl.ListTable.Tabs.tabs({height : content.height() - 70});
-		// 数据表
-		function loadDatagrid(dg,data) {
-			dg.datagrid('loadData',data);
-		}
 	}
 	init();
 }

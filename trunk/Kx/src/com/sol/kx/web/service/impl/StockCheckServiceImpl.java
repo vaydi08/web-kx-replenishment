@@ -13,6 +13,7 @@ import com.sol.kx.web.dao.BaseDao;
 import com.sol.kx.web.dao.StockCheckDao;
 import com.sol.kx.web.dao.pojo.InfoProduct;
 import com.sol.kx.web.dao.pojo.StockCheck;
+import com.sol.kx.web.dao.pojo.StockCheckSum;
 import com.sol.kx.web.service.StockCheckService;
 import com.sol.kx.web.service.bean.PagerBean;
 import com.sol.kx.web.service.bean.ResultBean;
@@ -78,6 +79,16 @@ public class StockCheckServiceImpl extends BaseServiceImpl<StockCheck> implement
 			return stockCheckDao.findCategoryNameById(id);
 		} catch (SQLException e) {
 			exceptionHandler.onDatabaseException("查询[info_category]名称 " + id, e);
+			return null;
+		}
+	}
+	
+	public StockCheckSum findStockCheckSum(StockCheck obj) {
+		Logger.SERVICE.debug("查询[stock_check]数量统计 " + obj.toString());
+		try {
+			return stockCheckDao.findStockCheckSum(obj.getShopid(), obj.getPid());
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("查询[stock_check]数量统计 " + obj.toString(), e);
 			return null;
 		}
 	}

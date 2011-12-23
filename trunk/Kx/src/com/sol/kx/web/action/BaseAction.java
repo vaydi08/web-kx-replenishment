@@ -119,13 +119,13 @@ public abstract class BaseAction<T> extends ActionSupport{
 	public String manager() {
 		T obj = defaultQuery();
 		pagerBean = getService().find(pagerBean, obj);
-		return DATA;
+		return JSONDATA;
 	}
 	
 	public String manager2() {
 		T obj = defaultQuery2();
 		pagerBean = getService().findByPage2(pagerBean, obj);
-		return DATA;
+		return JSONDATA;
 	}
 	
 	public String add() {

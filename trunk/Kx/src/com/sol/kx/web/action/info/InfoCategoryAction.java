@@ -52,7 +52,7 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 		if(type3 != null && type3 > 0)
 			obj.setParent(type3);
 		pagerBean = infoCategoryService.findByPage2(pagerBean, obj);
-		return DATA;
+		return JSONDATA;
 	}
 	
 	private String picData;

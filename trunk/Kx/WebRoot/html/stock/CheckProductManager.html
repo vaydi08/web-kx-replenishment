@@ -26,18 +26,21 @@
 </div>
 
 
-<div id="checkDiv" modal="true" style="width:100%;height:400px;background-color:#fafafa;padding:10px" title="核定" closed="true" closeable="true">
+<div id="checkDiv" modal="true" style="width:500;height:400px;background-color:#fafafa;padding:10px" title="核定" closed="true" closeable="true">
+
 <div style="margin-bottom:5px">
 <select id="shop"></select>
+<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" iconCls="icon-reload" id="reloadListTable"></a>
 </div>
 
-<div style="float:left;clear:none;height:100%;margin-right:10px;" id="checkTableDiv1">
-	<table id="checkTable" toolbar="#check-toolbar" title="一般日核定">
+<div style="float:left;clear:none;margin-right:10px;" id="checkTableDiv1">
+	<table id="checkTable" toolbar="#check-toolbar" title="核定数据">
 	<thead>
 	<tr>
-	<th field="minweight" width="80" editor="{type:'soltext',options:{required:true,precision:2,datagrid:'checkTable'}}">克重范围</th>
-	<th field="maxweight" width="80" editor="{type:'numberbox',options:{required:true,precision:2,validType:'compareWeight[\'checkTable\']'}}"></th>
-	<th field="stock" width="80" editor="{type:'validatebox',options:{required:true}}">核定库存</th>
+	<th field="minweight" width="80" editor="{type:'soltext',options:{required:true,precision:3,datagrid:'checkTable'}}">克重范围</th>
+	<th field="maxweight" width="80" editor="{type:'numberbox',options:{required:true,precision:3,validType:'compareWeight[\'checkTable\']'}}"></th>
+	<th field="stock_type1" width="80" editor="{type:'numberbox',options:{required:true}}">一般日 核定库存</th>
+	<th field="stock_type2" width="80" editor="{type:'numberbox',options:{required:true}}">节假日 核定库存</th>
 	</tr>
 	</thead>
 	</table>
@@ -49,22 +52,15 @@
 		<a href="javascript:void(0)" id="check_btn_undo" class="easyui-linkbutton" iconCls="icon-undo" plain="true">取消</a>
 	</div>
 </div>
-<div style="float:left;clear:none;height:100%;" id="checkTableDiv2">
-	<table id="checkTable2" toolbar="#check-toolbar2" title="节假日核定">
-	<thead>
-	<tr>
-	<th field="minweight" width="80" editor="{type:'soltext',options:{required:true,precision:2,datagrid:'checkTable2'}}">克重范围</th>
-	<th field="maxweight" width="80" editor="{type:'numberbox',options:{required:true,precision:2,validType:'compareWeight[\'checkTable2\']'}}"></th>
-	<th field="stock" width="80" editor="{type:'validatebox',options:{required:true}}">核定库存</th>
-	</tr>
-	</thead>
+
+<div style="float:left;clear:none;" id="countDiv">
+	<table id="countTable">
+		<thead><tr><th></th><th width="50">一般日</th><th width="50">节假日</th></tr>
+		<tr><td>当前门店已核定件数:</td><td id="shop_stocktype1"></td><td id="shop_stocktype2"></td></tr>
+		<tr><td>当前门店此产品已核定件数:</td><td id="shop_product_stocktype1"></td><td id="shop_product_stocktype2"></td></tr>
+		<tr><td>当前门店此产品所属大类约估克重:</td><td id="sum_type1_stocktype1"></td><td id="sum_type1_stocktype2"></td></tr>
+		<tr><td>当前门店此产品所属小类约估克重:</td><td id="sum_type2_stocktype1"></td><td id="sum_type2_stocktype2"></td></tr>
 	</table>
-	
-	<div id="check-toolbar2">
-		<a href="javascript:void(0)" id="check_btn_add2" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增</a>
-		<a href="javascript:void(0)" id="check_btn_del2" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
-		<a href="javascript:void(0)" id="check_btn_save2" class="easyui-linkbutton" iconCls="icon-save" plain="true">保存</a>
-		<a href="javascript:void(0)" id="check_btn_undo2" class="easyui-linkbutton" iconCls="icon-undo" plain="true">取消</a>
-	</div>
 </div>
+
 </div>

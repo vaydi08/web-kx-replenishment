@@ -18,71 +18,62 @@ function loadScript(content,param) {
 		CheckDiv : {
 			Dialog : $('#checkDiv'),
 			CheckTableDiv1 : $('#checkTableDiv1'),
-			CheckTableDiv2 : $('#checkTableDiv2'),
 			Shop : $('#shop'),
 			ListTable : $('#checkTable'),
-			ListTable2 : $('#checkTable2'),
+			Reload : $('#reloadListTable'),
 			Add : $('#check_btn_add'),
 			Del : $('#check_btn_del'),
 			Save : $('#check_btn_save'),
-			Undo : $('#check_btn_undo'),
-			Add2 : $('#check_btn_add2'),
-			Del2 : $('#check_btn_del2'),
-			Save2 : $('#check_btn_save2'),
-			Undo2 : $('#check_btn_undo2')
+			Undo : $('#check_btn_undo')
+		},
+		CountTable : {
+			shop_stocktype1 : $('#shop_stocktype1'),
+			shop_stocktype2 : $('#shop_stocktype2'),
+			shop_product_stocktype1 : $('#shop_product_stocktype1'),
+			shop_product_stocktype2 : $('#shop_product_stocktype2'),
+			sum_type1_stocktype1 : $('#sum_type1_stocktype1'),
+			sum_type1_stocktype2 : $('#sum_type1_stocktype2'),
+			sum_type2_stocktype1 : $('#sum_type2_stocktype1'),
+			sum_type2_stocktype2 : $('#sum_type2_stocktype2')
 		}
 	}
 	
 	
 	// 核定表单datagrid
 	function createCheckTable(pid) {
-		var opts = function(stocktype) {
-			var p = {
-				pagination:false,
-				width:$(document).width() / 2 - 50,
-				style:{'background-color':'#fafafa'},
-				url:"../stock/check!manager.action",
-				saveUrl: '../stock/check!add2.action',
-				updateUrl: '../stock/check!edit2.action',
-				destroyUrl: '../stock/check!delete2.action',
-				queryParams:{'input.shopid':ctrl.CheckDiv.Shop.combobox('getValue'),'input.pid':pid,'input.stocktype':stocktype},
-			
-				onAfterEdit:function(){$(this).edatagrid('reload');},
-				onDestroy:function(){$(this).edatagrid('reload');}
-			}
-			
-			return p;
-		}
-		ctrl.CheckDiv.ListTable.edatagrid(opts(1));
+		ctrl.CheckDiv.ListTable.edatagrid({
+			pagination:false,
+			width:400,
+			height:content.height()-100,
+			url:"../stock/check!manager.action",
+			saveUrl: '../stock/check!add2.action',
+			updateUrl: '../stock/check!edit2.action',
+			destroyUrl: '../stock/check!delete2.action',
+			queryParams:{'input.shopid':ctrl.CheckDiv.Shop.combobox('getValue'),'input.pid':pid},
 		
-		SoLFunction.prototype.loadStockCheckGrid2 = function() {
-			if(!$('#content').data('stock-check-datagrid2')) {
-				$('#checkTable2').edatagrid({
-					pagination:false,
-					width:$(document).width() / 2 - 50,
-					style:{'background-color':'#fafafa'},
-					url:"../stock/check!manager.action",
-					saveUrl: '../stock/check!add2.action',
-					updateUrl: '../stock/check!edit2.action',
-					destroyUrl: '../stock/check!delete2.action',
-					queryParams:{'input.shopid':$('#shop').combobox('getValue'),'input.pid':$('#content').data('stock-check-row').id,'input.stocktype':2},
+			onAfterEdit:function(){$(this).edatagrid('reload');},
+			onDestroy:function(){$(this).edatagrid('reload');},
+			
+			onLoadSuccess : function() {
+				var param = {
+					'input.shopid' : ctrl.CheckDiv.Shop.combobox('getValue'),
+					'input.pid' :content.data('stock-check-row').id
+				}
 				
-					onAfterEdit:function(){$(this).edatagrid('reload');},
-					onDestroy:function(){$(this).edatagrid('reload');}
-				});
-				$('#content').data('stock-check-datagrid2',true);
-			} else {
-				$('#checkTable2').edatagrid('load',{'input.shopid':$('#shop').combobox('getValue'),'input.pid':$('#content').data('stock-check-row').id,'input.stocktype':2});
+				$.post('../stock/check!stockCheckSum.action',param,function(data){
+					var td = ctrl.CountTable;
+					for(var key in td) {
+						td[key].text((data[key]) ? data[key] : 0);
+					}
+				},'json');
 			}
-		}
-		setTimeout('SF.loadStockCheckGrid2()',500);
-				
+		});
 		
+		ctrl.CheckDiv.Reload.click(function() {ctrl.CheckDiv.ListTable.edatagrid('reload')});
 		ctrl.CheckDiv.Add.click(function() {
 			ctrl.CheckDiv.ListTable.edatagrid('addRow',{
 				'shopid':ctrl.CheckDiv.Shop.combobox('getValue'),
-				'pid':content.data('stock-check-row').id,
-				'stocktype':1
+				'pid':content.data('stock-check-row').id
 			});
 		});
 		ctrl.CheckDiv.Del.click(function() {
@@ -94,35 +85,17 @@ function loadScript(content,param) {
 		ctrl.CheckDiv.Undo.click(function() {
 			ctrl.CheckDiv.ListTable.edatagrid('cancelRow');
 		});
-		
-		ctrl.CheckDiv.Add2.click(function() {
-			ctrl.CheckDiv.ListTable2.edatagrid('addRow',{
-				'shopid':ctrl.CheckDiv.Shop.combobox('getValue'),
-				'pid':content.data('stock-check-row').id,
-				'stocktype':2
-			});
-		});
-		ctrl.CheckDiv.Del2.click(function() {
-			ctrl.CheckDiv.ListTable2.edatagrid('destroyRow');
-		});
-		ctrl.CheckDiv.Save2.click(function() {
-			ctrl.CheckDiv.ListTable2.edatagrid('saveRow');
-		});
-		ctrl.CheckDiv.Undo2.click(function() {
-			ctrl.CheckDiv.ListTable2.edatagrid('cancelRow');
-		});
 	}
 		
 	// 核定数据
 	function stockCheck(row) {
 		content.data('stock-check-row',row);
-		var flag = content.data('stock-check-datagrid');
+		var flag = ctrl.CheckDiv.ListTable.data('stock-check-datagrid');
 		if(!flag) {
 			createCheckTable(row.id);
-			content.data('stock-check-datagrid',true);
+			ctrl.CheckDiv.ListTable.data('stock-check-datagrid',true);
 		} else {
-			ctrl.CheckDiv.ListTable.edatagrid('load',{'input.shopid':ctrl.CheckDiv.Shop.combobox('getValue'),'input.pid':row.id,'input.stocktype':1});
-			setTimeout('SF.loadStockCheckGrid2()',500);
+			ctrl.CheckDiv.ListTable.edatagrid('load',{'input.shopid':ctrl.CheckDiv.Shop.combobox('getValue'),'input.pid':row.id});
 		}
 		ctrl.CheckDiv.Dialog.dialog('open');
 	}
@@ -159,9 +132,7 @@ function loadScript(content,param) {
 
 		// 数据表
 		var listTableConfig = {
-			//url:"../stock/check!productList.action",
 			url : '../info/info-product!manager2.action',
-			//height:content.height()-110,
 			columns:[[
 					{field:'type',title:'类别',width:120,
 				        formatter:function(value,rec) {
@@ -221,8 +192,7 @@ function loadScript(content,param) {
 		ctrl.CheckDiv.Shop.combobox({
 			url:'../info/info-shop!shopCombo.action',
 			onSelect : function(record) {
-				ctrl.CheckDiv.ListTable.edatagrid('load',{'input.shopid':record.value,'input.pid':content.data('stock-check-row').id,'input.stocktype':1});
-				setTimeout('SF.loadStockCheckGrid2()',500);
+				ctrl.CheckDiv.ListTable.edatagrid('load',{'input.shopid':record.value,'input.pid':content.data('stock-check-row').id});
 			}
 		});
 		// 扩展easyui-datagrid
@@ -237,6 +207,13 @@ function loadScript(content,param) {
 		        },
 		        setValue: function(target, value){
 		        	var datagrid = $('#' + target.attr('datagrid'));
+		        	// 编辑行模式
+		        	if(datagrid.data('edatagrid-editmode') == 'edit') {
+		        		datagrid.data('minweight',value);
+		        		$(target).val(value);
+		        		return;
+		        	}
+		        	
 			        if(!value) {
 			        	var rows = datagrid.edatagrid('getRows');
 	

@@ -3,11 +3,10 @@ package com.sol.kx.web.action.info;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sol.kx.web.action.BaseAction;
-import com.sol.kx.web.dao.pojo.InfoProductDetail;
 import com.sol.kx.web.service.BaseService;
 import com.sol.kx.web.service.InfoProductService;
 
-public class InfoProductDetailAction extends BaseAction<InfoProductDetail>{
+public class InfoProductDetailAction extends BaseAction{
 
 	private static final long serialVersionUID = 1L;
 

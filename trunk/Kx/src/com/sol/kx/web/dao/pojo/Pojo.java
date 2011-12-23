@@ -1,34 +1,33 @@
 package com.sol.kx.web.dao.pojo;
 
-import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Pojo implements Serializable{
+public class Pojo {
 
 	private static final long serialVersionUID = 1L;
 
 	protected String prefix = "";
 	
 	
-	public Map<String,Object> getJson() {
-		Map<String,Object> map = new HashMap<String, Object>();
-		
-		try {
-			setField(map, this, null);
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		
-		return map;
-	}
+//	public Map<String,Object> getJson() {
+//		Map<String,Object> map = new HashMap<String, Object>();
+//		
+//		try {
+//			setField(map, this, null);
+//		} catch (IllegalArgumentException e) {
+//			e.printStackTrace();
+//		} catch (IllegalAccessException e) {
+//			e.printStackTrace();
+//		} catch (InvocationTargetException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return map;
+//	}
 	
 	protected void setField(Map<String,Object> map,Object obj,String name) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 
@@ -67,5 +66,30 @@ public class Pojo implements Serializable{
 
 	public void setPrefix(String prefix) {
 		this.prefix = prefix;
+	}
+	
+	@Override
+	public String toString() {
+		Field[] fields = this.getClass().getDeclaredFields();
+		StringBuilder sb = new StringBuilder();
+		sb.append('[');
+		for(Field f : fields) {
+			if(Modifier.isStatic(f.getModifiers()) || Modifier.isFinal(f.getModifiers()))
+				continue;
+			Object value = null;
+			try {
+				f.setAccessible(true);
+				value = f.get(this);
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+			if(value != null)
+				sb.append(f.getName()).append('=').append(value).append(',');
+		}
+		sb.append(']');
+		
+		return sb.toString();
 	}
 }
