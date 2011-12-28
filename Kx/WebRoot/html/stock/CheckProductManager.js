@@ -1,40 +1,42 @@
-function loadScript(content,param) {
+(function($) {
+	$.fn.stock_CheckProductManager = function() {
 	var ctrl = {
+		content : $(this),
 		QueryPanel : {
-			Panel : $('#queryPanel'),
-			Type1 : $('#type1'),
-			Type2 : $('#type2'),
-			Type3 : $('#type3'),
-			Btn : $('#btn_product')
+			Panel : $(this).find('#queryPanel'),
+			Type1 : $(this).find('#type1'),
+			Type2 : $(this).find('#type2'),
+			Type3 : $(this).find('#type3'),
+			Btn : $(this).find('#btn_product')
 		},
-		ListTable : $('#listTable'),
+		ListTable : $(this).find('#listTable'),
 		Toolbar : {
-			Stock : $('#btn_stock')
+			Stock : $(this).find('#btn_stock')
 		},
 		ImgDiv : {
-			Dialog : $('#imgDiv'),
-			Img : $('#largeImg')
+			Dialog : $(this).find('#imgDiv'),
+			Img : $(this).find('#largeImg')
 		},
 		CheckDiv : {
-			Dialog : $('#checkDiv'),
-			CheckTableDiv1 : $('#checkTableDiv1'),
-			Shop : $('#shop'),
-			ListTable : $('#checkTable'),
-			Reload : $('#reloadListTable'),
-			Add : $('#check_btn_add'),
-			Del : $('#check_btn_del'),
-			Save : $('#check_btn_save'),
-			Undo : $('#check_btn_undo')
+			Dialog : $(this).find('#checkDiv'),
+			CheckTableDiv1 : $(this).find('#checkTableDiv1'),
+			Shop : $(this).find('#shop'),
+			ListTable : $(this).find('#checkTable'),
+			Reload : $(this).find('#reloadListTable'),
+			Add : $(this).find('#check_btn_add'),
+			Del : $(this).find('#check_btn_del'),
+			Save : $(this).find('#check_btn_save'),
+			Undo : $(this).find('#check_btn_undo')
 		},
 		CountTable : {
-			shop_stocktype1 : $('#shop_stocktype1'),
-			shop_stocktype2 : $('#shop_stocktype2'),
-			shop_product_stocktype1 : $('#shop_product_stocktype1'),
-			shop_product_stocktype2 : $('#shop_product_stocktype2'),
-			sum_type1_stocktype1 : $('#sum_type1_stocktype1'),
-			sum_type1_stocktype2 : $('#sum_type1_stocktype2'),
-			sum_type2_stocktype1 : $('#sum_type2_stocktype1'),
-			sum_type2_stocktype2 : $('#sum_type2_stocktype2')
+			shop_stocktype1 : $(this).find('#shop_stocktype1'),
+			shop_stocktype2 : $(this).find('#shop_stocktype2'),
+			shop_product_stocktype1 : $(this).find('#shop_product_stocktype1'),
+			shop_product_stocktype2 : $(this).find('#shop_product_stocktype2'),
+			sum_type1_stocktype1 : $(this).find('#sum_type1_stocktype1'),
+			sum_type1_stocktype2 : $(this).find('#sum_type1_stocktype2'),
+			sum_type2_stocktype1 : $(this).find('#sum_type2_stocktype1'),
+			sum_type2_stocktype2 : $(this).find('#sum_type2_stocktype2')
 		}
 	}
 	
@@ -44,7 +46,7 @@ function loadScript(content,param) {
 		ctrl.CheckDiv.ListTable.edatagrid({
 			pagination:false,
 			width:400,
-			height:content.height()-100,
+			height:ctrl.content.height()-100,
 			url:"../stock/check!manager.action",
 			saveUrl: '../stock/check!add2.action',
 			updateUrl: '../stock/check!edit2.action',
@@ -54,10 +56,14 @@ function loadScript(content,param) {
 			onAfterEdit:function(){$(this).edatagrid('reload');},
 			onDestroy:function(){$(this).edatagrid('reload');},
 			
+			onSave : function(index,row,data) {
+				if(!data.success)
+					SOL.showError('服务器产生了一个错误 : ' + data.msg + ' , 请尝试刷新页面并重新提交数据');
+			},
 			onLoadSuccess : function() {
 				var param = {
 					'input.shopid' : ctrl.CheckDiv.Shop.combobox('getValue'),
-					'input.pid' :content.data('stock-check-row').id
+					'input.pid' :ctrl.content.data('stock-check-row').id
 				}
 				
 				$.post('../stock/check!stockCheckSum.action',param,function(data){
@@ -65,6 +71,7 @@ function loadScript(content,param) {
 					for(var key in td) {
 						td[key].text((data[key]) ? data[key] : 0);
 					}
+					
 				},'json');
 			}
 		});
@@ -73,7 +80,7 @@ function loadScript(content,param) {
 		ctrl.CheckDiv.Add.click(function() {
 			ctrl.CheckDiv.ListTable.edatagrid('addRow',{
 				'shopid':ctrl.CheckDiv.Shop.combobox('getValue'),
-				'pid':content.data('stock-check-row').id
+				'pid':ctrl.content.data('stock-check-row').id
 			});
 		});
 		ctrl.CheckDiv.Del.click(function() {
@@ -89,7 +96,7 @@ function loadScript(content,param) {
 		
 	// 核定数据
 	function stockCheck(row) {
-		content.data('stock-check-row',row);
+		ctrl.content.data('stock-check-row',row);
 		var flag = ctrl.CheckDiv.ListTable.data('stock-check-datagrid');
 		if(!flag) {
 			createCheckTable(row.id);
@@ -101,6 +108,8 @@ function loadScript(content,param) {
 	}
 		
 	function init() {
+		ctrl.ImgDiv.Dialog.dialog();
+		
 		// 初始化查询框体
 		var queryPanelConfig = {};
 		$.extend(queryPanelConfig,SOL.defaultConfig.queryPanel.panel,{height:100});
@@ -133,6 +142,7 @@ function loadScript(content,param) {
 		// 数据表
 		var listTableConfig = {
 			url : '../info/info-product!manager2.action',
+			height : ctrl.content.height() - 110,
 			columns:[[
 					{field:'type',title:'类别',width:120,
 				        formatter:function(value,rec) {
@@ -150,8 +160,8 @@ function loadScript(content,param) {
 				if(field == "image") {
 					ctrl.ImgDiv.Img.attr("src","../pic.action?img=" + value);
 					ctrl.ImgDiv.Img.load(function(){
-						var height = $(this).height() > (content.height() -100) ? content.height() -100 : $(this).height();
-						var width = $(this).width() > (content.width() -100) ? content.width() -100 : $(this).width();
+						var height = $(this).height() > (ctrl.content.height() -100) ? ctrl.content.height() -100 : $(this).height();
+						var width = $(this).width() > (ctrl.content.width() -100) ? ctrl.content.width() -100 : $(this).width();
 						height = height < 300 ? 300 : height;
 						width = width < 300 ? 300 : width;
 						ctrl.ImgDiv.Dialog.dialog('resize',{height:height,width:width,left:150,top:50});
@@ -192,7 +202,7 @@ function loadScript(content,param) {
 		ctrl.CheckDiv.Shop.combobox({
 			url:'../info/info-shop!shopCombo.action',
 			onSelect : function(record) {
-				ctrl.CheckDiv.ListTable.edatagrid('load',{'input.shopid':record.value,'input.pid':content.data('stock-check-row').id});
+				ctrl.CheckDiv.ListTable.edatagrid('load',{'input.shopid':record.value,'input.pid':ctrl.content.data('stock-check-row').id});
 			}
 		});
 		// 扩展easyui-datagrid
@@ -253,4 +263,5 @@ function loadScript(content,param) {
 	}
 	
 	init();
-}
+	}
+})(jQuery);

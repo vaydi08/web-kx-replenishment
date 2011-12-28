@@ -74,7 +74,7 @@ public class InfoProductAction extends BaseAction<InfoProduct>{
 			return null;
 		
 		pagerBean = infoProductService.findFuzzy(pagerBean, queryValue);
-		return DATA;
+		return JSONDATA;
 	}
 	
 	public String quickLocatorStock() {
@@ -100,7 +100,7 @@ public class InfoProductAction extends BaseAction<InfoProduct>{
 	// 快速定位 type4列表
 	public String findType4Select() {
 		pagerBean = infoProductService.find2(input);
-		return "panelSelect";
+		return JSONDATA;
 	}
 	
 	/**

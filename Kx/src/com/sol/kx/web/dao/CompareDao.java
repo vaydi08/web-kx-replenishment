@@ -32,7 +32,7 @@ public interface CompareDao {
 	
 	public void cargoSaleCreateTempTable() throws SQLException;
 	public void cargoSaleRemoveTempTable() throws SQLException;
-	public void cargoSaleDataUpdate(String serial,Integer sale,long saletime,String shopname,String pcode,Double weight,Integer stocktype) throws SQLException;
+	public void cargoSaleDataUpdate(String serial,Integer sale,long saletime,String shopname,String pcode,Double weight) throws SQLException;
 	public void cargoSaleDateDelete(String serial) throws SQLException;
 	
 	public void cargoStockCreateTempTable() throws SQLException;

@@ -28,30 +28,6 @@ public class DatabaseTest {
 	
 	@Test
 	public void test() throws ParseException {
-		try {
-//			File file = new File("f:/cargo_sale.XLS");
-//			FileInputStream is = new FileInputStream(file);
-//			
-//			//HSSFWorkbook wb = new HSSFWorkbook(is);
-//
-//			PoiUtil poi = new PoiUtil(file);
-//			poi.hasRow();
-//			poi.hasRow();
-//			
-//			DateFormat df = new SimpleDateFormat("dd-MMM-yy HH:mm:ss",Locale.ENGLISH);
-//			
-//			System.out.println(poi.getValue(0, ""));
-//			System.out.println(poi.getValue(1, ""));
-//			System.out.println(df.parse((String) poi.getValue(5, "")));
-//			System.out.println(poi.getValue(58, ""));
-//			poi.close();
-			
-			compareDao.cargoSaleCreateTempTable();
-			compareDao.cargoSaleDataUpdate("0001286738", 1, 1305610058000l, "金桥国际", "26ty01", 6.45, 1);
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 }

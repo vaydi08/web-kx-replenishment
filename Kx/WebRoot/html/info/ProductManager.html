@@ -1,4 +1,3 @@
-
 <div id="queryPanel">
 	<table cellpadding="0" cellspacing="0" border="0">
 		<tr>
@@ -18,10 +17,9 @@
 			</td>
 
 			<td>
-				<input type="hidden" id="queryType" />
-				<input id="EU_queryType" menu="#EU_queryValue" />
+				<input id="INFO_P_queryType" menu="#INFO_P_queryValue" />
 
-				<div id="EU_queryValue" style="width: 100px">
+				<div id="INFO_P_queryValue" style="width: 100px">
 					<div name="pname">品 名</div>
 					<div name="pcode">代 码</div>
 					<div name="unit">单 位</div>
@@ -33,17 +31,7 @@
 
 </div>
 
-<div class="list">
-	<table id="listTable" toolbar="#toolbar"></table>
-	
-	<div id="toolbar">
-		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" id="btn_add">添加产品</a>
-		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" id="btn_edit">修改产品</a>
-		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" id="btn_del">删除产品</a>
-	</div>
-</div>
-
-<div id="dlg" buttons="#dlg-buttons" title="类别" style="padding:10px 20px" closed="true">
+<div id="dlg" buttons="#INFO_P_dlg-buttons" title="类别" style="padding:10px 20px" closed="false">
 	<form id="form" method="post" enctype="multipart/form-data">
 	
 		<input type="hidden" name="input.id" id="id" />
@@ -69,17 +57,17 @@
 		<table border="0" cellpadding="0" cellspacing="0" id="capTable">
 		<tr>
 		<td>
-		<input type="radio" name="picType" value="webcap" onclick="$('#capTr').show();$('#fileTr').hide()"/>摄像头照片采集&nbsp;
-		<input type="radio" name="picType" value="file" onclick="$('#capTr').hide();$('#fileTr').show()"/>图片文件上传
+		<input type="radio" name="picType" class="picType" value="webcap" onclick="$('#INFO_P_capTr').show();$('#INFO_P_fileTr').hide()"/>摄像头照片采集&nbsp;
+		<input type="radio" name="picType" class="picType" value="file" onclick="$('#INFO_P_capTr').hide();$('#INFO_P_fileTr').show()"/>图片文件上传
 		</td>
 		</tr>
-		<tr id="capTr">
+		<tr id="INFO_P_capTr">
 		<td>
 		<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" id="startcam">启动摄像头</a>
 		<input type="hidden" id="picData" name="picData">
 		</td>
 		</tr>
-		<tr id="fileTr">
+		<tr id="INFO_P_fileTr">
 		<td>
 		<input type="file" name="picFile" id="picFile"/>
 		</td>
@@ -88,9 +76,20 @@
 		
 	</form>
 	
-	<div id="dlg-buttons">
+	<div id="INFO_P_dlg-buttons">
 		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" id="dlg-save">保存</a>
 		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" id="dlg-cancel">取消</a>
 	</div>
 </div>
 
+
+
+<div class="list">
+	<table id="listTable" toolbar="#INFO_P_toolbar"></table>
+	
+	<div id="INFO_P_toolbar">
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" id="btn_add">添加产品</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" id="btn_edit">修改产品</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" id="btn_del">删除产品</a>
+	</div>
+</div>

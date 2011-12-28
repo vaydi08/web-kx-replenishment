@@ -7,8 +7,8 @@
 "shopname":"<s:property value="key" escape="false"/>",
 "minweight":"",
 "maxweight":"",
-"stock":"",
-"stocktype":"",
+"stock_type1":"",
+"stock_type2":"",
 "children":[
 	<s:iterator value="value" status="typeSt">
 	{

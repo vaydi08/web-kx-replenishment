@@ -1,29 +1,32 @@
-function loadScript(content,param) {
+(function($) {
+	$.fn.compare_Cargo = function() {
 	var ctrl = {
+		content : $(this),
 		QueryPanel : {
-			Panel : $('#queryPanel'),
-			Form : $('#form'),
-			Minallot : $('#minallot'),
+			Panel : $(this).find('#queryPanel'),
+			Form : $(this).find('#form'),
+			Minallot : $(this).find('#minallot'),
 			File : {
-				Supply : $('#supplyFile'),
-				Sale : $('#saleFile'),
-				Stock : $('#stockFile')
+				Supply : $(this).find('#supplyFile'),
+				Sale : $(this).find('#saleFile'),
+				Stock : $(this).find('#stockFile')
 			},
-			Btn : $('#btn_add'),
-			LoadMsg : $('#loadMsg')
+			Btn : $(this).find('#btn_add'),
+			LoadMsg : $(this).find('#loadMsg')
 		},
 		ListTable : {
-			Tabs : $('#tabs'),
-			T1_Result : $('#stocktype1_result'),
-			T1_Stock : $('#stocktype1_stock'),
-			T2_Result : $('#stocktype2_result'),
-			T2_Stock : $('#stocktype2_stock')
+			Tabs : $(this).find('#tabs'),
+			T1_Result : $(this).find('#stocktype1_result'),
+			T1_Stock : $(this).find('#stocktype1_stock'),
+			T2_Result : $(this).find('#stocktype2_result'),
+			T2_Stock : $(this).find('#stocktype2_stock')
 		}
 	}
 	
 	function init() {
+		
 		// 查询面板
-		ctrl.QueryPanel.Panel.panel({height:60});
+		ctrl.QueryPanel.Panel.panel({height:70,style:{'padding':'10px'}});
 		// form
 		ctrl.QueryPanel.Form.form({
 			url : '../compare/cargo!uploadCargo.action',
@@ -56,11 +59,18 @@ function loadScript(content,param) {
 		});
 		
 		//tabs
-		ctrl.ListTable.Tabs.tabs({height : content.height() - 70});
+		ctrl.ListTable.Tabs.tabs({height : ctrl.content.height() - 80});
 		// 数据表
 		function loadDatagrid(dg,data) {
 			dg.datagrid('loadData',data);
 		}
+		
+		// datagrid
+		ctrl.ListTable.T1_Result.datagrid({height:ctrl.ListTable.Tabs.height() - 55});
+		ctrl.ListTable.T1_Stock.datagrid({height:ctrl.ListTable.Tabs.height() - 55});
+		ctrl.ListTable.T2_Result.datagrid({height:ctrl.ListTable.Tabs.height() - 55});
+		ctrl.ListTable.T2_Stock.datagrid({height:ctrl.ListTable.Tabs.height() - 55});
 	}
 	init();
-}
+	}
+})(jQuery);

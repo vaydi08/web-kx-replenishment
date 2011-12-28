@@ -53,10 +53,10 @@ public class InfoProductServiceImpl extends BaseServiceImpl<InfoProduct> impleme
 	public ResultBean checkExists(String pcode) {
 		try {
 			return (infoProductDao.checkExists(pcode)) ? 
-					ResultBean.RESULT_ERR("已存在的商品代码,请重新选择") : ResultBean.RESULT_SUCCESS();
+					ResultBean.RESULT_ERR("已存在的商品代码,请重新选择",pcode) : ResultBean.RESULT_SUCCESS(pcode);
 		} catch (SQLException e) {
 			exceptionHandler.onDatabaseException("查询[info_product]重复记录时的错误", e);
-			return ResultBean.RESULT_ERR("数据库错误");
+			return ResultBean.RESULT_ERR("数据库错误",pcode);
 		}
 	}
 	

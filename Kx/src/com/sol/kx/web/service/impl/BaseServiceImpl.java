@@ -64,10 +64,10 @@ public abstract class BaseServiceImpl<T extends Pojo> implements BaseService<T>{
 		Logger.SERVICE.ldebug("插入[" + po.getClass().getAnnotation(Table.class).name() + "]数据", po.toString());
 		try {
 			getDao().add(po);
-			return ResultBean.RESULT_SUCCESS();
+			return ResultBean.RESULT_SUCCESS(po);
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("插入记录错误", e);
-			return ResultBean.RESULT_ERR(e.getMessage());
+			return ResultBean.RESULT_ERR(e.getMessage(),po);
 		}
 	}
 	
@@ -85,10 +85,10 @@ public abstract class BaseServiceImpl<T extends Pojo> implements BaseService<T>{
 		Logger.SERVICE.ldebug("删除[" + po.getClass().getAnnotation(Table.class).name() + "]数据", po.toString());
 		try {
 			getDao().delete(po);
-			return ResultBean.RESULT_SUCCESS();
+			return ResultBean.RESULT_SUCCESS(po);
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("删除记录错误", e);
-			return ResultBean.RESULT_ERR(e.getMessage());
+			return ResultBean.RESULT_ERR(e.getMessage(),po);
 		}
 	}
 
@@ -96,10 +96,10 @@ public abstract class BaseServiceImpl<T extends Pojo> implements BaseService<T>{
 		Logger.SERVICE.ldebug("更新[" + po.getClass().getAnnotation(Table.class).name() + "]数据", po.toString());
 		try {
 			getDao().update(po);
-			return ResultBean.RESULT_SUCCESS();
+			return ResultBean.RESULT_SUCCESS(po);
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("更新记录错误", e);
-			return ResultBean.RESULT_ERR(e.getMessage());
+			return ResultBean.RESULT_ERR(e.getMessage(),po);
 		}
 	}
 	
@@ -145,10 +145,10 @@ public abstract class BaseServiceImpl<T extends Pojo> implements BaseService<T>{
 			InsertEntity entity = new InsertEntity();
 			entity.init(obj,false);
 			getDao().add2(entity);
-			return ResultBean.RESULT_SUCCESS();
+			return ResultBean.RESULT_SUCCESS(obj);
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("插入记录错误", e);
-			return ResultBean.RESULT_ERR(e.getMessage());
+			return ResultBean.RESULT_ERR(e.getMessage(),obj);
 		}
 	}
 	
@@ -158,10 +158,10 @@ public abstract class BaseServiceImpl<T extends Pojo> implements BaseService<T>{
 			DeleteEntity entity = new DeleteEntity();
 			entity.init(obj);
 			getDao().delete2(entity);
-			return ResultBean.RESULT_SUCCESS();
+			return ResultBean.RESULT_SUCCESS(obj);
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("删除记录错误", e);
-			return ResultBean.RESULT_ERR(e.getMessage());
+			return ResultBean.RESULT_ERR(e.getMessage(),obj);
 		}
 	}
 
@@ -171,10 +171,10 @@ public abstract class BaseServiceImpl<T extends Pojo> implements BaseService<T>{
 			UpdateEntity entity = new UpdateEntity();
 			entity.init(obj,false);
 			getDao().update2(entity);
-			return ResultBean.RESULT_SUCCESS();
+			return ResultBean.RESULT_SUCCESS(obj);
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("更新记录错误", e);
-			return ResultBean.RESULT_ERR(e.getMessage());
+			return ResultBean.RESULT_ERR(e.getMessage(),obj);
 		}
 	}
 }

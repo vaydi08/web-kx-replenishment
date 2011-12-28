@@ -1,21 +1,24 @@
-function loadScript(content,param) {
+(function($) {
+	$.fn.compare_Supply = function() {
 	var ctrl = {
 		QueryPanel : {
-			Panel : $('#queryPanel'),
-			Form : $('#form'),
-			Shop : $('#shop'),
-			Shopid : $('#shopid'),
-			File : $('#uploadStockFile'),
-			Btn : $('#btn_add'),
-			LoadMsg : $('#loadMsg')
+			Panel : $(this).find('#queryPanel'),
+			Form : $(this).find('#form'),
+			Shop : $(this).find('#shop'),
+			Shopid : $(this).find('#shopid'),
+			File : $(this).find('#uploadStockFile'),
+			Btn : $(this).find('#btn_add'),
+			LoadMsg : $(this).find('#loadMsg')
 		},
-		ListTable : $('#listTable'),
-		Btn_Download : $('#btn_download')
+		ListTable : $(this).find('#listTable'),
+		Btn_Download : $(this).find('#btn_download')
 	}
 	
 	function init() {
+		SF.grid(ctrl.ListTable,{});
+		
 		// 查询面板
-		ctrl.QueryPanel.Panel.panel({height:60});
+		ctrl.QueryPanel.Panel.panel({height:70,style:{'padding':'10px'}});
 		// form
 		ctrl.QueryPanel.Form.form({
 			url : '../compare/supply!uploadSupply.action',
@@ -52,4 +55,5 @@ function loadScript(content,param) {
 		});
 	}
 	init();
-}
+	}
+})(jQuery);
