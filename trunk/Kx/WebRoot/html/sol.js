@@ -35,16 +35,7 @@ function SolConfig() {
 				height:90
 			}
 		},
-		// 数据表参数
-		listTable : {
-			style:{'padding':'10px','background-color':'#fafafa'},
-			nowrap:true,
-			singleSelect:true,
-			striped:true,
-			pagination:true,
-			rownumbers:true,
-			fitColumns:true
-		},
+
 		// 对话框
 		dialog : {}
 	}
@@ -52,7 +43,6 @@ function SolConfig() {
 	// 修改easyui默认值
 	$.extend($.fn.datagrid.defaults, {
 		style:{'padding':'10px','background-color':'#fafafa'},
-		//width:$(SOL.content).width() - 30,
 		nowrap:true,
 		singleSelect:true,
 		striped:true,
@@ -169,6 +159,7 @@ function SolConfig() {
 	  
 	  return myNewObj;
 	}
+
 }
 var SOL = new SolConfig();
 
@@ -184,14 +175,14 @@ function SoLFunction() {
 	
 	// 查询面板
 	SoLFunction.prototype.queryPanel = function(panel,pconfig,search,sconfig,datagrid) {
-		var p = SOL.clone(SOL.defaultConfig.queryPanel.panel);
+		var p = $.extend({},SOL.defaultConfig.queryPanel.panel);
 		$.extend(p,pconfig);
 		panel.panel(p);
 		
 		var s = {};
 		$.extend(s,{
 			searcher : function(value,name) {
-				datagrid.datagrid('load',sconfig.getparam(value));
+				datagrid.datagrid('load',sconfig.getparam(value,name));
 			}
 		},sconfig);
 		search.searchbox(s);
@@ -200,7 +191,7 @@ function SoLFunction() {
 	SoLFunction.prototype.grid = function(ctrl,config) {
 		// 用来设定控件高度
 		if(!config.height)
-			$.extend(config,{height:$(SOL.content).height()-100});
+			$.extend(config,{height:$(SOL.content).height()-130});
 		ctrl.datagrid(config);
 	}
 	// 对话框
@@ -230,32 +221,45 @@ function SoLFunction() {
 	}
 	// 删除确认
 	SoLFunction.prototype.confirm = function(datagrid,url) {
-	var row = datagrid.datagrid('getSelected');
-	if(row) {
-		$.messager.confirm('确认删除','将要删除此记录,删除操作不可恢复,请确认?',function(b){
-			if(b) {
-				$.post(url,{"input.id":row.id},function(data){
-					var result = eval('(' + data + ')');
-					if(result.success)
-						datagrid.datagrid('reload');
-					else
-						SOL.showError(result.msg);
-				});
-			}
-		})
+		var row = datagrid.datagrid('getSelected');
+		if(row) {
+			$.messager.confirm('确认删除','将要删除此记录,删除操作不可恢复,请确认?',function(b){
+				if(b) {
+					$.post(url,{"input.id":row.id},function(data){
+						var result = eval('(' + data + ')');
+						if(result.success)
+							datagrid.datagrid('reload');
+						else
+							SOL.showError(result.msg);
+					});
+				}
+			})
+		}
 	}
-}
+
+	
+	// 用于载入js
+	SoLFunction.prototype.loadjs = function() {
+		var panel = $(SOL.content).data('sol-tabs-panel');
+		var script = $(SOL.content).data('sol-tabs-script');
+		
+		panel.jsLoader(script);
+	}
 }
 
 var SF = new SoLFunction();
 
 	
 $(document).ready(function(){
+	var loadScript = function(url) {
+		var jsUrl = SOL.urlactionPath + 'url.action?ext=js&url=' + url;
+		$.getScript(jsUrl);
+	}
 	// 初始化主框架Panel
 	var openTab = function(title,param) {
-		param.defaultConfig = SOL.clone(SOL.defaultConfig);
-		$(SOL.content).panel('options').param = param;
-
+		if(!param)
+			return;
+		
 		var url;
 		if(param.type) {
 			if(param.type == "redirect")
@@ -265,8 +269,12 @@ $(document).ready(function(){
 			if(param.ext)
 				url += '&ext=' + param.ext;
 		}
-		// 生成panel
-		$(SOL.content).panel('refresh',url);
+		// 生成tabs
+		if($(SOL.content).tabs('exists',title))
+			$(SOL.content).tabs('select',title);
+		else {
+			$(SOL.content).tabs('add',{title:title,href:url,solparam:param});
+		}
 	}
 	
 	// 初始化控件
@@ -279,32 +287,29 @@ $(document).ready(function(){
 			}
 		});
 		
-		// 主面板
-		$(SOL.content).panel({
+		// TABS
+		$(SOL.content).tabs({
+			border:false,
 			fit:true,
-			closable:true,
-			onLoad:function() {
-				// 相关参数
-				var param = $(this).panel('options').param;
-				if(!(param.js))
-					return;
-					
-				var jsUrl = SOL.urlactionPath + 'url.action?ext=js&url=' + param.js;
+//			onAdd:function(title) {
+//				//alert($(this).find('#info_productManager').html());
+//			},
+			onLoad:function(panel) {
+				// 读取DOM完成后,执行对应的js函数
+				var param = panel.panel('options').solparam;
+				var script = param.url.substring(6).replace('/',"_");
 
-				// 载入JS
-				var config = SOL.clone(SOL.defaultConfig.ajaxLoad);
-				$.extend(config,
-					{url:jsUrl,
-					success:function(){
-						//alert(param.script);
-						var sp = eval(param.script ? param.script : SOL.dynamicScript);
-						sp.call(sp,$(SOL.content),param);
-					}
-				});
-				$.ajax(config);
+				if(!$(SOL.content).data('sol-tabsload-' + script)) {
+					$(SOL.content).data('sol-tabsload-' + script,true);
+
+					// 延迟加载js 防止DOM读取不完整
+					$(SOL.content).data('sol-tabs-panel',panel);
+					$(SOL.content).data('sol-tabs-script',script);
+					setTimeout('SF.loadjs()',100);
+				}
 			}
 		});
-	
+
 		// 右侧视图
 		$(SOL.view).panel({
 			noheader : true,
@@ -332,5 +337,6 @@ $(document).ready(function(){
 	}
 	
 	init();
+
 });
 

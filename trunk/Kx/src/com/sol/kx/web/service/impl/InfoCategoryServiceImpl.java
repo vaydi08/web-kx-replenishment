@@ -36,16 +36,16 @@ public class InfoCategoryServiceImpl extends BaseServiceImpl<InfoCategory> imple
 	public ResultBean delete2(InfoCategory obj) {
 		try {
 			if(infoCategoryDao.checkDeleteExists(obj.getId()))
-				return ResultBean.RESULT_ERR("存在下级类别,不能直接进行删除");
+				return ResultBean.RESULT_ERR("存在下级类别,不能直接进行删除",obj);
 			else {
 				DeleteEntity entity = new DeleteEntity();
 				entity.init(obj);
 				infoCategoryDao.delete2(entity);
-				return ResultBean.RESULT_SUCCESS();
+				return ResultBean.RESULT_SUCCESS(obj);
 			}
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("删除[info_category]记录时的错误", e);
-			return ResultBean.RESULT_ERR("数据库错误 " + e.getMessage());
+			return ResultBean.RESULT_ERR("数据库错误 " + e.getMessage(),obj);
 		}
 	}
 	
@@ -141,10 +141,10 @@ public class InfoCategoryServiceImpl extends BaseServiceImpl<InfoCategory> imple
 	public ResultBean checkExists(String pcode,Integer level,Integer parent) {
 		try {
 			return (infoCategoryDao.checkExists(pcode,level,parent)) ? 
-					ResultBean.RESULT_ERR("已存在的商品代码,请重新输入") : ResultBean.RESULT_SUCCESS();
+					ResultBean.RESULT_ERR("已存在的商品代码,请重新输入",pcode) : ResultBean.RESULT_SUCCESS(pcode);
 		} catch (SQLException e) {
 			exceptionHandler.onDatabaseException("查询[info_category]重复记录时的错误", e);
-			return ResultBean.RESULT_ERR("数据库错误");
+			return ResultBean.RESULT_ERR("数据库错误",pcode);
 		}
 	}
 	

@@ -5,19 +5,19 @@
 "children":[{
 	"text":"产品数据",
 	"iconCls":"icon-gears",
-	"attributes":{"url":"/html/info/ProductManager","ext":"html","js":"/html/info/ProductManager"}
+	"attributes":{"url":"/html/info/ProductManager","ext":"html"}
 	},{
 	"text":"门店数据",
 	"iconCls":"icon-gears",
-	"attributes":{"url":"/html/info/ShopManager","ext":"html","js":"/html/info/ShopManager"}
+	"attributes":{"url":"/html/info/ShopManager","ext":"html"}
 	},{
 	"text":"分类列表",
 	"iconCls":"icon-gears",
-	"attributes":{"url":"/html/info/CategoryManager","ext":"html","js":"/html/info/CategoryManager"}
+	"attributes":{"url":"/html/info/CategoryManager","ext":"html"}
 	},{
 	"text":"快速检索",
 	"iconCls":"icon-gears",
-	"attributes":{"url":"/html/info/QuickLocator","ext":"html","js":"/html/info/QuickLocator"}
+	"attributes":{"url":"/html/info/QuickLocator","ext":"html"}
 	}]
 },{
 "text":"核定数据",
@@ -25,21 +25,7 @@
 "children":[{
 	"text":"核定数据",
 	"iconCls":"icon-gears",
-	"attributes":{"url":"/html/stock/CheckProductManager","ext":"html","js":"/html/stock/CheckProductManager"}
-	}]
-},{
-"text":"系统管理",
-"iconCls":"icon-stock",
-"children":[{
-	"text":"用户管理",
-	"iconCls":"icon-gears",
-	"attributes":{"url":"/html/sys/UserManager","ext":"html","js":"/html/sys/UserManager"}
-	},{"text":"权限分配",
-	"iconCls":"icon-gears",
-	"attributes":{"url":"/html/sys/AuthManager","ext":"html","js":"/html/sys/AuthManager"}
-	},{"text":"重载配置",
-	"iconCls":"icon-gears",
-	"attributes":{"url":"/html/sys/ReloadConfig","ext":"html","js":"/html/sys/ReloadConfig"}
+	"attributes":{"url":"/html/stock/CheckProductManager","ext":"html"}
 	}]
 },{
 "text":"智能比对",
@@ -47,10 +33,44 @@
 "children":[{
 	"text":"比对数据",
 	"iconCls":"icon-gears",
-	"attributes":{"url":"/html/compare/Supply","ext":"html","js":"/html/compare/Supply"}
+	"attributes":{"url":"/html/compare/Supply","ext":"html"}
 	},{"text":"智能分货",
 	"iconCls":"icon-gears",
-	"attributes":{"url":"/html/compare/Cargo","ext":"html","js":"/html/compare/Cargo"}
+	"attributes":{"url":"/html/compare/Cargo","ext":"html"}
+	}]
+},{
+"text":"订购管理",
+"iconCls":"icon-stock",
+"children":[{
+	"text":"我的订单",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/order/my","ext":"html"}
+	},{"text":"全部订单",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/order/all","ext":"html"}
+	},{"text":"未处理订单",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/order/unprocess","ext":"html"}
+	},{"text":"订购货品",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/order/order","ext":"html"}
+	},{"text":"供应商列表",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/order/supplier","ext":"html"}
+	}]
+},{
+"text":"系统管理",
+"iconCls":"icon-stock",
+"children":[{
+	"text":"用户管理",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/sys/UserManager","ext":"html"}
+	},{"text":"权限分配",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/sys/AuthManager","ext":"html"}
+	},{"text":"重载配置",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/sys/ReloadConfig","ext":"html"}
 	}]
 }
 ]

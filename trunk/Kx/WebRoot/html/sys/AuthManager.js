@@ -1,19 +1,21 @@
-function loadScript(content, param) {
+(function($) {
+	$.fn.sys_AuthManager = function() {
 	var ctrl = {
+		content : $(this),
 		QueryPanel : {
-			Panel : $('#queryPanel'),
-			Group : $('#group')
+			Panel : $(this).find('#queryPanel'),
+			Group : $(this).find('#group')
 		},
-		ListTable : $('#listTable'),
+		ListTable : $(this).find('#listTable'),
 		Toolbar : {
-			Save : $('#btn_save'),
-			Undo : $('#btn_undo')
+			Save : $(this).find('#btn_save'),
+			Undo : $(this).find('#btn_undo')
 		}
 	}
 	
 	function init() {
 		// 查询框体
-		ctrl.QueryPanel.Panel.panel({height:40});
+		ctrl.QueryPanel.Panel.panel({height:70,style:{'padding':'10px'}});
 		// 群组选择框
 		ctrl.QueryPanel.Group.combobox({
 			onSelect:function(record) {
@@ -22,7 +24,8 @@ function loadScript(content, param) {
 		});
 		// 数据表
 		ctrl.ListTable.edatagrid({
-			height:content.height() - 50,
+			height:ctrl.content.height() - 80,
+			style:{'padding':'10px'},
 			url:'../sys/auth!manager2.action',
 			queryParams : {'input.groupid' : 2},
 			saveUrl: '',
@@ -42,7 +45,11 @@ function loadScript(content, param) {
 			onDestroy:function(){$(this).edatagrid('reload');}
 		});
 		
+		// Toolbar
+		ctrl.Toolbar.Save.click(function() { ctrl.ListTable.edatagrid('saveRow'); });
+		ctrl.Toolbar.Undo.click(function() { ctrl.ListTable.edatagrid('cancelRow'); });
 	}
 	
 	init();
-}
+	}
+})(jQuery);

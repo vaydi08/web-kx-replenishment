@@ -20,11 +20,27 @@
 		<script type=text/javascript src="../script/easyui/datagrid-detailview.js"></script>
 	
 		<!-- DEFAULT -->
+		<script type="text/javascript" src="solJsLoader.js"></script>
 		<script type="text/javascript" src="sol.js"></script>
 		<script type="text/javascript" src="../script/sol/categoryType4Select.js"></script>
 
+		<!-- SOL JS -->
+		<script type="text/javascript" src="info/ProductManager.js"></script>
+		<script type="text/javascript" src="info/ShopManager.js"></script>
+		<script type="text/javascript" src="info/CategoryManager.js"></script>
+		<script type="text/javascript" src="info/QuickLocator.js"></script>
+		<script type="text/javascript" src="stock/CheckProductManager.js"></script>
+		<script type="text/javascript" src="compare/Supply.js"></script>
+		<script type="text/javascript" src="compare/Cargo.js"></script>
+		<script type="text/javascript" src="sys/UserManager.js"></script>
+		<script type="text/javascript" src="sys/AuthManager.js"></script>
+		<script type="text/javascript" src="sys/ReloadConfig.js"></script>
+		
+		
+		
 	</head>
 	<body class="easyui-layout">
+	
 		<div region="north" split="false" style="height:71px;background-color:#f6ab46" noheader="true" border="false">
 			<div style="text-align:right;width:100%;height:71px;background:url('../images/title_bar.jpg') no-repeat;" id="topHref">
 			<a href="../sys!logout.action" style="position:relative;top:30px;right:150px" iconCls="icon-cancel" class="easyui-linkbutton" plain="true" id="logStatus">退出登录</a>
@@ -33,7 +49,7 @@
 	    <div region="west" split="true" title="系统菜单" style="width:150px;padding:5px;">
 	    	<ul id="menu"></ul>
 	    </div>  
-	    <div region="center" style="padding:5px;background:#eee;background:url('../images/background2.png');" noheader="true">
+	    <div region="center" style="background:#eee;background:url('../images/background2.png');" noheader="true">
 	    	<div id="content">
 	    	</div>
 	    </div>
@@ -80,5 +96,6 @@
 			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" id="dlg-save">确定</a>
 		</div>
 	    </div>
+
 	</body>
 </html>

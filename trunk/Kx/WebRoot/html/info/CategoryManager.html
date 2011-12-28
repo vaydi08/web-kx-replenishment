@@ -19,10 +19,9 @@
 						
 		<td width="120" align="center">
 
-		<input type="hidden" id="queryType"/>
-		<input id="EU_queryType" menu="#EU_queryValue" />
+		<input id="INFO_C_queryType" menu="#INFO_C_queryValue" />
 		           
-		<div id="EU_queryValue" style="width:100px">  
+		<div id="INFO_C_queryValue" style="width:100px">  
 		    <div name="ccode">类别代码</div>  
 		    <div name="cname">类别名称</div>
 		</div>
@@ -33,9 +32,9 @@
 
 </div>
 
-	<table id="listTable" toolbar="#toolbar">
+	<table id="listTable" toolbar="#INFO_C_toolbar">
 	</table>
-	<div id="toolbar">
+	<div id="INFO_C_toolbar">
 		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" id="btn_add">添加分类</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" id="btn_edit">修改分类</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" id="btn_del">删除分类</a>
@@ -43,7 +42,7 @@
 
 
 
-<div id="dlg" buttons="#dlg-buttons" title="类别" style="padding:10px 20px" closed="true">
+<div id="dlg" buttons="#INFO_C_dlg-buttons" title="类别" style="padding:10px 20px" closed="true">
 	<form id="form" method="post" enctype="multipart/form-data">
 	
 		<input type="hidden" name="input.id" id="id" />
@@ -71,20 +70,20 @@
 		</tr>
 		</table>
 		
-		<table border="0" cellpadding="0" cellspacing="0" id="capTable">
+		<table border="0" cellpadding="0" cellspacing="0" id="INFO_C_capTable">
 		<tr>
 		<td>
-		<input type="radio" name="picType" value="webcap" onclick="$('#capTr').show();$('#fileTr').hide()"/>摄像头照片采集&nbsp;
-		<input type="radio" name="picType" value="file" onclick="$('#capTr').hide();$('#fileTr').show()"/>图片文件上传
+		<input type="radio" name="picType" value="webcap" onclick="$('#INFO_C_capTr').show();$('#INFO_C_fileTr').hide()"/>摄像头照片采集&nbsp;
+		<input type="radio" name="picType" value="file" onclick="$('#INFO_C_capTr').hide();$('#INFO_C_fileTr').show()"/>图片文件上传
 		</td>
 		</tr>
-		<tr id="capTr">
+		<tr id="INFO_C_capTr">
 		<td>
 		<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" id="startcam">启动摄像头</a>
 		<input type="hidden" id="picData" name="picData">
 		</td>
 		</tr>
-		<tr id="fileTr">
+		<tr id="INFO_C_fileTr">
 		<td>
 		<input type="file" name="picFile" id="picFile"/>
 		</td>
@@ -93,9 +92,9 @@
 		
 	</form>
 	
-	<div id="dlg-buttons">
-		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" id="dlg-save">保存</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" id="dlg-cancel">取消</a>
+	<div id="INFO_C_dlg-buttons">
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" id="dlg-save">保存</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" id="dlg-cancel">取消</a>
 	</div>
 </div>
 

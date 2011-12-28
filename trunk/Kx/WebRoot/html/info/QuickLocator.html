@@ -1,12 +1,11 @@
 
 <div id="queryPanel">
-<input type="hidden" id="queryType" />
-<input id="EU_queryType" prompt="请输入检索条件,将在产品代码和产品名称中搜寻" menu="#EU_queryValue" style="width:300px" />
+<input id="INFO_Q_queryType" prompt="请输入检索条件,将在产品代码和产品名称中搜寻" menu="#INFO_Q_queryValue" style="width:300px" />
 
 </div>
-<div id="EU_queryValue" style="width:120px">
-    <div name="pcode" iconCls="icon-ok">产品代码</div>
-    <div name="pname" iconCls="icon-ok">产品名称</div>
+<div id="INFO_Q_queryValue" style="width:120px">
+    <div name="pcode">产品代码</div>
+    <div name="pname">产品名称</div>
 </div>
 <table id="listTable" title="产品列表">
 </table>
@@ -20,7 +19,7 @@
 <td width="120"><select id="type3"></select></td>
 <td>
 <span id="type4Str" style="text-align:center"></span>
-<div id="categoryType4Div" class="easyui-dialog" closeable="true" title="选择款式" modal="false" style="width:600px;height:500px;position:relative;z-index:9;padding:10px" cache="false" closed="true">
+<div id="categoryType4Div" closeable="true" title="选择款式" modal="false" style="width:600px;height:500px;position:relative;z-index:9;padding:10px" cache="false" closed="true">
 	<div id="categoryType4Select"></div>
 </div>
 </td>
@@ -29,17 +28,17 @@
 </div>
 
 <div id="imgPanel" title="图片展示" style="padding:10px">
-<input id="img_queryType" prompt="请输入检索条件,将匹配产品代码对应的图片" menu="#img_queryValue" style="width:600px" />
+<input id="img_queryType" prompt="请输入检索条件,将匹配产品代码对应的图片" menu="#INFO_Q_img_queryValue" style="width:600px" />
        
-<div id="img_queryValue" style="width:120px">
+<div id="INFO_Q_img_queryValue" style="width:120px">
     <div name="pcode" iconCls="icon-ok">产品代码</div>
 </div>
-<div id="imgPanelDiv" class="easyui-dialog" closeable="true" title="图片预览" modal="false" style="width:600px;height:500px;position:relative;z-index:9;padding:10px" cache="false" closed="true">
+<div id="imgPanelDiv" closeable="true" title="图片预览" modal="false" style="width:600px;height:500px;position:relative;z-index:9;padding:10px" cache="false" closed="true">
 	<div id="imgPanelSelect"></div>
 </div>
 </div>
 
-<div id="dlg" buttons="#dlg-buttons" title="类别" style="padding:10px 20px" closed="true">
+<div id="dlg" buttons="#INFO_Q_dlg-buttons" title="类别" style="padding:10px 20px" closed="true">
 	<form id="form" method="post" enctype="multipart/form-data">
 	
 		<input type="hidden" name="input.id" id="id" />
@@ -65,17 +64,17 @@
 		<table border="0" cellpadding="0" cellspacing="0" id="capTable">
 		<tr>
 		<td>
-		<input type="radio" name="picType" value="webcap" onclick="$('#capTr').show();$('#fileTr').hide()"/>摄像头照片采集&nbsp;
-		<input type="radio" name="picType" value="file" onclick="$('#capTr').hide();$('#fileTr').show()"/>图片文件上传
+		<input type="radio" name="picType" value="webcap" onclick="$('#INFO_Q_capTr').show();$('#INFO_Q_fileTr').hide()"/>摄像头照片采集&nbsp;
+		<input type="radio" name="picType" value="file" onclick="$('#INFO_Q_capTr').hide();$('#INFO_Q_fileTr').show()"/>图片文件上传
 		</td>
 		</tr>
-		<tr id="capTr">
+		<tr id="INFO_Q_capTr">
 		<td>
 		<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" id="startcam">启动摄像头</a>
 		<input type="hidden" id="picData" name="picData">
 		</td>
 		</tr>
-		<tr id="fileTr">
+		<tr id="INFO_Q_fileTr">
 		<td>
 		<input type="file" name="picFile" id="picFile"/>
 		</td>
@@ -84,13 +83,13 @@
 		
 	</form>
 	
-	<div id="dlg-buttons">
-		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" id="dlg-save">保存</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" id="dlg-cancel">取消</a>
+	<div id="INFO_Q_dlg-buttons">
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" id="dlg-save">保存</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" id="dlg-cancel">取消</a>
 	</div>
 </div>
 
-<div id="stock" class="easyui-dialog" closeable="true" title="核定数量" modal="true" style="width:600px;height:500px;position:relative;z-index:9;padding:10px" cache="false" closed="true">
+<div id="stock" closeable="true" title="核定数量" modal="true" style="width:600px;height:500px;position:relative;z-index:9;padding:10px" cache="false" closed="true">
 	<table id="stockTable" title="核定数据">
 		<thead>  
 		    <tr>  

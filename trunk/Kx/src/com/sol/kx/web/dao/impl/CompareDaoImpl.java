@@ -198,7 +198,7 @@ public class CompareDaoImpl implements CompareDao{
 	private String SQL_CARGO_SUPPLY_TEMP;
 	
 	public void cargoSupplyCreateTempTable(Integer stocktype) throws SQLException {
-		updateSql(SQL_CARGO_SUPPLY_TEMP,stocktype);
+		updateSql(SQL_CARGO_SUPPLY_TEMP.replace(":stocktype",stocktype.toString()));
 	}
 	
 	@Value("${sql.compare.cargo.supply.removetemp}")
@@ -233,8 +233,8 @@ public class CompareDaoImpl implements CompareDao{
 	@Value("${sql.compare.cargo.sale.update}")
 	private String SQL_CARGO_SALE_DATAUPDATE;
 	
-	public void cargoSaleDataUpdate(String serial,Integer sale,long saletime,String shopname,String pcode,Double weight,Integer stocktype) throws SQLException {
-		updateSql(SQL_CARGO_SALE_DATAUPDATE, serial,sale,new Timestamp(saletime),shopname,pcode,stocktype,weight,weight);
+	public void cargoSaleDataUpdate(String serial,Integer sale,long saletime,String shopname,String pcode,Double weight) throws SQLException {
+		updateSql(SQL_CARGO_SALE_DATAUPDATE, serial,sale,new Timestamp(saletime),shopname,pcode,weight,weight);
 	}
 	
 	@Value("${sql.compare.cargo.sale.delete}")

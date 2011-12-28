@@ -3,7 +3,6 @@ package com.sol.kx.web.dao.pojo;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Pojo {
@@ -11,23 +10,7 @@ public class Pojo {
 	private static final long serialVersionUID = 1L;
 
 	protected String prefix = "";
-	
-	
-//	public Map<String,Object> getJson() {
-//		Map<String,Object> map = new HashMap<String, Object>();
-//		
-//		try {
-//			setField(map, this, null);
-//		} catch (IllegalArgumentException e) {
-//			e.printStackTrace();
-//		} catch (IllegalAccessException e) {
-//			e.printStackTrace();
-//		} catch (InvocationTargetException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return map;
-//	}
+
 	
 	protected void setField(Map<String,Object> map,Object obj,String name) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 

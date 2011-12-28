@@ -44,7 +44,7 @@ public class OrderAction extends BaseAction<OrderType>{
 		OrderType order = new OrderType();
 		order.setUserid(((SysUser) ActionContext.getContext().getSession().get(Constants.SESSION_USER)).getId());
 		pagerBean = orderService.findSelf(pagerBean,order.getUserid());
-		return DATA;
+		return JSONDATA;
 	}
 	
 	public String managerAll() {

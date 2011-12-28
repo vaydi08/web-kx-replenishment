@@ -45,7 +45,7 @@ public class SysAuthServiceImpl extends BaseServiceImpl<SysAuth> implements SysA
 		} catch (Exception e) {
 			Logger.SERVICE.debug("获取用户权限列表 出错");
 			authMap = new HashMap<String,Boolean[]>(0);
-			return ResultBean.RESULT_ERR(e.getMessage());
+			return ResultBean.RESULT_ERR(e.getMessage(),new Object());
 		}
 		
 		authMap = new HashMap<String,Boolean[]>(20);
@@ -59,7 +59,7 @@ public class SysAuthServiceImpl extends BaseServiceImpl<SysAuth> implements SysA
 			groupAuth[auth.getGroupid() - 1] = (auth.getStatus() == 1);
 		}
 		
-		return ResultBean.RESULT_SUCCESS();
+		return ResultBean.RESULT_SUCCESS(new Object());
 	}
 	
 	@Override

@@ -98,10 +98,10 @@ public class StockCheckServiceImpl extends BaseServiceImpl<StockCheck> implement
 		Logger.SERVICE.ldebug("更新[stock_check]数据", obj.toString());
 		try {
 			stockCheckDao.updateStockCheck(obj);
-			return ResultBean.RESULT_SUCCESS();
+			return ResultBean.RESULT_SUCCESS(obj);
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("更新记录错误", e);
-			return ResultBean.RESULT_ERR(e.getMessage());
+			return ResultBean.RESULT_ERR(e.getMessage(),obj);
 		}
 	}
 	
@@ -110,10 +110,10 @@ public class StockCheckServiceImpl extends BaseServiceImpl<StockCheck> implement
 		Logger.SERVICE.ldebug("删除[stock_check]数据", obj.toString());
 		try {
 			stockCheckDao.deleteStockCheck(obj);
-			return ResultBean.RESULT_SUCCESS();
+			return ResultBean.RESULT_SUCCESS(obj);
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("删除记录错误", e);
-			return ResultBean.RESULT_ERR(e.getMessage());
+			return ResultBean.RESULT_ERR(e.getMessage(),obj);
 		}
 	}
 	

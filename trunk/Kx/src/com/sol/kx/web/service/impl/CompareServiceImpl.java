@@ -313,7 +313,7 @@ public class CompareServiceImpl extends BaseServiceImpl<Compare> implements Comp
 				String pcode = (String)poi.getValue(CARGO_SALE_PCODE-1, "");
 				Double weight = (Double)poi.getValue(CARGO_SALE_PWEIGHT-1, 0.0);
 				
-				dao.cargoSaleDataUpdate(serial, sale, saletime, shopname, pcode, weight, stocktype);
+				dao.cargoSaleDataUpdate(serial, sale, saletime, shopname, pcode, weight);
 			} catch (Exception e) {
 				errList.add("销售数据 - 第" + poi.getRowNo() + "行数据导入失败,原因:" + e.getMessage());
 			}

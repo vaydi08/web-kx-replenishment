@@ -22,7 +22,7 @@ $.fn.categoryType4Select = function(options) {
 	     $.post(opts.url,opts.queryParams,function(data){
 	    	 var params = jQuery.parseJSON(data);
 	
-	    	 fillCtrl(params);
+	    	 fillCtrl(params.rows);
 	     });
      }
 	 reloadData();

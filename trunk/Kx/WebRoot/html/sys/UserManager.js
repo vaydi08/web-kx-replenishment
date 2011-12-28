@@ -1,11 +1,13 @@
-function loadScript(content, param) {
+(function($) {
+	$.fn.sys_UserManager = function() {
 	var ctrl = {
-		ListTable : $('#listTable'),
+		content : $(this),
+		ListTable : $(this).find('#listTable'),
 		Toolbar : {
-			Add : $('#btn_add'),
-			Del : $('#btn_del'),
-			Save : $('#btn_save'),
-			Undo : $('#btn_undo')
+			Add : $(this).find('#btn_add'),
+			Del : $(this).find('#btn_del'),
+			Save : $(this).find('#btn_save'),
+			Undo : $(this).find('#btn_undo')
 		},
 		GroupMap : [
 			{text:'系统管理组',value:1},
@@ -40,9 +42,9 @@ function loadScript(content, param) {
 			        }
 			    ]],
 			    
-			height:content.height(),
-			style:{'background-color':'#fafafa'},
-			url:"../sys/sys!manager.action",
+			height:ctrl.content.height()-10,
+			style:{'background-color':'#fafafa','padding':'10px'},
+			url:"../sys/sys!manager2.action",
 			saveUrl: '../sys/sys!add2.action',
 			updateUrl: '../sys/sys!edit2.action',
 			destroyUrl: '../sys/sys!delete2.action',
@@ -66,4 +68,5 @@ function loadScript(content, param) {
 	}
 	
 	init();
-}
+	}
+})(jQuery);

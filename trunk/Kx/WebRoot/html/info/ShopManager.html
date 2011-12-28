@@ -1,6 +1,5 @@
-
 <div class="list">
-	<table id="listTable" toolbar="#toolbar" title="分店列表">
+	<table id="listTable" toolbar="#INFO_S_toolbar" title="分店列表">
 	<thead><tr>
 	<th field="scode" width="80">分店编号</th>
 	<th field="name" width="80">分店名称</th>
@@ -10,15 +9,15 @@
 	<th field="remark" width="80">备注</th>
 	</tr></thead>
 	</table>
-	<div id="toolbar">
-		<a href="javascript:void(0)" id="btn_add" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="onAddBtn('info-shop!add.action')">添加分店</a>
-		<a href="javascript:void(0)" id="btn_edit" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="onEditBtn('info-shop!edit.action')">修改分店</a>
-		<a href="javascript:void(0)" id="btn_del" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="onRemoveBtn('info-shop!delete.action')">删除分店</a>
+	<div id="INFO_S_toolbar">
+		<a href="javascript:void(0)" id="btn_add" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加分店</a>
+		<a href="javascript:void(0)" id="btn_edit" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改分店</a>
+		<a href="javascript:void(0)" id="btn_del" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除分店</a>
 	</div>
 </div>
 
 
-<div id="dlg" buttons="#dlg-buttons" style="padding:10px 20px" title="分店" closed="true">
+<div id="dlg" buttons="#INFO_S_dlg-buttons" style="padding:10px 20px" title="分店" closed="true">
 <form id="form" method="post" >
 
 	<input type="hidden" name="input.id" id="id" />
@@ -48,9 +47,8 @@
 </form>
 </div>
 
-<div id="dlg-buttons">
-	<a href="#" class="easyui-linkbutton" iconCls="icon-ok" id="dlg-save">保存</a>
-	<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" id="dlg-cancel">取消</a>
+<div id="INFO_S_dlg-buttons">
+	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" id="dlg-save">保存</a>
+	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" id="dlg-cancel">取消</a>
 </div>
-
 	

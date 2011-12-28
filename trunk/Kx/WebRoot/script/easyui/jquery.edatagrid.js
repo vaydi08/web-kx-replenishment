@@ -47,10 +47,11 @@
 
 					$.post(url, newrow, function(data){
 						data.isNewRecord = null;
-						$(target).datagrid('updateRow', {
-							index: index,
-							row: data
-						});
+//						$(target).datagrid('updateRow', {
+//							index: index,
+//							row: data
+//						});
+
 						if (opts.tree){
 							var t = $(opts.tree);
 							var node = t.tree('find', row.id);
@@ -65,6 +66,7 @@
 								});
 							}
 						}
+
 						opts.onSave.call(target, index, row, data);
 					},'json');
 				}
