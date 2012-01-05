@@ -2,7 +2,6 @@ package com.sol.kx.web.service;
 
 import java.util.List;
 
-import com.sol.kx.web.dao.pojo.InfoProductDetail;
 import com.sol.kx.web.dao.pojo.OrderType;
 import com.sol.kx.web.service.bean.PagerBean;
 
@@ -15,5 +14,5 @@ public interface OrderService extends BaseService<OrderType>{
 	
 	public OrderType get(Integer id);
 	
-	public List<InfoProductDetail> findChooseProduct(String pcode);
+	public List findChooseProduct(String pcode);
 }

@@ -31,6 +31,7 @@ public class CheckAction extends BaseAction<StockCheck>{
 	private StockCheckService stockCheckService;
 	
 	private Integer shopid;
+	private Integer clevel;
 	
 	public String productList() {
 		productPagerBean = new PagerBean<InfoProduct>();
@@ -77,6 +78,12 @@ public class CheckAction extends BaseAction<StockCheck>{
 		return "stockCheckSum";
 	}
 	
+	// 核定数 复制
+	public String copyCheck() {
+		result = stockCheckService.copyCheck(input, clevel);
+		return RESULT;
+	}
+	
 	public String getStockCheckSum() {
 		return stockCheckSum;
 	}
@@ -108,6 +115,10 @@ public class CheckAction extends BaseAction<StockCheck>{
 
 	public PagerBean<InfoProduct> getProductPagerBean() {
 		return productPagerBean;
+	}
+
+	public void setClevel(Integer clevel) {
+		this.clevel = clevel;
 	}
 
 }

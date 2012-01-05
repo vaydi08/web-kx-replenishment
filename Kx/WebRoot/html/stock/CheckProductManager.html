@@ -50,6 +50,9 @@
 		<a href="javascript:void(0)" id="check_btn_del" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
 		<a href="javascript:void(0)" id="check_btn_save" class="easyui-linkbutton" iconCls="icon-save" plain="true">保存</a>
 		<a href="javascript:void(0)" id="check_btn_undo" class="easyui-linkbutton" iconCls="icon-undo" plain="true">取消</a>
+		
+		<a href="javascript:void(0)" class="easyui-splitbutton" iconCls="icon-redo" plain="true" menu="#STOCK_check_copymm">复制到...</a>
+		
 	</div>
 </div>
 
@@ -63,4 +66,14 @@
 	</table>
 </div>
 
+<div style="float:left;clear:none;width:400px;height:500px" id="checkImgDiv">
+	<img id="checkImgPreview" width="400"/>
+</div>
+
+<div id="STOCK_check_copymm" style="width:150px">
+	<div id="STOCK_C_CMM_copyToType2">1</div>
+	<div id="STOCK_C_CMM_copyToType3">2</div>
+	<div class="menu-sep"></div>
+	<div id="STOCK_C_CMM_copyToProduct">复制到产品...</div>
+</div>
 </div>

@@ -219,7 +219,9 @@ public abstract class BaseDaoImpl implements BaseDao{
 		StringBuilder sb = new StringBuilder();
 		if(page > 1) {
 			sb.append("declare @id nvarchar(100);");
-			sb.append("select @id=min(").append(sort).append(") from (select top ").append(page * pageSize - pageSize).append(" ").append(sort).append(" from ").append(tablename).append(" order by ").append(sort).append(" desc) tb1;");
+			sb.append("select @id=min(").append(sort).append(") from (select top ")
+			.append(page * pageSize - pageSize).append(" ").append(sort).append(" from ").append(tablename)
+			.append(" order by ").append(sort).append(" desc) tb1;");
 		}
 		sb.append("set ROWCOUNT ").append(pageSize).append(";");
 		sb.append(sql);

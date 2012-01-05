@@ -13,7 +13,7 @@ import com.sol.kx.web.dao.OrderTypeDao;
 import com.sol.kx.web.dao.pojo.OrderCount;
 import com.sol.kx.web.dao.pojo.OrderType;
 
-//@Repository
+@Repository
 public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 	@Value("${sql.order.untake.find}")
 	private String SQL_MAIN_UNTAKE;
@@ -41,16 +41,28 @@ public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 	private String SQL_MAIN_SELF;
 	
 	public List<OrderType> findSelf(int page,int pageSize,Integer userid) throws Exception {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("select * from(select top ").append(pageSize).append(" * From (");
-		sb.append("select top ").append(page * pageSize).append(SQL_MAIN_SELF.substring(6)).append(") find1 order by id asc) find2 order by id desc");
-
 		List<Object> params = new ArrayList<Object>(1);
 		params.add(userid);
+		if(page > 1)
+			params.add(userid);
+		
+		StringBuilder sb = new StringBuilder();
+		if(page > 1) {
+			sb.append("declare @id nvarchar(100);");
+			sb.append("select @id=min(id) from (select top ")
+			.append(page * pageSize - pageSize)
+			.append(" id from order_type where status>1 and userid=? order by id desc) tb1;");
+		}
+		sb.append("set ROWCOUNT ").append(pageSize).append(";");
+		sb.append(SQL_MAIN_SELF);
+		if(page > 1)
+			sb.append(" and id<@id");
+		sb.append(" order by od.id desc;");
+		sb.append("set ROWCOUNT 0");
 		
 		return dataConsole.find(sb.toString(),OrderType.class,
-				dataConsole.parseSmap(OrderType.class, "id","pname","shopname","pcode","fromwho","ordertime","status","num"),
+				dataConsole.parseSmap(OrderType.class,
+						"id","pname","shopname","pcode","fromwho","ordertime","status","num","weight"),
 				params);
 	}
 	
@@ -90,8 +102,8 @@ public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 	
 	public OrderType get(Integer id) throws Exception {
 		Map<String,Class<?>> smap = dataConsole.parseSmap(OrderType.class,
-				"id","fromwho","pname","pcode","pweight",
-				"stand","image","shopname","ordertime",
+				"id","fromwho","pname","pcode","weight",
+				"image","shopname","ordertime","num",
 				"requesttime","username","gettime","status");
 		List<Object> params = new ArrayList<Object>(1);
 		params.add(id);
@@ -102,13 +114,14 @@ public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 	@Value("${sql.order.product.get}")
 	private String SQL_CHOOSEPRODUCT;
 	
-	public List<InfoProductDetail> findChooseProduct(String pcode) throws Exception {
+	public List findChooseProduct(String pcode) throws Exception {
 		List<Object> params = new ArrayList<Object>(1);
 		params.add(pcode);
 		
-		return dataConsole.find(SQL_CHOOSEPRODUCT, InfoProductDetail.class, 
-				dataConsole.parseSmap(InfoProductDetail.class, 
-						"id","quality","image","pweight","stand","pname"), params);
+		return null;
+//		return dataConsole.find(SQL_CHOOSEPRODUCT, InfoProductDetail.class, 
+//				dataConsole.parseSmap(InfoProductDetail.class, 
+//						"id","quality","image","pweight","stand","pname"), params);
 	}
 	
 	// 订购统计

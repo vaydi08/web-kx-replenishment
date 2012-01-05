@@ -24,6 +24,7 @@ import com.sol.kx.web.dao.StockCheckDao;
 import com.sol.kx.web.dao.pojo.InfoProduct;
 import com.sol.kx.web.dao.pojo.StockCheck;
 import com.sol.kx.web.dao.pojo.StockCheckSum;
+import com.sol.kx.web.dao.pojo.StockChecked;
 
 @Repository
 public class StockCheckDaoImpl extends BaseDaoImpl implements StockCheckDao {
@@ -148,35 +149,45 @@ public class StockCheckDaoImpl extends BaseDaoImpl implements StockCheckDao {
 						"sum_type1_stocktype1","sum_type1_stocktype2",
 						"sum_type2_stocktype1","sum_type2_stocktype2"), param);
 	}
-	
-	
-	
-	@Value("${sql.stock.checked.find}")
-	private String SQL_CHEKCED;
-	
-	@Override
-	public List findByPage2(SelectEntity entity,int page,int pageSize,String order) throws Exception {
-		StringBuilder sb = new StringBuilder();
 
-		sb.append("select * from(select top ").append(pageSize).append(" * From (");
-		sb.append("select top ").append(page * pageSize).append(SQL_CHEKCED.substring(6)).append(") find1 order by " + order + " asc) find2 order by " + order + " desc");
-
-		Map<String,Class<?>> smap = new HashMap<String, Class<?>>();
-		smap.put("id", Integer.class);
-		smap.put("pname", String.class);
-		smap.put("minweight", Double.class);
-		smap.put("maxweight", Double.class);
-		smap.put("stock", Integer.class);
-		smap.put("stocktype", Short.class);
+	// 核定数 复制
+	@Value("${sql.stock.check.copy}")
+	private String SQL_CHECK_COPY;
+	
+	public void copyCheck(Integer pid,Integer shopid,Integer clevel) throws SQLException {
+		List<Object> list = new ArrayList<Object>(2);
+		list.add(pid);
+		list.add(shopid);
 		
-		return dataConsole.find(sb.toString(), entity.getClazz(), smap, entity.getCriteria().getParamList());
+		dataConsole.updatePrepareSQL(SQL_CHECK_COPY.replaceAll(":clevel", clevel.toString()), list);
 	}
 	
-	@Value("${sql.stock.checked.findcount}")
-	private String SQL_CHEKCED_COUNT;
+	// 已作核定统计
+	@Value("${sql.stock.checked.type1}")
+	private String SQL_CHECKED_TYPE1;
+	@Value("${sql.stock.checked.type234}")
+	private String SQL_CHECKED_TYPE234;
 	
-	@Override
-	public int findCount2(CountEntity entity) throws Exception {
-		return (Integer)dataConsole.findReturn(SQL_CHEKCED_COUNT, Types.INTEGER, entity.getCriteria().getParamList());
+	public List<StockChecked> findCheckedType1(Integer shopid) throws Exception {
+		List<Object> list = new ArrayList<Object>(1);
+		list.add(shopid);
+		
+		return dataConsole.find(SQL_CHECKED_TYPE1,StockChecked.class,
+				dataConsole.parseSmap(StockChecked.class, 
+						"stock_type1","sum_stock_type1","stock_type2","sum_stock_type2",
+						"ptype","cname"),list);
+	}
+	
+	public List<StockChecked> findCheckedType234(Integer shopid,Integer parent,Integer clevel,Integer parentlevel) throws Exception {
+		List<Object> list = new ArrayList<Object>(1);
+		list.add(shopid);
+		list.add(parent);
+		
+		return dataConsole.find(
+				SQL_CHECKED_TYPE234.replaceAll(":clevel", clevel.toString()).replace(":parentlevel",parentlevel.toString()),
+				StockChecked.class,
+				dataConsole.parseSmap(StockChecked.class, 
+						"stock_type1","sum_stock_type1","stock_type2","sum_stock_type2",
+						"ptype","cname"),list);
 	}
 }

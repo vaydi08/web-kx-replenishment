@@ -6,14 +6,16 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.json.JSONObject;
+
 @Table(name = "order_type")
 public class OrderType extends Pojo{
 
 	@Id
 	private Integer id;
 	
-	@Column(name = "pdid")
-	private Integer pdid;
+	@Column(name = "pid")
+	private Integer pid;
 	private String pname;
 	private String pcode;
 	private Double pweight;
@@ -29,6 +31,9 @@ public class OrderType extends Pojo{
 	
 	@Column(name = "num")
 	private Integer num;
+	
+	@Column(name = "weight")
+	private Double weight;
 	
 	@Column(name = "ordertime")
 	private Timestamp ordertime;
@@ -68,12 +73,12 @@ public class OrderType extends Pojo{
 		this.id = id;
 	}
 
-	public Integer getPdid() {
-		return pdid;
+	public Integer getPid() {
+		return pid;
 	}
 
-	public void setPdid(Integer pdid) {
-		this.pdid = pdid;
+	public void setPid(Integer pid) {
+		this.pid = pid;
 	}
 
 	public Integer getShopid() {
@@ -210,6 +215,18 @@ public class OrderType extends Pojo{
 
 	public void setNum(Integer num) {
 		this.num = num;
+	}
+
+	public Double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(Double weight) {
+		this.weight = weight;
+	}
+	
+	public String json() {
+		return new JSONObject(this).toString();
 	}
 
 }

@@ -39,6 +39,8 @@ public class PagerBean<T> {
 			json.put("total", this.count);
 			if(this.dataList != null)
 				json.put("rows", new JSONArray(this.dataList));
+			else
+				json.put("rows", new JSONArray());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

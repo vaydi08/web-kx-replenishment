@@ -31,7 +31,7 @@
 
 </div>
 
-<div id="dlg" buttons="#INFO_P_dlg-buttons" title="类别" style="padding:10px 20px" closed="false">
+<div id="dlg" buttons="#INFO_P_dlg-buttons" title="类别" style="padding:10px 20px" closed="true">
 	<form id="form" method="post" enctype="multipart/form-data">
 	
 		<input type="hidden" name="input.id" id="id" />
@@ -57,19 +57,19 @@
 		<table border="0" cellpadding="0" cellspacing="0" id="capTable">
 		<tr>
 		<td>
-		<input type="radio" name="picType" class="picType" value="webcap" onclick="$('#INFO_P_capTr').show();$('#INFO_P_fileTr').hide()"/>摄像头照片采集&nbsp;
-		<input type="radio" name="picType" class="picType" value="file" onclick="$('#INFO_P_capTr').hide();$('#INFO_P_fileTr').show()"/>图片文件上传
+		<input type="radio" name="picType" class="INFO_P_picType" value="webcap" onclick="$('#INFO_P_capTr').show();$('#INFO_P_fileTr').hide()"/>摄像头照片采集&nbsp;
+		<input type="radio" name="picType" class="INFO_P_picType" value="file" onclick="$('#INFO_P_capTr').hide();$('#INFO_P_fileTr').show()"/>图片文件上传
 		</td>
 		</tr>
 		<tr id="INFO_P_capTr">
 		<td>
 		<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" id="startcam">启动摄像头</a>
-		<input type="hidden" id="picData" name="picData">
+		<input type="hidden" id="INFO_P_picData" name="picData">
 		</td>
 		</tr>
 		<tr id="INFO_P_fileTr">
 		<td>
-		<input type="file" name="picFile" id="picFile"/>
+		<input type="file" id="INFO_P_picFile" name="picFile"/>
 		</td>
 		</tr>
 		</table>
@@ -77,8 +77,8 @@
 	</form>
 	
 	<div id="INFO_P_dlg-buttons">
-		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" id="dlg-save">保存</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" id="dlg-cancel">取消</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" id="dlg-save">保存</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" id="dlg-cancel">取消</a>
 	</div>
 </div>
 

@@ -20,8 +20,8 @@
 			Pic : {
 				Startcap : $(this).find('#startcam'),
 				picType : $(this).find('input[name=picType]:radio:first'),
-				picData : $(this).find('#picData'),
-				picFile : $(this).find('#picFile')
+				picData : '#INFO_P_picData',
+				picFile : '#INFO_P_picFile'
 			},
 			Input : {
 				Clevel : $(this).find('#clevel'),
@@ -37,11 +37,11 @@
 			SF.submit(ctrl.Form,{
 				url : '../info/info-category!add.action',
 				onSubmit:function(){
-					if(ctrl.Dialog.find('.picType:checked').val() == "webcap" && ctrl.Pic.picData.val() == "") {
+					if(ctrl.Dialog.find('.INFO_P_picType:checked').val() == "webcap" && $(ctrl.Pic.picData).val() == "") {
 						SOL.showWarning('请首先使用摄像头程序照相 或上传一个图片文件');
 						return false;
 					}
-					if(ctrl.Dialog.find('.picType:checked').val() == "file" && ctrl.Pic.picFile.val() == "") {
+					if(ctrl.Dialog.find('.INFO_P_picType:checked').val() == "file" && $(ctrl.Pic.picFile).val() == "") {
 						SOL.showWarning('请首先使用摄像头程序照相 或上传一个图片文件');
 						return false;
 					}
@@ -145,6 +145,8 @@
 		}
 	
 		init();
+		
+		webCap.initCap();
 	
 		// 按钮绑定
 		ctrl.Toolbar.Add.click(function() {
@@ -186,7 +188,7 @@
 		// 打开摄像头对话框
 		ctrl.Pic.Startcap.click(function() {
 			SF.openCap(function(result){
-				ctrl.Pic.picData.val(result);
+				$(ctrl.Pic.picData).val(result);
 			});
 		});
 	}

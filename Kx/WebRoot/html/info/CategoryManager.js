@@ -21,8 +21,8 @@
 			Pic : {
 				Startcap : $(this).find('#startcam'),
 				picType : $(this).find('input[name=picType]:radio:first'),
-				picData : $(this).find('#picData'),
-				picFile : $(this).find('#picFile')
+				picData : '#picData',
+				picFile : '#picFile'
 			},
 			Input : {
 				Clevel : $(this).find('#clevel'),
@@ -40,11 +40,11 @@
 				url : '../info/info-category!add.action',
 				onSubmit:function(){
 					if(ctrl.Input.Clevel.combobox('getValue') == 4) {
-						if(ctrl.content.find('input[name=picType]:checked').val() == "webcap" && ctrl.Pic.picData.val() == "") {
+						if(ctrl.content.find('input[name=picType]:checked').val() == "webcap" && ctrl.content.find(ctrl.Pic.picData).val() == "") {
 							SOL.showWarning('请首先使用摄像头程序照相 或上传一个图片文件');
 							return false;
 						}
-						if(ctrl.content.find('input[name=picType]:checked').val() == "file" && ctrl.Pic.picFile.val() == "") {
+						if(ctrl.content.find('input[name=picType]:checked').val() == "file" && ctrl.content.find(ctrl.Pic.picFile).val() == "") {
 							SOL.showWarning('请首先使用摄像头程序照相 或上传一个图片文件');
 							return false;
 						}
@@ -169,6 +169,8 @@
 		
 		init();
 		
+		webCap.initCap();
+		
 		// 按钮绑定
 		ctrl.Toolbar.Add.click(function() {
 			ctrl.Form.form('clear');
@@ -196,7 +198,7 @@
 		// 打开摄像头对话框
 		ctrl.Pic.Startcap.click(function() {
 			SF.openCap(function(result){
-				ctrl.Pic.picData.val(result);
+				ctrl.content.find(ctrl.Pic.picData).val(result);
 			});
 		});
 	}

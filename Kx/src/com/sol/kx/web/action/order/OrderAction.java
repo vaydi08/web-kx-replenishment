@@ -23,13 +23,13 @@ import com.sol.kx.web.service.OrderService;
 @Results({@Result(name = "orderTake",location = "/order/orderTake.jsp"),
 		  @Result(name = "order3Repost",location = "/order/order3Repost.jsp"),
 		  @Result(name = "order4Over",location = "/order/self.html",type = "redirect"),
-		  @Result(name = "orderInfo",location = "/order/orderInfo.jsp"),
+		  @Result(name = "orderInfo",location = "/html/order/info.jsp"),
 		  @Result(name = "chooseProduct",location = "/order/chooseData.jsp")})
 public class OrderAction extends BaseAction<OrderType>{
 
 	private static final long serialVersionUID = 1L;
 
-	//@Autowired
+	@Autowired
 	private OrderService orderService;
 	
 	
@@ -41,9 +41,7 @@ public class OrderAction extends BaseAction<OrderType>{
 	
 	// 首页 自身订单
 	public String managerSelf() {
-		OrderType order = new OrderType();
-		order.setUserid(((SysUser) ActionContext.getContext().getSession().get(Constants.SESSION_USER)).getId());
-		pagerBean = orderService.findSelf(pagerBean,order.getUserid());
+		pagerBean = orderService.findSelf(pagerBean,((SysUser) ActionContext.getContext().getSession().get(Constants.SESSION_USER)).getId());
 		return JSONDATA;
 	}
 	
@@ -104,9 +102,9 @@ public class OrderAction extends BaseAction<OrderType>{
 	}
 	
 	private String pcode;
-	private List<InfoProductDetail> productList;
+	private List productList;
 	public String chooseProduct() {
-		productList = orderService.findChooseProduct(pcode);
+//		productList = orderService.findChooseProduct(pcode);
 		return "chooseProduct";
 	}
 	
@@ -129,7 +127,7 @@ public class OrderAction extends BaseAction<OrderType>{
 		this.pcode = pcode;
 	}
 
-	public List<InfoProductDetail> getProductList() {
+	public List getProductList() {
 		return productList;
 	}
 
