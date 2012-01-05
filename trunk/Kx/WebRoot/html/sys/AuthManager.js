@@ -26,6 +26,7 @@
 		ctrl.ListTable.edatagrid({
 			height:ctrl.content.height() - 80,
 			style:{'padding':'10px'},
+			pagination:false,
 			url:'../sys/auth!manager2.action',
 			queryParams : {'input.groupid' : 2},
 			saveUrl: '',

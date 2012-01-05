@@ -13,7 +13,7 @@ import com.sol.kx.web.dao.pojo.OrderType;
 import com.sol.kx.web.service.OrderService;
 import com.sol.kx.web.service.bean.PagerBean;
 
-//@Service
+@Service
 public class OrderServiceImpl extends BaseServiceImpl<OrderType> implements OrderService{
 
 	@Autowired
@@ -76,10 +76,10 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderType> implements Orde
 	}
 	
 	// 选择产品
-	public List<InfoProductDetail> findChooseProduct(String pcode) {
+	public List findChooseProduct(String pcode) {
 		Logger.SERVICE.ldebug("查询[info_product_detail]对应pcode产品列表", pcode);
 		try {
-			return orderTypeDao.findChooseProduct(pcode);
+			return null;
 		} catch (Exception e) {
 			Logger.SERVICE.ldebug("查询[info_product_detail]对应pcode产品列表错误", e);
 			return null;

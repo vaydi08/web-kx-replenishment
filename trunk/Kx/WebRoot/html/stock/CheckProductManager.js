@@ -37,6 +37,15 @@
 			sum_type1_stocktype2 : $(this).find('#sum_type1_stocktype2'),
 			sum_type2_stocktype1 : $(this).find('#sum_type2_stocktype1'),
 			sum_type2_stocktype2 : $(this).find('#sum_type2_stocktype2')
+		},
+		CheckImgDiv : {
+			Panel : $(this).find('#checkImgDiv'),
+			Img : $(this).find('#checkImgPreview')
+		},
+		CheckCopyButton : {
+			CopyToType2 : $('#STOCK_C_CMM_copyToType2'),
+			CopyToType3 : $('#STOCK_C_CMM_copyToType3'),
+			CopyToProduct : $('#STOCK_C_CMM_copyToProduct')
 		}
 	}
 	
@@ -104,6 +113,11 @@
 		} else {
 			ctrl.CheckDiv.ListTable.edatagrid('load',{'input.shopid':ctrl.CheckDiv.Shop.combobox('getValue'),'input.pid':row.id});
 		}
+		// 预览图片
+		ctrl.CheckImgDiv.Img.attr('src','pic.action?img=' + row.image)
+		// copy功能文字
+		ctrl.CheckCopyButton.CopyToType2.find('.menu-text').text('复制到小类-' + row.type2name);
+		ctrl.CheckCopyButton.CopyToType3.find('.menu-text').text('复制到货型-' + row.type3name);
 		ctrl.CheckDiv.Dialog.dialog('open');
 	}
 		
@@ -260,6 +274,34 @@
 		    }   
 		});
 		
+		// 核定框体 图片预览
+		ctrl.CheckImgDiv.Panel.panel();
+		
+		var getCopyUrl = function(clevel) {
+			return '../stock/check!copyCheck.action?input.pid=' + ctrl.content.data('stock-check-row').id + 
+				   '&input.shopid=' + ctrl.CheckDiv.Shop.combobox('getValue') + '&clevel=' + clevel;
+		}
+		// 核定数复制功能按钮
+		ctrl.CheckCopyButton.CopyToType2.click(function() {
+			$.post(getCopyUrl(2),
+				function(data) {
+					if(data.success)
+						SOL.alert('复制成功');
+					else
+						SOL.alert('复制失败,服务器返回的错误信息:' + data.msg);
+				}
+			,'json');
+		});
+		ctrl.CheckCopyButton.CopyToType3.click(function() {
+			$.post(getCopyUrl(3),
+				function(data) {
+					if(data.success)
+						SOL.alert('复制成功');
+					else
+						SOL.alert('复制失败,服务器返回的错误信息:' + data.msg);
+				}
+			,'json');
+		});
 	}
 	
 	init();

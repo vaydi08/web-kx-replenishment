@@ -14,6 +14,7 @@ import com.sol.kx.web.dao.StockCheckDao;
 import com.sol.kx.web.dao.pojo.InfoProduct;
 import com.sol.kx.web.dao.pojo.StockCheck;
 import com.sol.kx.web.dao.pojo.StockCheckSum;
+import com.sol.kx.web.dao.pojo.StockChecked;
 import com.sol.kx.web.service.StockCheckService;
 import com.sol.kx.web.service.bean.PagerBean;
 import com.sol.kx.web.service.bean.ResultBean;
@@ -90,6 +91,49 @@ public class StockCheckServiceImpl extends BaseServiceImpl<StockCheck> implement
 		} catch (Exception e) {
 			exceptionHandler.onDatabaseException("查询[stock_check]数量统计 " + obj.toString(), e);
 			return null;
+		}
+	}
+	
+	// 核定数 复制
+	public ResultBean copyCheck(StockCheck obj,Integer clevel) {
+		Logger.SERVICE.ldebug("复制[stock_check]核定数 ",obj.toString(),clevel);
+		try {
+			stockCheckDao.copyCheck(obj.getPid(), obj.getShopid(),clevel);
+			return ResultBean.RESULT_SUCCESS(obj);
+		} catch (Exception e) {
+			exceptionHandler.onDatabaseException("复制[stock_check]核定数 " + obj.toString(), e);
+			return ResultBean.RESULT_ERR(e.getMessage(), obj);
+		}
+	}
+	
+	// 已作核定
+	public PagerBean<StockChecked> findCheckedType1(Integer shopid) {
+		Logger.SERVICE.debug("查询[stock_check]已核定数据 "+shopid);
+		PagerBean<StockChecked> bean = new PagerBean<StockChecked>();
+		try {
+			bean.setException(null);
+			bean.setDataList(stockCheckDao.findCheckedType1(shopid));
+			bean.setCount(0);
+			return bean;
+		} catch (Exception e) {
+			bean.setException(e);
+			exceptionHandler.onDatabaseException("查询[stock_check]已核定数据 " + shopid, e);
+			return bean;
+		}
+	}
+	public PagerBean<StockChecked> findCheckedType234(Integer shopid,Integer parent,Integer clevel,Integer parentlevel) {
+		Logger.SERVICE.ldebug("查询[stock_check]已核定数据 ",shopid,parent,clevel,parentlevel);
+		PagerBean<StockChecked> bean = new PagerBean<StockChecked>();
+		try {
+			bean.setException(null);
+			bean.setDataList(stockCheckDao.findCheckedType234(shopid,parent,clevel,parentlevel));
+			bean.setCount(0);
+			return bean;
+		} catch (Exception e) {
+			bean.setException(e);
+			exceptionHandler.onDatabaseException("查询[stock_check]已核定数据 " + 
+					shopid + "," + parent + "," + clevel + "," + parentlevel, e);
+			return bean;
 		}
 	}
 	

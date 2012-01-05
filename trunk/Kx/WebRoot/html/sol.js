@@ -13,7 +13,8 @@ function SolConfig() {
 	SolConfig.prototype.messageHideDelay = 4000;
 	// 摄像头
 	SolConfig.prototype.capDialog = '#cap';
-	//SolConfig.prototype.cap = document.getElementById("WebVideoCap1");
+	SolConfig.prototype.loadCap = '#loadCap';
+	SolConfig.prototype.cap = document.getElementById("WebVideoCap1");
 
 	
 	// URL ACTION加载路径
@@ -121,6 +122,9 @@ function SolConfig() {
 		
 		setTimeout("SOL.hideMessage()",SOL.messageHideDelay);
 	}
+	SolConfig.prototype.alert = function(text) {
+		$.messager.alert('信息',text);
+	}
 	SolConfig.prototype.hideMessage = function() {
 		$('body').layout('collapse','south');
 	}
@@ -167,8 +171,8 @@ function SoLFunction() {
 	// 摄像头
 	SoLFunction.prototype.openCap = function(callback) {
 		$(SOL.capDialog).dialog('open');
-		SOL.cap.clear();
-		SOL.cap.start();
+		document.getElementById("WebVideoCap1").clear();
+		document.getElementById("WebVideoCap1").start();
 		
 		$(SOL.capDialog).data('callback',callback);
 	}
@@ -242,13 +246,15 @@ function SoLFunction() {
 	SoLFunction.prototype.loadjs = function() {
 		var panel = $(SOL.content).data('sol-tabs-panel');
 		var script = $(SOL.content).data('sol-tabs-script');
-		
-		panel.jsLoader(script);
+		var param = $(SOL.content).data('sol-tabs-param');
+
+		panel.jsLoader(script,param);
 	}
 }
 
 var SF = new SoLFunction();
 
+var webCap = new WebCap();
 	
 $(document).ready(function(){
 	var loadScript = function(url) {
@@ -297,6 +303,9 @@ $(document).ready(function(){
 			onLoad:function(panel) {
 				// 读取DOM完成后,执行对应的js函数
 				var param = panel.panel('options').solparam;
+				if(param.isSolScript)
+					return;
+					
 				var script = param.url.substring(6).replace('/',"_");
 
 				if(!$(SOL.content).data('sol-tabsload-' + script)) {
@@ -305,6 +314,8 @@ $(document).ready(function(){
 					// 延迟加载js 防止DOM读取不完整
 					$(SOL.content).data('sol-tabs-panel',panel);
 					$(SOL.content).data('sol-tabs-script',script);
+					$(SOL.content).data('sol-tabs-param',param);
+					
 					setTimeout('SF.loadjs()',100);
 				}
 			}
@@ -322,18 +333,23 @@ $(document).ready(function(){
 		$('body').layout('collapse','east');
 		
 		// 摄像头
-		SolConfig.prototype.cap = document.getElementById("WebVideoCap1");
-		SOL.cap.stop();
-		SOL.cap.hiddenControllButtons();
-		SOL.cap.autofill(636,false);
-		$(SOL.capDialog).find("#cap_btn_cap").click(function(){
-			SOL.cap.cap();
+		$(SOL.loadCap).click(function() {
+			if(!$(SOL.content).tabs('exists','摄像头')) {
+				$(SOL.content).tabs('add',{title:'摄像头',href:'cap.html',solparam:{isSolScript:true}});
+			}
 		});
-		$(SOL.capDialog).find('#dlg-save').click(function() {
-			var callback = $(SOL.capDialog).data('callback');
-			callback(SOL.cap.jpegBase64Data);
-			$(SOL.capDialog).dialog('close');
-		});
+//		SolConfig.prototype.cap = document.getElementById("WebVideoCap1");
+//		SOL.cap.stop();
+//		SOL.cap.hiddenControllButtons();
+//		SOL.cap.autofill(636,false);
+//		$(SOL.capDialog).find("#cap_btn_cap").click(function(){
+//			SOL.cap.cap();
+//		});
+//		$(SOL.capDialog).find('#dlg-save').click(function() {
+//			var callback = $(SOL.capDialog).data('callback');
+//			callback(SOL.cap.jpegBase64Data);
+//			$(SOL.capDialog).dialog('close');
+//		});
 	}
 	
 	init();

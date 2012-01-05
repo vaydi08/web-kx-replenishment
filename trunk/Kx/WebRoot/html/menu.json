@@ -26,6 +26,10 @@
 	"text":"核定数据",
 	"iconCls":"icon-gears",
 	"attributes":{"url":"/html/stock/CheckProductManager","ext":"html"}
+	},{
+	"text":"已作核定",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/stock/Checked","ext":"html"}
 	}]
 },{
 "text":"智能比对",

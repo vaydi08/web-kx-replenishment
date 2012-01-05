@@ -1,8 +1,11 @@
 (function($) {
 	$.fn.order_my = function() {
+		var content = $(this);
+		var C = function(name) {
+			return content.find(name);
+		}
 		var ctrl = {
-			content : $(this),
-			ListTable : $(this).find('#listTable')
+			ListTable : '#listTable'
 		}
 		
 		var statusMap = {'-1':{text:'已取消',color:'#708090'},
@@ -15,9 +18,22 @@
 		};
 
 		var orderInfo = function(row) {
-			if(row) {
-				location.href = "order!orderInfo.action?input.id=" + row.id
+			var title = '订单明细';
+			var url = '../url.action?url=/html/order/info&ext=html';
+			var param = {url : '/html/order/info',id:row.id}
+			// 生成tabs
+			if($(SOL.content).tabs('exists',title)) {
+				$(SOL.content).tabs('select',title);
+				
+				var panel = $(SOL.content).tabs('getTab',title);
+				panel.order_info(param);
+			} else {
+				$(SOL.content).tabs('add',{title:title,href:url,solparam:param});
 			}
+		}
+		var orderTake = function() {
+			var row = ctrl.ListTable.datagrid('getSelected');
+			
 		}
 		// 表格
 		var gridConfig = {
@@ -33,8 +49,9 @@
 				text:'订单信息',
 				iconCls:'icon-print',
 				handler:function() {
-					var row = ctrl.ListTable.datagrid('getSelected');
-					orderInfo(row);
+					var row = C(ctrl.ListTable).datagrid('getSelected');
+					if(row)
+						orderInfo(row);
 					}
 				},{
 				id:'btncancelorder',
@@ -61,9 +78,10 @@
 		        {field:'id',title:'订单编号',width:120},
 		        {field:'pname',title:'产品名称',width:80},
 		        {field:'pcode',title:'产品代码',width:80},
-		        {field:'shopname',title:'shopname',width:40},
+		        {field:'shopname',title:'订购门店',width:40},
 		        {field:'fromwho',title:'下单人员',width:80},
 		        {field:'num',title:'订购数量',width:80},
+		        {field:'weight',title:'订购重量',width:80},
 		        {field:'ordertime',title:'下单时间',width:40},
 		        {field:'status',title:'处理状态',width:40,
 		        	formatter : function(value,row,index) {
@@ -76,6 +94,7 @@
 			}
 		};
 		
-
+		// 初始化表单
+		C(ctrl.ListTable).datagrid(gridConfig);
 	}
 })(jQuery);
