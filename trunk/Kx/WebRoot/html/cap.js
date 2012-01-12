@@ -1,6 +1,13 @@
 var WebCap = function() {
 	var isloaded = false;
 	
+	WebCap.prototype.load = function() {
+		var cap = document.getElementById("WebVideoCap1");
+		cap.onreadystatechange = function() {
+			alert(cap.readyState);
+		}
+	}
+	
 	WebCap.prototype.initCap = function() {
 		if(!isloaded) {
 			var cap = document.getElementById("WebVideoCap1");

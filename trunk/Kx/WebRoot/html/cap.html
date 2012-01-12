@@ -1,3 +1,13 @@
+<script type="text/javascript" for="WebVideoCap1" event="onreadystatechange">
+var num = $('body').data('sol-load-num') || 0;
+$("body").data('sol-load-num',++num);
+
+if($('body').data('sol-load-num') > 1) {
+	$('#capStatusDiv').text('摄像头已加载');
+
+	$('#loadCap').hide();
+}
+</script>
 <div id="cap" buttons="#cap-dlg-buttons" title="摄像头" class="easyui-dialog" modal="true" closed="true" style="width:700px;height:350px"> 
 	    <object classid="clsid:34681DB3-58E6-4512-86F2-9477F1A9F3D8"
 			id="WebVideoCap1"  codebase="../cabs/Package.cab#version=1,0,0,50" width="636" height="238">

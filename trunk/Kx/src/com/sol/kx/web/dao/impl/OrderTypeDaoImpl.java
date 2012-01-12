@@ -20,12 +20,22 @@ public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 	
 	public List<OrderType> findUntake(int page,int pageSize) throws Exception {
 		StringBuilder sb = new StringBuilder();
-
-		sb.append("select * from(select top ").append(pageSize).append(" * From (");
-		sb.append("select top ").append(page * pageSize).append(SQL_MAIN_UNTAKE.substring(6)).append(") find1 order by id asc) find2 order by id desc");
-
+		if(page > 1) {
+			sb.append("declare @id nvarchar(100);");
+			sb.append("select @id=min(id) from (select top ")
+			.append(page * pageSize - pageSize)
+			.append(" id from order_type where status>1 order by id desc) tb1;");
+		}
+		sb.append("set ROWCOUNT ").append(pageSize).append(";");
+		sb.append(SQL_MAIN_UNTAKE);
+		if(page > 1)
+			sb.append(" and id<@id");
+		sb.append(" order by od.id desc;");
+		sb.append("set ROWCOUNT 0");
+		
 		return dataConsole.find(sb.toString(),OrderType.class,
-				dataConsole.parseSmap(OrderType.class, "id","pname","shopname","pcode","fromwho","ordertime","num"),
+				dataConsole.parseSmap(OrderType.class,
+						"id","pname","shopname","pcode","fromwho","ordertime","status","num","weight"),
 				null);
 	}
 	
@@ -80,14 +90,10 @@ public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 	private String SQL_MAIN_ALL;
 	
 	public List<OrderType> findAll(int page,int pageSize) throws Exception {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("select * from(select top ").append(pageSize).append(" * From (");
-		sb.append("select top ").append(page * pageSize).append(SQL_MAIN_ALL.substring(6)).append(") find1 order by id asc) find2 order by id desc");
-		
-		return dataConsole.find(sb.toString(),OrderType.class,
-				dataConsole.parseSmap(OrderType.class, "id","pname","shopname","pcode","fromwho","ordertime","status","username","num"),
-				null);
+		return dataConsole.find(SQL_MAIN_ALL, OrderType.class, 
+				dataConsole.parseSmap(OrderType.class,
+						"id","pname","shopname","pcode","fromwho","ordertime","status","num","weight"),
+					null);
 	}
 	
 	@Value("${sql.order.all.findcount}")
