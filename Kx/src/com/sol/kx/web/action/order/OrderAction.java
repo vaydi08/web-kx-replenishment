@@ -13,10 +13,13 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionContext;
 import com.sol.kx.web.action.BaseAction;
 import com.sol.kx.web.common.Constants;
+import com.sol.kx.web.dao.pojo.OrderFeedback;
 import com.sol.kx.web.dao.pojo.OrderType;
 import com.sol.kx.web.dao.pojo.SysUser;
 import com.sol.kx.web.service.BaseService;
+import com.sol.kx.web.service.OrderFeedbackService;
 import com.sol.kx.web.service.OrderService;
+import com.sol.kx.web.service.bean.PagerBean;
 
 @Controller
 @Scope("session")
@@ -32,11 +35,13 @@ public class OrderAction extends BaseAction<OrderType>{
 	@Autowired
 	private OrderService orderService;
 	
+	@Autowired
+	private OrderFeedbackService orderFeedbackService;
 	
 	// 首页 未处理订单
 	public String managerUntake() {		
 		pagerBean = orderService.findUntake(pagerBean,((SysUser) ActionContext.getContext().getSession().get(Constants.SESSION_USER)).getId());
-		return DATA;
+		return JSONDATA;
 	}
 	
 	// 首页 自身订单
@@ -47,10 +52,11 @@ public class OrderAction extends BaseAction<OrderType>{
 	
 	public String managerAll() {
 		pagerBean = orderService.findAll(pagerBean);
-		return DATA;
+		return JSONDATA;
 	}
 	
 	private OrderType order;
+	private PagerBean<OrderFeedback> feedbackBean;
 	
 	public String orderTake() {
 		input.setStatus(OrderType.STATUS_2_Taked);
@@ -88,6 +94,10 @@ public class OrderAction extends BaseAction<OrderType>{
 	
 	public String orderInfo() {
 		order = orderService.get(input.getId());
+		
+		OrderFeedback feedback = new OrderFeedback();
+		feedback.setOrderid(input.getId());
+		this.feedbackBean = orderFeedbackService.find2(feedback);
 		return "orderInfo";
 	}
 	
@@ -129,6 +139,10 @@ public class OrderAction extends BaseAction<OrderType>{
 
 	public List getProductList() {
 		return productList;
+	}
+
+	public PagerBean<OrderFeedback> getFeedbackBean() {
+		return feedbackBean;
 	}
 
 	
