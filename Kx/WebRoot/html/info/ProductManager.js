@@ -13,7 +13,8 @@
 			Toolbar : {
 				Add : $(this).find('#btn_add'),
 				Edit : $(this).find('#btn_edit'),
-				Del : $(this).find('#btn_del')
+				Del : $(this).find('#btn_del'),
+				Print : $(this).find('#btn_print')
 			},
 			Dialog : $(this).find('#dlg'),
 			Form : $(this).find('#form'),
@@ -31,6 +32,17 @@
 				Cname : $(this).find('#cname')
 			}
 		}
+		
+		ctrl.Toolbar.Print.click(function() {
+			var param = ctrl.ListTable.datagrid('options').queryParams;
+			var query = [];
+			for(var key in param) {
+				query.push(key + "=" + param[key]);
+			}
+			
+			var pstr = query.length > 0 ? '?' + encodeURI(query.join('&')) : '';
+			window.open('info/ProductPrint.html' + pstr);
+		});
 	
 		// From提交情况
 		function onSave() {
@@ -185,6 +197,7 @@
 				});
 			}
 		});
+		
 		// 打开摄像头对话框
 		ctrl.Pic.Startcap.click(function() {
 			SF.openCap(function(result){

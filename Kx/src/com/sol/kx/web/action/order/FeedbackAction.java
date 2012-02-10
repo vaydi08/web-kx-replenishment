@@ -28,7 +28,7 @@ public class FeedbackAction extends BaseAction<OrderFeedback>{
 			if(feedback.getSettime().getTime() >= lastFeedback.getSettime().getTime())
 				lastFeedback = feedback;
 		pagerBean.setReserve(new Object[]{lastFeedback.getId()});
-		return DATA;
+		return JSONDATA;
 	}
 	
 	@Override

@@ -10,8 +10,8 @@
 		
 		var statusMap = {'-1':{text:'已取消',color:'#708090'},
 			'1':{text:'等待处理',color:'#00FFFF'},
-			'2':{text:'已接单,等待确认',color:'#D2691E'},
-			'3':{text:'供应商反馈',color:'#00008B'},
+			'2':{text:'已接单',color:'#D2691E'},
+			'3':{text:'联系供应商',color:'#00008B'},
 			'4':{text:'供应商发货',color:'#1E90FF'},
 			'5':{text:'发送产品',color:'#D2B48C'},
 			'6':{text:'订购完成',color:'#00FFFF'}
@@ -31,20 +31,11 @@
 				$(SOL.content).tabs('add',{title:title,href:url,solparam:param});
 			}
 		}
-		var orderTake = function() {
-			var row = ctrl.ListTable.datagrid('getSelected');
-			
-		}
 		// 表格
 		var gridConfig = {
 			title:"订单列表",
 			url:'../order/order!managerAll.action',
 			toolbar:[{
-				id:'btngetorder',
-				text:'处理',
-				iconCls:'icon-print',
-				handler:orderTake
-				},{
 				id:'btngetorder',
 				text:'订单信息',
 				iconCls:'icon-print',
@@ -53,27 +44,7 @@
 					if(row)
 						orderInfo(row);
 					}
-				},{
-				id:'btncancelorder',
-				text:'取消订单',
-				iconCls:'icon-remove',
-				handler:function(){
-					var row = ctrl.ListTable.datagrid('getSelected');
-					if(row) {
-						$.messager.prompt('取消确认', '确定要取消此订单,订单取消后就不能再进行处理<br/>请输入订单取消的原因:', function(r){
-							if(r!= null && r != '') {
-								$.post('order!orderCancel.action',{'input.id':row.id,'input.cancelReason':r},function(data){
-									var result = eval('(' + data + ')');
-									if(result.success)
-										ctrl.ListTable.datagrid('reload');
-									else
-										$.messager.show({title:"Error",msg:result.msg});
-								});
-							}
-						});
-					}
-				}
-			}],
+				}],
 			columns:[[
 		        {field:'id',title:'订单编号',width:120},
 		        {field:'pname',title:'产品名称',width:80},

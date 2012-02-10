@@ -44,6 +44,12 @@ public class InfoProductAction extends BaseAction<InfoProduct>{
 		return new InfoProduct();
 	}
 
+	public String find() {
+		InfoProduct obj = defaultQuery2();
+		pagerBean = infoProductService.find2(obj);
+		return JSONDATA;
+	}
+	
 	private String picType;
 	private File picFile;
 	private String picData;

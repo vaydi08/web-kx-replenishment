@@ -109,25 +109,13 @@ public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 	public OrderType get(Integer id) throws Exception {
 		Map<String,Class<?>> smap = dataConsole.parseSmap(OrderType.class,
 				"id","fromwho","pname","pcode","weight",
+				"msWeight","msStand","pstand","remark",
 				"image","shopname","ordertime","num",
-				"requesttime","username","gettime","status");
+				"requesttime","username","gettime","status",
+				"canceltime","cancelReason");
 		List<Object> params = new ArrayList<Object>(1);
 		params.add(id);
 		return dataConsole.get(OrderType.class, SQL_GET, smap, params);
-	}
-	
-	// 选择产品
-	@Value("${sql.order.product.get}")
-	private String SQL_CHOOSEPRODUCT;
-	
-	public List findChooseProduct(String pcode) throws Exception {
-		List<Object> params = new ArrayList<Object>(1);
-		params.add(pcode);
-		
-		return null;
-//		return dataConsole.find(SQL_CHOOSEPRODUCT, InfoProductDetail.class, 
-//				dataConsole.parseSmap(InfoProductDetail.class, 
-//						"id","quality","image","pweight","stand","pname"), params);
 	}
 	
 	// 订购统计
@@ -141,14 +129,5 @@ public class OrderTypeDaoImpl extends BaseDaoImpl implements OrderTypeDao{
 		
 		return dataConsole.get(OrderCount.class, SQL_ORDERCOUNT, dataConsole.parseSmap(OrderCount.class, 
 				"untake","mytake","alert"), params);
-	}
-	
-	
-	
-	@Override
-	protected <X> X get(Class<X> clazz, String sql, Integer id)
-			throws Exception {
-		// TODO Auto-generated method stub
-		return super.get(clazz, sql, id);
 	}
 }

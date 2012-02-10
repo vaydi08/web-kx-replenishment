@@ -5,6 +5,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.Map;
 
+import org.json.JSONObject;
+
 public class Pojo {
 
 	private static final long serialVersionUID = 1L;
@@ -49,6 +51,11 @@ public class Pojo {
 
 	public void setPrefix(String prefix) {
 		this.prefix = prefix;
+	}
+	
+	public String toJSONString() {
+		JSONObject json = new JSONObject(this);
+		return json.toString();
 	}
 	
 	@Override

@@ -18,7 +18,6 @@ public interface OrderTypeDao extends BaseDao {
 	public int findAllCount() throws SQLException;
 	
 	public OrderType get(Integer id) throws Exception;
-	
-	public List findChooseProduct(String pcode) throws Exception;
+
 	public OrderCount findOrderCount(Integer userid) throws Exception;
 }

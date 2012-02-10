@@ -46,6 +46,7 @@
 "text":"订购管理",
 "iconCls":"icon-stock",
 "children":[{
+	"id":"myOrder",
 	"text":"我的订单",
 	"iconCls":"icon-gears",
 	"attributes":{"url":"/html/order/my","ext":"html"}
