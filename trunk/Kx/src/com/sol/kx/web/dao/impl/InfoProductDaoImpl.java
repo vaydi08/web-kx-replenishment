@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.sol.util.c3p0.dataEntity2.Criteria;
+import org.sol.util.c3p0.dataEntity2.SelectEntity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -28,6 +29,15 @@ public class InfoProductDaoImpl extends BaseDaoImpl implements InfoProductDao {
 						"id","type1","type1name","type2","type2name","type3","type3name",
 						"type4","type4name","pname","pcode","unit","image"), 
 				criteria.getParamListWithoutId());
+	}
+	
+	@Override
+	public List find2(SelectEntity entity) throws Exception {
+		entity.getCriteria().order("pcode");
+		return dataConsole.find(entity.getFullSql(SQL_FINDPRODUCT), entity.getClazz(), 
+				dataConsole.parseSmap(InfoProduct.class, 
+						"type1name","type2name","type3name","type4name","pname","pcode","image")
+				, entity.getCriteria().getParamList());
 	}
 	
 	// 查找是否存在重复记录

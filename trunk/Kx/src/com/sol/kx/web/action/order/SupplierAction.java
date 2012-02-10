@@ -28,7 +28,7 @@ public class SupplierAction extends BaseAction<OrderSupplier>{
 	
 	public String manager2() {
 		pagerBean = orderSupplierService.find2(input);
-		return DATA;
+		return JSONDATA;
 	}
 	
 	public String suppliers() {

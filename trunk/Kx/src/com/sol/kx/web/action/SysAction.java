@@ -45,7 +45,7 @@ public class SysAction extends BaseAction<SysUser> {
 			ActionContext.getContext().getSession().put(Constants.SESSION_USER, user);
 			result = ResultBean.RESULT_SUCCESS(user);
 		} else {
-			result = ResultBean.RESULT_ERR("用户名 / 密码有误,请重新尝试登录",user);
+			result = ResultBean.RESULT_ERR("用户名 / 密码有误,请重新尝试登录",input);
 		}
 		return RESULT;
 	}

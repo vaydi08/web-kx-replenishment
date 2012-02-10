@@ -35,6 +35,18 @@ public class OrderType extends Pojo{
 	@Column(name = "weight")
 	private Double weight;
 	
+	@Column(name = "msWeight")
+	private Double msWeight;
+	
+	@Column(name = "msStand")
+	private String msStand;
+	
+	@Column(name = "stand")
+	private String pstand;
+	
+	@Column(name = "remark")
+	private String remark;
+	
 	@Column(name = "ordertime")
 	private Timestamp ordertime;
 	
@@ -227,6 +239,38 @@ public class OrderType extends Pojo{
 	
 	public String json() {
 		return new JSONObject(this).toString();
+	}
+
+	public Double getMsWeight() {
+		return msWeight;
+	}
+
+	public void setMsWeight(Double msWeight) {
+		this.msWeight = msWeight;
+	}
+
+	public String getMsStand() {
+		return msStand;
+	}
+
+	public void setMsStand(String msStand) {
+		this.msStand = msStand;
+	}
+
+	public String getPstand() {
+		return pstand;
+	}
+
+	public void setPstand(String pstand) {
+		this.pstand = pstand;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 }

@@ -17,8 +17,8 @@
 		
 		var statusMap = {'-1':{text:'已取消',color:'#708090'},
 			1:{text:'等待处理',color:'#00FFFF'},
-			2:{text:'已接单,等待确认',color:'#D2691E'},
-			3:{text:'供应商反馈',color:'#00008B'},
+			2:{text:'已接单',color:'#D2691E'},
+			3:{text:'联系供应商',color:'#00008B'},
 			4:{text:'供应商发货',color:'#1E90FF'},
 			5:{text:'发送产品',color:'#D2B48C'},
 			6:{text:'订购完成',color:'#00FFFF'}};
@@ -69,7 +69,7 @@
 					str.push('<span ' + (data.status == i ? 'style="color:' + statusMap[i].color + '"' : '') + '>' + statusMap[i].text + '</span>');
 				}
 			} else
-				str.push('<span style="color:' + statusMap['-1'].color + '">' + statusMap['-1'].text + '</span>');
+				str.push('<span style="color:' + statusMap['-1'].color + '">' + statusMap['-1'].text + '</span><span style="padding-left:10px">' + data.cancelReason + ' : ' + data.canceltime + '</span>');
 				
 			C(ctrl.Status).html(str.join(' -> '));
 		}

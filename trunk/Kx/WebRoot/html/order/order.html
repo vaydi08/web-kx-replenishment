@@ -12,11 +12,21 @@
 </tr>
 
 <tr>
+<td height="30">　　主石规格:</td><td>&nbsp;</td><td><input type="text" class="easyui-validatebox combo" name="input.msStand" id="msStand" style="width:150px"/></td>
+<td>主石重量:</td><td>&nbsp;</td><td><input type="text" class="easyui-numberbox combo" min="0" precision="3" name="input.msWeight" id="msWeight" style="width:150px"/></td>
+</tr>
+
+<tr>
+<td height="30">　　产品规格:</td><td>&nbsp;</td><td><input type="text" class="easyui-validatebox combo" name="input.pstand" id="pstand" style="width:150px"/></td>
+<td>其他要求:</td><td>&nbsp;</td><td><input type="text" class="easyui-validatebox combo" name="input.remark" id="remark" style="width:150px"/></td>
+</tr>
+
+<tr>
 <td height="30">要求发货期限:</td><td>&nbsp;</td><td colspan="4"><input type="text" class="easyui-datetimebox" readonly="readonly" required="true" name="input.requesttime" id="requesttime" style="width:150px" showSeconds="false"/></td>
 </tr>
 
 <tr>
-<td height="30">请求订购产品:</td><td>&nbsp;</td><td><span id="order_pname"></span><input type="hidden" name="input.pid" id="pid" /><input type="hidden" name="input.status" value="0" /></td>
+<td height="30">请求订购产品:</td><td>&nbsp;</td><td><span id="order_pname"></span><input type="hidden" name="input.pid" id="pid" /><input type="hidden" id="status" name="input.status" value="1" /></td>
 <td>产品代码:</td><td>&nbsp;</td><td><span id="order_pcode"></span></td>
 </tr>
 

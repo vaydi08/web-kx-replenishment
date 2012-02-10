@@ -78,7 +78,8 @@
 				$.post('../stock/check!stockCheckSum.action',param,function(data){
 					var td = ctrl.CountTable;
 					for(var key in td) {
-						td[key].text((data[key]) ? data[key] : 0);
+						var d = Number(data[key]).toFixed(3);
+						td[key].text((d) ? d : 0);
 					}
 					
 				},'json');

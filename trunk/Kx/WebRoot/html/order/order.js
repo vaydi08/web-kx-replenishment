@@ -12,6 +12,7 @@
 				Submit : '#btn_submit',
 				Shop : '#shop',
 				Pid : '#pid',
+				Status : '#status',
 				
 				PnameText : '#order_pname',
 				PcodeText : '#order_pcode'
@@ -170,8 +171,9 @@
 					var ret = $.parseJSON(data);
 					if(ret.success) {
 						$.messager.alert('消息','订单已经成功提交');
-						removeLoaded();
-						$(SOL.content).tabs('close','订购货品');
+						C(ctrl.Input.Form).form('clear');
+						C(ctrl.Input.Status).val('1');
+						$(SOL.menu).tree('select',$(SOL.menu).tree('find','myOrder').target);
 					} else {
 						SOL.showError(ret.msg);
 					}
