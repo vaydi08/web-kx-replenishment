@@ -137,14 +137,10 @@ public class StockCheckDaoImpl extends BaseDaoImpl implements StockCheckDao {
 		List<Object> param = new ArrayList<Object>();
 		param.add(pid);
 		param.add(shopid);
-		param.add(shopid);
-		param.add(pid);
-		param.add(shopid);
-		param.add(shopid);
 		
 		return dataConsole.get(StockCheckSum.class, SQL_SUM, 
 				dataConsole.parseSmap(StockCheckSum.class, 
-						"shop_stocktype1","shop_stocktype2",
+						"type1name","type2name","shop_stocktype1","shop_stocktype2",
 						"shop_product_stocktype1","shop_product_stocktype2",
 						"sum_type1_stocktype1","sum_type1_stocktype2",
 						"sum_type2_stocktype1","sum_type2_stocktype2"), param);

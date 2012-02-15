@@ -1,6 +1,8 @@
 package com.sol.kx.web.dao.pojo;
 
 public class StockCheckSum extends Pojo{
+	private String type1name;
+	private String type2name;
 	private Integer shop_stocktype1;
 	private Integer shop_stocktype2;
 	private Integer shop_product_stocktype1;
@@ -57,5 +59,17 @@ public class StockCheckSum extends Pojo{
 	}
 	public void setSum_type2_stocktype2(Double sumType2Stocktype2) {
 		sum_type2_stocktype2 = sumType2Stocktype2;
+	}
+	public String getType1name() {
+		return type1name;
+	}
+	public void setType1name(String type1name) {
+		this.type1name = type1name;
+	}
+	public String getType2name() {
+		return type2name;
+	}
+	public void setType2name(String type2name) {
+		this.type2name = type2name;
 	}
 }
