@@ -61,19 +61,19 @@ public class CheckAction extends BaseAction<StockCheck>{
 	
 	public String stockCheckSum() {
 		StockCheckSum sum = stockCheckService.findStockCheckSum(input);
-		JSONObject json = new JSONObject();
-		try {
-			json.put("shop_stocktype1", sum.getShop_stocktype1());
-			json.put("shop_stocktype2", sum.getShop_stocktype2());
-			json.put("shop_product_stocktype1", sum.getShop_product_stocktype1());
-			json.put("shop_product_stocktype2", sum.getShop_product_stocktype2());
-			json.put("sum_type1_stocktype1", sum.getSum_type1_stocktype1());
-			json.put("sum_type1_stocktype2", sum.getSum_type1_stocktype2());
-			json.put("sum_type2_stocktype1", sum.getSum_type2_stocktype1());
-			json.put("sum_type2_stocktype2", sum.getSum_type2_stocktype2());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		JSONObject json = new JSONObject(sum);
+//		try {
+//			json.put("shop_stocktype1", sum.getShop_stocktype1());
+//			json.put("shop_stocktype2", sum.getShop_stocktype2());
+//			json.put("shop_product_stocktype1", sum.getShop_product_stocktype1());
+//			json.put("shop_product_stocktype2", sum.getShop_product_stocktype2());
+//			json.put("sum_type1_stocktype1", sum.getSum_type1_stocktype1());
+//			json.put("sum_type1_stocktype2", sum.getSum_type1_stocktype2());
+//			json.put("sum_type2_stocktype1", sum.getSum_type2_stocktype1());
+//			json.put("sum_type2_stocktype2", sum.getSum_type2_stocktype2());
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//		}
 		stockCheckSum = json.toString();
 		return "stockCheckSum";
 	}

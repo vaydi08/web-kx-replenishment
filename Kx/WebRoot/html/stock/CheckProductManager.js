@@ -28,16 +28,7 @@
 			Save : $(this).find('#check_btn_save'),
 			Undo : $(this).find('#check_btn_undo')
 		},
-		CountTable : {
-			shop_stocktype1 : $(this).find('#shop_stocktype1'),
-			shop_stocktype2 : $(this).find('#shop_stocktype2'),
-			shop_product_stocktype1 : $(this).find('#shop_product_stocktype1'),
-			shop_product_stocktype2 : $(this).find('#shop_product_stocktype2'),
-			sum_type1_stocktype1 : $(this).find('#sum_type1_stocktype1'),
-			sum_type1_stocktype2 : $(this).find('#sum_type1_stocktype2'),
-			sum_type2_stocktype1 : $(this).find('#sum_type2_stocktype1'),
-			sum_type2_stocktype2 : $(this).find('#sum_type2_stocktype2')
-		},
+		CountTable : $(this).find('#countTable'),
 		CheckImgDiv : {
 			Panel : $(this).find('#checkImgDiv'),
 			Img : $(this).find('#checkImgPreview')
@@ -75,13 +66,15 @@
 					'input.pid' :ctrl.content.data('stock-check-row').id
 				}
 				
+				ctrl.CountTable.datagrid({width:270,style:{'padding':'0px'},pagination:false,fitColumns:false,rownumbers:false});
+				
+				var dgData = {total:122,rows:[]};
 				$.post('../stock/check!stockCheckSum.action',param,function(data){
-					var td = ctrl.CountTable;
-					for(var key in td) {
-						var d = Number(data[key]).toFixed(3);
-						td[key].text((d) ? d : 0);
-					}
-					
+					dgData.rows.push({title:data.type1name + ' 已核定',type1:data.shop_stocktype1,type2:data.shop_stocktype2});
+					dgData.rows.push({title:'产品已核定',type1:data.shop_product_stocktype1,type2:data.shop_product_stocktype2});
+					dgData.rows.push({title:data.type1name + ' 约估克重',type1:Number(data.sum_type1_stocktype1).toFixed(3),type2:Number(data.sum_type1_stocktype2).toFixed(3)});
+					dgData.rows.push({title:data.type2name + ' 约估克重',type1:Number(data.sum_type2_stocktype1).toFixed(3),type2:Number(data.sum_type2_stocktype2).toFixed(3)});
+					ctrl.CountTable.datagrid('loadData',dgData);
 				},'json');
 			}
 		});
