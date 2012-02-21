@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>main.html</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+		<!-- NORMAL STYLE -->
+		<link rel="stylesheet" type="text/css" href="../images/style_easyui.css" />
+		
+		<!-- EASYUI -->
+		<link rel="stylesheet" type="text/css" href="../script/easyui/themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="../script/easyui/themes/icon.css" />
+	
+		<script type="text/javascript" src="../script/easyui/jquery-1.6.min.js"></script>
+		<script type="text/javascript" src="../script/easyui/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="../script/easyui/jquery.edatagrid.js"></script>
+		<script type="text/javascript" src="../script/easyui/locale/easyui-lang-zh_CN.js"></script>
+		
+		<!-- EXTENSION -->
+		<script type=text/javascript src="../script/easyui/datagrid-detailview.js"></script>
+	
+		<!-- DEFAULT -->
+		<script type="text/javascript" src="solJsLoader.js"></script>
+		<script type="text/javascript" src="cap.js"></script>
+		<script type="text/javascript" src="sol.js"></script>
+		
+		<script type="text/javascript" src="../script/sol/categoryType4Select.js"></script>
+
+		<!-- SOL JS -->
+		<script type="text/javascript" src="info/ProductManager.js"></script>
+		<script type="text/javascript" src="info/ShopManager.js"></script>
+		<script type="text/javascript" src="info/CategoryManager.js"></script>
+		<script type="text/javascript" src="info/QuickLocator.js"></script>
+		<script type="text/javascript" src="stock/CheckProductManager.js"></script>
+		<script type="text/javascript" src="stock/Checked.js"></script>
+		<script type="text/javascript" src="compare/Supply.js"></script>
+		<script type="text/javascript" src="compare/Cargo.js"></script>
+		<script type="text/javascript" src="sys/UserManager.js"></script>
+		<script type="text/javascript" src="sys/AuthManager.js"></script>
+		<script type="text/javascript" src="sys/ReloadConfig.js"></script>
+		<script type="text/javascript" src="order/my.js"></script>
+		<script type="text/javascript" src="order/info.js"></script>
+		<script type="text/javascript" src="order/all.js"></script>
+		<script type="text/javascript" src="order/unprocess.js"></script>
+		<script type="text/javascript" src="order/order.js"></script>
+		<script type="text/javascript" src="order/supplier.js"></script>
+		
+		
+	</head>
+	<body class="easyui-layout">
+	
+		<div region="north" split="false" style="height:71px;background-color:#f6ab46" noheader="true" border="false">
+			<div style="text-align:right;width:100%;height:71px;background:url('../images/title_bar.jpg') no-repeat;" id="topHref">
+			<a href="javascript:void(0)" style="position:relative;top:30px;right:180px" iconCls="icon-redo" class="easyui-linkbutton" plain="true" id="loadCap">加载摄像头</a>
+			<a href="../sys!logout.action" style="position:relative;top:30px;right:150px" iconCls="icon-cancel" class="easyui-linkbutton" plain="true" id="logStatus">退出登录</a>
+			</div>
+		</div>
+	    <div region="west" split="true" title="系统菜单" style="width:150px;padding:5px;">
+	    	<ul id="menu"></ul>
+	    </div>  
+	    <div region="center" style="background:#eee;background:url('../images/background2.png');" noheader="true">
+	    	<div id="content">
+	    	</div>
+	    </div>
+	    <div region="east" title="预览视图" split="true" style="width:200px" cache="false">
+	    	<div id="view" style="padding:10px"></div>
+	    </div>
+	    <div region="south" title="Message" split="true" style="height:100px;">
+	    	<div id="message" style="padding:10px"></div>
+	    </div>
+	    
+	    
+
+	</body>
+</html>

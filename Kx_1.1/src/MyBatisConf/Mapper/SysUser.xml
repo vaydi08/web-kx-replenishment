@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "mybatis-3-mapper" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sol.kx.web.dao.sys.SysUserMapper">
+
+	<select id="select" resultType="sysUser">
+		select u.*,g.groupname,g.description 
+		from sys_user u 
+		inner join sys_group g on u.groupid=g.id order by u.id desc
+	</select>
+
+	<select id="login" parameterType="sysUser" resultType="sysUser">
+		select u.*,g.groupname,g.description from sys_user u 
+		inner join sys_group g on u.groupid=g.id 
+		where username=#{username} and password=#{password}
+	</select>
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "mybatis-3-mapper" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sol.kx.web.dao.info.InfoProductMapper">
+
+	<select id="selectByPage" parameterType="infoProduct" resultType="infoProduct">
+		<if test="page > 1">
+		declare @id nvarchar(100)
+		select @id=min(id) from (
+			select top ${page * pageSize - pageSize} id from info_product
+		<where>
+			<if test="type1 != null">type1 = #{type1}</if>
+			<if test="type2 != null">and type2 = #{type2}</if>
+			<if test="type3 != null">and type3 = #{type3}</if>
+			<if test="pname != null">and pname like '%'+#{pname}+'%'</if>
+			<if test="pcode != null">and pcode like '%'+#{pcode}+'%'</if>
+			<if test="unit != null">and unit like '%'+#{unit}+'%'</if>
+		</where>
+		order by id desc) tb1
+		</if>
+		set ROWCOUNT ${pageSize}
+		
+		select p.id as id,p.type1,type1.cname as type1name,p.type2,type2.cname as type2name,
+		p.type3,type3.cname as type3name,p.type4,type4.cname as type4name,
+		p.pname,p.pcode,p.unit,p.image 
+		from info_product p inner join info_category type1 on p.type1=type1.id 
+		inner join info_category type2 on p.type2=type2.id 
+		inner join info_category type3 on p.type3=type3.id 
+		inner join info_category type4 on p.type4=type4.id
+		<where>
+			<if test="type1 != null">type1 = #{type1}</if>
+			<if test="type2 != null">and type2 = #{type2}</if>
+			<if test="type3 != null">and type3 = #{type3}</if>
+			<if test="pname != null">and pname like '%'+#{pname}+'%'</if>
+			<if test="pcode != null">and pcode like '%'+#{pcode}+'%'</if>
+			<if test="unit != null">and unit like '%'+#{unit}+'%'</if>
+			<if test="page > 1">and p.id &lt; @id</if>
+		</where>
+		order by p.id desc
+		
+		set ROWCOUNT 0
+	</select>
+	
+	<select id="selectExport" parameterType="infoProduct" resultType="infoProduct">
+		select p.id as id,p.type1,type1.cname as type1name,p.type2,type2.cname as type2name,
+		p.type3,type3.cname as type3name,p.type4,type4.cname as type4name,
+		p.pname,p.pcode,p.unit,p.image 
+		from info_product p inner join info_category type1 on p.type1=type1.id 
+		inner join info_category type2 on p.type2=type2.id 
+		inner join info_category type3 on p.type3=type3.id 
+		inner join info_category type4 on p.type4=type4.id
+		<where>
+			<if test="type1 != null">type1 = #{type1}</if>
+			<if test="type2 != null">and type2 = #{type2}</if>
+			<if test="type3 != null">and type3 = #{type3}</if>
+			<if test="pname != null">and pname like '%'+#{pname}+'%'</if>
+			<if test="pcode != null">and pcode like '%'+#{pcode}+'%'</if>
+			<if test="unit != null">and unit like '%'+#{unit}+'%'</if>
+		</where>
+		order by p.pcode desc
+	</select>
+</mapper>

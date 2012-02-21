@@ -1,0 +1,96 @@
+<div id="queryPanel">
+	<table cellpadding="0" cellspacing="0" border="0">
+		<tr>
+			<td width="120" align="center">
+				<select id="type1">
+				</select>
+			</td>
+
+			<td width="120" align="center">
+				<select id="type2">
+				</select>
+			</td>
+
+			<td width="120" align="center">
+				<select id="type3">
+				</select>
+			</td>
+
+			<td>
+				<input id="INFO_P_queryType" menu="#INFO_P_queryValue" />
+
+				<div id="INFO_P_queryValue" style="width: 100px">
+					<div name="pname">品 名</div>
+					<div name="pcode">代 码</div>
+					<div name="unit">单 位</div>
+				</div>
+			</td>
+
+		</tr>
+	</table>
+
+</div>
+
+<div id="dlg" buttons="#INFO_P_dlg-buttons" title="类别" style="padding:10px 20px" closed="true">
+	<form id="form" method="post" enctype="multipart/form-data">
+	
+		<input type="hidden" name="input.id" id="id" />
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+		<td width="70" height="30">类　　别</td>
+		<td>
+		<input name="input.clevel" id="clevel" value="4" type="hidden"/>款　式
+		从属于 <select name="input.parent" id="parent"></select>
+		</td>
+		</tr>	
+		<tr>
+		<td height="30">类别代码</td>
+		<td><input type="text" name="input.ccode" id="ccode" required="true" validType="length[1,2]" class="easyui-validatebox"/>
+		&nbsp;&nbsp;<span id="codeMsg" style="color:red"></span>
+		</td>
+		</tr><tr>
+		<td height="30">类别名称</td>
+		<td><input type="text" name="input.cname" id="cname"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
+		</tr>
+		</table>
+		
+		<table border="0" cellpadding="0" cellspacing="0" id="capTable">
+		<tr>
+		<td>
+		<input type="radio" name="picType" class="INFO_P_picType" value="webcap" onclick="$('#INFO_P_capTr').show();$('#INFO_P_fileTr').hide()"/>摄像头照片采集&nbsp;
+		<input type="radio" name="picType" class="INFO_P_picType" value="file" onclick="$('#INFO_P_capTr').hide();$('#INFO_P_fileTr').show()"/>图片文件上传
+		</td>
+		</tr>
+		<tr id="INFO_P_capTr">
+		<td>
+		<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" id="startcam">启动摄像头</a>
+		<input type="hidden" id="INFO_P_picData" name="picData">
+		</td>
+		</tr>
+		<tr id="INFO_P_fileTr">
+		<td>
+		<input type="file" id="INFO_P_picFile" name="picFile"/>
+		</td>
+		</tr>
+		</table>
+		
+	</form>
+	
+	<div id="INFO_P_dlg-buttons">
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" id="dlg-save">保存</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" id="dlg-cancel">取消</a>
+	</div>
+</div>
+
+
+
+<div class="list">
+	<table id="listTable" toolbar="#INFO_P_toolbar"></table>
+	
+	<div id="INFO_P_toolbar">
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" id="btn_add">添加产品</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" id="btn_edit">修改产品</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" id="btn_del">删除产品</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true" id="btn_print">打印预览</a>
+	</div>
+</div>

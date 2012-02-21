@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title></title>
+    
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<!-- NORMAL STYLE -->
+	<link rel="stylesheet" type="text/css" href="../../images/style_easyui.css" />
+	
+	<!-- EASYUI -->
+	<link rel="stylesheet" type="text/css" href="../../script/easyui/themes/default/easyui.css" />
+	<link rel="stylesheet" type="text/css" href="../../script/easyui/themes/icon.css" />
+
+	<script type="text/javascript" src="../../script/easyui/jquery-1.6.min.js"></script>
+	<script type="text/javascript" src="../../script/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../../script/easyui/locale/easyui-lang-zh_CN.js"></script>
+<!-- 
+	<script type="text/javascript" src="orderTake.js"></script>
+	 -->
+	<script>
+	$(document).ready(function() {
+		var id = window.dialogArguments[0];
+		var inputData;
+
+		$.post('../../order/order!take.action',{'input.id':id},function(data) {
+				$('input').each(function() {
+					var name = $(this).attr('name');
+					if(data[name])
+						$(this).val(data[name]);
+				});
+
+				if(data.image)
+					$('#image').attr('src','../../pic.action?img=' + data.image);
+
+				$('#id').val(id);
+				
+				inputData = data;
+			},'json');
+
+		$("#listTable").datagrid({
+			height:150,
+			pagination:false,
+			title:"供应商情况列表",
+			style:{'background-color':'#fafafa'},
+			url:'../../order/feedback!manager.action?input.orderid=' + id,
+			onLoadSuccess:function(data) {
+				$("#feedbackid").val(data.reserve[0]);
+			}
+		});
+
+		$('#formTabs').tabs({
+			onSelect : function(title) {
+				if(title == '供应商无货') {
+					if(!$('#formTabs').data('sol-tabs-nopost')) {
+						$('#formTabs').data('sol-tabs-nopost',true);
+
+						var form = $('#failForm')
+						form.find('#feedbackorderid').val(id);
+						
+						form.find("#supplier").combobox({
+							url:"../../order/supplier!suppliers.action",
+							valueField:'text',
+							onSelect:function(record) {
+								form.find("#supplier_contact").val(record.reserve);
+							},
+							onLoadSuccess:function() {
+								var data = $(this).combobox('getData');
+								if(data.length > 0)
+									form.find("#supplier_contact").val(data[0].reserve);
+							}
+						});
+					}
+				}
+
+				if(title == '部分发货') {
+					if(!$('#formTabs').data('sol-tabs-subfail')) {
+						$('#formTabs').data('sol-tabs-subfail',true);
+
+						var form = $('#subfailForm')
+						form.find('#feedbackorderid').val(id);
+						
+						form.find("#supplier").combobox({
+							url:"../../order/supplier!suppliers.action",
+							valueField:'text',
+							onSelect:function(record) {
+								form.find("#supplier_contact").val(record.reserve);
+							},
+							onLoadSuccess:function() {
+								var data = $(this).combobox('getData');
+								if(data.length > 0)
+									form.find("#supplier_contact").val(data[0].reserve);
+							}
+						});
+					}
+				}
+			}
+		});
+
+		$('#successForm').find('#btn_submit').click(function() {
+			var param = {
+				'input.id' : id,
+				'input.status' : 4,
+
+				'feedbackid' : $('#feedbackid').val(),
+				'feedback' : $('#successForm').find('#feedback').val()
+			}
+
+			$.post('../../order/order!repostOk.action',param,function(data) {
+				if(data.success)
+					window.close();
+				else
+					$.messager.alert("Error",data.msg);
+			},'json');
+		});
+
+		function failFormSubmit(form) {
+			var param = {
+				'input.id' : id,
+				'input.status' : 3,
+
+				'feedbackid' : $('#feedbackid').val(),
+				'feedback' : form.find('#feedback').val(),
+
+				'supplier' : form.find("#supplier").combobox('getValue'),
+				'contact' : form.find('#supplier_contact').val()
+			}
+
+			$.post('../../order/order!repostFail.action',param,function(data) {
+				if(data.success)
+					window.close();
+				else
+					$.messager.alert("Error",data.msg);
+			},'json');
+		}
+		$('#failForm').find('#btn_submit').click(function() {
+			failFormSubmit($('#failForm'));
+		});
+		$('#subfailForm').find('#btn_submit').click(function() {
+			failFormSubmit($('#subfailForm'));
+		});
+		
+		$('#cancelOrder').click(function() {
+			$.messager.prompt('取消确认', '确定要取消此订单,订单取消后就不能再进行处理<br/>请输入订单取消的原因:', function(r){
+				if(r!= null && r != '') {
+					$.post('../../order/order!orderCancel.action',{'input.id':id,'input.cancelReason':r},function(data){
+						if(data.success)
+							window.close();
+						else
+							$.messager.alert("Error",data.msg);
+					},'json');
+				} else {
+					$.messager.alert("消息",'请输入一个取消理由');
+				}
+			});
+		});
+	});
+	</script>
+		
+	</head>
+	<body>
+			<div class="easyui-panel" style="padding:10px;background-color:#fafafa;" title="订购信息" iconCls="icon-tip" >
+			<table border="0" cellpadding="0" cellspacing="0" width="700">
+			<tbody>
+			<tr>
+			<td width="100" height="20">订单号</td><td width="170"><input type="text" id="id" name="id" readonly="readonly" class="combo"/></td>
+			<td width="100">订购人</td><td width="170"><input type="text" id="fromwho" name="fromwho" readonly="readonly" class="combo"/></td>
+			<td rowspan="8" align="center"><img height="160" id="image"/></td>
+			</tr>
+			<tr>
+			<td height="20">产品名称</td><td><input type="text" id="pname" name="pname" readonly="readonly" class="combo"/></td>
+			<td width="100">产品代码</td><td><input type="text" id="pcode" name="pcode" readonly="readonly" class="combo"/></td>
+			</tr>
+			<tr>
+			<td height="20">订购重量</td><td><input type="text" id="weight" name="weight" readonly="readonly" class="combo"/></td>
+			<td width="100">产品规格</td><td><input type="text" id="pstand" name="pstand" readonly="readonly" class="combo"/></td>
+			</tr>
+			<tr>
+			<td height="20">主石重量</td><td><input type="text" id="msWeight" name="msWeight" readonly="readonly" class="combo"/></td>
+			<td>主石规格</td><td><input type="text" id="msStand" name="msStand" readonly="readonly" class="combo"/></td>
+			</tr>
+			<tr>
+			<td height="20">其他要求</td><td colspan="3"><input type="text" id="remark" name="remark"" readonly="readonly" class="combo"/></td>
+			</tr>
+			<tr><td colspan="4">&nbsp;</td></tr>
+			<tr>
+			<td height="20">订购门店</td><td><input type="text" id="shopname" name="shopname" readonly="readonly" class="combo"/></td>
+			<td>下单时间</td><td><input type="text" id="ordertime" name="ordertime" readonly="readonly" class="combo"/></td>
+			</tr>
+			<tr>
+			<td height="20">订购数量</td><td><input type="text" id="num" name="num" readonly="readonly" class="combo"/></td>
+			<td>请求期限</td><td><input type="text" id="requesttime" name="requesttime" readonly="readonly" class="combo"/></td>
+			</tr>
+			</tbody>
+			</table>
+			</div>
+			
+			<div class="clear"></div>
+			
+			<table id="listTable">
+			<thead>
+			<tr>
+			<th field="supplier" width="80">供应商</th>
+			<th field="contact" width="80">联系人</th>
+			<th field="ordernum" width="80">订购数量</th>
+			<th field="settime" width="80">联系时间</th>
+			<th field="feedback" width="80">反馈情况</th>
+			<th field="feedbacktime" width="80">反馈时间</th>
+			</tr>
+			</thead>
+			</table>
+			
+			<div class="clear"></div>
+			
+			<div style="background-color:#fafafa;" title="反馈情况" iconCls="icon-ok" id="formTabs">
+				<div title="正常发货" iconCls="icon-ok" style="padding:20px;">  
+			        <form id="successForm" method="post">
+			        <input type="hidden" id="feedbackid" name="input.id" />
+			       	供应商反馈情况　<input type="text" name="input.feedback" id="feedback" value="正常发货" class="combo"/>
+			        <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" iconCls="icon-ok" id="btn_submit">提　交</a>
+			        </form>
+			    </div>
+			    <div title="供应商无货" iconCls="icon-cancel" style="padding:20px;">  
+			        <form id="failForm" method="post">
+					<input type="hidden" name="input.orderid" id="feedbackorderid" />
+					<table cellpadding="0" cellspacing="0">
+					<tbody>
+					<tr>
+					<td height="25" width="100">供应商反馈情况</td><td width="150"><input type="text" name="input.feedback" id="feedback" value="无货,联系其他供应商" class="combo"/></td>
+					<td height="25" width="80">更换供应商为</td>
+					<td width="150"><select id="supplier" name="input.supplier"></select></td>
+					<td width="45">联系人</td><td><input type="text" id="supplier_contact" name="input.contact" class="combo"/></td>
+					</tr>
+					<tr>
+					<td height="25" colspan="6" align="center"><a href="javascript:void(0)" class="easyui-linkbutton" plain="true" iconCls="icon-ok" id="btn_submit">提交</a></td><td></td>
+					</tr>
+					</tbody>
+					</table>
+					</form>
+			    </div>
+			    <div title="部分发货" iconCls="icon-undo" style="padding:20px;">  
+			        <form id="subfailForm" method="post">
+					<input type="hidden" name="input.orderid" id="feedbackorderid" />
+					<table cellpadding="0" cellspacing="0">
+					<tbody>
+					<tr>
+					<td height="25" width="100">供应商反馈情况</td><td width="150"><input type="text" name="input.feedback" id="feedback" value="货品不足,联系其他供应商补足" class="combo"/></td>
+					<td height="25" width="80">更换供应商为</td>
+					<td width="150"><select id="supplier" name="input.supplier"></select></td>
+					<td width="45">联系人</td><td><input type="text" id="supplier_contact" name="input.contact" class="combo"/></td>
+					</tr>
+					<tr>
+					<td height="25" colspan="6" align="center"><a href="javascript:void(0)" class="easyui-linkbutton" plain="true" iconCls="icon-ok" id="btn_submit">提交</a></td><td></td>
+					</tr>
+					</tbody>
+					</table>
+					</form>
+			    </div>
+			
+			</div>
+
+	</body>
+</html>

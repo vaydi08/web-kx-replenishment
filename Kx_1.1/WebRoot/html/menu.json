@@ -1,0 +1,81 @@
+[
+{
+"text":"基础数据",
+"iconCls":"icon-info",
+"children":[{
+	"text":"产品数据",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/info/ProductManager","ext":"html"}
+	},{
+	"text":"门店数据",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/info/ShopManager","ext":"html"}
+	},{
+	"text":"分类列表",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/info/CategoryManager","ext":"html"}
+	},{
+	"text":"快速检索",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/info/QuickLocator","ext":"html"}
+	}]
+},{
+"text":"核定数据",
+"iconCls":"icon-stock",
+"children":[{
+	"text":"核定数据",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/stock/CheckProductManager","ext":"html"}
+	},{
+	"text":"已作核定",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/stock/Checked","ext":"html"}
+	}]
+},{
+"text":"智能比对",
+"iconCls":"icon-stock",
+"children":[{
+	"text":"比对数据",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/compare/Supply","ext":"html"}
+	},{"text":"智能分货",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/compare/Cargo","ext":"html"}
+	}]
+},{
+"text":"订购管理",
+"iconCls":"icon-stock",
+"children":[{
+	"id":"myOrder",
+	"text":"我的订单",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/order/my","ext":"html"}
+	},{"text":"全部订单",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/order/all","ext":"html"}
+	},{"text":"未处理订单",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/order/unprocess","ext":"html"}
+	},{"text":"订购货品",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/order/order","ext":"html"}
+	},{"text":"供应商列表",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/order/supplier","ext":"html"}
+	}]
+},{
+"text":"系统管理",
+"iconCls":"icon-stock",
+"children":[{
+	"text":"用户管理",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/sys/UserManager","ext":"html"}
+	},{"text":"权限分配",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/sys/AuthManager","ext":"html"}
+	},{"text":"重载配置",
+	"iconCls":"icon-gears",
+	"attributes":{"url":"/html/sys/ReloadConfig","ext":"html"}
+	}]
+}
+]
