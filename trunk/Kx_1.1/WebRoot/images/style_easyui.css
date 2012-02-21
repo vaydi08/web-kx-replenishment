@@ -1,0 +1,24 @@
+@charset "utf-8";
+*{ margin:0px; padding:0px; font-family: '微软雅黑','黑体','宋体','Arial'}
+
+body {background:#e5e5e5;font-family: '微软雅黑','黑体','宋体','Arial'}
+table {font-size:12px}
+
+a img {border:0px;}
+select {width:150px;}
+
+.clear {height:15px;}
+.topStr {padding-left:700px;padding-top:20px;font-weight:bold}
+
+#right {width:825px!important; width:820px;margin:0px;padding:10px;height:676px!important;height:700px;background-image:url('background2.png');}
+
+.hiddenDiv {display:none;width:300px;padding:10px;position:absolute;left:200px;top:200px;border:1px solid #444;background-color:#fff;}
+
+/* easyui extention */
+#queryPanel{padding:10px;background:#fafafa;margin-bottom:10px}
+
+.panelSelect td {padding:3px}
+.panelSelect a:hover {border:1px solid blue}
+.panelSelect a{border:0px solid blue;color:#aaa;padding:5px}
+
+

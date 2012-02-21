@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "mybatis-3-mapper" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sol.kx.web.dao.info.InfoCategoryMapper">
+
+	<select id="findCategoryTypeByNew" parameterType="infoCategory" resultType="infoCategory">
+		select a.id,a.ccode,isnull(c.cname+'-','')+isnull(b.cname+'-','')+a.cname as cname,a.image 
+		from info_category a left join info_category b on a.parent=b.id 
+		left join info_category c on b.parent=c.id 
+		where a.clevel=#{clevel} order by cname
+	</select>
+
+	<select id="findCategoryTypeByQuery" parameterType="infoCategory" resultType="infoCategory">
+		select id,ccode,cname,image from info_category 
+		where clevel=#{clevel} and parent=#{parent} order by cname
+	</select>
+	
+	<select id="generatePname" parameterType="infoCategory" resultType="string">
+		select type1.ccode+type2.ccode+type3.ccode+#{ccode} 
+		from (select ccode from info_category where id=#{parent}) type3,
+		(select ccode from info_category where id=(select parent from info_category where id=#{parent})) type2,
+		(select ccode from info_category where id=(select parent from info_category where id=(select parent from info_category where id=#{parent}))) type1
+	</select>
+	
+	<select id="checkExists" parameterType="infoCategory" resultType="_int">
+		if exists(select 1 from info_category 
+			where ccode=#{ccode} and clevel=#{clevel} and parent=#{parent}) 
+		select 1 else select 0
+	</select>
+	
+	<select id="checkDeleteExists" parameterType="infoCategory" resultType="_int">
+		if exists(select top 1 1 from info_category where parent=#{id}) 
+		select 1 else select 0
+	</select>
+</mapper>

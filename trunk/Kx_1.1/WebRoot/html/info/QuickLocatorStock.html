@@ -1,0 +1,79 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title></title>
+    
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<!-- NORMAL STYLE -->
+	<link rel="stylesheet" type="text/css" href="../images/style_easyui.css" />
+	
+	<!-- EASYUI -->
+	<link rel="stylesheet" type="text/css" href="../script/easyui/themes/default/easyui.css" />
+	<link rel="stylesheet" type="text/css" href="../script/easyui/themes/icon.css" />
+
+	<script type="text/javascript" src="../script/easyui/jquery-1.6.min.js"></script>
+	<script type="text/javascript" src="../script/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../script/easyui/locale/easyui-lang-zh_CN.js"></script>
+
+	<!-- DEFAULT -->
+	<script type="text/javascript" src="../script/sol-easyui-action.js"></script>
+		
+	<script>
+	//获取QueryString的数组
+	function getQueryString(){
+	     var result = location.search.match(new RegExp("[\?\&][^\?\&]+=[^\?\&]+","g")); 
+
+	     if(result == null){
+	         return "";
+	     }
+
+	     var out = {};
+	     for(var i = 0; i < result.length; i++){
+	         var value = result[i].split("=");
+	         out[value[0].substring(1)] = value[1];
+	     }
+	     return out;
+	}
+	// url query
+	var queryString = getQueryString();
+	
+	$(document).ready(function() {
+		$("#listTable").treegrid({
+			title:"核定数据",
+			width:600,
+			height:300,
+			style:{'background-color':'#fafafa'},
+			url:"info-product!quickLocatorStock.action",
+			//url:"test.json",
+			queryParams:{pid:queryString.pid},
+			rownumbers:true,
+			treeField:"shopname",
+			idField:"treeid",
+			fitColumns:true
+		});
+	});
+	</script>
+  </head>
+<body>
+<div id="right" >
+	<div class="list">
+	<table id="listTable">
+    <thead>  
+        <tr>  
+            <th field="shopname" width="60">门店名称</th>  
+            <th field="minweight" width="60">克重范围</th>  
+            <th field="maxweight" width="60">&nbsp;</th>  
+            <th field="stock" width="60">核定数</th>  
+            <th field="stocktype" width="60">核定类型</th> 
+        </tr>  
+    </thead>    
+    </table>
+	</div>
+</div>
+</body>
+</html>

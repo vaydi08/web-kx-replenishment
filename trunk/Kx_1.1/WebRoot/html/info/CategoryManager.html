@@ -1,0 +1,101 @@
+
+<div id="queryPanel">
+	<table cellpadding="0" cellspacing="0" border="0">
+		<tr>
+		<td width="120" align="center">
+		<select id="type1" >
+		</select>
+		</td>
+		
+		<td width="120" align="center">
+		<select id="type2" >
+		</select>
+		</td>
+		
+		<td width="120" align="center">
+		<select id="type3" >
+		</select>
+		</td>
+						
+		<td width="120" align="center">
+
+		<input id="INFO_C_queryType" menu="#INFO_C_queryValue" />
+		           
+		<div id="INFO_C_queryValue" style="width:100px">  
+		    <div name="ccode">类别代码</div>  
+		    <div name="cname">类别名称</div>
+		</div>
+		</td>
+		
+		</tr>
+	</table>
+
+</div>
+
+	<table id="listTable" toolbar="#INFO_C_toolbar">
+	</table>
+	<div id="INFO_C_toolbar">
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" id="btn_add">添加分类</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" id="btn_edit">修改分类</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" id="btn_del">删除分类</a>
+	</div>
+
+
+
+<div id="dlg" buttons="#INFO_C_dlg-buttons" title="类别" style="padding:10px 20px" closed="true">
+	<form id="form" method="post" enctype="multipart/form-data">
+	
+		<input type="hidden" name="input.id" id="id" />
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+		<td width="70" height="30">类　　别</td>
+		<td>
+		<select name="input.clevel" id="clevel">
+		<option value="1" selected="selected">大类</option>
+		<option value="2">小类</option>
+		<option value="3">货型</option>
+		<option value="4">款式</option>
+		</select>
+		从属于 <select name="input.parent" id="parent"></select>
+		</td>
+		</tr>	
+		<tr>
+		<td height="30">类别代码</td>
+		<td><input type="text" name="input.ccode" id="ccode" required="true" validType="length[1,2]" class="easyui-validatebox"/>
+		&nbsp;&nbsp;<span id="codeMsg" style="color:red"></span>
+		</td>
+		</tr><tr>
+		<td height="30">类别名称</td>
+		<td><input type="text" name="input.cname" id="cname"  required="true" validType="length[1,20]" class="easyui-validatebox"/></td>
+		</tr>
+		</table>
+		
+		<table border="0" cellpadding="0" cellspacing="0" id="INFO_C_capTable">
+		<tr>
+		<td>
+		<input type="radio" name="picType" value="webcap" onclick="$('#INFO_C_capTr').show();$('#INFO_C_fileTr').hide()"/>摄像头照片采集&nbsp;
+		<input type="radio" name="picType" value="file" onclick="$('#INFO_C_capTr').hide();$('#INFO_C_fileTr').show()"/>图片文件上传
+		</td>
+		</tr>
+		<tr id="INFO_C_capTr">
+		<td>
+		<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" id="startcam">启动摄像头</a>
+		<input type="hidden" id="picData" name="picData">
+		</td>
+		</tr>
+		<tr id="INFO_C_fileTr">
+		<td>
+		<input type="file" name="picFile" id="picFile"/>
+		</td>
+		</tr>
+		</table>
+		
+	</form>
+	
+	<div id="INFO_C_dlg-buttons">
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" id="dlg-save">保存</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" id="dlg-cancel">取消</a>
+	</div>
+</div>
+
+

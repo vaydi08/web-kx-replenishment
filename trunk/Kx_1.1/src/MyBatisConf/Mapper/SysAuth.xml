@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "mybatis-3-mapper" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sol.kx.web.dao.sys.SysAuthMapper">
+  
+  <select id="reloadAuth" resultType="sysAuth">
+  	select auth.id,uri.uri,uri.description as uriname,sg.description as groupdesc,auth.groupid,auth.status 
+  	from sys_auth auth 
+  	inner join sys_uri uri on auth.uriid=uri.id 
+  	inner join sys_group sg on auth.groupid=sg.id
+  </select>
+  
+  <select id="select" parameterType="sysAuth" resultType="sysAuth">
+  	select auth.id,status,uri,description 
+  	from sys_auth auth 
+  	inner join sys_uri uri on auth.uriid=uri.id where groupid=#{groupid}
+  </select>
+
+</mapper>
