@@ -17,4 +17,5 @@ public class ReflectUtils {
 	public static <T> Class<T> getClassGenricType(final Class clazz) {
 		return (Class<T>)((ParameterizedType)clazz.getGenericSuperclass()).getActualTypeArguments()[0];
 	}
+
 }

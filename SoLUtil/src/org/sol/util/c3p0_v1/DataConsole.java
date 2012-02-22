@@ -72,6 +72,32 @@ public class DataConsole {
 		RESULTSET_CONCUR = resultsetConcur;
 	}
 	
+	/**
+	 * 包裹事务处理代码
+	 */
+	public Object transactionWrapper(IDataConsoleTransaction transaction) throws SQLException {
+		log.debug("Begin Transaction Wrapper");
+		
+		try {
+			getConnection();
+
+			connection.setAutoCommit(false);
+
+			Object out = transaction.run(connection);
+			
+			connection.commit();
+			
+			return out;
+		} catch (SQLException e) {
+			connection.rollback();
+			throw e;
+		} finally {
+			if (connection != null) {
+				connection.setAutoCommit(true);
+				closeConnection();
+			}
+		}
+	}
 	
 	/**
 	 * 统计语句查询 直接返回值
@@ -305,7 +331,7 @@ public class DataConsole {
 	 * @throws SQLException
 	 */
 	public int updatePrepareSQL(String sql,Object... objs) throws SQLException {
-		log.debug("Update:[" + sql + "]" + (objs != null ? objs.toString() : ""));
+		log.debug("Update:[" + sql + "]" + (objs != null ? Arrays.deepToString(objs) : ""));
 		
 		int countRow = 0;
 		try {
@@ -498,5 +524,8 @@ public class DataConsole {
 	
 	public static String setMethod(String name) {
 		return "set" + name.replaceFirst(name.substring(0,1), name.substring(0,1).toUpperCase());
+	}
+	public static Log getLog() {
+		return log;
 	}
 }

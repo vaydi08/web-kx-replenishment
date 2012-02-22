@@ -4,7 +4,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Component;
 
 /**
  * Spring应用上下文环境
@@ -19,7 +18,8 @@ public class SpringContextUtil implements ApplicationContextAware {
 	  * @param applicationContext
 	  * @throws BeansException
 	  */
-	  public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+	  @Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 	    SpringContextUtil.applicationContext = applicationContext;
 	  }
 	 

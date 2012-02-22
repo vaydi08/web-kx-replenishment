@@ -17,6 +17,7 @@
 	<classpathentry kind="lib" path="lib/swt/runtime-3.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/swt/swt-win32-3.5.5.7.jar"/>
 	<classpathentry kind="lib" path="lib/persistence.jar"/>
+	<classpathentry kind="lib" path="lib/mybatis/mybatis-3.0.6.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/swt"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

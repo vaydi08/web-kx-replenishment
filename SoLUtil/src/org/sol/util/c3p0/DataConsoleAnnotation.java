@@ -77,6 +77,30 @@ public class DataConsoleAnnotation {
 		this.queryTime = queryTime;
 	}
 	
+	/**
+	 * 包裹事务处理代码
+	 */
+	public void transactionWrapper(IDataConsoleTransaction transaction) throws SQLException {
+		log.debug("Begin Transaction Wrapper");
+		
+		try {
+			getConnection();
+
+			connection.setAutoCommit(false);
+
+			transaction.run(connection);
+			
+			connection.commit();
+		} catch (SQLException e) {
+			connection.rollback();
+			throw e;
+		} finally {
+			if (connection != null) {
+				connection.setAutoCommit(true);
+				closeConnection();
+			}
+		}
+	}
 	
 	/**
 	 * 统计语句查询 直接返回值

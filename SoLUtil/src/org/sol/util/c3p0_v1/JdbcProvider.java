@@ -15,13 +15,17 @@ public class JdbcProvider implements IConnectionProvider {
 	private String username;
 	private String password;
 	
-	public JdbcProvider(String DBDriver,String DBUrl,String username,String password) throws ClassNotFoundException {
+	public JdbcProvider(String DBDriver,String DBUrl,String username,String password){
 		this.DBDriver = DBDriver;
 		this.DBUrl = DBUrl;
 		this.username = username;
 		this.password = password;
 		
-		Class.forName(DBDriver);
+		try {
+			Class.forName(DBDriver);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

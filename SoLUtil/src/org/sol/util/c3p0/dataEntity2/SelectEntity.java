@@ -30,6 +30,10 @@ public class SelectEntity extends Entity {
 		return sql + criteria.getWhereSql() + criteria.getOrderString();
 	}
 	
+	public String getFullSql(String sql) {
+		return sql + criteria.getWhereSql() + criteria.getOrderString();
+	}
+	
 	private void buildSmap(Field[] fields,StringBuilder sql) {
 		// 输出字段映射表
 		Map<String,Class<?>> map = new HashMap<String, Class<?>>(fields.length);
