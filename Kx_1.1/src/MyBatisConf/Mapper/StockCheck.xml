@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "mybatis-3-mapper" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sol.kx.web.dao.stock.StockCheckMapper">
+
+	<select id="stockCheckSum" parameterType="stockCheck" resultType="stockCheckSum">
+		declare @type1 int
+		declare @type2 int
+		declare @pid int
+		declare @shopid int
+		declare @type1name varchar(20)
+		declare @type2name varchar(20)
+		set @pid = #{pid}
+		set @shopid = #{shopid}
+		select @type1=type1,@type2=type2 from info_product where id=@pid
+		select @type1name=cname from info_category where id=@type1
+		select @type2name=cname from info_category where id=@type2
+		
+		select @type1name as type1name,@type2name as type2name,* from (
+			select sum(stock_type1) as shop_stocktype1,sum(stock_type2) as shop_stocktype2
+			 from stock_check sc inner join info_product p on sc.pid=p.id
+			 where shopid=@shopid and p.type1=@type1) s1,(
+			select sum(stock_type1) as shop_product_stocktype1,sum(stock_type2) as shop_product_stocktype2
+			 from stock_check where shopid=@shopid and pid=@pid) s2,(
+			select sum((minweight+maxweight)/2*stock_type1) as sum_type1_stocktype1,sum((minweight+maxweight)/2*stock_type2) as sum_type1_stocktype2
+			 from stock_check sc inner join info_product p on sc.pid=p.id 
+			 where shopid=@shopid and exists(select 1 where p.type1=@type1)) p3,(
+			select sum((minweight+maxweight)/2*stock_type1) as sum_type2_stocktype1,sum((minweight+maxweight)/2*stock_type2) as sum_type2_stocktype2
+			 from stock_check sc inner join info_product p on sc.pid=p.id 
+			 where shopid=@shopid and exists(select 1 where p.type2=@type2)) p4
+	</select>
+	
+	<select id="copyCheck" parameterType="stockCheck">
+	<![CDATA[
+	declare @pid int
+	declare @shopid int
+	select @pid=#{pid}
+	select @shopid=#{shopid}
+	delete from stock_check where pid in (
+		select id from info_product where type${clevel}=(
+			select type${clevel} from info_product where id=@pid) and id <> @pid)
+	insert into stock_check select p.id,shopid,minweight,maxweight,stock_type1,stock_type2
+	 from stock_check sc,info_product p 
+	 where sc.pid=@pid and sc.shopid=@shopid and p.id in (
+	 	select id from info_product where type${clevel}=(
+	 		select type${clevel} from info_product where id=@pid) and id <> @pid)
+	]]>
+	</select>
+</mapper>
