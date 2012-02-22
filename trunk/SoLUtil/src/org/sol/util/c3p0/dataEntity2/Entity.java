@@ -5,6 +5,8 @@ import java.lang.reflect.Field;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.sol.util.c3p0.dataEntity2.presistence.Sort;
+
 public abstract class Entity {
 	protected String sql;
 	protected Criteria criteria;
@@ -34,6 +36,17 @@ public abstract class Entity {
 	
 	public String getTablename() {
 		return clazz.getAnnotation(Table.class).name();
+	}
+	
+	public String getSortname() {
+		Field[] fields = clazz.getDeclaredFields();
+		
+		for(Field field : fields) {
+			if(field.isAnnotationPresent(Sort.class)) 
+				return field.getName();
+		}
+		
+		return null;
 	}
 	
 	public String getIdname() {
