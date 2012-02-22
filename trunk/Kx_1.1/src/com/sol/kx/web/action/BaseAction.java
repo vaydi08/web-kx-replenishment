@@ -1,7 +1,5 @@
 package com.sol.kx.web.action;
 
-import javax.annotation.PostConstruct;
-
 import org.sol.util.mybatis.MyBatisPojo;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -154,5 +152,7 @@ public abstract class BaseAction<T extends MyBatisPojo> extends ActionSupport{
 		this.result = result;
 	}
 
-
+	public ComboBoxBean getComboboxBean() {
+		return comboboxBean;
+	}
 }

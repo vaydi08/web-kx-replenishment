@@ -1,0 +1,52 @@
+
+<div style="margin-left:10px;margin-top:10px;margin-bottom:10px">
+<select id="shop"></select>
+<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" iconCls="icon-reload" id="reloadListTable"></a>
+</div>
+
+<div style="float:left;clear:none;margin-right:10px;margin-left:10px" id="checkTableDiv1">
+	<table id="checkTable" title="核定数据" toolbar="#STOCK_check-toolbar">
+	<thead>
+	<tr>
+	<th field="minweight" width="80" editor="{type:'numberbox',options:{required:true,precision:3}}">克重范围</th>
+	<th field="maxweight" width="80" editor="{type:'numberbox',options:{required:true,precision:3}}"></th>
+	<th field="stock_type1" width="85" editor="{type:'numberbox',options:{required:true}}">一般日 核定库存</th>
+	<th field="stock_type2" width="85" editor="{type:'numberbox',options:{required:true}}">节假日 核定库存</th>
+	</tr>
+	</thead>
+	</table>
+	
+	<div id="STOCK_check-toolbar">
+		<a href="javascript:void(0)" id="check_btn_add" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增</a>
+		<a href="javascript:void(0)" id="check_btn_del" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+		<a href="javascript:void(0)" id="check_btn_save" class="easyui-linkbutton" iconCls="icon-save" plain="true">保存</a>
+		<a href="javascript:void(0)" id="check_btn_undo" class="easyui-linkbutton" iconCls="icon-undo" plain="true">取消</a>
+		
+		<a href="javascript:void(0)" class="easyui-splitbutton" iconCls="icon-redo" plain="true" menu="#STOCK_check_copymm">复制到...</a>
+		
+	</div>
+</div>
+
+<div style="float:left;clear:none;width:300px" id="countDiv">
+	<table id="countTable" title="当前门店 统计">
+		<thead>
+		<tr>
+		<th width="100" field="title"></th>
+		<th width="80" field="type1">一般日</th>
+		<th width="80" field="type2">节假日</th>
+		</tr>
+		</thead>
+	</table>
+</div>
+
+<div style="float:left;clear:none;width:405px;height:500px;text-align:center" id="checkImgDiv">
+	<img id="checkImgPreview" width="400"/>
+</div>
+
+<div id="STOCK_check_copymm" style="width:150px">
+	<div id="STOCK_C_CMM_copyToType2">1</div>
+	<div id="STOCK_C_CMM_copyToType3">2</div>
+	<div class="menu-sep"></div>
+	<div id="STOCK_C_CMM_copyToProduct">复制到产品...</div>
+</div>
+

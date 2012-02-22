@@ -15,10 +15,19 @@ public abstract class BaseService {
 	@Autowired
 	protected ExceptionHandler exceptionHandler;
 
+	protected void DEBUG(String msg) {
+		if (Constants.DEBUG)
+			Logger.SERVICE.debug(msg);
+	}
+	
+	protected void LDEBUG(String msg,Object... objs) {
+		if (Constants.DEBUG)
+			Logger.SERVICE.ldebug(msg,objs);
+	}
+	
 	@Transactional(readOnly = true)
 	public <T extends MyBatisPojo> void select(PagerBean<T> bean,T obj) {
-		if (Constants.DEBUG)
-			Logger.SERVICE.debug("查询数据 "+ obj.tablename());
+		LDEBUG("查询数据 ",obj.tablename(),obj.toString());
 		
 		try {
 			bean.setDataList(injectMapper().select(obj));
@@ -30,8 +39,7 @@ public abstract class BaseService {
 	
 	@Transactional(readOnly = true)
 	public <T extends MyBatisPojo> void selectByPage(PagerBean<T> bean,T obj) {
-		if (Constants.DEBUG)
-			Logger.SERVICE.ldebug("查询分页数据", obj.tablename(), bean.getPage(),
+		LDEBUG("查询分页数据", obj.tablename(), bean.getPage(),
 					bean.getPageSize(), obj.toString());
 		try {
 			obj.setPage(bean.getPage());
@@ -46,8 +54,7 @@ public abstract class BaseService {
 	
 	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,timeout = Constants.DB_TIMEOUT)
 	public <T extends MyBatisPojo> ResultBean insert(T obj) {
-		if (Constants.DEBUG)
-			Logger.SERVICE.debug("插入数据 " + obj.toString());
+		DEBUG("插入数据 " + obj.toString());
 		
 		try {
 			injectMapper().insert(obj);
@@ -60,8 +67,7 @@ public abstract class BaseService {
 	
 	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,timeout = Constants.DB_TIMEOUT)
 	public <T extends MyBatisPojo> ResultBean update(T obj) {
-		if (Constants.DEBUG)
-			Logger.SERVICE.debug("更新数据 " + obj.toString());
+		DEBUG("更新数据 " + obj.toString());
 		
 		try {
 			injectMapper().update(obj);
@@ -74,8 +80,7 @@ public abstract class BaseService {
 	
 	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,timeout = Constants.DB_TIMEOUT)
 	public <T extends MyBatisPojo> ResultBean delete(T obj) {
-		if (Constants.DEBUG)
-			Logger.SERVICE.debug("删除数据 " + obj.toString());
+		DEBUG("删除数据 " + obj.toString());
 		
 		try {
 			injectMapper().delete(obj);

@@ -25,7 +25,7 @@ public class InfoShopAction extends BaseAction<InfoShop>{
 		for(InfoShop shop : pagerBean.getDataList())
 			comboboxBean.addData(shop.getName(), shop.getId());
 		comboboxBean.setFirstSelect();
-		
+
 		return COMBOBOX;
 	}
 	

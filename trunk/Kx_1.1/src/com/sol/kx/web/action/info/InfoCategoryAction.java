@@ -115,9 +115,4 @@ public class InfoCategoryAction extends BaseAction<InfoCategory>{
 	public void setPicFile(File picFile) {
 		this.picFile = picFile;
 	}
-
-	public ComboBoxBean getComboboxBean() {
-		return comboboxBean;
-	}
-
 }
