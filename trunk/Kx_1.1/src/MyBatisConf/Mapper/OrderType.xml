@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "mybatis-3-mapper" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sol.kx.web.dao.order.OrderTypeMapper">
+
+	<!-- 未处理订单 -->
+	<select id="untake" parameterType="orderType" resultType="orderType">
+		<if test="page > 1">
+		declare @id nvarchar(100)
+		select @id=min(id) from (
+			select top ${page * pageSize - pageSize} id from order_type
+			where od.status=1 order by id desc) tb1
+		</if>
+		set ROWCOUNT ${pageSize}
+		
+		select od.id,p.pname,shop.name as shopname,p.pcode,od.fromwho,od.ordertime,od.status,od.num,od.weight 
+		 from order_type od inner join info_product p on p.id=od.pid 
+		 inner join info_shop shop on od.shopid=shop.id
+		 <where>
+		 od.status=1
+		 <if test="page > 1">and od.id &lt; @id</if>
+		 </where>
+		 order by od.id desc
+		 
+		set ROWCOUNT 0
+	</select>
+	
+	<select id="untakeCount" resultType="_int">
+		select count(id) from order_type where status=1
+	</select>
+	
+	<!-- 自身订单 -->
+	<select id="self" parameterType="orderType" resultType="orderType">
+		<if test="page > 1">
+		declare @id nvarchar(100)
+		select @id=min(id) from (
+			select top ${page * pageSize - pageSize} id from order_type
+			<where>
+				status>1
+				and userid=#{userid}
+			</where>
+			where od.status=1 
+			order by id desc) tb1
+		</if>
+		set ROWCOUNT ${pageSize}
+		
+		select od.id,p.pname,shop.name as shopname,p.pcode,od.fromwho,od.ordertime,od.status,od.num,od.weight 
+		 from order_type od inner join info_product p on p.id=od.pid 
+		 inner join info_shop shop on od.shopid=shop.id
+		 <where>
+		 od.status>1
+		 and userid=#{userid}
+		 <if test="page > 1">and od.id &lt; @id</if>
+		 </where>
+		 order by od.id desc
+		 
+		set ROWCOUNT 0
+	</select>
+	
+	<select id="selfCount" parameterType="orderType" resultType="_int">
+		select count(id) from order_type where status>1 and userid=#{userid}
+	</select>
+
+	<!-- 所有订单 -->
+	<select id="all" parameterType="orderType" resultType="orderType">
+		<if test="page > 1">
+		declare @id nvarchar(100)
+		select @id=min(id) from (
+			select top ${page * pageSize - pageSize} id from order_type
+			order by id desc) tb1
+		</if>
+		set ROWCOUNT ${pageSize}
+		
+		select od.id,p.pname,shop.name as shopname,p.pcode,od.fromwho,od.ordertime,od.status,od.num,od.weight 
+		 from order_type od inner join info_product p on p.id=od.pid 
+		 inner join info_shop shop on od.shopid=shop.id
+		 <where>
+		 <if test="page > 1">and od.id &lt; @id</if>
+		 </where>
+		 order by od.id desc
+		 
+		set ROWCOUNT 0
+	</select>
+	
+	<select id="allCount" resultType="_int">
+		select count(id) from order_type
+	</select>
+	
+	<!-- 获取订单 -->
+	<select id="get" parameterType="orderType" resultType="orderType">
+		select od.id,od.fromwho,p.pname,p.pcode,od.weight,od.num,od.msWeight,od.msStand,
+		od.pstand,od.remark,p.image,shop.name as shopname,od.ordertime,od.requesttime,
+		u.username,od.gettime,od.status,od.canceltime,od.cancelReason
+		 from order_type od inner join info_product p on p.id=od.pid 
+		 inner join info_shop shop on shop.id=od.shopid 
+		 left join sys_user u on u.id=od.userid 
+		 where od.id=#{id}
+	</select>
+	
+	<!-- 订单统计 -->
+	<select id="orderCount"  parameterType="orderType" resultType="orderCount">
+		<![CDATA[
+		select 
+		(select count(id) from order_type where status=1) untake,
+		(select count(id) from order_type where status>1 and status<4 and userid=#{userid}) mytake,
+		(select count(id) from order_type where status>1 and status<4 and userid=#{userid} and dateadd(day,7,getdate())>requesttime) alert
+		]]>
+	</select>
+</mapper>

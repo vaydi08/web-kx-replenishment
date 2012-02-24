@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "mybatis-3-mapper" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sol.kx.web.dao.compare.CompareMapper">
+	<select id="createSupplyTempTable" resultType="string">
+		declare @tablename varchar(26)
+		select @tablename=convert(char(6),getdate(),12)+convert(varchar(20),cast(floor(rand()*10000) as int))
+
+		exec('CREATE TABLE stock' + @tablename + '(pcode varchar(20),weight float)')
+		select @tablename
+	</select>
+	
+	<insert id="insertSupplyTempTable" parameterType="compare">
+		insert into stock${tablename}(pcode,weight) values(#{pcode},#{weight})
+	</insert>
+	
+	<select id="compareSupply" parameterType="compare" resultType="compare">
+	<![CDATA[
+		select p.pname,p.pcode,tb.*,stock_type1-kucun as need_stocktype1,stock_type2-kucun as need_stocktype2
+		 from (
+		 select scheck.pid,scheck.minweight,scheck.maxweight,scheck.stock_type1,scheck.stock_type2,
+		 (select count(stock.pcode)
+		  from stock${tablename} stock inner join info_product p on stock.pcode=p.pcode 
+		  	and weight >= scheck.minweight and weight<scheck.maxweight and p.id=scheck.pid) as kucun 
+		  from stock_check scheck where shopid=#{shopid}) tb 
+		 inner join info_product p on tb.pid=p.id where stock_type1>kucun or stock_type2>kucun order by p.pcode
+	]]>
+	</select>
+	
+	<update id="removeSupplyTempTable" parameterType="compare">
+		drop table stock${tablename}
+	</update>
+</mapper>

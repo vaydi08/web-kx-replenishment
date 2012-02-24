@@ -41,7 +41,8 @@
 		// 表格
 		var gridConfig = {
 			title:"订单列表",
-			url:'../order/order!managerUntake.action',
+			height:content.height() - 10,
+			url:'../order/order!selectUntake.action',
 			toolbar:[{
 				id:'btngetorder',
 				text:'处理',
@@ -61,17 +62,18 @@
 				text:'取消订单',
 				iconCls:'icon-remove',
 				handler:function(){
-					var row = ctrl.ListTable.datagrid('getSelected');
+					var row = C(ctrl.ListTable).datagrid('getSelected');
 					if(row) {
 						$.messager.prompt('取消确认', '确定要取消此订单,订单取消后就不能再进行处理<br/>请输入订单取消的原因:', function(r){
 							if(r!= null && r != '') {
-								$.post('order!orderCancel.action',{'input.id':row.id,'input.cancelReason':r},function(data){
-									var result = eval('(' + data + ')');
-									if(result.success)
-										ctrl.ListTable.datagrid('reload');
+								$.post('../order/order!orderCancel.action',{'input.id':row.id,'input.cancelReason':r},function(data){
+									if(data.success)
+										C(ctrl.ListTable).datagrid('reload');
 									else
-										$.messager.show({title:"Error",msg:result.msg});
-								});
+										$.messager.alert("Error",data.msg);
+								},'json');
+							} else {
+								$.messager.alert("消息",'请输入一个取消理由');
 							}
 						});
 					}

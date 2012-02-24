@@ -3,10 +3,10 @@
 		var content = $(this);
 		var C = function(name) {
 			return content.find(name);
-		}
+		};
 		var ctrl = {
 			ListTable : '#listTable'
-		}
+		};
 		
 		var statusMap = {'-1':{text:'已取消',color:'#708090'},
 			'1':{text:'等待处理',color:'#00FFFF'},
@@ -20,7 +20,7 @@
 		var orderInfo = function(row) {
 			var title = '订单明细';
 			var url = '../url.action?url=/html/order/info&ext=html';
-			var param = {url : '/html/order/info',id:row.id}
+			var param = {url : '/html/order/info',id:row.id};
 			// 生成tabs
 			if($(SOL.content).tabs('exists',title)) {
 				$(SOL.content).tabs('select',title);
@@ -30,7 +30,7 @@
 			} else {
 				$(SOL.content).tabs('add',{title:title,href:url,solparam:param});
 			}
-		}
+		};
 		var orderTake = function() {
 			var row = C(ctrl.ListTable).datagrid('getSelected');
 			
@@ -39,11 +39,11 @@
 				
 				C(ctrl.ListTable).datagrid('reload');
 			}
-		}
+		};
 		// 表格
 		var gridConfig = {
 			title:"订单列表",
-			url:'../order/order!managerSelf.action',
+			url:'../order/order!selectSelf.action',
 			toolbar:[{
 				id:'btngetorder',
 				text:'处理',
@@ -91,7 +91,7 @@
 							
 						$.messager.confirm('确认', '此订单开始发送往门店', function(r){
 							if(r) {
-								$.post('../order/order!edit2.action',{'input.id':row.id,'input.status':5},function(data){
+								$.post('../order/order!edit.action',{'input.id':row.id,'input.status':5},function(data){
 									if(data.success)
 										C(ctrl.ListTable).datagrid('reload');
 									else
@@ -115,7 +115,7 @@
 							
 						$.messager.confirm('确认', '订单已发送至门店,此订单完结', function(r){
 							if(r) {
-								$.post('../order/order!edit2.action',{'input.id':row.id,'input.status':6},function(data){
+								$.post('../order/order!edit.action',{'input.id':row.id,'input.status':6},function(data){
 									if(data.success)
 										C(ctrl.ListTable).datagrid('reload');
 									else
@@ -151,5 +151,5 @@
 		
 		// 初始化表单
 		C(ctrl.ListTable).datagrid(gridConfig);
-	}
+	};
 })(jQuery);

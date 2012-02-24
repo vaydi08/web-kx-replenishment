@@ -15,30 +15,34 @@ $(document).ready(function() {
 			$('#id').val(id);
 			
 			inputData = data;
+			
+			loadSupplierCombobox();
 		},'json');
 	
-	$("#supplier").combobox({
-		url:"../../order/supplier!suppliers.action",
-		valueField:'text',
-		onSelect:function(record) {
-			$("#supplier_contact").val(record.reserve);
-		},
-		onLoadSuccess:function() {
-			var data = $(this).combobox('getData');
-			if(data.length > 0)
-				$("#supplier_contact").val(data[0].reserve);
-		}
-	});
+	function loadSupplierCombobox() {
+		$("#supplier").combobox({
+			url:"../../order/supplier!combo.action",
+			valueField:'text',
+			onSelect:function(record) {
+				$("#supplier_contact").val(record.reserve);
+			},
+			onLoadSuccess:function() {
+				var data = $(this).combobox('getData');
+				if(data.length > 0)
+					$("#supplier_contact").val(data[0].reserve);
+			}
+		});
+	}
 
 	$('#btn_submit').click(function() {
 		var param = {
 			'input.id' : id,
-			'input.status' : inputData.status,
 			'input.userid' : inputData.userid,
 			'input.gettime' : inputData.gettime.substring(0,19),
 		
 			'supplier' : $("#supplier").combobox('getValue'),
 			'contact' : $('#supplier_contact').val()
+
 		};
 	
 		$.post('../../order/order!accept.action',param,function(data) {

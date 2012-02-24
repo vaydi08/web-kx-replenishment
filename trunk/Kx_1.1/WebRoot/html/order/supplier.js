@@ -18,10 +18,10 @@
 			title:"供应商列表",
 			pagination:false,
 			height:content.height() - 50,
-			url:"../order/supplier!manager2.action",
-			saveUrl: '../order/supplier!add2.action',
-			updateUrl: '../order/supplier!edit2.action',
-			destroyUrl: '../order/supplier!delete2.action',
+			url:"../order/supplier!select.action",
+			saveUrl: '../order/supplier!add.action',
+			updateUrl: '../order/supplier!edit.action',
+			destroyUrl: '../order/supplier!delete.action',
 	
 			columns:[[   
 		        {field:'name',title:'供应商',width:100,
