@@ -4,7 +4,7 @@
 		var content = $(this);
 		var C = function(name) {
 			return content.find(name);
-		}
+		};
 		var ctrl = {
 			FormDiv : '#formDiv',
 			Input : {
@@ -25,7 +25,7 @@
 				Btn : '#btn_product'
 			},
 			ListTable : '#listTable'
-		}
+		};
 		
 		var loadedCtrl = [];
 		function init(control,method,param) {
@@ -37,7 +37,7 @@
 			}
 		}
 		function removeLoaded() {
-			for(i = 0; i < loadedCtrl.length; i ++) {
+			for(var i = 0; i < loadedCtrl.length; i ++) {
 				loadedCtrl[i].removeData('sol-isloaded');
 			}
 			C(ctrl.ListTable).data('sol-remoteload',false);
@@ -63,9 +63,21 @@
 			init(C(ctrl.ListTable),'datagrid',
 				{
 					height : content.height() - C(ctrl.FormDiv).height() - 150,
-					rownumbers:false,
-					url:"../info/info-product!manager2.action",
-					view:cardview,
+					url:"../info/info-product!manager.action",
+					fitColumns:true,
+					columns:[[
+				        {field:'type',title:'类别',width:120,
+					        formatter:function(value,rec) {
+								return rec.type1name + "-" + rec.type2name + "-" + rec.type3name + "-" + rec.type4name;
+				        }},
+				        {field:'pname',title:'产品名称',width:80},
+				        {field:'pcode',title:'产品代码',width:80},
+				        {field:'unit',title:'单位',width:40},
+				        {field:'image',title:'图片',width:120,
+					        formatter:function(value,rec) {
+								return '<img src="../pic.action?img=' + value +'" height="80" />';
+				        }}
+				    ]],
 					
 					onLoadSuccess : function() {
 						loadType();
@@ -86,12 +98,12 @@
 		
 		function loadType() {
 			init(C(ctrl.Query.Type1),'combobox',{
-				url:"../info/info-category!combobox.action?clevel=1&parent=0",
+				url:"../info/info-category!typeQueryCombo.action?input.clevel=1&input.parent=0",
 				width:100,
 				editable:false,
 				onSelect:function(row) {
 					if(row.value > 0)
-						C(ctrl.Query.Type2).combobox('reload',"../info/info-category!combobox.action?clevel=2&parent=" + row.value);
+						C(ctrl.Query.Type2).combobox('reload',"../info/info-category!typeQueryCombo.action?input.clevel=2&input.parent=" + row.value);
 					}
 				}
 			);
@@ -101,7 +113,7 @@
 				editable:false,
 				onSelect:function(row) {
 					if(row.value > 0)
-						C(ctrl.Query.Type3).combobox('reload',"../info/info-category!combobox.action?clevel=3&parent=" + row.value);
+						C(ctrl.Query.Type3).combobox('reload',"../info/info-category!typeQueryCombo.action?input.clevel=3&input.parent=" + row.value);
 					}
 				}
 			);
@@ -131,34 +143,12 @@
 				}
 			});
 		}
-		
-		var cardview = $.extend({}, $.fn.datagrid.defaults.view, {   
-		    renderRow: function(target, fields, frozen, rowIndex, rowData){   
-		        var cc = [];   
-		        cc.push('<td colspan="4" width="30%" style="padding:10px 5px;border:0;">');   
-		        if (!frozen){   
-		            cc.push('<img src="../pic.action?img=' + rowData.image + '" style="height:150px;margin-left:20px;float:left">');
-		            cc.push('</td><td width="70%" colspan="4" border="0" style="padding:10px 5px">')
-		            cc.push('<div style="float:left;margin-left:20px;">');  
-		            
-		            var t = "类别";
-		            var v = rowData['type1name'] + '-' + rowData['type2name'] + '-' + 
-		            		rowData['type3name'] + '-' + rowData['type4name'];
-		            cc.push('<p><span>产品名称: </span>' + rowData['pname'] + '</p>');
-		            cc.push('<p><span>产品代码: </span>' + rowData['pcode'] + '</p>');
-		            cc.push('<p><span>单位: </span>' + rowData['unit'] + '</p>');
-		            cc.push('</div>');
-		        }   
-		        cc.push('</td>');   
-		        return cc.join('');   
-		    }   
-		});  
 
 		loadShopCombo();
 		
 		function initForm() {
 			init(C(ctrl.Input.Form),'form',{
-				url : '../order/order!add2.action',
+				url : '../order/order!add.action',
 				onSubmit : function() {
 					if(C(ctrl.Input.Pid).val() == "") {
 						SOL.showWarning('请选择一个产品');
@@ -186,5 +176,5 @@
 		}
 		
 		initForm();
-	}
+	};
 })(jQuery);

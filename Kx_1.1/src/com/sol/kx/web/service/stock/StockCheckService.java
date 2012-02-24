@@ -3,9 +3,10 @@ package com.sol.kx.web.service.stock;
 import org.sol.util.mybatis.BaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sol.kx.web.common.Constants;
-import com.sol.kx.web.common.Logger;
 import com.sol.kx.web.dao.pojo.StockCheck;
 import com.sol.kx.web.dao.pojo.StockCheckSum;
 import com.sol.kx.web.dao.stock.StockCheckMapper;
@@ -17,6 +18,7 @@ public class StockCheckService extends BaseService {
 	@Autowired
 	private StockCheckMapper stockCheckMapper;
 	
+	@Transactional(readOnly = true)
 	public StockCheckSum stockCheckSum(StockCheck obj) {
 		DEBUG("查询数据 StockCheck合计数");
 		
@@ -24,6 +26,7 @@ public class StockCheckService extends BaseService {
 	}
 	
 	// 核定数 复制
+	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,timeout = Constants.DB_TIMEOUT)
 	public ResultBean copyCheck(StockCheck obj) {
 		DEBUG("复制[stock_check]核定数 " + obj.toString());
 		

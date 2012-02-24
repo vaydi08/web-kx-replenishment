@@ -12,7 +12,7 @@
 		},
 		ListTable : $(this).find('#listTable'),
 		Btn_Download : $(this).find('#btn_download')
-	}
+	};
 	
 	function init() {
 		SF.grid(ctrl.ListTable,{});
@@ -21,7 +21,7 @@
 		ctrl.QueryPanel.Panel.panel({height:70,style:{'padding':'10px'}});
 		// form
 		ctrl.QueryPanel.Form.form({
-			url : '../compare/supply!uploadSupply.action',
+			url : '../compare/compare!uploadSupply.action',
 			onSubmit : function() {
 				if(ctrl.QueryPanel.File.val() == "") {
 					SOL.showWarning("未选择上传文件,请选择一个库存文件");
@@ -55,5 +55,5 @@
 		});
 	}
 	init();
-	}
+	};
 })(jQuery);

@@ -2,27 +2,21 @@
 <form method="post" id="form">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
-<td width="100" align="left" height="30">请求订购门店:</td><td>&nbsp;</td><td width="200" align="left"><select id="shop" name="input.shopid"></select></td>
-<td width="60" align="left">订购人:</td><td>&nbsp;</td><td align="left"><input type="text" class="easyui-validatebox combo" required="true" validType="length[1,20]" name="input.fromwho" id="fromwho" style="width:150px"/></td>
+<td width="100" align="left" height="30">请求订购门店:</td><td>&nbsp;</td><td width="170" align="left"><select id="shop" name="input.shopid"></select></td>
+<td width="60" align="left">订购人:</td><td>&nbsp;</td><td width="170" align="left"><input type="text" class="easyui-validatebox combo" required="true" validType="length[1,20]" name="input.fromwho" id="fromwho" style="width:150px"/></td>
+<td width="100">要求发货期限:</td><td>&nbsp;</td><td><input type="text" class="easyui-datetimebox" readonly="readonly" required="true" name="input.requesttime" id="requesttime" style="width:150px" showSeconds="false"/></td>
 </tr>
 
 <tr>
 <td height="30">请求订购重量:</td><td>&nbsp;</td><td><input type="text" class="easyui-numberbox combo" required="true" min="0" precision="3" name="input.weight" id="weight" style="width:150px"/></td>
 <td>订购数量:</td><td>&nbsp;</td><td><input type="text" class="easyui-numberbox combo" required="true" min="1" precision="0" name="input.num" id="num" style="width:150px"/></td>
+<td>产品规格:</td><td>&nbsp;</td><td><input type="text" class="easyui-validatebox combo" name="input.pstand" id="pstand" style="width:150px"/></td>
 </tr>
 
 <tr>
-<td height="30">　　主石规格:</td><td>&nbsp;</td><td><input type="text" class="easyui-validatebox combo" name="input.msStand" id="msStand" style="width:150px"/></td>
+<td height="30">主石规格:</td><td>&nbsp;</td><td><input type="text" class="easyui-validatebox combo" name="input.msStand" id="msStand" style="width:150px"/></td>
 <td>主石重量:</td><td>&nbsp;</td><td><input type="text" class="easyui-numberbox combo" min="0" precision="3" name="input.msWeight" id="msWeight" style="width:150px"/></td>
-</tr>
-
-<tr>
-<td height="30">　　产品规格:</td><td>&nbsp;</td><td><input type="text" class="easyui-validatebox combo" name="input.pstand" id="pstand" style="width:150px"/></td>
 <td>其他要求:</td><td>&nbsp;</td><td><input type="text" class="easyui-validatebox combo" name="input.remark" id="remark" style="width:150px"/></td>
-</tr>
-
-<tr>
-<td height="30">要求发货期限:</td><td>&nbsp;</td><td colspan="4"><input type="text" class="easyui-datetimebox" readonly="readonly" required="true" name="input.requesttime" id="requesttime" style="width:150px" showSeconds="false"/></td>
 </tr>
 
 <tr>

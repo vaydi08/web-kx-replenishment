@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 	
 	<context:property-placeholder location="classpath:/system.properties"/>
+	<context:component-scan base-package="com.sol.kx.web" />
+	
+	<bean class="com.sol.kx.web.common.MyBatisLog4j" />
 	
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:comp/env/jdbc/kx"></property>
@@ -17,6 +21,8 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="defaultTimeout" value="40" />
 	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -30,5 +36,5 @@
 		<property name="markerInterface" value="org.sol.util.mybatis.BaseMapper"></property>
 	</bean>
 
-	<context:component-scan base-package="com.sol.kx.web" />
+	
 </beans>

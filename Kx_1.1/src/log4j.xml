@@ -82,17 +82,12 @@
 		<appender-ref ref="uncatch"/>
 	</logger>
 
-
-	<category name="org.springframework">
-		<level value="ERROR" />
-		<appender-ref ref="STDOUT" />
-	</category>
-	
+	<!-- 
 	<category name="org.apache">
 		<level value="ERROR" />
 		<appender-ref ref="error"/>
 	</category>
-	
+	 -->
 	<logger name="org.sol">
 		<level value="ALL" />
 		<appender-ref ref="STDOUT"/>
@@ -101,25 +96,18 @@
 	
 
 	<!--自定义的日志输出器 -->  
-    <logger name="org.springframework.jdbc.core">  
-        <level value="info" />  
-        <!-- 日志输出地 -->  
-        <appender-ref ref="STDOUT" />  
+    <logger name="org.springframework">  
+        <level value="info" />
     </logger>
     <logger name="com.opensymphony.xwork2">  
-        <level value="info" />
-        <appender-ref ref="STDOUT" />  
+        <level value="info" /> 
     </logger> 
     <logger name="freemarker">  
-        <level value="info" />
-        <appender-ref ref="STDOUT" />  
+        <level value="info" /> 
     </logger>
 	
 	<logger name="org.apache.ibatis" additivity="true">
-		<level value="debug" />
-	</logger>
-	<logger name="java.sql" additivity="true">
-		<level value="debug" />
+		<level value="info" />
 	</logger>
 	<logger name="org.mybatis.spring">
 		<level value="info" />
@@ -127,5 +115,6 @@
 	
     <root>
 		<level value="debug" />
+		<appender-ref ref="STDOUT"/>
 	</root>
 </log4j:configuration>

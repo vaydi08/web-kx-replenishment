@@ -34,7 +34,7 @@
 		// 表格
 		var gridConfig = {
 			title:"订单列表",
-			url:'../order/order!managerAll.action',
+			url:'../order/order!selectAll.action',
 			toolbar:[{
 				id:'btngetorder',
 				text:'订单信息',
