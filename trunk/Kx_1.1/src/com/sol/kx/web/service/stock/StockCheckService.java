@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sol.kx.web.common.Constants;
 import com.sol.kx.web.dao.pojo.StockCheck;
 import com.sol.kx.web.dao.pojo.StockCheckSum;
+import com.sol.kx.web.dao.pojo.StockChecked;
 import com.sol.kx.web.dao.stock.StockCheckMapper;
 import com.sol.kx.web.service.BaseService;
+import com.sol.kx.web.service.bean.PagerBean;
 import com.sol.kx.web.service.bean.ResultBean;
 
 @Service
@@ -37,6 +39,13 @@ public class StockCheckService extends BaseService {
 			exceptionHandler.onDatabaseException("复制[stock_check]核定数 " + obj.toString(),"stock_check", e);
 			return ResultBean.RESULT_ERR(e.getMessage(), obj);
 		}
+	}
+	
+	@Transactional(readOnly = true)
+	public void selectChecked(PagerBean<StockChecked> bean,StockChecked obj) {
+		DEBUG("查找[stock_check]已经核定数 " + obj.toString());
+		
+		bean.setDataList(stockCheckMapper.selectChecked(obj));
 	}
 	
 	@Override

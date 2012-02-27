@@ -14,6 +14,10 @@ public class StockChecked extends MyBatisPojo{
 	private Integer ptype;
 	private String cname;
 	
+	private Integer clevel;
+	private Integer parent;
+	private Integer shopid;
+	
 	public Integer getStock_type1() {
 		return stock_type1;
 	}
@@ -70,5 +74,23 @@ public class StockChecked extends MyBatisPojo{
 			builder.append("sum_stock_type2=").append(sum_stock_type2);
 		builder.append("]");
 		return builder.toString();
+	}
+	public Integer getClevel() {
+		return clevel;
+	}
+	public void setClevel(Integer clevel) {
+		this.clevel = clevel;
+	}
+	public Integer getParent() {
+		return parent;
+	}
+	public void setParent(Integer parent) {
+		this.parent = parent;
+	}
+	public Integer getShopid() {
+		return shopid;
+	}
+	public void setShopid(Integer shopid) {
+		this.shopid = shopid;
 	}
 }

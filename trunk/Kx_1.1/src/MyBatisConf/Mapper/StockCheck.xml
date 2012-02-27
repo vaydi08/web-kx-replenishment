@@ -45,4 +45,19 @@
 	 		select type${clevel} from info_product where id=@pid) and id <> @pid)
 	]]>
 	</select>
+	
+	<select id="selectChecked" parameterType="stockChecked" resultType="stockChecked">
+		select tb.*,c.cname from 
+		(select sum(stock_type1) as stock_type1,sum((minweight+maxweight)/2*stock_type1) as sum_stock_type1,
+			sum(stock_type2) as stock_type2,sum((minweight+maxweight)/2*stock_type2) as sum_stock_type2,
+			tb.type${clevel} as ptype from
+			(select sc.*,p.type${clevel} 
+			from stock_check sc inner join info_product p on sc.pid=p.id 
+			where sc.shopid=#{shopid} 
+			<if test="clevel > 1">
+			and p.type${clevel - 1}=#{parent}
+			</if>
+			) tb 
+			group by tb.type${clevel}) tb inner join info_category c on tb.ptype=c.id
+	</select>
 </mapper>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "mybatis-3-mapper" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sol.kx.web.dao.compare.CompareMapper">
+	<!-- 补货比对 supply -->
 	<select id="createSupplyTempTable" resultType="string">
 		declare @tablename varchar(26)
 		select @tablename=convert(char(6),getdate(),12)+convert(varchar(20),cast(floor(rand()*10000) as int))
@@ -28,5 +29,84 @@
 	
 	<update id="removeSupplyTempTable" parameterType="compare">
 		drop table stock${tablename}
+	</update>
+	
+	
+	<!-- 分货比对 Cargo -->
+	<select id="createCargoSupplyTempTable" resultType="string">
+		declare @tablename varchar(26)
+		select @tablename=convert(char(6),getdate(),12)+convert(varchar(20),cast(floor(rand()*10000) as int))
+		
+		exec('select sc.id,p.pname,sc.pid,p.pcode,shop.name as shopname,sc.shopid,minweight,
+		maxweight,stock_type1 as stock,0 as stocknow 
+		into cargoSupplyST1'+@tablename+' from stock_check sc 
+		inner join info_product p on sc.pid=p.id inner join info_shop shop on sc.shopid=shop.id
+		
+		select sc.id,p.pname,sc.pid,p.pcode,shop.name as shopname,sc.shopid,minweight,
+		maxweight,stock_type2 as stock,0 as stocknow 
+		into cargoSupplyST2'+@tablename+' from stock_check sc 
+		inner join info_product p on sc.pid=p.id inner join info_shop shop on sc.shopid=shop.id')
+		
+		select @tablename
+	</select>
+	
+	<update id="updateCargoSupply" parameterType="cargoCompare">
+	<![CDATA[
+		update cargoSupplyST1${tablename} set stocknow=stocknow+1 
+		where shopname=#{shopname} and pcode=#{pcode} and (#{weight} >= minweight and #{weight} < maxweight)
+		
+		update cargoSupplyST2${tablename} set stocknow=stocknow+1 
+		where shopname=#{shopname} and pcode=#{pcode} and (#{weight} >= minweight and #{weight} < maxweight)
+	]]>
+	</update>
+	
+	<update id="removeCargoSupplyTempTable" parameterType="cargoCompare">
+		drop table cargoSupplyST1${tablename}
+		drop table cargoSupplyST2${tablename}
+	</update>
+	
+	
+	<select id="createCargoSaleTempTable" resultType="string">
+		declare @tablename varchar(26)
+		select @tablename=convert(char(6),getdate(),12)+convert(varchar(20),cast(floor(rand()*10000) as int))
+		
+		exec('create table cargoSale' + @tablename + '(scid int,serial varchar(20),sale int,saletime datetime)')
+		select @tablename
+	</select>
+	
+	<insert id="insertCargoSale" parameterType="cargoCompare">
+	<![CDATA[
+		insert into cargoSale${tablename}(scid,serial,sale,saletime) select sc.id,#{serial},#{num},#{saletime} 
+		from stock_check sc inner join info_product p on sc.pid=p.id 
+		inner join info_shop shop on shop.id=sc.shopid 
+		where shop.name=#{shopname} and pcode=#{pcode} and (#{weight} >= minweight and #{weight} < maxweight)
+	]]>
+	</insert>
+		
+	<update id="removeCargoSaleTempTable" parameterType="cargoCompare">
+		drop table cargoSale${tablename}
+	</update>
+	
+	
+	<select id="createCargoStockTempTable" resultType="string">
+		declare @tablename varchar(26)
+		select @tablename=convert(char(6),getdate(),12)+convert(varchar(20),cast(floor(rand()*10000) as int))
+		
+		exec('create table cargoStock' + @tablename + '(
+		pid int,pname nvarchar(20),pcode varchar(20),serial varchar(20),num int,weight float,shopname varchar(20))')
+		select @tablename
+	</select>
+	
+	<insert id="insertCargoStock" parameterType="cargoCompare">
+		insert into cargoStock${tablename}(pid,pname,pcode,serial,num,weight) 
+		select id,pname,pcode,#{serial},#{num},#{weight} from info_product where pcode=#{pcode}
+	</insert>
+	
+	<update id="updateCargoStock" parameterType="cargoCompare">
+		update cargoStock${tablename} set shopname=#{shopname} where serial=#{serial} and weight=#{weight}
+	</update>
+	
+	<update id="removeCargoStockTempTable" parameterType="cargoCompare">
+		drop table cargoStock${tablename}
 	</update>
 </mapper>
