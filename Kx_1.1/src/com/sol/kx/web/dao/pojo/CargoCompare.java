@@ -24,6 +24,8 @@ public class CargoCompare extends MyBatisPojo{
 	private Double weight;
 	private int minallot;
 	
+	private String tablename;
+	
 	public CargoCompare() {
 		
 	}
@@ -36,6 +38,32 @@ public class CargoCompare extends MyBatisPojo{
 		this.num = num;
 		this.weight = weight;
 		this.shopname = shopname;
+	}
+	
+	public CargoCompare(String tablename,String pcode,String shopname,Double weight) {
+		this.tablename = tablename;
+		this.pcode = pcode;
+		this.shopname = shopname;
+		this.weight = weight;
+	}
+	
+	public CargoCompare(String tablename,String serial,int num,Timestamp saletime,
+			String shopname,String pcode,Double weight) {
+		this.tablename = tablename;
+		this.serial = serial;
+		this.num = num;
+		this.saletime = saletime;
+		this.shopname = shopname;
+		this.pcode = pcode;
+		this.weight = weight;
+	}
+	
+	public CargoCompare(String tablename,String serial,int num,String pcode,Double weight) {
+		this.tablename = tablename;
+		this.serial = serial;
+		this.num = num;
+		this.pcode = pcode;
+		this.weight = weight;
 	}
 	
 	public int getPid() {
@@ -149,5 +177,13 @@ public class CargoCompare extends MyBatisPojo{
 
 	public void setMinallot(int minallot) {
 		this.minallot = minallot;
+	}
+
+	public String getTablename() {
+		return tablename;
+	}
+
+	public void setTablename(String tablename) {
+		this.tablename = tablename;
 	}
 }

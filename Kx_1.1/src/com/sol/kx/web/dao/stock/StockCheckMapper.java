@@ -8,6 +8,7 @@ import org.sol.util.mybatis.SelectTemplate;
 
 import com.sol.kx.web.dao.pojo.StockCheck;
 import com.sol.kx.web.dao.pojo.StockCheckSum;
+import com.sol.kx.web.dao.pojo.StockChecked;
 
 public interface StockCheckMapper extends BaseMapper<StockCheck>{
 	@SelectProvider(type = SelectTemplate.class,method = "select")
@@ -16,4 +17,6 @@ public interface StockCheckMapper extends BaseMapper<StockCheck>{
 	public StockCheckSum stockCheckSum(StockCheck obj);
 	
 	public void copyCheck(StockCheck obj);
+	
+	public List<StockChecked> selectChecked(StockChecked obj);
 }

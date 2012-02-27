@@ -128,9 +128,13 @@
 				return '../stock/check!copyCheck.action?input.pid=' + pid() + 
 					   '&input.shopid=' + C(ctrl.CheckDiv.Shop).combobox('getValue') + '&input.clevel=' + clevel;
 			};
+			
+			// 重新读取表单按钮
+			C(ctrl.CheckDiv.Reload).click(function() {
+				C(ctrl.CheckDiv.ListTable).datagrid('reload');
+			});
 			// 核定数复制功能按钮
 			$(ctrl.CheckCopyButton.CopyToType2).click(function() {
-				alert(1);
 				$.post(getCopyUrl(2),
 					function(data) {
 						if(data.success)

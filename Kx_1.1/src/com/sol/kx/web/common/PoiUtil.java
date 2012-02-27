@@ -99,8 +99,9 @@ public class PoiUtil {
 	}
 	
 	public void autoSize(int col) {
-//		sheet.autoSizeColumn(col);
-		sheet.setColumnWidth(col, 3000);
+		sheet.autoSizeColumn(col);
+		sheet.setColumnWidth(col, sheet.getColumnWidth(col) * 2);
+//		sheet.setColumnWidth(col, 3000);
 	}
 	
 	public void newRow() {

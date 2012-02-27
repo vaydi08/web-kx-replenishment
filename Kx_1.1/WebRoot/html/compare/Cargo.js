@@ -21,7 +21,7 @@
 			T2_Result : $(this).find('#stocktype2_result'),
 			T2_Stock : $(this).find('#stocktype2_stock')
 		}
-	}
+	};
 	
 	function init() {
 		
@@ -29,7 +29,7 @@
 		ctrl.QueryPanel.Panel.panel({height:70,style:{'padding':'10px'}});
 		// form
 		ctrl.QueryPanel.Form.form({
-			url : '../compare/cargo!uploadCargo.action',
+			url : '../compare/compare!uploadCargo.action',
 			onSubmit : function() {
 				if(ctrl.QueryPanel.File.Supply.val() == '' ||
 				   ctrl.QueryPanel.File.Sale.val() == '' ||
@@ -72,5 +72,5 @@
 		ctrl.ListTable.T2_Stock.datagrid({height:ctrl.ListTable.Tabs.height() - 55});
 	}
 	init();
-	}
+	};
 })(jQuery);
