@@ -100,8 +100,13 @@ public class PoiUtil {
 	
 	public void autoSize(int col) {
 		sheet.autoSizeColumn(col);
-		sheet.setColumnWidth(col, sheet.getColumnWidth(col) * 2);
+		sheet.setColumnWidth(col, (int)(sheet.getColumnWidth(col) * 1.5));
 //		sheet.setColumnWidth(col, 3000);
+	}
+	
+	public void autoFilterOnTitle(int col) {
+		CellRangeAddress range = CellRangeAddress.valueOf("A1:" + (char)(65+col-1) + "1");
+		sheet.setAutoFilter(range);
 	}
 	
 	public void newRow() {
@@ -117,6 +122,20 @@ public class PoiUtil {
 			Cell cell = thisrow.createCell(col);
 			cell.setCellValue(value);
 		}
+	}
+	
+	public void setValues(int startcol,Object... values) {
+		for(int i = startcol; i < startcol + values.length; i ++) {
+			if(values[i] instanceof String)
+				setValue(i, (String)values[i]);
+			else if(values[i] instanceof Integer)
+				setValue(i, (Integer)values[i]);
+			else if(values[i] instanceof Double)
+				setValue(i, (Double)values[i]);
+		}
+	}
+	public void setValuesDefault(Object... values) {
+		setValues(0,values);
 	}
 	
 	public void setValue(int col,double value) {

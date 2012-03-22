@@ -6,24 +6,40 @@
 		declare @tablename varchar(26)
 		select @tablename=convert(char(6),getdate(),12)+convert(varchar(20),cast(floor(rand()*10000) as int))
 
-		exec('CREATE TABLE stock' + @tablename + '(pcode varchar(20),weight float)')
+		exec('CREATE TABLE stock' + @tablename + '(pcode varchar(20),weight float,shopname nvarchar(20),dispname nvarchar(20),serial nvarchar(20))')
 		select @tablename
 	</select>
 	
 	<insert id="insertSupplyTempTable" parameterType="compare">
-		insert into stock${tablename}(pcode,weight) values(#{pcode},#{weight})
+		insert into stock${tablename} select #{pcode},#{weight},#{shopname},#{dispname},#{serial} where exists (
+			select 1 from info_product where pcode=#{pcode}
+		)
 	</insert>
-	
+
 	<select id="compareSupply" parameterType="compare" resultType="compare">
 	<![CDATA[
+	select tb.*,stock.dispname from (
 		select p.pname,p.pcode,tb.*,stock_type1-kucun as need_stocktype1,stock_type2-kucun as need_stocktype2
-		 from (
-		 select scheck.pid,scheck.minweight,scheck.maxweight,scheck.stock_type1,scheck.stock_type2,
-		 (select count(stock.pcode)
-		  from stock${tablename} stock inner join info_product p on stock.pcode=p.pcode 
-		  	and weight >= scheck.minweight and weight<scheck.maxweight and p.id=scheck.pid) as kucun 
-		  from stock_check scheck where shopid=#{shopid}) tb 
-		 inner join info_product p on tb.pid=p.id where stock_type1>kucun or stock_type2>kucun order by p.pcode
+			from (
+				 select s.name as shopname,scheck.pid,scheck.minweight,scheck.maxweight,scheck.stock_type1,scheck.stock_type2,
+				 (select count(stock.pcode)
+				  from stock${tablename} stock inner join info_product p on stock.pcode=p.pcode inner join info_shop s on stock.shopname=s.name
+				  	where scheck.pid=p.id and scheck.shopid=s.id and weight >= scheck.minweight and weight<scheck.maxweight) as kucun
+				  from stock_check scheck inner join info_shop s on scheck.shopid=s.id) tb
+				 inner join info_product p on tb.pid=p.id 
+
+			) tb left join (select distinct pcode,dispname from stock${tablename}) stock on stock.pcode=tb.pcode
+	order by tb.shopname,tb.pcode
+	]]>
+	</select>
+	
+	<select id="compareSupplyNull" parameterType="compare" resultType="compare">
+	<![CDATA[
+	select * from stock${tablename} s left join (
+		select p.pcode,p.pname,sc.shopid,sc.minweight,sc.maxweight,shop.name as shopname from stock_check sc 
+		inner join info_product p on sc.pid=p.id inner join info_shop shop on sc.shopid=shop.id
+	) p on s.pcode=p.pcode and s.weight >= p.minweight and s.weight < p.maxweight and s.shopname=p.shopname
+	where p.pcode is null
 	]]>
 	</select>
 	
@@ -39,30 +55,21 @@
 		
 		exec('select sc.id,p.pname,sc.pid,p.pcode,shop.name as shopname,sc.shopid,minweight,
 		maxweight,stock_type1 as stock,0 as stocknow 
-		into cargoSupplyST1'+@tablename+' from stock_check sc 
-		inner join info_product p on sc.pid=p.id inner join info_shop shop on sc.shopid=shop.id
-		
-		select sc.id,p.pname,sc.pid,p.pcode,shop.name as shopname,sc.shopid,minweight,
-		maxweight,stock_type2 as stock,0 as stocknow 
-		into cargoSupplyST2'+@tablename+' from stock_check sc 
+		into cargoSupply'+@tablename+' from stock_check sc 
 		inner join info_product p on sc.pid=p.id inner join info_shop shop on sc.shopid=shop.id')
-		
+
 		select @tablename
 	</select>
 	
 	<update id="updateCargoSupply" parameterType="cargoCompare">
 	<![CDATA[
-		update cargoSupplyST1${tablename} set stocknow=stocknow+1 
-		where shopname=#{shopname} and pcode=#{pcode} and (#{weight} >= minweight and #{weight} < maxweight)
-		
-		update cargoSupplyST2${tablename} set stocknow=stocknow+1 
+		update cargoSupply${tablename} set stocknow=stocknow+1 
 		where shopname=#{shopname} and pcode=#{pcode} and (#{weight} >= minweight and #{weight} < maxweight)
 	]]>
 	</update>
 	
 	<update id="removeCargoSupplyTempTable" parameterType="cargoCompare">
-		drop table cargoSupplyST1${tablename}
-		drop table cargoSupplyST2${tablename}
+		drop table cargoSupply${tablename}
 	</update>
 	
 	
@@ -109,4 +116,47 @@
 	<update id="removeCargoStockTempTable" parameterType="cargoCompare">
 		drop table cargoStock${tablename}
 	</update>
+	
+	<select id="createCargoCompareTempTable" parameterType="cargoCompare" resultType="string">
+		declare @tablename varchar(26)
+		select @tablename=convert(char(6),getdate(),12)+convert(varchar(20),cast(floor(rand()*10000) as int))
+		
+		exec('select supply.*,sale.saletime,cast('''' as varchar(20)) as serial,0 as num,
+		(case when stock-stocknow>${minallot} then ${minallot} else stock-stocknow end) as minallot 
+		into cargoTb' + @tablename + ' from cargoSupply${supplyTablename} supply 
+		left join (select scid,max(saletime) as saletime 
+		from cargoSale${saleTablename} group by scid) sale on supply.id=sale.scid 
+		where stock>stocknow')
+		
+		select @tablename
+	</select>
+	
+	<select id="selectCargoStock" resultType="cargoCompare">
+		select pid,pname,pcode,serial,num,weight,shopname from cargoStock${tablename} with(nolock) order by serial
+	</select>
+	
+	<select id="selectCargoCompare" parameterType="cargoCompare" resultType="cargoCompare">
+		declare @id int
+		select top 1 @id=id from cargoTb${tablename} 
+		where pid=#{pid} 
+		<if test="minallot != -1">
+		and minallot>0 
+		</if>
+		and #{weight} >= minweight and #{weight} &lt; maxweight 
+		order by saletime
+		
+		if @@rowcount>0
+		begin
+			update cargoTb${tablename} 
+			set serial=serial+#{serial}+',',num=num+#{num},minallot=minallot-#{num} where id=@id
+			select @@rowcount as num,shopname from cargoTb${tablename} where id=@id
+		end
+		else
+			select 0 as num,null as shopname
+	</select>
+	
+	<select id="selectCargoCompareResult" resultType="cargoCompare">
+		select * from cargoTb${tablename} order by shopid,pid,minweight
+	</select>
+	
 </mapper>

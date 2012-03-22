@@ -17,6 +17,8 @@ public class StockCheck extends MyBatisPojo{
 	@Column
 	private Integer pid;
 	private String pname;
+	private String pcode;
+	private String image;
 	
 	@Column
 	private Integer shopid;
@@ -114,6 +116,22 @@ public class StockCheck extends MyBatisPojo{
 
 	public void setClevel(Integer clevel) {
 		this.clevel = clevel;
+	}
+
+	public String getPcode() {
+		return pcode;
+	}
+
+	public void setPcode(String pcode) {
+		this.pcode = pcode;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }

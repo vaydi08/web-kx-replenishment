@@ -22,7 +22,7 @@ public class AlreadyCheckedAction extends BaseAction<StockChecked>{
 		stockCheckService.selectChecked(pagerBean, input);
 		return JSONDATA;
 	}
-	
+
 	@Override
 	protected StockChecked newPojo() {
 		return new StockChecked();

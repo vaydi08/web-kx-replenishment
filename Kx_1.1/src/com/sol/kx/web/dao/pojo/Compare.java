@@ -17,17 +17,26 @@ public class Compare extends MyBatisPojo{
 	private Integer need_stocktype1;
 	private Integer need_stocktype2;
 	
+	private int line;
 	private String tablename;
 	private Double weight;
 	private Integer shopid;
+	private String shopname;
+	private String dispname;
+	private String serial;
 	
 	public Compare() {
 	}
 	
-	public Compare(String tablename,String pcode,Double weight) {
+	public Compare(int line,String tablename,String pcode,Double weight,
+			String shopname,String dispname,String serial) {
+		this.line = line;
 		this.tablename = tablename;
 		this.pcode = pcode;
 		this.weight = weight;
+		this.shopname = shopname;
+		this.dispname = dispname;
+		this.serial = serial;
 	}
 	
 	public String getPname() {
@@ -110,6 +119,38 @@ public class Compare extends MyBatisPojo{
 
 	public void setShopid(Integer shopid) {
 		this.shopid = shopid;
+	}
+
+	public String getShopname() {
+		return shopname;
+	}
+
+	public void setShopname(String shopname) {
+		this.shopname = shopname;
+	}
+
+	public String getDispname() {
+		return dispname;
+	}
+
+	public void setDispname(String dispname) {
+		this.dispname = dispname;
+	}
+
+	public int getLine() {
+		return line;
+	}
+
+	public void setLine(int line) {
+		this.line = line;
+	}
+
+	public String getSerial() {
+		return serial;
+	}
+
+	public void setSerial(String serial) {
+		this.serial = serial;
 	}
 
 }

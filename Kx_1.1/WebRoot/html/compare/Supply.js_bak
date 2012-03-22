@@ -1,0 +1,71 @@
+(function($) {
+	$.fn.compare_Supply = function() {
+		var content = $(this);
+	var ctrl = {
+		QueryPanel : {
+			Panel : $(this).find('#queryPanel'),
+			Form : $(this).find('#form'),
+			Shop : $(this).find('#shop'),
+			Shopid : $(this).find('#shopid'),
+			File : $(this).find('#uploadStockFile'),
+			Btn : $(this).find('#btn_add'),
+			LoadMsg : $(this).find('#loadMsg')
+		},
+		Tabs: $(this).find('#tabs'),
+		DataListTable : $(this).find('#dataListTable'),
+		UnmatcherListTable : $(this).find('#unmatcherListTable'),
+		Btn_Download : $(this).find('#btn_download')
+	};
+	
+	function init() {
+		
+		// 查询面板
+		ctrl.QueryPanel.Panel.panel({height:70,style:{'padding':'10px'}});
+		// form
+//		ctrl.QueryPanel.Form.form({
+//			url : '../compare/compare!uploadSupply.action',
+//			onSubmit : function() {
+//				if(ctrl.QueryPanel.File.val() == "") {
+//					SOL.showWarning("未选择上传文件,请选择一个库存文件");
+//					ctrl.QueryPanel.LoadMsg.hide();
+//					return false;
+//				}
+//			},
+//			success : function(data) {
+//				ctrl.QueryPanel.LoadMsg.hide();
+//				var ret = $.parseJSON(data);
+//				if(ret.success) {
+//					ctrl.DataListTable.datagrid('loadData',ret.dataList);
+//					ctrl.UnmatcherListTable.datagrid('loadData',ret.unmatcherList);
+//					ctrl.Btn_Download.linkbutton('enable');
+//				} else {
+//					SOL.showError(ret.msg);
+//					ctrl.Btn_Download.linkbutton('disable');
+//				}
+//			}
+//		});
+		// shop
+		ctrl.QueryPanel.Shop.combobox({
+			url:'../info/info-shop!shopCombo.action',
+			onSelect : function(record) {
+				ctrl.QueryPanel.Shopid.val($(this).combobox('getValue'));
+			}
+		});
+		// btn
+		ctrl.QueryPanel.Btn.click(function() {
+			ctrl.QueryPanel.LoadMsg.show();
+			ctrl.QueryPanel.Form.submit();
+		});
+		// tabs
+		ctrl.Tabs.tabs({
+			height:content.height() - 80
+			//fit:true
+		});
+		
+		
+		SF.grid(ctrl.DataListTable,{height:ctrl.Tabs.height()-40,width:ctrl.Tabs.width()-20});
+		SF.grid(ctrl.UnmatcherListTable,{height:ctrl.Tabs.height()-40,width:ctrl.Tabs.width()-20});
+	}
+	init();
+	};
+})(jQuery);
