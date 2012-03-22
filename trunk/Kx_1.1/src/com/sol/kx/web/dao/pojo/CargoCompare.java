@@ -186,4 +186,5 @@ public class CargoCompare extends MyBatisPojo{
 	public void setTablename(String tablename) {
 		this.tablename = tablename;
 	}
+
 }

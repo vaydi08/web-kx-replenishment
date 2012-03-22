@@ -15,7 +15,8 @@
 				Type2 : '#type2Table',
 				Type3 : '#type3Table',
 				Type4 : '#type4Table'
-			}
+			},
+			Detail : '#S_C_detailDialog'
 		};
 		
 		// 4数据表
@@ -98,8 +99,30 @@
 		
 		var type4config = $.extend(gridConfig(),{
 			url : type234url,
-			queryParams : {'input.shopid':-1,'input.clevel':4}
+			queryParams : {'input.shopid':-1,'input.clevel':4},
+			onClickRow : function(index,row) {
+				$.post('../stock/check!detail.action',
+					{'input.pid':row.ptype,'input.shopid':C(ctrl.Query.Shop).combobox('getValue')},
+					function(data) {
+						var i;
+						var tbl = '';
+						for(i = 0;i < data.rows.length;i ++) {
+							tbl += '<tr><td class="combo">' + data.rows[i].minweight + '</td><td class="combo">' + data.rows[i].maxweight + '</td>' + 
+								'<td class="combo">' + data.rows[i].stock_type1 + '</td><td class="combo">' + data.rows[i].stock_type2 + '</td>' + 
+								'<td class="combo">' + data.rows[i].pname + '</td><td class="combo">' + data.rows[i].pcode + '</td>' + 
+								'<td class="combo"><img height="30" src="../pic.action?img=' + data.rows[i].image + '" /></td></tr>';
+						}
+						var html = '<table class="combo" cellpadding="0" cellspacing="0">' + 
+							'<thead><tr><th class="combo" width="60">核定范围</th><th class="combo" width="50">&nbsp;</th><th class="combo" width="50">一般日</th><th class="combo" width="50">节假日</th><th class="combo">产品名称</th><th class="combo" width="80">产品代码</th><th class="combo">产品图片</th></tr></thead>' + 
+							tbl + '</table>';
+						$(ctrl.Detail).find('#content').html(html);
+						$(ctrl.Detail).dialog('open');
+				},'json');
+			}
 		});
 		C(ctrl.ListTable.Type4).datagrid(type4config);
+		
+		// 明细dialog
+		C(ctrl.Detail).dialog({modal:true});
 	};
 })(jQuery);

@@ -60,4 +60,10 @@
 			) tb 
 			group by tb.type${clevel}) tb inner join info_category c on tb.ptype=c.id
 	</select>
+	
+	<select id="selectCheckedDetail" parameterType="stockCheck" resultType="stockCheck">
+		select sc.*,p.pname,p.pcode,p.image 
+		from stock_check sc inner join info_product p on sc.pid=p.id 
+		where p.type4=#{pid} and sc.shopid=#{shopid}
+	</select>
 </mapper>

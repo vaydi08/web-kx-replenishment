@@ -40,6 +40,12 @@ public class CheckAction extends BaseAction<StockCheck>{
 		return RESULT;
 	}
 	
+	public String detail() {
+		stockCheckService.selectCheckedDetail(pagerBean, input);
+		
+		return JSONDATA;
+	}
+	
 	@Override
 	protected StockCheck newPojo() {
 		return new StockCheck();

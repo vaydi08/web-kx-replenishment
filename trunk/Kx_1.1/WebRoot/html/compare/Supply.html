@@ -1,5 +1,6 @@
+<!-- 
 <div id="queryPanel">
-	<form id="form" method="post" enctype="multipart/form-data">
+	<form id="form" method="post" enctype="multipart/form-data" action="../compare/compare!uploadSupply.action" target="_blank">
 	<table cellpadding="0" cellspacing="0" border="0">
 		<tr>
 		<td align="center">
@@ -25,25 +26,75 @@
 </div>
 
 
-<div title="补货建议单 一般日">
-	<table id="listTable" pagination="true" toolbar="#COMPARE_S_toolbar" >
-	<thead>
-	<tr>
-	<th field="pname" width="80">产品名称</th>
-	<th field="pcode" width="80">产品代码</th>
-	<th field="minweight" width="80">克重范围</th>
-	<th field="maxweight" width="80"></th>
-	<th field="kucun" width="80">实际库存</th>
-	<th field="stock_type1" width="80">一般日 核定库存</th>
-	<th field="need_stocktype1" width="80">一般日 建议补货量</th>
-	<th field="stock_type2" width="80">节假日 核定库存</th>
-	<th field="need_stocktype2" width="80">节假日 建议补货量</th>
-	</tr>
-	</thead>
-	</table>
+<div id="tabs">
+	<div title="补货建议单" style="padding:2px">
+		<table id="dataListTable" pagination="true" toolbar="#COMPARE_S_toolbar" >
+		<thead>
+		<tr>
+		<th field="pname" width="80">产品名称</th>
+		<th field="pcode" width="80">产品代码</th>
+		<th field="shopname" width="80">门店名称</th>
+		<th field="dispname" width="80">显示名称</th>
+		
+		<th field="minweight" width="80">克重范围</th>
+		<th field="maxweight" width="80"></th>
+		<th field="kucun" width="80">实际库存</th>
+		<th field="stock_type1" width="80">一般日 核定库存</th>
+		<th field="need_stocktype1" width="80">一般日 建议补货量</th>
+		<th field="stock_type2" width="80">节假日 核定库存</th>
+		<th field="need_stocktype2" width="80">节假日 建议补货量</th>
+		</tr>
+		</thead>
+		</table>
+		
+		<div id="COMPARE_S_toolbar">
+			<a href="../compare/compare!downloadSupply.action" class="easyui-linkbutton" iconCls="icon-save" plain="true" id="btn_download" disabled="true">下载数据文件</a>
+		</div>
+	</div>
 	
-	<div id="COMPARE_S_toolbar">
-		<a href="../compare/compare!downloadSupply.action" class="easyui-linkbutton" iconCls="icon-save" plain="true" id="btn_download" disabled="true">下载数据文件</a>
+	<div title="未匹配产品代码数据表" style="padding:2px">
+		<table id="unmatcherListTable" pagination="true" >
+		<thead>
+		<tr>
+		<th field="line" width="80">行</th>
+		<th field="pname" width="80">产品名称</th>
+		<th field="pcode" width="80">产品代码</th>
+		<th field="shopname" width="80">门店名称</th>
+		<th field="dispname" width="80">显示名称</th>
+		</tr>
+		</thead>
+		</table>
 	</div>
 </div>
-
+ -->
+ <style>
+ 	.msgdl {font-style: italic;}
+ 	.msgdl dl dt{display:inline;color:#6495ED;padding-right:5px;padding-left:5px}
+ 	.msgdl dl dd{display:inline;color:#DEB887;text-decoration: underline;;padding-right:5px;padding-left:5px}
+ </style>
+<div style="padding:10px">
+	<div id="panel" title="当前读取EXCEL文件的配置情况" style="padding:10px">
+		<div id="panel_content" class="msgdl"></div>
+	</div>
+	
+	<div>&nbsp;</div>
+	
+	<div id="upload" title="上传文件" style="padding:10px">
+		<div id="panel_content">
+			<form id="form" method="post" enctype="multipart/form-data" action="../compare/compare!uploadSupply.action" target="_blank">
+			<table cellpadding="0" cellspacing="0" border="0" >
+				<tr>
+				<td>
+				<label>库存清单</label>
+				<input type="file" name="supplyFile" id="uploadStockFile" class="combo"/>
+				</td>
+				<td width="20">&nbsp;</td>
+				<td>
+				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" plain="true" id="btn_upload">上传文件</a>
+				</td>
+				</tr>
+			</table>
+			</form>
+		</div>
+	</div>
+</div>

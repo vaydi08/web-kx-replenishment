@@ -19,4 +19,6 @@ public interface StockCheckMapper extends BaseMapper<StockCheck>{
 	public void copyCheck(StockCheck obj);
 	
 	public List<StockChecked> selectChecked(StockChecked obj);
+	
+	public List<StockCheck> selectCheckedDetail(StockCheck obj);
 }

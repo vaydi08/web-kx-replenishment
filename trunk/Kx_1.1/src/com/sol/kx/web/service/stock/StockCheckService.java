@@ -48,6 +48,13 @@ public class StockCheckService extends BaseService {
 		bean.setDataList(stockCheckMapper.selectChecked(obj));
 	}
 	
+	@Transactional(readOnly = true)
+	public void selectCheckedDetail(PagerBean<StockCheck> bean,StockCheck obj) {
+		DEBUG("查找[stock_check]已经核定明细 " + obj.toString());
+		
+		bean.setDataList(stockCheckMapper.selectCheckedDetail(obj));
+	}
+	
 	@Override
 	protected BaseMapper injectMapper() {
 		return stockCheckMapper;
