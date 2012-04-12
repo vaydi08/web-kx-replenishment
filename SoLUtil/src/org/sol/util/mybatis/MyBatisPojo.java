@@ -9,13 +9,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.json.JSONObject;
 import org.sol.util.mybatis.exception.PojoStructureException;
 
 /**
- * @author HUYAO
+ * MyBatis用POJO基类
+ * @author Allen.Hu
  *
  */
 public class MyBatisPojo implements Serializable{
@@ -32,13 +34,26 @@ public class MyBatisPojo implements Serializable{
 		if(table != null)
 			return table.name();
 		else
-			throw new PojoStructureException("undefine POJO @Table, need Tablename(@Table)");
+			throw new PojoStructureException("undefine POJO @Table, need Tablename(@Table(name))");
 	}
 	
+	/**
+	 * 获取POJO中的主键字段名
+	 * 需要定义@Id
+	 * @return
+	 */
 	public String id() {
-		return "id";
+		for(Field field : this.getClass().getDeclaredFields()) {
+			if(field.isAnnotationPresent(Id.class))
+				return field.getName();
+		}
+		
+		throw new RuntimeException("undefine POJO @Id");
 	}
 
+	/**
+	 * 用于存放POJO的列信息
+	 */
 	private transient static Map<Class<? extends MyBatisPojo>,List<String>> columnMap = new HashMap<Class<? extends MyBatisPojo>, List<String>>();
 	
 	private boolean isNull(String fieldname) {
@@ -106,6 +121,11 @@ public class MyBatisPojo implements Serializable{
 		return columnList;
 	}
 	
+	/**
+	 * Where条件信息
+	 * @author HUYAO
+	 *
+	 */
 	public class WhereColumn {
 		public String name;
 		public boolean isString;
@@ -176,15 +196,22 @@ public class MyBatisPojo implements Serializable{
 		return sb.toString();
 	}
 	
-	
-	
-	public Integer getId(){return 0;}
 
+	public Object getId(){return 0;}
+
+	/**
+	 * 转化POJO为JSON格式
+	 * 需要org.json包支持,可以在json官网下载源码,或自己实现json编码
+	 * @return
+	 */
 	public String toJSONString() {
 		JSONObject json = new JSONObject(this);
 		return json.toString();
 	}
 	
+	/**
+	 * 打印类字段信息
+	 */
 	@Override
 	public String toString() {
 		Field[] fields = this.getClass().getDeclaredFields();
@@ -205,11 +232,15 @@ public class MyBatisPojo implements Serializable{
 			if(value != null)
 				sb.append(f.getName()).append('=').append(value).append(',');
 		}
+		sb.append("page=").append(page).append(" pageSize=").append(pageSize);
 		sb.append(']');
 		
 		return sb.toString();
 	}
 	
+	/**
+	 * 以下为一些分页信息,如不需要可以删除
+	 */
 	private int page;
 	private int pageSize;
 
@@ -227,5 +258,13 @@ public class MyBatisPojo implements Serializable{
 
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
+	}
+	
+	public int getRows() {
+		return pageSize;
+	}
+	
+	public void setRows(int rows) {
+		this.pageSize = rows;
 	}
 }
