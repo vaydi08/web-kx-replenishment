@@ -45,6 +45,12 @@ public class SelectTemplate<T extends MyBatisPojo>{
 		return org.apache.ibatis.jdbc.SelectBuilder.SQL();
 	}
 	
+	public String get(T obj) {
+		String tablename = obj.tablename();
+		String idname = obj.id();
+		return "select * from " + tablename + " where " + idname + "=#{" + idname + "}";
+	}
+	
 	public String selectByPage(T obj) {
 		return selectByPage(obj, obj.getPage(), obj.getPageSize(),"*",true);
 	}

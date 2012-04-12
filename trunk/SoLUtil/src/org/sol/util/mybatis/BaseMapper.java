@@ -28,6 +28,8 @@ public interface BaseMapper<T extends MyBatisPojo> {
 	@SelectProvider(type = SelectTemplate.class,method = "count")
 	public int count(T obj);
 	
+	public T get(T obj);
+	
 	/**
 	 * Insert语句从CUDTemplate类中生成
 	 * @param obj

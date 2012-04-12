@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <jardesc>
-    <jar path="F:/megajoy/开发项目/SoLUtil/SoLUtil_v1.1.jar"/>
+    <jar path="SoLUtil/dist/SoLUtil_v1.1.jar"/>
     <options buildIfNeeded="true" compress="true" descriptionLocation="/SoLUtil/outputV1.1.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>

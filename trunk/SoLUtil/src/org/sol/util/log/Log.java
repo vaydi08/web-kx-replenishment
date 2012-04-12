@@ -42,28 +42,30 @@ public class Log {
 		return sb.toString();
 	}
 	public void ldebug(String msg,Object... params) {
-		log.debug(getString(msg, params));
+		debug(getString(msg, params));
 	}
 	
 	public void linfo(String msg,Object... params) {
-		log.info(getString(msg, params));
+		info(getString(msg, params));
 	}
 	
 	public void lerror(String msg,Object... params) {
-		log.error(getString(msg, params));
+		error(getString(msg, params));
 	}
 	
 	public void lerror(String msg,Throwable t,Object... params) {
-		log.error(getString(msg, params),t);
+		error(getString(msg, params),t);
 	}
 	
 	
 	public void debug(Object obj) {
-		log.debug(obj);
+		if(log.isDebugEnabled())
+			log.debug(obj);
 	}
 
 	public void debug(Object obj, Throwable throwable) {
-		log.debug(obj,throwable);
+		if(log.isDebugEnabled())
+			log.debug(obj,throwable);
 	}
 
 	public void info(Object obj) {
